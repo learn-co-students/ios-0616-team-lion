@@ -7,7 +7,29 @@
 //
 
 import UIKit
+import SnapKit
 
 class NewPostViewController: UIViewController {
+	
+	var itemNameField: UITextField!
+	var itemDescriptionField: UITextField!
+	var itemNameLabel: UILabel!
+	var itemDescription: UILabel!
+	var uploadImageButton: UIButton!
+	var profilePic: UIImage!
+	
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		
+	}
+	
+	func generateScene() {
+		
+		
+		
+	}
+	
+	
 
 }

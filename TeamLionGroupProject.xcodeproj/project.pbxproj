@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		40AAA4FBEFCA22063F2724B6 /* Pods_TeamLionGroupProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 034ABA837B2714A494044940 /* Pods_TeamLionGroupProject.framework */; };
-		BE6E6C991D54C83E00FF8416 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6E6C981D54C83E00FF8416 /* Secrets.swift */; };
 		BEC67E431D53DF8100D2D030 /* MarketplaceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E421D53DF8100D2D030 /* MarketplaceCollectionViewController.swift */; };
 		BEC67E451D53DFCD00D2D030 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E441D53DFCD00D2D030 /* NewPostViewController.swift */; };
 		BEC67E481D53E04300D2D030 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E471D53E04300D2D030 /* ProfileViewController.swift */; };
@@ -20,12 +19,15 @@
 		FFE94A9A1D53D9730036ED38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFE94A981D53D9730036ED38 /* Main.storyboard */; };
 		FFE94A9C1D53D9730036ED38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFE94A9B1D53D9730036ED38 /* Assets.xcassets */; };
 		FFE94A9F1D53D9730036ED38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFE94A9D1D53D9730036ED38 /* LaunchScreen.storyboard */; };
+		FFE94AA71D54E4970036ED38 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94AA61D54E4970036ED38 /* TestData.swift */; };
+		FFE94AAB1D54E7320036ED38 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94AA81D54E7320036ED38 /* UIColorExtensions.swift */; };
+		FFE94AAC1D54E7320036ED38 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94AA91D54E7320036ED38 /* UIImageExtension.swift */; };
+		FFE94AAD1D54E7320036ED38 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94AAA1D54E7320036ED38 /* UIViewExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		034ABA837B2714A494044940 /* Pods_TeamLionGroupProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TeamLionGroupProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A387EE526A800AD0083D978F /* Pods-TeamLionGroupProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamLionGroupProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeamLionGroupProject/Pods-TeamLionGroupProject.debug.xcconfig"; sourceTree = "<group>"; };
-		BE6E6C981D54C83E00FF8416 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		BEC67E421D53DF8100D2D030 /* MarketplaceCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketplaceCollectionViewController.swift; sourceTree = "<group>"; };
 		BEC67E441D53DFCD00D2D030 /* NewPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
 		BEC67E471D53E04300D2D030 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -40,6 +42,10 @@
 		FFE94A9B1D53D9730036ED38 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FFE94A9E1D53D9730036ED38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FFE94AA01D53D9730036ED38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FFE94AA61D54E4970036ED38 /* TestData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
+		FFE94AA81D54E7320036ED38 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		FFE94AA91D54E7320036ED38 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		FFE94AAA1D54E7320036ED38 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +72,6 @@
 			isa = PBXGroup;
 			children = (
 				FFE94A941D53D9730036ED38 /* AppDelegate.swift */,
-				BE6E6C981D54C83E00FF8416 /* Secrets.swift */,
 			);
 			name = Files;
 			sourceTree = "<group>";
@@ -126,11 +131,23 @@
 				BEC67E491D53E0D400D2D030 /* Models */,
 				BEC67E461D53DFD500D2D030 /* Views */,
 				FFE94A981D53D9730036ED38 /* Main.storyboard */,
+				FFE94AAE1D54E7390036ED38 /* Extensions */,
 				FFE94A9B1D53D9730036ED38 /* Assets.xcassets */,
+				FFE94AA61D54E4970036ED38 /* TestData.swift */,
 				FFE94A9D1D53D9730036ED38 /* LaunchScreen.storyboard */,
 				FFE94AA01D53D9730036ED38 /* Info.plist */,
 			);
 			path = TeamLionGroupProject;
+			sourceTree = "<group>";
+		};
+		FFE94AAE1D54E7390036ED38 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FFE94AA81D54E7320036ED38 /* UIColorExtensions.swift */,
+				FFE94AA91D54E7320036ED38 /* UIImageExtension.swift */,
+				FFE94AAA1D54E7320036ED38 /* UIViewExtensions.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,14 +273,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFE94A971D53D9730036ED38 /* LoginViewController.swift in Sources */,
-				BE6E6C991D54C83E00FF8416 /* Secrets.swift in Sources */,
 				BEC67E451D53DFCD00D2D030 /* NewPostViewController.swift in Sources */,
+				FFE94AA71D54E4970036ED38 /* TestData.swift in Sources */,
 				BEC67E4B1D53E0F900D2D030 /* PostViewCell.swift in Sources */,
+				FFE94AAC1D54E7320036ED38 /* UIImageExtension.swift in Sources */,
 				BEC67E4F1D53E14700D2D030 /* PlacePost.swift in Sources */,
 				BEC67E481D53E04300D2D030 /* ProfileViewController.swift in Sources */,
 				BEC67E431D53DF8100D2D030 /* MarketplaceCollectionViewController.swift in Sources */,
 				FFE94A951D53D9730036ED38 /* AppDelegate.swift in Sources */,
 				BEC67E4D1D53E13A00D2D030 /* PlaceUser.swift in Sources */,
+				FFE94AAD1D54E7320036ED38 /* UIViewExtensions.swift in Sources */,
+				FFE94AAB1D54E7320036ED38 /* UIColorExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
