@@ -7,3 +7,13 @@
 //
 
 import Foundation
+import UIKit
+
+struct PlacePost {
+	
+	var itemImages: [UIImage]
+	var itemTitle: String
+	var itemDescription: String
+	var price: Int
+	
+}

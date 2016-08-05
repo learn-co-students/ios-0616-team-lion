@@ -7,3 +7,12 @@
 //
 
 import Foundation
+
+struct PlaceUser {
+	var firstName: String
+	var lastName: String
+	var currentPosts: [PlacePost]
+	
+	
+}
+
