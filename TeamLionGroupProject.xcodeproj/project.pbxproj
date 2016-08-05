@@ -93,6 +93,7 @@
 			children = (
 				BEC67E4C1D53E13A00D2D030 /* PlaceUser.swift */,
 				BEC67E4E1D53E14700D2D030 /* PlacePost.swift */,
+				FFE94AA61D54E4970036ED38 /* TestData.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -133,7 +134,6 @@
 				FFE94A981D53D9730036ED38 /* Main.storyboard */,
 				FFE94AAE1D54E7390036ED38 /* Extensions */,
 				FFE94A9B1D53D9730036ED38 /* Assets.xcassets */,
-				FFE94AA61D54E4970036ED38 /* TestData.swift */,
 				FFE94A9D1D53D9730036ED38 /* LaunchScreen.storyboard */,
 				FFE94AA01D53D9730036ED38 /* Info.plist */,
 			);

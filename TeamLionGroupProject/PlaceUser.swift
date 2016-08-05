@@ -7,11 +7,31 @@
 //
 
 import Foundation
+import UIKit
 
-struct PlaceUser {
-	var firstName: String
-	var lastName: String
-	var currentPosts: [PlacePost]
+class PlaceUser: NSObject {
+	
+	let firstName: String
+	let lastName: String
+	var profilePicture: UIImage?
+	//var profilePictureReferencePath			from Firebase
+	//let uid: String							from data
+	var postings: [PlacePost]
+	
+	
+	init(withName firstName: String,
+	              lastName: String,
+	              profilePicture: UIImage?,
+	              postings: [PlacePost]) {
+		
+		
+		self.firstName = firstName
+		self.lastName = lastName
+		self.profilePicture = profilePicture
+		self.postings = postings
+		
+		super.init()
+	}
 	
 	
 }

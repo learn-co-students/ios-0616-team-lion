@@ -17,3 +17,4 @@ struct PlacePost {
 	var price: Int
 	
 }
+
