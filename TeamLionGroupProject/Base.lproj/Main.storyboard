@@ -99,7 +99,7 @@
         <!--New Post View Controller-->
         <scene sceneID="coU-Iw-FIb">
             <objects>
-                <viewController id="La8-mt-cWy" userLabel="New Post View Controller" sceneMemberID="viewController">
+                <viewController id="La8-mt-cWy" userLabel="New Post View Controller" customClass="NewPostViewController" customModule="TeamLionGroupProject" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DfV-0S-iZK"/>
                         <viewControllerLayoutGuide type="bottom" id="vBD-Ea-3h7"/>
