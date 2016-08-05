@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		40AAA4FBEFCA22063F2724B6 /* Pods_TeamLionGroupProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 034ABA837B2714A494044940 /* Pods_TeamLionGroupProject.framework */; };
+		BE6E6C991D54C83E00FF8416 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6E6C981D54C83E00FF8416 /* Secrets.swift */; };
 		BEC67E431D53DF8100D2D030 /* MarketplaceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E421D53DF8100D2D030 /* MarketplaceCollectionViewController.swift */; };
 		BEC67E451D53DFCD00D2D030 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E441D53DFCD00D2D030 /* NewPostViewController.swift */; };
 		BEC67E481D53E04300D2D030 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E471D53E04300D2D030 /* ProfileViewController.swift */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		034ABA837B2714A494044940 /* Pods_TeamLionGroupProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TeamLionGroupProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A387EE526A800AD0083D978F /* Pods-TeamLionGroupProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamLionGroupProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeamLionGroupProject/Pods-TeamLionGroupProject.debug.xcconfig"; sourceTree = "<group>"; };
+		BE6E6C981D54C83E00FF8416 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		BEC67E421D53DF8100D2D030 /* MarketplaceCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketplaceCollectionViewController.swift; sourceTree = "<group>"; };
 		BEC67E441D53DFCD00D2D030 /* NewPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
 		BEC67E471D53E04300D2D030 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -58,6 +60,15 @@
 				034ABA837B2714A494044940 /* Pods_TeamLionGroupProject.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BE6E6C971D54C79600FF8416 /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				FFE94A941D53D9730036ED38 /* AppDelegate.swift */,
+				BE6E6C981D54C83E00FF8416 /* Secrets.swift */,
+			);
+			name = Files;
 			sourceTree = "<group>";
 		};
 		BEC67E461D53DFD500D2D030 /* Views */ = {
@@ -111,7 +122,7 @@
 		FFE94A931D53D9730036ED38 /* TeamLionGroupProject */ = {
 			isa = PBXGroup;
 			children = (
-				FFE94A941D53D9730036ED38 /* AppDelegate.swift */,
+				BE6E6C971D54C79600FF8416 /* Files */,
 				BEC67E491D53E0D400D2D030 /* Models */,
 				BEC67E461D53DFD500D2D030 /* Views */,
 				FFE94A981D53D9730036ED38 /* Main.storyboard */,
@@ -245,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFE94A971D53D9730036ED38 /* LoginViewController.swift in Sources */,
+				BE6E6C991D54C83E00FF8416 /* Secrets.swift in Sources */,
 				BEC67E451D53DFCD00D2D030 /* NewPostViewController.swift in Sources */,
 				BEC67E4B1D53E0F900D2D030 /* PostViewCell.swift in Sources */,
 				BEC67E4F1D53E14700D2D030 /* Post.swift in Sources */,
