@@ -15,11 +15,21 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setUpCollectionCells()
+    }
+    
+    func setUpCollectionCells() {
+        
+        let screenSize = UIScreen.mainScreen().bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        
         //setup Layout
         let layout = UICollectionViewFlowLayout()
-        layout.minimumInteritemSpacing = 1
-        layout.minimumLineSpacing = 1
-        layout.itemSize = CGSize(width: 180, height: 180)
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 10, right: 0)
+        layout.itemSize = CGSize(width: screenWidth/3, height: screenWidth/3)
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
         
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         collectionView.dataSource = self
@@ -31,12 +41,11 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         
         collectionView?.registerClass(PostViewCell.self, forCellWithReuseIdentifier: "basicCell")
         
-        print("view LOADED")
     }
     
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 40
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -54,7 +63,5 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
     }
     
     let layout = UICollectionViewFlowLayout()
-    
-    
     
 }
