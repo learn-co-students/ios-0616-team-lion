@@ -34,11 +34,10 @@ class PostViewCell: UICollectionViewCell {
         //profile picture constraints
         
         contentView.addSubview(profileImage)
-        profileImage.image = UIImage(named: "Profile")
-        profileImage.image?.circle
+        profileImage.image = UIImage(named: "Profile")?.circle
         profileImage.snp_makeConstraints { (make) in
-            make.centerX.equalTo(postImage.snp_centerX).offset(-110)
-            make.centerY.equalTo(postImage.snp_centerY).offset(-110)
+            make.centerX.equalTo(postImage.snp_centerX).dividedBy(4.5)
+            make.centerY.equalTo(postImage.snp_centerY).dividedBy(4.5)
             make.width.equalTo(postImage.snp_width).dividedBy(5)
             make.height.equalTo(postImage.snp_height).dividedBy(5)
         }
@@ -48,7 +47,7 @@ class PostViewCell: UICollectionViewCell {
         nameLabel.text = "Name Label"
         nameLabel.textColor = UIColor.whiteColor()
         nameLabel.snp_makeConstraints { (make) in
-            make.centerX.equalTo(profileImage.snp_centerY).offset(160)
+            make.leading.equalTo(profileImage.snp_trailing).multipliedBy(1.2)
             make.centerY.equalTo(profileImage.snp_centerY)
             make.width.equalTo(profileImage.snp_width).multipliedBy(4)
             make.height.equalTo(profileImage.snp_height)
@@ -56,13 +55,13 @@ class PostViewCell: UICollectionViewCell {
         
         //price label constraints
         contentView.addSubview(priceLabel)
-        priceLabel.text = "$$$"
+        priceLabel.text = "$10"
         priceLabel.textColor = UIColor.whiteColor()
         priceLabel.snp_makeConstraints { (make) in
-            make.centerX.equalTo(contentView.snp_centerX).offset(120)
-            make.centerY.equalTo(contentView.snp_centerY).offset(120)
-            make.width.equalTo(contentView.snp_width).dividedBy(5)
-            make.height.equalTo(contentView.snp_height).dividedBy(5)
+            make.centerX.equalTo(postImage.snp_centerX).multipliedBy(1.8)
+            make.centerY.equalTo(postImage.snp_centerY).multipliedBy(1.8)
+            make.width.equalTo(postImage.snp_width).dividedBy(5)
+            make.height.equalTo(postImage.snp_height).dividedBy(5)
         }
         
     }
