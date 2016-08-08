@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1BC10C821D58D1C5006E9747 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1BC10C811D58D1C5006E9747 /* GoogleService-Info.plist */; };
+		1BC10C841D58D656006E9747 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BC10C831D58D656006E9747 /* FBSDKCoreKit.framework */; };
+		1BC10C861D58D886006E9747 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BC10C851D58D886006E9747 /* FBSDKLoginKit.framework */; };
 		40AAA4FBEFCA22063F2724B6 /* Pods_TeamLionGroupProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 034ABA837B2714A494044940 /* Pods_TeamLionGroupProject.framework */; };
 		BEC67E431D53DF8100D2D030 /* MarketplaceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E421D53DF8100D2D030 /* MarketplaceCollectionViewController.swift */; };
 		BEC67E451D53DFCD00D2D030 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E441D53DFCD00D2D030 /* NewPostViewController.swift */; };
@@ -27,6 +30,9 @@
 
 /* Begin PBXFileReference section */
 		034ABA837B2714A494044940 /* Pods_TeamLionGroupProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TeamLionGroupProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BC10C811D58D1C5006E9747 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1BC10C831D58D656006E9747 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		1BC10C851D58D886006E9747 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		A387EE526A800AD0083D978F /* Pods-TeamLionGroupProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamLionGroupProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeamLionGroupProject/Pods-TeamLionGroupProject.debug.xcconfig"; sourceTree = "<group>"; };
 		BEC67E421D53DF8100D2D030 /* MarketplaceCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketplaceCollectionViewController.swift; sourceTree = "<group>"; };
 		BEC67E441D53DFCD00D2D030 /* NewPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +60,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				40AAA4FBEFCA22063F2724B6 /* Pods_TeamLionGroupProject.framework in Frameworks */,
+				1BC10C841D58D656006E9747 /* FBSDKCoreKit.framework in Frameworks */,
+				1BC10C861D58D886006E9747 /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +71,8 @@
 		BD96C50602298B6851D12DC2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1BC10C851D58D886006E9747 /* FBSDKLoginKit.framework */,
+				1BC10C831D58D656006E9747 /* FBSDKCoreKit.framework */,
 				034ABA837B2714A494044940 /* Pods_TeamLionGroupProject.framework */,
 			);
 			name = Frameworks;
@@ -128,6 +138,7 @@
 		FFE94A931D53D9730036ED38 /* TeamLionGroupProject */ = {
 			isa = PBXGroup;
 			children = (
+				1BC10C811D58D1C5006E9747 /* GoogleService-Info.plist */,
 				BE6E6C971D54C79600FF8416 /* Files */,
 				BEC67E491D53E0D400D2D030 /* Models */,
 				BEC67E461D53DFD500D2D030 /* Views */,
@@ -214,6 +225,7 @@
 				FFE94A9F1D53D9730036ED38 /* LaunchScreen.storyboard in Resources */,
 				FFE94A9C1D53D9730036ED38 /* Assets.xcassets in Resources */,
 				FFE94A9A1D53D9730036ED38 /* Main.storyboard in Resources */,
+				1BC10C821D58D1C5006E9747 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,6 +411,11 @@
 			baseConfigurationReference = A387EE526A800AD0083D978F /* Pods-TeamLionGroupProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"~/Documents/FacebookSDK",
+				);
 				INFOPLIST_FILE = TeamLionGroupProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = DavidVY.TeamLionGroupProject;
@@ -411,6 +428,11 @@
 			baseConfigurationReference = DCF91F518C6C9AD294129C82 /* Pods-TeamLionGroupProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"~/Documents/FacebookSDK",
+				);
 				INFOPLIST_FILE = TeamLionGroupProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = DavidVY.TeamLionGroupProject;

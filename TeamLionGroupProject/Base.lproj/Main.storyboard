@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="mAc-2O-b26">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Zik-vM-d9N">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -8,7 +8,7 @@
         <!--Login View Controller-->
         <scene sceneID="3eM-dn-eAC">
             <objects>
-                <viewController id="Zik-vM-d9N" customClass="LoginViewController" customModule="TeamLionGroupProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginView" id="Zik-vM-d9N" customClass="LoginViewController" customModule="TeamLionGroupProject" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4tT-e5-M41"/>
                         <viewControllerLayoutGuide type="bottom" id="Bws-DW-9h8"/>
@@ -45,7 +45,7 @@
         <!--Profile View Controller-->
         <scene sceneID="7S8-rD-w5R">
             <objects>
-                <viewController id="1O1-Mm-aR9" userLabel="Profile View Controller" customClass="ProfileViewController" customModule="TeamLionGroupProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileView" id="1O1-Mm-aR9" userLabel="Profile View Controller" customClass="ProfileViewController" customModule="TeamLionGroupProject" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eqe-qt-d02"/>
                         <viewControllerLayoutGuide type="bottom" id="xKt-rU-13b"/>
@@ -59,7 +59,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SAT-uw-L1k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-298" y="-985"/>
+            <point key="canvasLocation" x="-298" y="-957"/>
         </scene>
         <!--Marketplace View Controller-->
         <scene sceneID="2mw-6Z-sGa">
