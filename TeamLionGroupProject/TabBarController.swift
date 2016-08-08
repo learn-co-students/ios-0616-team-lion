@@ -22,13 +22,13 @@ class TabBarController: UITabBarController {
         self.tabBar.backgroundColor = UIColor.clearColor()
         self.tabBar.tintColor = UIColor.clearColor()
         
-        let item1 = ProfileViewController()
-        item1.tabBarItem = UITabBarItem(title: "Profile", image: nil, selectedImage: nil)
+        let profile = ProfileViewController()
+        profile.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "smileIcon")?.imageWithRenderingMode(.AlwaysOriginal), selectedImage: UIImage(named: "smileIcon")?.imageWithRenderingMode(.AlwaysOriginal))
         
-        let item2 = MarketplaceCollectionViewController()
-        item2.tabBarItem = UITabBarItem(title: "Place", image: nil, selectedImage: nil)
+        let place = MarketplaceCollectionViewController()
+        place.tabBarItem = UITabBarItem(title: "Place", image: UIImage(named: "shopIcon")?.imageWithRenderingMode(.AlwaysOriginal), selectedImage: UIImage(named: "shopIcon")?.imageWithRenderingMode(.AlwaysOriginal))
         
-        let controllers = [item2, item1]  //array of the root view controllers displayed by the tab bar interface
+        let controllers = [place, profile]  //array of the root view controllers displayed by the tab bar interface
         self.viewControllers = controllers
         
     }
