@@ -11,11 +11,13 @@ import UIKit
 class MarketplaceCollectionViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     var collectionView: UICollectionView!
+    var postArray = [post1, post2, post3, post4, post5, post6, post7, post8, post9, post10, post11, post12]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUpCollectionCells()
+
     }
     
     func setUpCollectionCells() {
@@ -47,15 +49,17 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
     
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 40
+        return self.postArray.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("basicCell", forIndexPath: indexPath) as! PostViewCell
         
-        //        cell.backgroundColor = UIColor.blackColor()
-        
+        cell.postImage.image = self.postArray[indexPath.item].itemImages[0]
+        cell.priceLabel.text = "$\(self.postArray[indexPath.item].price)"
+        cell.nameLabel.text = self.postArray[indexPath.item].itemTitle
+
         return cell
     }
     
