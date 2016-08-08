@@ -23,6 +23,7 @@
 		FFE94AAB1D54E7320036ED38 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94AA81D54E7320036ED38 /* UIColorExtensions.swift */; };
 		FFE94AAC1D54E7320036ED38 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94AA91D54E7320036ED38 /* UIImageExtension.swift */; };
 		FFE94AAD1D54E7320036ED38 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94AAA1D54E7320036ED38 /* UIViewExtensions.swift */; };
+		FFE94AB61D58FE810036ED38 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94AB51D58FE810036ED38 /* ProfileHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		FFE94AA81D54E7320036ED38 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		FFE94AA91D54E7320036ED38 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		FFE94AAA1D54E7320036ED38 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
+		FFE94AB51D58FE810036ED38 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				BEC67E421D53DF8100D2D030 /* MarketplaceCollectionViewController.swift */,
 				BEC67E441D53DFCD00D2D030 /* NewPostViewController.swift */,
 				BEC67E471D53E04300D2D030 /* ProfileViewController.swift */,
+				FFE94AB51D58FE810036ED38 /* ProfileHeaderView.swift */,
 				BEC67E4A1D53E0F900D2D030 /* PostViewCell.swift */,
 			);
 			name = Views;
@@ -185,7 +188,6 @@
 				TargetAttributes = {
 					FFE94A901D53D9730036ED38 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = RP6364VX67;
 					};
 				};
 			};
@@ -279,6 +281,7 @@
 				BEC67E4B1D53E0F900D2D030 /* PostViewCell.swift in Sources */,
 				FFE94AAC1D54E7320036ED38 /* UIImageExtension.swift in Sources */,
 				BEC67E4F1D53E14700D2D030 /* PlacePost.swift in Sources */,
+				FFE94AB61D58FE810036ED38 /* ProfileHeaderView.swift in Sources */,
 				BEC67E481D53E04300D2D030 /* ProfileViewController.swift in Sources */,
 				BEC67E431D53DF8100D2D030 /* MarketplaceCollectionViewController.swift in Sources */,
 				FFE94A951D53D9730036ED38 /* AppDelegate.swift in Sources */,
