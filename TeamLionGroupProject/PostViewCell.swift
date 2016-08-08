@@ -46,6 +46,7 @@ class PostViewCell: UICollectionViewCell {
         contentView.addSubview(nameLabel)
         nameLabel.text = "Name Label"
         nameLabel.textColor = UIColor.whiteColor()
+        nameLabel.shadowColor = UIColor.blackColor()
         nameLabel.snp_makeConstraints { (make) in
             make.leading.equalTo(profileImage.snp_trailing).multipliedBy(1.2)
             make.centerY.equalTo(profileImage.snp_centerY)
@@ -57,10 +58,11 @@ class PostViewCell: UICollectionViewCell {
         contentView.addSubview(priceLabel)
         priceLabel.text = "$10"
         priceLabel.textColor = UIColor.whiteColor()
+        priceLabel.shadowColor = UIColor.blackColor()
         priceLabel.snp_makeConstraints { (make) in
             make.centerX.equalTo(postImage.snp_centerX).multipliedBy(1.8)
             make.centerY.equalTo(postImage.snp_centerY).multipliedBy(1.8)
-            make.width.equalTo(postImage.snp_width).dividedBy(5)
+            make.width.equalTo(postImage.snp_width).dividedBy(4)
             make.height.equalTo(postImage.snp_height).dividedBy(5)
         }
         
