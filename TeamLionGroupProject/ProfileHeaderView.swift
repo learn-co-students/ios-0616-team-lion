@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import SnapKit
 
 class ProfileHeaderView: UICollectionReusableView {
 	
 	var usernameLabel = UILabel()
-	var profilePic = UIImage()
+	var profilePic = UIImageView()
 	var followingCountLabel = UILabel()
 	var listingsCountLabel = UILabel()
 	var friendsButton = UIButton()
@@ -28,6 +29,35 @@ class ProfileHeaderView: UICollectionReusableView {
 	
 	func setupScene() {
 		
+		self.addSubview(usernameLabel)
+		usernameLabel.snp_makeConstraints { (make) in
+			make.centerX.equalTo(self.snp_centerX)
+			
+		}
+		
+		self.addSubview(profilePic)
+		profilePic.snp_makeConstraints { (make) in
+			make.centerX.equalTo(self.snp_centerX)
+			
+		}
+		
+		self.addSubview(followingCountLabel)
+		followingCountLabel.snp_makeConstraints { (make) in
+			make.right.equalTo(self.snp_centerX)
+			
+		}
+		
+		self.addSubview(listingsCountLabel)
+		listingsCountLabel.snp_makeConstraints { (make) in
+			make.left.equalTo(self.snp_centerX)
+			
+		}
+		
+		self.addSubview(friendsButton)
+		friendsButton.snp_makeConstraints { (make) in
+			make.centerX.equalTo(snp_centerX)
+			
+		}
 	}
 	
 }
