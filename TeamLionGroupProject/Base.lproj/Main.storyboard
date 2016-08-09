@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="mAc-2O-b26">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Zik-vM-d9N">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -79,6 +79,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Fa-6U-xNc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-298" y="-304"/>
+        </scene>
+        <!--Segment Practice-->
+        <scene sceneID="4dn-ml-jJ2">
+            <objects>
+                <viewController id="PCd-zW-98O" customClass="SegmentPractice" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="G6B-ON-8ik"/>
+                        <viewControllerLayoutGuide type="bottom" id="Onc-KD-L45"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zpt-nK-yr7">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7gw-hX-WKg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-332" y="370"/>
         </scene>
         <!--New Post View Controller-->
         <scene sceneID="coU-Iw-FIb">

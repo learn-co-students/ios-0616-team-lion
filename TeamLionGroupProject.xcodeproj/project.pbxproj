@@ -29,6 +29,7 @@
 		FFE94AAC1D54E7320036ED38 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94AA91D54E7320036ED38 /* UIImageExtension.swift */; };
 		FFE94AAD1D54E7320036ED38 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94AAA1D54E7320036ED38 /* UIViewExtensions.swift */; };
 		FFE94AB61D58FE810036ED38 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94AB51D58FE810036ED38 /* ProfileHeaderView.swift */; };
+		FFE94AB81D5A36F30036ED38 /* SegementPractice.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94AB71D5A36F30036ED38 /* SegementPractice.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		FFE94AA91D54E7320036ED38 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		FFE94AAA1D54E7320036ED38 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		FFE94AB51D58FE810036ED38 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		FFE94AB71D5A36F30036ED38 /* SegementPractice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegementPractice.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				FFE94AB51D58FE810036ED38 /* ProfileHeaderView.swift */,
 				BEC67E4A1D53E0F900D2D030 /* PostViewCell.swift */,
 				BE6E6CC71D58FA6A00FF8416 /* TabBarController.swift */,
+				FFE94AB71D5A36F30036ED38 /* SegementPractice.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				BE6E6CC81D58FA6A00FF8416 /* TabBarController.swift in Sources */,
 				BEC67E451D53DFCD00D2D030 /* NewPostViewController.swift in Sources */,
 				FFE94AA71D54E4970036ED38 /* TestData.swift in Sources */,
+				FFE94AB81D5A36F30036ED38 /* SegementPractice.swift in Sources */,
 				BEC67E4B1D53E0F900D2D030 /* PostViewCell.swift in Sources */,
 				FFE94AAC1D54E7320036ED38 /* UIImageExtension.swift in Sources */,
 				BEC67E4F1D53E14700D2D030 /* PlacePost.swift in Sources */,
