@@ -10,6 +10,7 @@
 		1BC10C821D58D1C5006E9747 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1BC10C811D58D1C5006E9747 /* GoogleService-Info.plist */; };
 		1BC10C841D58D656006E9747 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BC10C831D58D656006E9747 /* FBSDKCoreKit.framework */; };
 		1BC10C861D58D886006E9747 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BC10C851D58D886006E9747 /* FBSDKLoginKit.framework */; };
+		1BC10C8A1D5A174A006E9747 /* PlaceUserDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC10C891D5A174A006E9747 /* PlaceUserDataStore.swift */; };
 		40AAA4FBEFCA22063F2724B6 /* Pods_TeamLionGroupProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 034ABA837B2714A494044940 /* Pods_TeamLionGroupProject.framework */; };
 		BE6E6CC81D58FA6A00FF8416 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6E6CC71D58FA6A00FF8416 /* TabBarController.swift */; };
 		BEC67E431D53DF8100D2D030 /* MarketplaceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E421D53DF8100D2D030 /* MarketplaceCollectionViewController.swift */; };
@@ -35,6 +36,7 @@
 		1BC10C811D58D1C5006E9747 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1BC10C831D58D656006E9747 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		1BC10C851D58D886006E9747 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		1BC10C891D5A174A006E9747 /* PlaceUserDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceUserDataStore.swift; sourceTree = "<group>"; };
 		A387EE526A800AD0083D978F /* Pods-TeamLionGroupProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamLionGroupProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeamLionGroupProject/Pods-TeamLionGroupProject.debug.xcconfig"; sourceTree = "<group>"; };
 		BE6E6CC71D58FA6A00FF8416 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		BEC67E421D53DF8100D2D030 /* MarketplaceCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketplaceCollectionViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				BEC67E4C1D53E13A00D2D030 /* PlaceUser.swift */,
 				BEC67E4E1D53E14700D2D030 /* PlacePost.swift */,
 				FFE94AA61D54E4970036ED38 /* TestData.swift */,
+				1BC10C891D5A174A006E9747 /* PlaceUserDataStore.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				FFE94A951D53D9730036ED38 /* AppDelegate.swift in Sources */,
 				BEC67E4D1D53E13A00D2D030 /* PlaceUser.swift in Sources */,
 				FFE94AAD1D54E7320036ED38 /* UIViewExtensions.swift in Sources */,
+				1BC10C8A1D5A174A006E9747 /* PlaceUserDataStore.swift in Sources */,
 				FFE94AAB1D54E7320036ED38 /* UIColorExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -419,13 +423,13 @@
 			baseConfigurationReference = A387EE526A800AD0083D978F /* Pods-TeamLionGroupProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"~/Documents/FacebookSDK",
 				);
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = TeamLionGroupProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = DavidVY.TeamLionGroupProject;
@@ -439,14 +443,13 @@
 			baseConfigurationReference = DCF91F518C6C9AD294129C82 /* Pods-TeamLionGroupProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"~/Documents/FacebookSDK",
 				);
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-
 				INFOPLIST_FILE = TeamLionGroupProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = DavidVY.TeamLionGroupProject;
