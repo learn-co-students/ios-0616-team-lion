@@ -9,7 +9,13 @@
 import UIKit
 import SnapKit
 
+protocol ProfileHeaderViewDelegate: class {
+	func friendsButtonPressed()
+}
+
 class ProfileHeaderView: UICollectionReusableView {
+	
+	weak var delegate: ProfileHeaderViewDelegate?
 	
 	var usernameLabel = UILabel()
 	var profilePic = UIImageView()

@@ -74,14 +74,24 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 		case UICollectionElementKindSectionHeader:
 			let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerIdentifier, forIndexPath: indexPath) as! ProfileHeaderView
 			
-			//headerView.delegate = self
+			headerView.delegate = self
 			
+			// DO PROPERTY STUFF FROM FACEBOOK/FIREBASE HERE
 			headerView.username = "username"
+			
+			
+			
+			//******************************
 			
 			return headerView
 		default: assert(false, "Unexpected element type")
 		}
 	}
+}
+
+extension ProfileViewController: ProfileHeaderViewDelegate {
 	
-	
+	func friendsButtonPressed() {
+		
+	}
 }
