@@ -31,7 +31,7 @@ class TabBarController: UITabBarController {
         place.tabBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
         
         let photo = PhotoViewController()
-        photo.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "camera")?.imageWithRenderingMode(.AlwaysOriginal), selectedImage: UIImage(named: "camera")?.imageWithRenderingMode(.AlwaysOriginal))
+        photo.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "cameraIcon")?.imageWithRenderingMode(.AlwaysOriginal), selectedImage: UIImage(named: "cameraIcon")?.imageWithRenderingMode(.AlwaysOriginal))
         photo.tabBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
         
         let controllers = [place, profile, photo]  //array of the root view controllers displayed by the tab bar interface
