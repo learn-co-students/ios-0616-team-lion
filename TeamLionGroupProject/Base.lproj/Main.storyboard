@@ -80,6 +80,24 @@
             </objects>
             <point key="canvasLocation" x="-298" y="-304"/>
         </scene>
+        <!--Segement Practice-->
+        <scene sceneID="4dn-ml-jJ2">
+            <objects>
+                <viewController id="PCd-zW-98O" customClass="SegementPractice" customModule="TeamLionGroupProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="G6B-ON-8ik"/>
+                        <viewControllerLayoutGuide type="bottom" id="Onc-KD-L45"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zpt-nK-yr7">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7gw-hX-WKg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-332" y="370"/>
+        </scene>
         <!--New Post View Controller-->
         <scene sceneID="coU-Iw-FIb">
             <objects>
