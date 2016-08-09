@@ -12,5 +12,6 @@ target 'TeamLionGroupProject' do
   pod 'Firebase/Auth'
   pod 'FBSDKCoreKit' 
   pod 'FBSDKLoginKit'
-
+  pod 'Firebase/Storage'
+  pod 'Firebase/Database'
 end

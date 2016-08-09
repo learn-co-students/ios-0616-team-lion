@@ -45,7 +45,8 @@ class ProfileHeaderView: UICollectionReusableView {
 			make.height.equalTo(self.snp_height).dividedBy(8)
 		}
 		//usernameLabel.backgroundColor = UIColor.blackColor()
-		usernameLabel.text = "David Park"
+
+        //usernameLabel.text = LoginViewController.
 		usernameLabel.textAlignment = .Center
 		usernameLabel.font = UIFont(name: headerFont, size: usernameLabel.font.pointSize)
 		usernameLabel.textColor = UIColor.whiteColor()
@@ -57,7 +58,7 @@ class ProfileHeaderView: UICollectionReusableView {
 			make.height.equalTo(self.snp_height).dividedBy(2.5)
 			make.width.equalTo(self.snp_height).dividedBy(2.5)
 		}
-		profilePic.image = UIImage(named: "david")?.rounded
+//		profilePic.image = UIImage(named: "imac")?.rounded
 		profilePic.layer.cornerRadius = self.frame.height/5
 		profilePic.layer.masksToBounds = true
 		profilePic.layer.borderWidth = 2
@@ -111,5 +112,13 @@ class ProfileHeaderView: UICollectionReusableView {
 		print("friendsButton pressed")
 		
 	}
+    
+    func setUpForUser(name: String, picture: NSURL) {
+        self.usernameLabel.text = name
+        let data = NSData(contentsOfURL: picture)
+        let pic = UIImage(data: data!)
+        self.profilePic.image = pic
+        print("\n\n\n\n\n\n\n\(pic)")
+    }
 	
 }
