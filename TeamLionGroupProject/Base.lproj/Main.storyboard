@@ -26,7 +26,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="eAG-4s-JH0">
             <objects>
-                <tabBarController id="mAc-2O-b26" sceneMemberID="viewController">
+                <tabBarController id="mAc-2O-b26" customClass="TabBarController" customModule="TeamLionGroupProject" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="n7d-tj-ljL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
