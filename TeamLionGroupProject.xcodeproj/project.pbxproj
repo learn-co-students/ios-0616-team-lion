@@ -12,6 +12,7 @@
 		1BC10C861D58D886006E9747 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BC10C851D58D886006E9747 /* FBSDKLoginKit.framework */; };
 		1BC10C8A1D5A174A006E9747 /* PlaceUserDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC10C891D5A174A006E9747 /* PlaceUserDataStore.swift */; };
 		40AAA4FBEFCA22063F2724B6 /* Pods_TeamLionGroupProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 034ABA837B2714A494044940 /* Pods_TeamLionGroupProject.framework */; };
+		BE0049001D5A2C68005F3E2C /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0048FF1D5A2C68005F3E2C /* PhotoViewController.swift */; };
 		BE6E6CC81D58FA6A00FF8416 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6E6CC71D58FA6A00FF8416 /* TabBarController.swift */; };
 		BEC67E431D53DF8100D2D030 /* MarketplaceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E421D53DF8100D2D030 /* MarketplaceCollectionViewController.swift */; };
 		BEC67E451D53DFCD00D2D030 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E441D53DFCD00D2D030 /* NewPostViewController.swift */; };
@@ -29,6 +30,7 @@
 		FFE94AAC1D54E7320036ED38 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94AA91D54E7320036ED38 /* UIImageExtension.swift */; };
 		FFE94AAD1D54E7320036ED38 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94AAA1D54E7320036ED38 /* UIViewExtensions.swift */; };
 		FFE94AB61D58FE810036ED38 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94AB51D58FE810036ED38 /* ProfileHeaderView.swift */; };
+		FFE94AB81D5A36F30036ED38 /* SegementPractice.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94AB71D5A36F30036ED38 /* SegementPractice.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,7 @@
 		1BC10C851D58D886006E9747 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		1BC10C891D5A174A006E9747 /* PlaceUserDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceUserDataStore.swift; sourceTree = "<group>"; };
 		A387EE526A800AD0083D978F /* Pods-TeamLionGroupProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamLionGroupProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeamLionGroupProject/Pods-TeamLionGroupProject.debug.xcconfig"; sourceTree = "<group>"; };
+		BE0048FF1D5A2C68005F3E2C /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		BE6E6CC71D58FA6A00FF8416 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		BEC67E421D53DF8100D2D030 /* MarketplaceCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketplaceCollectionViewController.swift; sourceTree = "<group>"; };
 		BEC67E441D53DFCD00D2D030 /* NewPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
@@ -58,6 +61,7 @@
 		FFE94AA91D54E7320036ED38 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		FFE94AAA1D54E7320036ED38 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		FFE94AB51D58FE810036ED38 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		FFE94AB71D5A36F30036ED38 /* SegementPractice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegementPractice.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,8 @@
 				FFE94AB51D58FE810036ED38 /* ProfileHeaderView.swift */,
 				BEC67E4A1D53E0F900D2D030 /* PostViewCell.swift */,
 				BE6E6CC71D58FA6A00FF8416 /* TabBarController.swift */,
+				BE0048FF1D5A2C68005F3E2C /* PhotoViewController.swift */,
+				FFE94AB71D5A36F30036ED38 /* SegementPractice.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -297,6 +303,7 @@
 				BE6E6CC81D58FA6A00FF8416 /* TabBarController.swift in Sources */,
 				BEC67E451D53DFCD00D2D030 /* NewPostViewController.swift in Sources */,
 				FFE94AA71D54E4970036ED38 /* TestData.swift in Sources */,
+				FFE94AB81D5A36F30036ED38 /* SegementPractice.swift in Sources */,
 				BEC67E4B1D53E0F900D2D030 /* PostViewCell.swift in Sources */,
 				FFE94AAC1D54E7320036ED38 /* UIImageExtension.swift in Sources */,
 				BEC67E4F1D53E14700D2D030 /* PlacePost.swift in Sources */,
@@ -308,6 +315,7 @@
 				FFE94AAD1D54E7320036ED38 /* UIViewExtensions.swift in Sources */,
 				1BC10C8A1D5A174A006E9747 /* PlaceUserDataStore.swift in Sources */,
 				FFE94AAB1D54E7320036ED38 /* UIColorExtensions.swift in Sources */,
+				BE0049001D5A2C68005F3E2C /* PhotoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
