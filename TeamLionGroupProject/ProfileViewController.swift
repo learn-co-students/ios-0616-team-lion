@@ -80,9 +80,9 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 		switch kind {
 		case UICollectionElementKindSectionHeader:
 			let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerIdentifier, forIndexPath: indexPath) as! ProfileHeaderView
-            headerView.setUpForUser(self.name!, picture: picture!)
-			headerView.delegate = self
-			
+
+				headerView.setUpForUser(self.name!, picture: picture!)
+				headerView.delegate = self
 
 			return headerView
 		default: assert(false, "Unexpected element type")
