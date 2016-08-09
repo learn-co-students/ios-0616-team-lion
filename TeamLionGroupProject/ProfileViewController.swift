@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FBSDKCoreKit
+import FirebaseAuth
 
 class ProfileViewController: UIViewController {
 	
@@ -45,7 +47,6 @@ class ProfileViewController: UIViewController {
 			make.edges.equalTo(view.snp_edges)
 		}
 	}
-
 }
 
 

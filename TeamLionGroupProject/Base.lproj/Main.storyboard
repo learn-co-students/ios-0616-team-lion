@@ -8,7 +8,7 @@
         <!--Login View Controller-->
         <scene sceneID="3eM-dn-eAC">
             <objects>
-                <viewController id="Zik-vM-d9N" customClass="LoginViewController" customModule="TeamLionGroupProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginView" id="Zik-vM-d9N" customClass="LoginViewController" customModule="TeamLionGroupProject" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4tT-e5-M41"/>
                         <viewControllerLayoutGuide type="bottom" id="Bws-DW-9h8"/>
@@ -26,7 +26,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="eAG-4s-JH0">
             <objects>
-                <tabBarController id="mAc-2O-b26" sceneMemberID="viewController">
+                <tabBarController id="mAc-2O-b26" customClass="TabBarController" customModule="TeamLionGroupProject" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="n7d-tj-ljL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -45,7 +45,7 @@
         <!--Profile View Controller-->
         <scene sceneID="7S8-rD-w5R">
             <objects>
-                <viewController id="1O1-Mm-aR9" userLabel="Profile View Controller" customClass="ProfileViewController" customModule="TeamLionGroupProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileView" id="1O1-Mm-aR9" userLabel="Profile View Controller" customClass="ProfileViewController" customModule="TeamLionGroupProject" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eqe-qt-d02"/>
                         <viewControllerLayoutGuide type="bottom" id="xKt-rU-13b"/>
@@ -59,7 +59,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SAT-uw-L1k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-298" y="-985"/>
+            <point key="canvasLocation" x="-298" y="-957"/>
         </scene>
         <!--Marketplace View Controller-->
         <scene sceneID="2mw-6Z-sGa">

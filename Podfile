@@ -8,4 +8,9 @@ target 'TeamLionGroupProject' do
   # Pods for TeamLionGroupProject
   pod 'SnapKit'
 
+  pod 'Firebase'
+  pod 'Firebase/Auth'
+  pod 'FBSDKCoreKit' 
+  pod 'FBSDKLoginKit'
+
 end
