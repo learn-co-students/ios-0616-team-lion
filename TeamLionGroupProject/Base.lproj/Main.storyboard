@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Zik-vM-d9N">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="mAc-2O-b26">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -80,10 +80,10 @@
             </objects>
             <point key="canvasLocation" x="-298" y="-304"/>
         </scene>
-        <!--Segment Practice-->
+        <!--Segement Practice-->
         <scene sceneID="4dn-ml-jJ2">
             <objects>
-                <viewController id="PCd-zW-98O" customClass="SegmentPractice" sceneMemberID="viewController">
+                <viewController id="PCd-zW-98O" customClass="SegementPractice" customModule="TeamLionGroupProject" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="G6B-ON-8ik"/>
                         <viewControllerLayoutGuide type="bottom" id="Onc-KD-L45"/>
