@@ -12,5 +12,7 @@ target 'TeamLionGroupProject' do
   pod 'FBSDKCoreKit' 
   pod 'FBSDKLoginKit'
   pod 'DynamicButton', '~> 2.1.0'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Database'
 
 end

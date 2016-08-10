@@ -8,7 +8,7 @@
 
 import UIKit
 import SnapKit
-
+import FBSDKLoginKit
 protocol ProfileHeaderViewDelegate: class {
 	func friendsButtonPressed()
 }
@@ -28,6 +28,7 @@ class ProfileHeaderView: UICollectionReusableView {
 	var currentFollowingsCount = 7
 	
 	let headerFont = "HelveticaNeue"
+    var loginButton: FBSDKLoginButton = FBSDKLoginButton()
 
 	override func layoutSubviews() {
 		super.layoutSubviews()
@@ -36,7 +37,11 @@ class ProfileHeaderView: UICollectionReusableView {
 	}
 	
 	func setupScene() {
-		
+        self.addSubview(loginButton)
+        loginButton.frame = CGRectMake(15, 30, 80, 30)
+        loginButton.addTarget(self, action: #selector(loginButtonPressed), forControlEvents: .TouchUpInside)
+
+        
 		self.addSubview(usernameLabel)
 		usernameLabel.snp_makeConstraints { (make) in
 			make.centerX.equalTo(self.snp_centerX)
@@ -45,7 +50,8 @@ class ProfileHeaderView: UICollectionReusableView {
 			make.height.equalTo(self.snp_height).dividedBy(8)
 		}
 		//usernameLabel.backgroundColor = UIColor.blackColor()
-		usernameLabel.text = "David Park"
+
+        //usernameLabel.text = LoginViewController.
 		usernameLabel.textAlignment = .Center
 		usernameLabel.font = UIFont(name: headerFont, size: usernameLabel.font.pointSize)
 		usernameLabel.textColor = UIColor.whiteColor()
@@ -57,7 +63,7 @@ class ProfileHeaderView: UICollectionReusableView {
 			make.height.equalTo(self.snp_height).dividedBy(2.5)
 			make.width.equalTo(self.snp_height).dividedBy(2.5)
 		}
-		profilePic.image = UIImage(named: "david")?.rounded
+//		profilePic.image = UIImage(named: "imac")?.rounded
 		profilePic.layer.cornerRadius = self.frame.height/5
 		profilePic.layer.masksToBounds = true
 		profilePic.layer.borderWidth = 2
@@ -107,9 +113,27 @@ class ProfileHeaderView: UICollectionReusableView {
 		friendsButton.addTarget(self, action: #selector(friendsButtonPressed), forControlEvents: .TouchUpInside)
 	}
 	
-	func friendsButtonPressed() {
-		print("friendsButton pressed")
-		
+	func loginButtonPressed() -> Bool{
+            if (loginButton.touchInside){
+            print("user logged out")
+        return true
+        }
+            print("user logged in")
+		return false
 	}
+    
+    func friendsButtonPressed() {
+        print("friendsButton pressed")
+    }
+    
+    func setUpForUser(name: String, picture: NSURL) {
+        self.usernameLabel.text = name
+        let data = NSData(contentsOfURL: picture)
+        let pic = UIImage(data: data!)
+        self.profilePic.image = pic
+        print("\n\n\n\n\n\n\n\(pic)")
+    }
+    
+
 	
 }

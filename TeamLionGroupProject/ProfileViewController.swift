@@ -11,7 +11,13 @@ import FBSDKCoreKit
 import FirebaseAuth
 
 class ProfileViewController: UIViewController {
-	
+let shared = PlaceUserDataStore.sharedDataStore
+    
+    
+    var name: String?
+    var picture: NSURL?
+    
+    
 	private let cellIdentifier = "Cell"
 	private let headerIdentifier = "header"
 	
@@ -21,6 +27,7 @@ class ProfileViewController: UIViewController {
 		super.viewDidLoad()
 		
 		setupCollectionView()
+       
 		
 	}
 	
@@ -72,17 +79,21 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 		
 		switch kind {
 		case UICollectionElementKindSectionHeader:
-			let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerIdentifier, forIndexPath: indexPath) as! ProfileHeaderView
-			
+
+			var headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerIdentifier, forIndexPath: indexPath) as! ProfileHeaderView
+            headerView.setUpForUser(self.name!, picture: picture!)
 			headerView.delegate = self
-			
-			// DO PROPERTY STUFF FROM FACEBOOK/FIREBASE HERE
-			headerView.username = "username"
-			
-			
-			
-			//******************************
-			
+            
+            print("login - \(headerView.loginButtonPressed())")
+            if (headerView.loginButtonPressed() == (true)){
+                try! FIRAuth.auth()!.signOut()
+                FBSDKAccessToken.setCurrentAccessToken(nil)
+                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let loginViewController: UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("LoginView")
+                self.presentViewController(loginViewController, animated: true, completion: nil)
+            }
+
+
 			return headerView
 		default: assert(false, "Unexpected element type")
 		}
@@ -94,4 +105,8 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
 	func friendsButtonPressed() {
 		
 	}
+    
+    func backToLoginScreen(){
+    
+    }
 }
