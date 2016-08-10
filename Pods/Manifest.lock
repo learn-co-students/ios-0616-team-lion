@@ -5,6 +5,7 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
+  - DynamicButton (2.1.0)
   - FBSDKCoreKit (4.14.0):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.14.0):
@@ -42,6 +43,7 @@ PODS:
   - SnapKit (0.21.1)
 
 DEPENDENCIES:
+  - DynamicButton (~> 2.1.0)
   - FBSDKCoreKit
   - FBSDKLoginKit
   - Firebase
@@ -50,6 +52,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  DynamicButton: 08c809fdee3c4feb34a20beeba64c069a529d176
   FBSDKCoreKit: 6e020b5db0b5bd1e01f5fb0902131befd129a502
   FBSDKLoginKit: da563567a108050ef83739c8c8c001ee9e25fa13
   Firebase: 754562547af419cc2f4b15247fee419081924bc2
@@ -63,6 +66,6 @@ SPEC CHECKSUMS:
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
   SnapKit: bbad04cb016c7cead63965f16b00c09318d271ee
 
-PODFILE CHECKSUM: 78e357ee4ed954e9012754c03ca3259f67e84261
+PODFILE CHECKSUM: d3bee1c57a1418a148fbd94007f6f09d13cdf234
 
 COCOAPODS: 1.0.1

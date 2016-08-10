@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class NewPostViewController: UIViewController {
+class NewPostViewController: UIViewController, UINavigationBarDelegate {
 	
 	var itemNameLabel: UILabel = UILabel()
 	var itemNameField: UITextField = UITextField()
@@ -17,17 +17,20 @@ class NewPostViewController: UIViewController {
 	var itemDescriptionField: UITextView = UITextView()
 	var itemPriceLabel: UILabel = UILabel()
 	var itemPriceField: UITextField = UITextField()
+    
 	var uploadImageButton: UIButton = UIButton()
+    var takePictureButton: UIButton = UIButton()
 	var profilePic = UIImageView()
 	var postItemButton: UIButton = UIButton()
 	var newPostTextLabel: UILabel = UILabel()
-	
+	var cancelButton = UIButton()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		print("New Post VC View Did Load")
 		
+        view.backgroundColor = UIColor.whiteColor()
 		generateScene()
 	}
 	
@@ -104,20 +107,32 @@ class NewPostViewController: UIViewController {
 		view.addSubview(uploadImageButton)
 		uploadImageButton.snp_makeConstraints { (make) in
 			make.top.equalTo(itemDescriptionField.snp_bottom).offset(10)
-			make.width.equalTo(itemDescriptionField.snp_width)
+			make.width.equalTo(itemDescriptionField.snp_width).dividedBy(2)
 			make.height.equalTo(itemDescriptionField.snp_height).dividedBy(2)
-			make.centerX.equalTo(itemDescriptionField.snp_centerX)
+			make.centerX.equalTo(itemDescriptionField.snp_centerX).offset(-80)
 		}
 		uploadImageButton.backgroundColor = UIColor.magentaColor()
 		uploadImageButton.layer.cornerRadius = view.frame.height/16
 		uploadImageButton.setTitle("Upload Images", forState: .Normal)
 		uploadImageButton.addTarget(self, action: #selector(uploadImagesButtonPressed), forControlEvents: .TouchUpInside)
+        
+        view.addSubview(takePictureButton)
+        takePictureButton.snp_makeConstraints { (make) in
+            make.top.equalTo(itemDescriptionField.snp_bottom).offset(10)
+            make.width.equalTo(itemDescriptionField.snp_width).dividedBy(2)
+            make.height.equalTo(itemDescriptionField.snp_height).dividedBy(2)
+            make.centerX.equalTo(itemDescriptionField.snp_centerX).offset(80)
+        }
+        takePictureButton.backgroundColor = UIColor.alizarinColor()
+        takePictureButton.layer.cornerRadius = view.frame.height/16
+        takePictureButton.setTitle("Take Picture", forState: .Normal)
+        takePictureButton.addTarget(self, action: #selector(takePictureButtonPressed), forControlEvents: .TouchUpInside)
 		
 		
 		view.addSubview(postItemButton)
 		postItemButton.snp_makeConstraints { (make) in
-			make.left.equalTo(uploadImageButton.snp_left)
-			make.right.equalTo(uploadImageButton.snp_right)
+			make.left.equalTo(itemDescriptionField.snp_left)
+			make.right.equalTo(itemDescriptionField.snp_right)
 			make.top.equalTo(uploadImageButton.snp_bottom).offset(10)
 			make.bottom.equalTo(view.snp_bottom).offset(-40)
 		}
@@ -146,6 +161,15 @@ class NewPostViewController: UIViewController {
 		newPostTextLabel.text = "New Post"
 		newPostTextLabel.textAlignment = .Center
 		newPostTextLabel.font = UIFont(name: labelFont, size: 40)
+        
+        view.addSubview(cancelButton)
+        cancelButton.setTitle("Cancel", forState: .Normal)
+        cancelButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        cancelButton.addTarget(self, action: #selector(NewPostViewController.cancelButtonTapped(_:)), forControlEvents: .TouchUpInside)
+        cancelButton.snp_makeConstraints { (make) in
+            make.right.equalTo(view.snp_right).offset(-30)
+            make.top.equalTo(view.topAnchor).offset(30)
+        }
 		
 	}
 	
@@ -156,9 +180,20 @@ class NewPostViewController: UIViewController {
 	func sellItButtonPressed() {
 		print("Sell It pressed")
 		//alert "Are you sure you want to post (item Name) for (price)?
-		
 	}
-	
+    
+    func takePictureButtonPressed(){
+        print("Take Picture pressed")
+        
+        presentViewController(PhotoViewController(), animated: true, completion: nil)
+        
+    }
+    
+    func cancelButtonTapped(sender: UIBarButtonItem) {
+        
+        dismissViewControllerAnimated(true, completion: nil)
+        
+    }
 	
 
 }

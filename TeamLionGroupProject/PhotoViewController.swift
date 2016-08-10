@@ -8,13 +8,17 @@
 
 import UIKit
 import AVFoundation
+import DynamicButton
+import SnapKit
 
 class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var previewView = UIView()
     var capturedImage = UIImageView()
-    let captureButton = UIButton()
-    let galleryButton = UIButton()
+    let captureButton = DynamicButton()
+    let saveButton = DynamicButton()
+    let retakeButton = DynamicButton()
+    let circle = UIImageView()
     
     var captureSession: AVCaptureSession?
     var stillImageOutput: AVCaptureStillImageOutput?
@@ -29,6 +33,8 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         view.backgroundColor = UIColor.whiteColor()
+        saveButton.hidden = true
+        retakeButton.hidden = true
         layOutPhoto()
         
     }
@@ -75,8 +81,9 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         previewLayer!.frame = previewView.bounds
     }
     
-    func didPressTakePhoto(sender: UIButton) {
+    func didPressTakePhoto() {
         
+        print ("Taking Picture")
         if let videoConnection = stillImageOutput!.connectionWithMediaType(AVMediaTypeVideo) {
             videoConnection.videoOrientation = AVCaptureVideoOrientation.Portrait
             stillImageOutput?.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: {(sampleBuffer, error) in
@@ -90,6 +97,14 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
                 }
             })
         }
+        
+        UIView.transitionWithView(view, duration: 0.3, options: .TransitionCrossDissolve, animations: {() -> Void in
+            self.captureButton.hidden = true
+            self.saveButton.hidden = false
+            self.retakeButton.hidden = false
+            self.capturedImage.hidden = false
+            }, completion: { _ in })
+        
     }
     
     func processImage(image:UIImage) -> UIImage{
@@ -120,11 +135,29 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         captureSession!.startRunning()
     }
     
-    func photoGallery(sender: UIButton) {
+    func photoGallery() {
         
         print("Gallery Button Tapped")
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+    }
+    
+    func saveButtonTapped() {
+     
+
+    }
+    
+    func retakeButtonTapped() {
+        
+        UIView.transitionWithView(view, duration: 0.3, options: .TransitionCrossDissolve, animations: {() -> Void in
+            self.capturedImage.hidden = true
+            self.captureButton.hidden = false
+            self.saveButton.hidden = true
+            self.retakeButton.hidden = true
+            }, completion: { _ in })
+        
+        capturedImage.image = nil
+        
     }
     
     func layOutPhoto() {
@@ -153,34 +186,60 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
             make.height.equalTo(view.snp_width).dividedBy(1.5)
         }
 
-        view.addSubview(captureButton)
-        captureButton.setImage(UIImage(named: "circleButton" ), forState: .Normal)
-        captureButton.addTarget(self, action: #selector(PhotoViewController.didPressTakePhoto(_:)), forControlEvents: .TouchUpInside)
-        captureButton.snp_makeConstraints { (make) in
-            make.centerX.equalTo(view.snp_centerX)
-            make.centerY.equalTo(view.snp_centerY).multipliedBy(1.6)
-            make.width.equalTo(view.snp_width).dividedBy(3.7)
-            make.height.equalTo(view.snp_width).dividedBy(3.7)
-        }
         
         bottomFrame.addSubview(capturedImage)
         capturedImage.snp_makeConstraints { (make) in
-            make.centerX.equalTo(bottomFrame.snp_centerX).dividedBy(3.5)
-            make.centerY.equalTo(bottomFrame.snp_centerY).dividedBy(1.2)
-            make.width.equalTo(view.snp_width).dividedBy(5)
-            make.height.equalTo(view.snp_width).dividedBy(5)
+            make.width.equalTo(previewView.snp_width)
+            make.height.equalTo(previewView.snp_width)
+            make.top.equalTo(topFrame.snp_bottom)
+            make.bottom.equalTo(bottomFrame.snp_top)
         }
         
-        
-        view.addSubview(galleryButton)
-        galleryButton.setImage(UIImage(named: "gallery" ), forState: .Normal)
-        galleryButton.addTarget(self, action: #selector(PhotoViewController.photoGallery(_:)), forControlEvents: .TouchUpInside)
-        galleryButton.snp_makeConstraints { (make) in
-            make.centerX.equalTo(bottomFrame.snp_centerX).multipliedBy(1.7)
-            make.centerY.equalTo(bottomFrame.snp_centerY)
-            make.width.equalTo(view.snp_width).dividedBy(3.7)
-            make.height.equalTo(view.snp_width).dividedBy(3.7)
+        view.addSubview(circle)
+        circle.image = UIImage(named: "circle")
+        circle.snp_makeConstraints { (make) in
+            make.centerX.equalTo(bottomFrame.snp_centerX)
+            make.centerY.equalTo(bottomFrame.snp_centerY).offset(-10)
+            make.width.equalTo(bottomFrame.snp_width).dividedBy(3)
+            make.height.equalTo(bottomFrame.snp_width).dividedBy(3)
         }
+        
+        view.addSubview(captureButton)
+        captureButton.setStyle(DynamicButtonStyle.None, animated: true)
+        captureButton.addTarget(self, action: #selector(didPressTakePhoto), forControlEvents: .TouchUpInside)
+        captureButton.snp_makeConstraints { (make) in
+            make.centerX.equalTo(bottomFrame.snp_centerX)
+            make.centerY.equalTo(bottomFrame.snp_centerY).offset(-10)
+            make.width.equalTo(bottomFrame.snp_width).dividedBy(5)
+            make.height.equalTo(bottomFrame.snp_width).dividedBy(5)
+        }
+        
+        view.addSubview(saveButton)
+        saveButton.setStyle(DynamicButtonStyle.CheckMark, animated: true)
+        saveButton.strokeColor = UIColor.peterRiverColor()
+        saveButton.highlightStokeColor = UIColor.greenSeaColor()
+        saveButton.lineWidth = 4
+        saveButton.addTarget(self, action: #selector(saveButtonTapped), forControlEvents: .TouchUpInside)
+        saveButton.snp_makeConstraints { (make) in
+            make.centerX.equalTo(bottomFrame.snp_centerX)
+            make.centerY.equalTo(bottomFrame.snp_centerY).offset(-10)
+            make.width.equalTo(bottomFrame.snp_width).dividedBy(5)
+            make.height.equalTo(bottomFrame.snp_width).dividedBy(5)
+        }
+        
+        view.addSubview(retakeButton)
+        retakeButton.setStyle(DynamicButtonStyle.Reload, animated: true)
+        retakeButton.strokeColor = UIColor.peterRiverColor()
+        retakeButton.highlightStokeColor = UIColor.redColor()
+        retakeButton.lineWidth = 2
+        retakeButton.addTarget(self, action: #selector(retakeButtonTapped), forControlEvents: .TouchUpInside)
+        retakeButton.snp_makeConstraints { (make) in
+            make.centerX.equalTo(bottomFrame.snp_centerX).offset(-150)
+            make.centerY.equalTo(bottomFrame.snp_centerY).offset(-80)
+            make.width.equalTo(bottomFrame.snp_width).dividedBy(10)
+            make.height.equalTo(bottomFrame.snp_width).dividedBy(10)
+        }
+        
         
     }
     

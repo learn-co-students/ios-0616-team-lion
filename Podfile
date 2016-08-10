@@ -7,10 +7,10 @@ target 'TeamLionGroupProject' do
 
   # Pods for TeamLionGroupProject
   pod 'SnapKit'
-
   pod 'Firebase'
   pod 'Firebase/Auth'
   pod 'FBSDKCoreKit' 
   pod 'FBSDKLoginKit'
+  pod 'DynamicButton', '~> 2.1.0'
 
 end
