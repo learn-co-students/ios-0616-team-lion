@@ -31,16 +31,21 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 let profileViewController = mainStoryboard.instantiateViewControllerWithIdentifier("ProfileView") as! ProfileViewController
                 profileViewController.name = user.displayName
                 profileViewController.picture = user.photoURL
-                
-                    
+              
                 self.presentViewController(profileViewController, animated: true, completion: nil)
             } else {
                 // No user is signed in.
                 self.loginButton.center = self.view.center
-                self.loginButton.readPermissions = ["public_profile", "email", "user_friends"]
+                self.loginButton.readPermissions = ["public_profile", "email", "user_friends", "read_custom_friendlists"]
                 self.loginButton.delegate = self
                 self.view!.addSubview(self.loginButton)
                 self.loginButton.hidden = false
+                
+                
+
+                
+                
+                
             }
         }
         // Optional: Place the button in the center of your view.
@@ -66,8 +71,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
             FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
                 print("user logged in to firebase app")
-
-                self.shared.test()
+                self.shared.facebookToFirebase()
 
         }
         
@@ -75,6 +79,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
         }
     }
+   
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
         print("user did log out")

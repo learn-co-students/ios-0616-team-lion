@@ -8,7 +8,7 @@
 
 import UIKit
 import SnapKit
-
+import FBSDKLoginKit
 protocol ProfileHeaderViewDelegate: class {
 	func friendsButtonPressed()
 }
@@ -28,6 +28,7 @@ class ProfileHeaderView: UICollectionReusableView {
 	var currentFollowingsCount = 7
 	
 	let headerFont = "HelveticaNeue"
+    var loginButton: FBSDKLoginButton = FBSDKLoginButton()
 
 	override func layoutSubviews() {
 		super.layoutSubviews()
@@ -36,7 +37,11 @@ class ProfileHeaderView: UICollectionReusableView {
 	}
 	
 	func setupScene() {
-		
+        self.addSubview(loginButton)
+        loginButton.frame = CGRectMake(15, 30, 80, 30)
+        loginButton.addTarget(self, action: #selector(loginButtonPressed), forControlEvents: .TouchUpInside)
+
+        
 		self.addSubview(usernameLabel)
 		usernameLabel.snp_makeConstraints { (make) in
 			make.centerX.equalTo(self.snp_centerX)
@@ -108,10 +113,18 @@ class ProfileHeaderView: UICollectionReusableView {
 		friendsButton.addTarget(self, action: #selector(friendsButtonPressed), forControlEvents: .TouchUpInside)
 	}
 	
-	func friendsButtonPressed() {
-		print("friendsButton pressed")
-		
+	func loginButtonPressed() -> Bool{
+            if (loginButton.touchInside){
+            print("user logged out")
+        return true
+        }
+            print("user logged in")
+		return false
 	}
+    
+    func friendsButtonPressed() {
+        print("friendsButton pressed")
+    }
     
     func setUpForUser(name: String, picture: NSURL) {
         self.usernameLabel.text = name
@@ -120,5 +133,7 @@ class ProfileHeaderView: UICollectionReusableView {
         self.profilePic.image = pic
         print("\n\n\n\n\n\n\n\(pic)")
     }
+    
+
 	
 }
