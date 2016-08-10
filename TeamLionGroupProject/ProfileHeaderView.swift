@@ -114,10 +114,11 @@ class ProfileHeaderView: UICollectionReusableView {
 	}
 	
 	func loginButtonPressed() -> Bool{
-        if (loginButton.touchInside){
+            if (loginButton.touchInside){
+            print("user logged out")
         return true
         }
-        print("loginButton pressed")
+            print("user logged in")
 		return false
 	}
     

@@ -82,14 +82,14 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 			var headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerIdentifier, forIndexPath: indexPath) as! ProfileHeaderView
             headerView.setUpForUser(self.name!, picture: picture!)
 			headerView.delegate = self
+            
+            print("login - \(headerView.loginButtonPressed())")
             if (headerView.loginButtonPressed() == (true)){
                 try! FIRAuth.auth()!.signOut()
                 FBSDKAccessToken.setCurrentAccessToken(nil)
                 let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 let loginViewController: UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("LoginView")
-                
                 self.presentViewController(loginViewController, animated: true, completion: nil)
-
             }
 
 			return headerView
