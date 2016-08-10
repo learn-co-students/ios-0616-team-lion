@@ -79,10 +79,18 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 		
 		switch kind {
 		case UICollectionElementKindSectionHeader:
-			let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerIdentifier, forIndexPath: indexPath) as! ProfileHeaderView
+			var headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerIdentifier, forIndexPath: indexPath) as! ProfileHeaderView
             headerView.setUpForUser(self.name!, picture: picture!)
 			headerView.delegate = self
-			
+            if (headerView.loginButtonPressed() == (true)){
+                try! FIRAuth.auth()!.signOut()
+                FBSDKAccessToken.setCurrentAccessToken(nil)
+                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let loginViewController: UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("LoginView")
+                
+                self.presentViewController(loginViewController, animated: true, completion: nil)
+
+            }
 
 			return headerView
 		default: assert(false, "Unexpected element type")
@@ -95,4 +103,8 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
 	func friendsButtonPressed() {
 		
 	}
+    
+    func backToLoginScreen(){
+    
+    }
 }
