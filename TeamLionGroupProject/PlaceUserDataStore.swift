@@ -11,6 +11,7 @@ import FirebaseAuth
 import FirebaseStorage
 import Firebase
 import FirebaseDatabase
+import FBSDKLoginKit
 
 
 struct CurrentUser {
@@ -51,7 +52,7 @@ class PlaceUserDataStore {
     }
     
 
-    
+
     
     func postToDataStore(nameKey: String, pictureKey: String){
         print("post to data store")
@@ -74,6 +75,36 @@ class PlaceUserDataStore {
                 let email = user.email
                 let photoUrl = user.photoURL
                 let uid = user.uid
+                
+                
+//                let fbRequest = FBSDKGraphRequest(graphPath:"/me/friends", parameters:["fields": "friends"]);
+//                fbRequest.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
+//                    if error == nil {
+//                        print("Friends are : \(result)")
+//                    } else {
+//                        print("Error Getting Friends \(error)")
+//                        
+//                    }
+//                }
+                
+                
+                let fbRequestFriends = FBSDKGraphRequest(graphPath:"/me/taggable_friends", parameters:["taggable_friends": "taggable_friends"]);
+                fbRequestFriends.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
+                    if error == nil {
+                        
+                       var firstLevel = result as? NSDictionary
+                        guard let firstDictionary = firstLevel else {fatalError()}
+                        var firstArray = firstDictionary["data"]
+                        print(firstArray)
+                        //guard let neededArray = firstArray else {fatalError()}
+
+                    } else {
+                        
+                        print("Error Getting Friends \(error)");
+                        
+                    }
+                }
+                
                 
                 
                 let data = NSData(contentsOfURL: photoUrl!)
