@@ -18,6 +18,7 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
     let captureButton = DynamicButton()
     let saveButton = DynamicButton()
     let retakeButton = DynamicButton()
+    let cancelButton = DynamicButton()
     let circle = UIImageView()
     
     var captureSession: AVCaptureSession?
@@ -98,12 +99,15 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
             })
         }
         
+        
         UIView.transitionWithView(view, duration: 0.3, options: .TransitionCrossDissolve, animations: {() -> Void in
             self.captureButton.hidden = true
             self.saveButton.hidden = false
             self.retakeButton.hidden = false
             self.capturedImage.hidden = false
             }, completion: { _ in })
+        
+        
         
     }
     
@@ -121,7 +125,7 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         
         CGContextTranslateCTM(ctx, 0, (screenWidth-(aspectRatio*height))*0.5)
         
-        image.drawInRect(CGRect(origin: CGPoint(x: 0, y: 100), size: CGSize(width:screenWidth, height:height*aspectRatio)))
+        image.drawInRect(CGRect(origin: CGPoint(x: 0, y: 92.5), size: CGSize(width:screenWidth, height:height*aspectRatio)))
         
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -144,6 +148,7 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
     
     func saveButtonTapped() {
      
+        //save self.capturedImage as PlacePost.itemImages
 
     }
     
@@ -157,6 +162,12 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
             }, completion: { _ in })
         
         capturedImage.image = nil
+        
+    }
+    
+    func cancelButtonTapped() {
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
         
     }
     
@@ -175,7 +186,7 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         topFrame.snp_makeConstraints { (make) in
             make.top.equalTo(view.snp_top)
             make.width.equalTo(view.snp_width)
-            make.height.equalTo(view.snp_width).dividedBy(8)
+            make.height.equalTo(view.snp_width).dividedBy(7)
         }
         
         view.addSubview(bottomFrame)
@@ -183,14 +194,13 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         bottomFrame.snp_makeConstraints { (make) in
             make.bottom.equalTo(view.snp_bottom)
             make.width.equalTo(view.snp_width)
-            make.height.equalTo(view.snp_width).dividedBy(1.5)
+            make.height.equalTo(view.snp_width).dividedBy(1.575)
         }
 
         
         bottomFrame.addSubview(capturedImage)
         capturedImage.snp_makeConstraints { (make) in
             make.width.equalTo(previewView.snp_width)
-            make.height.equalTo(previewView.snp_width)
             make.top.equalTo(topFrame.snp_bottom)
             make.bottom.equalTo(bottomFrame.snp_top)
         }
@@ -240,6 +250,17 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
             make.height.equalTo(bottomFrame.snp_width).dividedBy(10)
         }
         
+        view.addSubview(cancelButton)
+        cancelButton.setStyle(DynamicButtonStyle.Rewind, animated: true)
+        cancelButton.strokeColor = UIColor.peterRiverColor()
+        cancelButton.highlightStokeColor = UIColor.redColor()
+        cancelButton.addTarget(self, action: #selector(cancelButtonTapped), forControlEvents: .TouchUpInside)
+        cancelButton.snp_makeConstraints { (make) in
+            make.centerX.equalTo(topFrame.snp_centerX).offset(-160)
+            make.centerY.equalTo(topFrame.snp_centerY).offset(10)
+            make.width.equalTo(topFrame.snp_width).dividedBy(12)
+            make.height.equalTo(topFrame.snp_width).dividedBy(12)
+        }
         
     }
     

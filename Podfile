@@ -14,5 +14,5 @@ target 'TeamLionGroupProject' do
   pod 'DynamicButton', '~> 2.1.0'
   pod 'Firebase/Storage'
   pod 'Firebase/Database'
-
+  pod 'CCTextFieldEffects'
 end
