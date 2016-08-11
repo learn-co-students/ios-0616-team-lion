@@ -55,11 +55,14 @@ class PlaceUserDataStore {
     
     func postToDataStore(nameKey: String, pictureKey: String){
         print("post to data store")
-        let uid = FIRAuth.auth()?.currentUser!.uid
-        print(uid)
-        let data = [ uid! : [CurrentUser.nameKey: nameKey,
-            CurrentUser.pictureKey: pictureKey]]
-        self.ref.child(CurrentUser.childName).setValue(data)
+        if let user = FIRAuth.auth()?.currentUser {
+            let uid = user.uid
+            print(uid)
+            let data = [ uid : [CurrentUser.nameKey: nameKey,
+                CurrentUser.pictureKey: pictureKey]]
+            self.ref.child(CurrentUser.childName).setValue(data)
+        }
+        
     }
     
 

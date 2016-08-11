@@ -27,6 +27,8 @@ let shared = PlaceUserDataStore.sharedDataStore
 		super.viewDidLoad()
 		
 		setupCollectionView()
+        
+    
        
 		
 	}
@@ -84,8 +86,8 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
             headerView.setUpForUser(self.name!, picture: picture!)
 			headerView.delegate = self
             
-            print("login - \(headerView.loginButtonPressed())")
-            if (headerView.loginButtonPressed() == (true)){
+            print("login - \(headerView.backToLoginScreen())")
+            if (headerView.backToLoginScreen() == (true)){
                 try! FIRAuth.auth()!.signOut()
                 FBSDKAccessToken.setCurrentAccessToken(nil)
                 let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -103,10 +105,14 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 extension ProfileViewController: ProfileHeaderViewDelegate {
 	
 	func friendsButtonPressed() {
-		
 	}
     
     func backToLoginScreen(){
-    
+        try! FIRAuth.auth()!.signOut()
+        FBSDKAccessToken.setCurrentAccessToken(nil)
+        dispatch_async(dispatch_get_main_queue()) { 
+            self.showViewController(LoginViewController(), sender: nil)
+        }
+
     }
 }

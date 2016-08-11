@@ -9,14 +9,20 @@
 import UIKit
 import FBSDKLoginKit
 import FirebaseAuth
+
+
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
+   
+    
     let shared = PlaceUserDataStore.sharedDataStore
-    
-    
-    
     var loginButton: FBSDKLoginButton = FBSDKLoginButton()
     var activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
       
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
+    }
     
 	override func viewDidLoad() {
 		super.viewDidLoad()
