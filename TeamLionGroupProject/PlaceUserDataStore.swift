@@ -74,7 +74,6 @@ class PlaceUserDataStore {
                 CurrentUser.friendsKey : [friendName: friendPic]]]
             self.ref.child(CurrentUser.childName).setValue(data)
             
-            
         }
         
     }
@@ -117,6 +116,7 @@ class PlaceUserDataStore {
             } else {
                 // No user is signed in.
             }
+            
         }
     }
  
@@ -131,11 +131,11 @@ class PlaceUserDataStore {
                 let a = result as? NSDictionary
                 guard let b = a else {fatalError()}
                 let c = b["data"]
-                
+
                 let d = c as? NSArray
                 guard let e = d else {fatalError()}
                 let f = e[0]
-                
+
                 let g = f as? NSDictionary
                 guard let h = g else {fatalError()}
                 let i = h["name"]
