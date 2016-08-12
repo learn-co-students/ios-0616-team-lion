@@ -17,12 +17,14 @@ import FBSDKLoginKit
 struct CurrentUser {
     static var name: String?
     static var picture: UIImage?
-    static var postings: [PlacePost]?
+    static var postings: [PlacePost]? 
+    static var friendsList: [Friend]?
     
     
     static let childName = "user"
     static let nameKey = "name"
     static let pictureKey = "picture"
+
     
 }
 
@@ -66,8 +68,6 @@ class PlaceUserDataStore {
         
     }
     
-
-    
     func facebookToFirebase(){
         FIRAuth.auth()?.addAuthStateDidChangeListener { auth, user in
             if let user = user {
@@ -76,36 +76,8 @@ class PlaceUserDataStore {
                 let photoUrl = user.photoURL
                 let uid = user.uid
                 
-                
-//                let fbRequest = FBSDKGraphRequest(graphPath:"/me/friends", parameters:["fields": "friends"]);
-//                fbRequest.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
-//                    if error == nil {
-//                        print("Friends are : \(result)")
-//                    } else {
-//                        print("Error Getting Friends \(error)")
-//                        
-//                    }
-//                }
-                
-                
-                let fbRequestFriends = FBSDKGraphRequest(graphPath:"/me/taggable_friends", parameters:["taggable_friends": "taggable_friends"]);
-                fbRequestFriends.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
-                    if error == nil {
-                        
-                       var firstLevel = result as? NSDictionary
-                        guard let firstDictionary = firstLevel else {fatalError()}
-                        var firstArray = firstDictionary["data"]
-                        print(firstArray)
-                        //guard let neededArray = firstArray else {fatalError()}
+       self.getFriendsInfo()
 
-                    } else {
-                        
-                        print("Error Getting Friends \(error)");
-                        
-                    }
-                }
-                
-                
                 
                 let data = NSData(contentsOfURL: photoUrl!)
                 let currentUser = PlaceUser.init(withName: name!, lastName: "", profilePicture: UIImage(data: data!), postings: [])
@@ -136,5 +108,52 @@ class PlaceUserDataStore {
         }
     }
  
+    
+    
+    func getFriendsInfo(){
+        var name = String()
+        var profilePicURL = String()
+        let fbRequestFriends = FBSDKGraphRequest(graphPath:"/me/taggable_friends", parameters:["taggable_friends": "taggable_friends"]);
+        fbRequestFriends.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
+            if error == nil {
+                let a = result as? NSDictionary
+                guard let b = a else {fatalError()}
+                let c = b["data"]
+                
+                let d = c as? NSArray
+                guard let e = d else {fatalError()}
+                let f = e[0]
+                
+                let g = f as? NSDictionary
+                guard let h = g else {fatalError()}
+                let i = h["name"]
+                
+                //get friends name
+                if let j = i{
+                    name = j as! String}
+                
+                let k = f as? NSDictionary
+                guard let l = k else {fatalError()}
+                let m = l["picture"]
+                
+                let o = m as? NSDictionary
+                guard let p = o else {fatalError()}
+                let r = p["data"]
+                
+                let s = r as? NSDictionary
+                guard let t = s else {fatalError()}
+                let q = t["url"]
+                
+                //get friends profile pic
+                if let u = q{
+                    profilePicURL = u as! String}
+            } else {
+                print("Error Getting Friends \(error)");
+            }
+            let friend = Friend(friendsName: name, friendsProfilePic: profilePicURL)
+            CurrentUser.friendsList?.append(friend)
+        }
+
+    }
     
 }
