@@ -41,10 +41,12 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         print("You selected cell #\(indexPath.item)!")
         let postDetailVC = PostDetailViewController()
         
-        postDetailVC.itemTitle = "TEST TEST"
-        postDetailVC.itemPrice = 100
-            
-        self.presentViewController(PostDetailViewController(), animated: true, completion:  nil)
+        postDetailVC.itemTitle = postArray[indexPath.item].itemTitle
+        postDetailVC.itemPrice = postArray[indexPath.item].price
+        postDetailVC.descriptionField.text = postArray[indexPath.item].itemDescription
+        postDetailVC.itemImage = postArray[indexPath.item].itemImages[0]
+        
+        self.presentViewController(postDetailVC, animated: true, completion:  nil)
     }
     
     func setUpCollectionCells() {

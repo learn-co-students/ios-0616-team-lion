@@ -16,7 +16,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
     var profilePic = UIImageView()
     var fullNameLabel = UILabel()
     var priceLabel = UILabel()
-    var descriptionLabel = UILabel()
+    var descriptionField = UITextView()
     var titleLabel = UILabel()
     var buyButton = DynamicButton()
     var topFrame = UIImageView()
@@ -28,24 +28,23 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
     var itemTitle: String?
     var itemDescription: String!
     var itemPrice: Int!
-    var itemImages:[UIImage]!
+    var itemImage: UIImage!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.whiteColor()
-        
         scrollView.delegate = self
         generateScene()
-        
+        print(itemTitle)
         
     }
+    
     
     func cancelButtonTapped() {
         
         self.dismissViewControllerAnimated(true, completion: nil)
-        print(itemTitle)
     }
     
     func buyButtonTapped() {
@@ -143,6 +142,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         }
         
         scrollView.addSubview(itemImageView)
+        itemImageView.image = itemImage
         itemImageView.backgroundColor = UIColor.carrotColor()
         itemImageView.snp_makeConstraints { (make) in
             make.top.equalTo(profilePic.snp_bottom).offset(10)
@@ -154,7 +154,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(priceLabel)
         priceLabel.backgroundColor = UIColor.amethystColor()
         priceLabel.textColor = UIColor.blackColor()
-        priceLabel.text = "\(itemPrice)"
+        priceLabel.text = "$\(itemPrice)"
         priceLabel.snp_makeConstraints { (make) in
             make.right.equalTo(itemImageView.snp_right).offset(-5)
             make.top.equalTo(itemImageView.snp_top).offset(5)
@@ -162,10 +162,10 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
             make.width.equalTo(itemImageView.snp_width).dividedBy(5)
         }
         
-        scrollView.addSubview(descriptionLabel)
-        descriptionLabel.text = "DESCRIPTION HERE"
-        descriptionLabel.backgroundColor = UIColor.cyanColor()
-        descriptionLabel.snp_makeConstraints { (make) in
+        scrollView.addSubview(descriptionField)
+        descriptionField.userInteractionEnabled = false
+        descriptionField.backgroundColor = UIColor.cyanColor()
+        descriptionField.snp_makeConstraints { (make) in
             make.left.equalTo(itemImageView.snp_left)
             make.right.equalTo(itemImageView.snp_right)
             make.top.equalTo(itemImageView.snp_bottom).offset(10)
