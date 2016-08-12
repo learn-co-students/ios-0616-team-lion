@@ -9,14 +9,20 @@
 import UIKit
 import FBSDKLoginKit
 import FirebaseAuth
+
+
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
+   
+  
     let shared = PlaceUserDataStore.sharedDataStore
-    
-    
-    
     var loginButton: FBSDKLoginButton = FBSDKLoginButton()
     var activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
       
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
+    }
     
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -41,7 +47,19 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 self.view!.addSubview(self.loginButton)
                 self.loginButton.hidden = false
                 
-                
+                let fbRequest = FBSDKGraphRequest(graphPath:"/me/friends", parameters:["fields": "friends"]);
+                fbRequest.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
+                    
+                    if error == nil {
+                        print("\n\n\nfriends\n\n\n")
+                        print("Friends are : \(result)")
+                        
+                    } else {
+                        
+                        print("Error Getting Friends \(error)");
+                        
+                    }
+                }
 
                 
                 
@@ -70,7 +88,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         }else{
             let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
             FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
-                print("user logged in to firebase app")
+                print("\n\n\n\n\nuser logged in to firebase app\n\n\n\n")
+                print("\n\n\n\(credential.description)\n\n\n")
                 self.shared.facebookToFirebase()
 
         }

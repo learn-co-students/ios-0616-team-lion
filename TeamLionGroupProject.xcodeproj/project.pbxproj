@@ -11,6 +11,7 @@
 		1BC10C841D58D656006E9747 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BC10C831D58D656006E9747 /* FBSDKCoreKit.framework */; };
 		1BC10C861D58D886006E9747 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BC10C851D58D886006E9747 /* FBSDKLoginKit.framework */; };
 		1BC10C8A1D5A174A006E9747 /* PlaceUserDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC10C891D5A174A006E9747 /* PlaceUserDataStore.swift */; };
+		1BCEC75A1D5D7A89006A8418 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCEC7591D5D7A89006A8418 /* Friend.swift */; };
 		40AAA4FBEFCA22063F2724B6 /* Pods_TeamLionGroupProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 034ABA837B2714A494044940 /* Pods_TeamLionGroupProject.framework */; };
 		BE0049001D5A2C68005F3E2C /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0048FF1D5A2C68005F3E2C /* PhotoViewController.swift */; };
 		BE3FF0581D5D68A6001D2C9E /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3FF0571D5D68A6001D2C9E /* PostDetailViewController.swift */; };
@@ -40,6 +41,7 @@
 		1BC10C831D58D656006E9747 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		1BC10C851D58D886006E9747 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		1BC10C891D5A174A006E9747 /* PlaceUserDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceUserDataStore.swift; sourceTree = "<group>"; };
+		1BCEC7591D5D7A89006A8418 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		A387EE526A800AD0083D978F /* Pods-TeamLionGroupProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamLionGroupProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeamLionGroupProject/Pods-TeamLionGroupProject.debug.xcconfig"; sourceTree = "<group>"; };
 		BE0048FF1D5A2C68005F3E2C /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		BE3FF0571D5D68A6001D2C9E /* PostDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				BEC67E4E1D53E14700D2D030 /* PlacePost.swift */,
 				FFE94AA61D54E4970036ED38 /* TestData.swift */,
 				1BC10C891D5A174A006E9747 /* PlaceUserDataStore.swift */,
+				1BCEC7591D5D7A89006A8418 /* Friend.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 				TargetAttributes = {
 					FFE94A901D53D9730036ED38 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = L2YWSL9AVF;
 					};
 				};
 			};
@@ -318,6 +322,7 @@
 				BE3FF0581D5D68A6001D2C9E /* PostDetailViewController.swift in Sources */,
 				FFE94AAD1D54E7320036ED38 /* UIViewExtensions.swift in Sources */,
 				1BC10C8A1D5A174A006E9747 /* PlaceUserDataStore.swift in Sources */,
+				1BCEC75A1D5D7A89006A8418 /* Friend.swift in Sources */,
 				FFE94AAB1D54E7320036ED38 /* UIColorExtensions.swift in Sources */,
 				BE0049001D5A2C68005F3E2C /* PhotoViewController.swift in Sources */,
 			);
@@ -388,6 +393,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Debug;
 		};
@@ -414,6 +420,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
