@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MarketplaceCollectionViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+class MarketplaceCollectionViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UINavigationBarDelegate {
     
     var collectionView: UICollectionView!
     var postArray = [post1, post2, post3, post4, post5, post6, post7, post8, post9, post10, post11, post12]
@@ -17,36 +17,9 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         super.viewDidLoad()
     
         setUpCollectionCells()
+        setUpNavigationBar()
 
     }
-    
-    func setUpCollectionCells() {
-        
-        let screenSize = UIScreen.mainScreen().bounds
-        let screenWidth = screenSize.width
-        let screenHeight = screenSize.height
-        
-        //setup Layout
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = UICollectionViewScrollDirection.Vertical
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 50, right: 0)
-        layout.itemSize = CGSize(width: screenWidth/2.005, height: screenWidth/2.005)
-        layout.minimumLineSpacing = 1
-        layout.minimumInteritemSpacing = 0
-        
-        
-        collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "basicCell")
-        collectionView.backgroundColor = UIColor.whiteColor()
-        self.view.addSubview(collectionView)
-        
-        
-        collectionView?.registerClass(PostViewCell.self, forCellWithReuseIdentifier: "basicCell")
-        
-    }
-    
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.postArray.count
@@ -68,8 +41,56 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         print("You selected cell #\(indexPath.item)!")
     }
     
-    let layout = UICollectionViewFlowLayout()
     
+    func setUpCollectionCells() {
+        
+        let screenSize = UIScreen.mainScreen().bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        
+        //setup Layout
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = UICollectionViewScrollDirection.Vertical
+        layout.sectionInset = UIEdgeInsets(top: 65, left: 0, bottom: 50, right: 0)
+        layout.itemSize = CGSize(width: screenWidth/2.005, height: screenWidth/2.005)
+        layout.minimumLineSpacing = 1
+        layout.minimumInteritemSpacing = 0
+        
+        
+        collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "basicCell")
+        collectionView.backgroundColor = UIColor.whiteColor()
+        self.view.addSubview(collectionView)
+        
+        
+        collectionView?.registerClass(PostViewCell.self, forCellWithReuseIdentifier: "basicCell")
+        
+    }
+    
+    func setUpNavigationBar() {
+        
+        let navigationBar = UINavigationBar(frame: CGRectMake(0, 0, view.frame.size.width, 64))
+        
+        view.addSubview(navigationBar)
+        navigationBar.backgroundColor = UIColor.whiteColor()
+        navigationBar.delegate = self
+        
+        let navItem = UINavigationItem()
+        let newPost = UIBarButtonItem(image: UIImage(named: "NewPost"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(MarketplaceCollectionViewController.newPostButtonTapped(_:)))
+        navItem.title = "Place"
+        navItem.rightBarButtonItem = newPost
+        
+        navigationBar.items = [navItem]
+        
+    }
+    
+    func newPostButtonTapped(sender: UIBarButtonItem) {
+
+        self.presentViewController(NewPostViewController(), animated: true, completion: nil)
+
+    }
     
     
 }

@@ -22,7 +22,8 @@ class TabBarController: UITabBarController {
         self.tabBar.backgroundColor = UIColor.clearColor()
         self.tabBar.tintColor = UIColor.clearColor()
         
-        let profile = ProfileViewController()
+        //let profile = ProfileViewController()
+        let profile = LoginViewController()
         profile.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "smileIcon")?.imageWithRenderingMode(.AlwaysOriginal), selectedImage: UIImage(named: "smileIcon")?.imageWithRenderingMode(.AlwaysOriginal))
         profile.tabBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
         
