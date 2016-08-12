@@ -39,8 +39,13 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         // handle tap events
         print("You selected cell #\(indexPath.item)!")
+        let postDetailVC = PostDetailViewController()
+        
+        postDetailVC.itemTitle = "TEST TEST"
+        postDetailVC.itemPrice = 100
+            
+        self.presentViewController(PostDetailViewController(), animated: true, completion:  nil)
     }
-    
     
     func setUpCollectionCells() {
         
