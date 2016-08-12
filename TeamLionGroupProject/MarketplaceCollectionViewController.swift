@@ -39,8 +39,15 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         // handle tap events
         print("You selected cell #\(indexPath.item)!")
+        let postDetailVC = PostDetailViewController()
+        
+        postDetailVC.itemTitle = postArray[indexPath.item].itemTitle
+        postDetailVC.itemPrice = postArray[indexPath.item].price
+        postDetailVC.descriptionField.text = postArray[indexPath.item].itemDescription
+        postDetailVC.itemImage = postArray[indexPath.item].itemImages[0]
+        
+        self.presentViewController(postDetailVC, animated: true, completion:  nil)
     }
-    
     
     func setUpCollectionCells() {
         
