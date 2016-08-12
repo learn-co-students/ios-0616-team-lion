@@ -30,13 +30,13 @@ class SegementPractice: UIViewController {
 		customSC.tintColor = UIColor.whiteColor()
 	
 		//Add target action method
-		customSC.addTarget(self, action: #selector(changeColor), forControlEvents: .ValueChanged)
+		customSC.addTarget(self, action: #selector(changeView), forControlEvents: .ValueChanged)
 		
 		//Add SegmentedControl to view
 		view.addSubview(customSC)
 	}
 	
-	func changeColor(sender: UISegmentedControl) {
+	func changeView(sender: UISegmentedControl) {
 		switch sender.selectedSegmentIndex {
 		case 1:
 			view.backgroundColor = UIColor.greenColor()
@@ -46,6 +46,7 @@ class SegementPractice: UIViewController {
 			view.backgroundColor = UIColor.purpleColor()
 		}
 	}
+	
 	override func viewDidLoad() {
 		 super.viewDidLoad()
 	}
@@ -55,3 +56,6 @@ class SegementPractice: UIViewController {
 	}
 
 }
+
+
+

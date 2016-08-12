@@ -27,10 +27,7 @@ let shared = PlaceUserDataStore.sharedDataStore
 		super.viewDidLoad()
 		
 		setupCollectionView()
-        
-    
-       
-		
+
 	}
 	
 	func setupCollectionView() {
@@ -83,7 +80,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 		case UICollectionElementKindSectionHeader:
 
 			var headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerIdentifier, forIndexPath: indexPath) as! ProfileHeaderView
-            headerView.setUpForUser(self.name!, picture: picture!)
+			//headerView.setUpForUser(self.name!, picture: picture!)
 			headerView.delegate = self
             
             print("login - \(headerView.backToLoginScreen())")
@@ -112,7 +109,9 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
         FBSDKAccessToken.setCurrentAccessToken(nil)
         dispatch_async(dispatch_get_main_queue()) { 
             self.showViewController(LoginViewController(), sender: nil)
+			
         }
 
     }
 }
+
