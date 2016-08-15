@@ -79,9 +79,38 @@ class PlaceUserDataStore {
         
     }
     
-    
+    func postPictureToDatabase(pictue: UIImage) {
+        var piccopy = UIImage()
+        piccopy = pictue
+        let postImageData: NSData = UIImagePNGRepresentation(piccopy)!
+        //let currentUser = PlaceUser.init(withName: name!, lastName: "", profilePicture: UIImage(data: data!), postings: [])
+        
+        let storage = FIRStorage.storage()
+        let storageRef = storage.referenceForURL("gs://teamliongroupproject.appspot.com/")
+        //let id = user.uid
+        let randomNumber = arc4random_uniform(500)
+        let postImageRef = storageRef.child("users/userID/posts/\(randomNumber).png")
+        let uploadTask = postImageRef.putData(postImageData, metadata: nil) { metadata, error in
+            if (error != nil) {
+                print("did NOT upload picture to firebase")
+            } else {
+                // Metadata contains file metadata such as size, content-type, and download URL.
+                let downloadURL = metadata?.downloadURL()
+                let postPicURLString = downloadURL?.absoluteString
+                let picID = String(randomNumber)
+                if let user = FIRAuth.auth()?.currentUser {
+                let uid = user.uid
+                    self.ref.child("\(uid)/posts").updateChildValues([picID : postPicURLString!])
 
-    
+                }
+
+            }
+        }
+        self.loadDatabase()
+        // User is signed in.
+    }
+
+
     func facebookToFirebase(){
         FIRAuth.auth()?.addAuthStateDidChangeListener { auth, user in
             if let user = user {

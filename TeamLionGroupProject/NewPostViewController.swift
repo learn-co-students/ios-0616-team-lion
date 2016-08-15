@@ -12,7 +12,7 @@ import DynamicButton
 import CCTextFieldEffects
 
 class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
-	
+	let datastore = PlaceUserDataStore.sharedDataStore
     var itemNameField = ChisatoTextField()
 	var itemDescriptionTextField = ChisatoTextField()
 	var itemDescriptionField = UITextView()
@@ -76,7 +76,9 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         
         let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
             let post = PlacePost(itemImages: [UIImage(named: "pictureFrame")!], itemTitle: self.itemNameField.text!, itemDescription: self.itemDescriptionField.text, price: Int(self.itemPriceField.text!)!)
-            CurrentUser.postings?.append(post)
+            let pic = UIImage(named: "pictureFrame")
+            self.datastore.postPictureToDatabase(pic!)
+            CurrentUser.postings.append(post)
             self.dismissViewControllerAnimated(true, completion: nil)
         }
         alertController.addAction(OKAction)
