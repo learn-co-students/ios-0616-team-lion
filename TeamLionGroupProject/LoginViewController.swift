@@ -22,6 +22,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         super.viewDidAppear(animated)
 		
 		FIRAuth.auth()?.addAuthStateDidChangeListener({ (auth: FIRAuth, user: FIRUser?) in
+			print("THIS IS THE USER = \(user)")
+			
+			//**** THE USER IS NIL EVEN IF AUTHENTICATED NEED A DIFFERENT IF CHECK OR NEED TO FIGURE OUT WHAT
+			//**** FB USES AS THEIR "USER"
 			
 			if user != nil {
 				//Facebook user info
