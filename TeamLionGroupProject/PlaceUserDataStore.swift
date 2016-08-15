@@ -12,7 +12,7 @@ import FirebaseStorage
 import Firebase
 import FirebaseDatabase
 import FBSDKLoginKit
-
+import SwiftyJSON
 
 struct CurrentUser {
     static var name: String?
