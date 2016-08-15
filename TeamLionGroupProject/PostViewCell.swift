@@ -50,18 +50,17 @@ class PostViewCell: UICollectionViewCell {
         nameLabel.snp_makeConstraints { (make) in
             make.leading.equalTo(profileImage.snp_trailing).multipliedBy(1.2)
             make.centerY.equalTo(profileImage.snp_centerY)
-            make.width.equalTo(profileImage.snp_width).multipliedBy(4)
+            make.right.equalTo(postImage.snp_right).offset(-2)
             make.height.equalTo(profileImage.snp_height)
         }
         
         //price label constraints
         contentView.addSubview(priceLabel)
-        priceLabel.text = "$10"
         priceLabel.textColor = UIColor.whiteColor()
         priceLabel.shadowColor = UIColor.blackColor()
         priceLabel.snp_makeConstraints { (make) in
-            make.centerX.equalTo(postImage.snp_centerX).multipliedBy(1.8)
-            make.centerY.equalTo(postImage.snp_centerY).multipliedBy(1.8)
+            make.bottom.equalTo(postImage.snp_bottom).offset(-2)
+            make.right.equalTo(postImage.snp_right).offset(-2)
             make.width.equalTo(postImage.snp_width).dividedBy(4)
             make.height.equalTo(postImage.snp_height).dividedBy(5)
         }

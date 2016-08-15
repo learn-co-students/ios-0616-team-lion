@@ -35,15 +35,13 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
     var itemPrice: Int!
     var itemImage: UIImage!
     
+    var totalHeight: CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.whiteColor()
-        scrollView.delegate = self
         generateScene()
-        print(itemTitle)
-        
     }
     
     
@@ -101,8 +99,8 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
             
         }
         
+        
         view.addSubview(scrollView)
-        scrollView.contentSize = CGSizeMake(400, 820)
         scrollView.scrollEnabled = true
         scrollView.showsVerticalScrollIndicator = true
         scrollView.userInteractionEnabled = true
@@ -168,7 +166,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
             make.centerX.equalTo(titleFrame.snp_centerX)
             make.centerY.equalTo(titleFrame.snp_centerY).offset(10)
             make.width.equalTo(titleFrame.snp_width).offset(-5)
-            make.height.equalTo(titleFrame.snp_height)git 
+            make.height.equalTo(titleFrame.snp_height)
         }
         
         scrollView.addSubview(itemImageView)
@@ -192,8 +190,20 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
             make.width.equalTo(itemImageView.snp_width).dividedBy(5)
         }
         
+        scrollView.addSubview(descriptionField)
+        descriptionField.userInteractionEnabled = false
+        descriptionField.scrollEnabled = false
+        descriptionField.textContainerInset = UIEdgeInsets(top: 5, left: 30, bottom: 0, right: 30)
+        descriptionField.snp_makeConstraints { (make) in
+            make.centerX.equalTo(itemImageView.snp_centerX)
+            make.top.equalTo(itemImageView.snp_bottom).offset(30)
+            make.left.equalTo(itemImageView.snp_left)
+            make.right.equalTo(itemImageView.snp_right)
+        }
+        
         scrollView.addSubview(descriptionFrame)
-        descriptionFrame.text = " "
+        descriptionFrame.text = descriptionField.text
+        descriptionFrame.textColor = UIColor.clearColor()
         descriptionFrame.placeholderColor = UIColor.peterRiverColor()
         descriptionFrame.placeholder = "Description"
         descriptionFrame.borderColor = UIColor.peterRiverColor()
@@ -201,19 +211,34 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         descriptionFrame.snp_makeConstraints { (make) in
             make.left.equalTo(itemImageView.snp_left)
             make.right.equalTo(itemImageView.snp_right)
-            make.top.equalTo(itemImageView.snp_bottom).offset(10)
-            make.height.equalTo(itemImageView.snp_height)
+            make.top.equalTo(itemImageView.snp_bottom).offset(5)
+            make.bottom.equalTo(descriptionField.snp_bottom).offset(20)
+            
         }
         
-        scrollView.addSubview(descriptionField)
-        descriptionField.userInteractionEnabled = false
+        calculateScrollViewHeight()
+    
+        scrollView.contentSize = CGSize(width: 300, height: totalHeight)
+        
 
-        descriptionField.snp_makeConstraints { (make) in
-            make.centerX.equalTo(descriptionFrame.snp_centerX)
-            make.centerY.equalTo(descriptionFrame.snp_centerY).offset(15)
-            make.width.equalTo(descriptionFrame.snp_width).offset(-20)
-            make.height.equalTo(descriptionFrame.snp_height).offset(-35)
+    }
+    
+    func calculateScrollViewHeight() {
+     
+        let preTotalHeight = 520 + CGFloat((descriptionFrame.text?.characters.count)!)/1.25
+        
+        if preTotalHeight > 600 {
+            totalHeight = 600
+        }
+            
+        else if preTotalHeight < 525 {
+            totalHeight = 525
+        }
+            
+        else {
+            totalHeight = preTotalHeight
         }
     }
+    
 
 }

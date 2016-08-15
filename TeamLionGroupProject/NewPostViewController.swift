@@ -29,8 +29,6 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
     
     let topFrame = UIImageView()
     let pictureFrame = UIImageView()
-    
-    var textStarted = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -68,6 +66,9 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
 	func sellItButtonPressed() {
 		print("Sell It pressed")
 		//alert "Are you sure you want to post (item Name) for (price)?
+        
+        let post = PlacePost(itemImages: [UIImage(named: "pictureFrame")!], itemTitle: itemNameField.text!, itemDescription: itemDescriptionField.text, price: Int(itemPriceField.text!)!)
+        CurrentUser.postings?.append(post)
 	}
     
     func takePictureButtonPressed(){
