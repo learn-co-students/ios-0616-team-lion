@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import DynamicButton
+import CCTextFieldEffects
 
 class PostDetailViewController: UIViewController, UIScrollViewDelegate {
     
@@ -23,6 +24,10 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
     var cancelButton = DynamicButton()
     var itemImageView = UIImageView()
     let roundSquare = UIImageView()
+    
+    let fullnameFrame = ChisatoTextField()
+    let titleFrame = ChisatoTextField()
+    let descriptionFrame = ChisatoTextField()
     
     var fullName: String!
     var itemTitle: String?
@@ -97,7 +102,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         }
         
         view.addSubview(scrollView)
-        scrollView.contentSize = CGSizeMake(400,800)
+        scrollView.contentSize = CGSizeMake(400, 820)
         scrollView.scrollEnabled = true
         scrollView.showsVerticalScrollIndicator = true
         scrollView.userInteractionEnabled = true
@@ -119,26 +124,51 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
             make.height.equalTo(view.snp_width).dividedBy(4)
         }
         
-        scrollView.addSubview(fullNameLabel)
-        fullNameLabel.text = "Full Name"
-        fullNameLabel.backgroundColor = UIColor.redColor()
-        fullNameLabel.textColor = UIColor.blackColor()
-        fullNameLabel.snp_makeConstraints { (make) in
+        scrollView.addSubview(fullnameFrame)
+        fullnameFrame.text = " "
+        fullnameFrame.placeholderColor = UIColor.peterRiverColor()
+        fullnameFrame.placeholder = "Name"
+        fullnameFrame.borderColor = UIColor.peterRiverColor()
+        fullnameFrame.activeColor = UIColor.peterRiverColor()
+        fullnameFrame.snp_makeConstraints { (make) in
             make.top.equalTo(profilePic.snp_top)
             make.left.equalTo(profilePic.snp_right).offset(5)
             make.right.equalTo(view.snp_right).offset(-20)
             make.height.equalTo(profilePic.snp_height).dividedBy(2.2)
         }
+
+        
+        scrollView.addSubview(fullNameLabel)
+        fullNameLabel.text = "Full Name"
+        fullNameLabel.textColor = UIColor.blackColor()
+        fullNameLabel.snp_makeConstraints { (make) in
+            make.centerX.equalTo(fullnameFrame.snp_centerX)
+            make.centerY.equalTo(fullnameFrame.snp_centerY).offset(10)
+            make.width.equalTo(fullnameFrame.snp_width).offset(-5)
+            make.height.equalTo(fullnameFrame.snp_height)
+        }
+        
+        scrollView.addSubview(titleFrame)
+        titleFrame.text = " "
+        titleFrame.placeholderColor = UIColor.peterRiverColor()
+        titleFrame.placeholder = "Item Name"
+        titleFrame.borderColor = UIColor.peterRiverColor()
+        titleFrame.activeColor = UIColor.peterRiverColor()
+        titleFrame.snp_makeConstraints { (make) in
+            make.bottom.equalTo(profilePic.snp_bottom)
+            make.left.equalTo(fullnameFrame.snp_left)
+            make.width.equalTo(fullnameFrame.snp_width)
+            make.height.equalTo(fullnameFrame.snp_height)
+        }
         
         scrollView.addSubview(titleLabel)
         titleLabel.text = itemTitle
-        titleLabel.backgroundColor = UIColor.purpleColor()
         titleLabel.textColor = UIColor.blackColor()
         titleLabel.snp_makeConstraints { (make) in
-            make.bottom.equalTo(profilePic.snp_bottom)
-            make.left.equalTo(fullNameLabel.snp_left)
-            make.width.equalTo(fullNameLabel.snp_width)
-            make.height.equalTo(fullNameLabel.snp_height)
+            make.centerX.equalTo(titleFrame.snp_centerX)
+            make.centerY.equalTo(titleFrame.snp_centerY).offset(10)
+            make.width.equalTo(titleFrame.snp_width).offset(-5)
+            make.height.equalTo(titleFrame.snp_height)
         }
         
         scrollView.addSubview(itemImageView)
@@ -147,14 +177,14 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         itemImageView.snp_makeConstraints { (make) in
             make.top.equalTo(profilePic.snp_bottom).offset(10)
             make.left.equalTo(profilePic.snp_left)
-            make.right.equalTo(fullNameLabel.snp_right)
+            make.right.equalTo(fullnameFrame.snp_right)
             make.height.equalTo(itemImageView.snp_width)
         }
         
         scrollView.addSubview(priceLabel)
-        priceLabel.backgroundColor = UIColor.amethystColor()
-        priceLabel.textColor = UIColor.blackColor()
+        priceLabel.textColor = UIColor.whiteColor()
         priceLabel.text = "$\(itemPrice)"
+        priceLabel.textAlignment = NSTextAlignment.Right
         priceLabel.snp_makeConstraints { (make) in
             make.right.equalTo(itemImageView.snp_right).offset(-5)
             make.top.equalTo(itemImageView.snp_top).offset(5)
@@ -162,14 +192,27 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
             make.width.equalTo(itemImageView.snp_width).dividedBy(5)
         }
         
-        scrollView.addSubview(descriptionField)
-        descriptionField.userInteractionEnabled = false
-        descriptionField.backgroundColor = UIColor.cyanColor()
-        descriptionField.snp_makeConstraints { (make) in
+        scrollView.addSubview(descriptionFrame)
+        descriptionFrame.text = " "
+        descriptionFrame.placeholderColor = UIColor.peterRiverColor()
+        descriptionFrame.placeholder = "Description"
+        descriptionFrame.borderColor = UIColor.peterRiverColor()
+        descriptionFrame.activeColor = UIColor.peterRiverColor()
+        descriptionFrame.snp_makeConstraints { (make) in
             make.left.equalTo(itemImageView.snp_left)
             make.right.equalTo(itemImageView.snp_right)
             make.top.equalTo(itemImageView.snp_bottom).offset(10)
             make.height.equalTo(itemImageView.snp_height)
+        }
+        
+        scrollView.addSubview(descriptionField)
+        descriptionField.userInteractionEnabled = false
+
+        descriptionField.snp_makeConstraints { (make) in
+            make.centerX.equalTo(descriptionFrame.snp_centerX)
+            make.centerY.equalTo(descriptionFrame.snp_centerY).offset(15)
+            make.width.equalTo(descriptionFrame.snp_width).offset(-20)
+            make.height.equalTo(descriptionFrame.snp_height).offset(-35)
         }
     }
 

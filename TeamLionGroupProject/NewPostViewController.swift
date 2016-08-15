@@ -29,12 +29,15 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
     
     let topFrame = UIImageView()
     let pictureFrame = UIImageView()
+    
+    var textStarted = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		print("New Post VC View Did Load")
         
+        itemDescriptionTextField.delegate = self
         itemDescriptionField.delegate = self
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
@@ -78,10 +81,6 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
             
         self.dismissViewControllerAnimated(true, completion: nil)
             
-    }
-    
-    func descriptionTextViewEqualTextField() {
-        itemDescriptionTextField.text = itemDescriptionField.text
     }
     
     func generateScene() {
@@ -164,6 +163,7 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         
         view.addSubview(itemDescriptionTextField)
         itemDescriptionTextField.text = " "
+        itemDescriptionTextField.placeholderColor = UIColor.peterRiverColor()
         itemDescriptionTextField.placeholder = "Description"
         itemDescriptionTextField.borderColor = UIColor.peterRiverColor()
         itemDescriptionTextField.activeColor = UIColor.peterRiverColor()
