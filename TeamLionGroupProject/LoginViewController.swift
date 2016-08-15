@@ -56,8 +56,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 		fbRequest.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
 			
 			if error == nil {
-				print("\n\n\nfriends\n\n\n")
-				print("Friends are : \(result)")
+//				print("\n\n\nfriends\n\n\n")
+//				print("Friends are : \(result)")
 				
 			} else {
 				
@@ -91,7 +91,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 				print("\n\n\n\n\nuser logged in to firebase app\n\n\n\n")
 				print("\n\n\n\(credential.description)\n\n\n")
 				
-				//self.shared.facebookToFirebase()
+				self.shared.facebookToFirebase()
 				
 				self.moveToMarket()
 				

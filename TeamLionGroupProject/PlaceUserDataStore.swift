@@ -17,8 +17,8 @@ import SwiftyJSON
 struct CurrentUser {
     static var name: String?
     static var picture: UIImage?
-    static var postings: [PlacePost]? 
-   // static var friendsList: [Friend]?
+    static var postings = [PlacePost]()
+    static var friendsList = [UsersFriend]()
     
     
   //  static var friend: Friend
@@ -41,9 +41,8 @@ class PlaceUserDataStore {
     var dataSnapshot = [FIRDataSnapshot]()
     var ref: FIRDatabaseReference!
     var refHandle: FIRDatabaseHandle!
-    var frr: UsersFriend?
-    
-    
+    //var frr: UsersFriend?
+
     
     static let sharedDataStore = PlaceUserDataStore()
     private init(){}
@@ -69,15 +68,19 @@ class PlaceUserDataStore {
         print("post to data store")
         if let user = FIRAuth.auth()?.currentUser {
             let uid = user.uid
-            let data = [ uid : [CurrentUser.nameKey: nameKey,
-                CurrentUser.pictureKey: pictureKey,
-                CurrentUser.friendsKey : [friendName: friendPic]]]
-            self.ref.child(CurrentUser.childName).setValue(data)
+            //let data = [ uid : [CurrentUser.nameKey: nameKey,
+            let data = [CurrentUser.nameKey: nameKey,
+                CurrentUser.pictureKey: pictureKey]
+            //self.ref.child(uid).setValue(data)
+            self.ref.child(uid).updateChildValues(data as [NSObject : AnyObject])
+            self.ref.child("\(uid)/friends").updateChildValues([friendName : friendPic])
             
         }
         
     }
     
+    
+
     
     func facebookToFirebase(){
         FIRAuth.auth()?.addAuthStateDidChangeListener { auth, user in
@@ -103,11 +106,13 @@ class PlaceUserDataStore {
                         // Metadata contains file metadata such as size, content-type, and download URL.
                         let downloadURL = metadata?.downloadURL()
                         let profilePicURLString = downloadURL?.absoluteString
-                        let frname = self.frr?.name
-                        let frpic = self.frr?.profilePicture
-                        if let profilePicURLString = profilePicURLString{
+                        for friend in CurrentUser.friendsList{
+                        let frname = friend.name
+                        let frpic = friend.profilePicture
+                            print("to the database: \(frname)\(frpic)")
+                        self.postToDataStore(name!, pictureKey: profilePicURLString!, friendName: frname, friendPic: frpic!)
                         }
-                        self.postToDataStore(name!, pictureKey: profilePicURLString!, friendName: frname!, friendPic: frpic!)
+
                     }
                 }
                 self.loadDatabase()
@@ -127,44 +132,28 @@ class PlaceUserDataStore {
         var profilePicURL = String()
         let fbRequestFriends = FBSDKGraphRequest(graphPath:"/me/taggable_friends", parameters:["taggable_friends": "taggable_friends"]);
         fbRequestFriends.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
+            print(result)
             if error == nil {
-                let a = result as? NSDictionary
-                guard let b = a else {fatalError()}
-                let c = b["data"]
+                let json = JSON(result)
 
-                let d = c as? NSArray
-                guard let e = d else {fatalError()}
-                let f = e[0]
+                guard let arrayOfUsers = json["data"].array else { return }
+                //user id
+                for dictionary in arrayOfUsers {
+                    print("@@@@@@@ ID: \(dictionary["id"])")
+                }
+                
+                for dictionary in arrayOfUsers {
+                    let friendsName = String(dictionary["name"])
+                    let friendPicture = String(dictionary["picture"]["data"]["url"])
+                    print("@@@@@@@ picture: \(friendPicture)")
+                    let friend = UsersFriend(withName: friendsName, profilePicture: friendPicture)
+                    CurrentUser.friendsList.append(friend)
+                }
 
-                let g = f as? NSDictionary
-                guard let h = g else {fatalError()}
-                let i = h["name"]
-                
-                //get friends name
-                if let j = i{
-                    name = j as! String}
-                
-                let k = f as? NSDictionary
-                guard let l = k else {fatalError()}
-                let m = l["picture"]
-                
-                let o = m as? NSDictionary
-                guard let p = o else {fatalError()}
-                let r = p["data"]
-                
-                let s = r as? NSDictionary
-                guard let t = s else {fatalError()}
-                let q = t["url"]
-                
-                //get friends profile pic
-                if let u = q{
-                    profilePicURL = u as! String}
             } else {
                 print("Error Getting Friends \(error)");
             }
-//            let friend = Friend(friendsName: name, friendsProfilePic: profilePicURL)
-//            CurrentUser.friendsList?.append(friend)
-           self.frr = UsersFriend.init(withName: name, profilePicture: profilePicURL)
+
         }
 
     }
