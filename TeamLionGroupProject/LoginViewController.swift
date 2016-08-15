@@ -32,7 +32,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         FIRAuth.auth()?.addAuthStateDidChangeListener { auth, user in
             if var user = user {
                 // User is signed in.
-                
+                print("\n\n\nuser\(user)\n\n\n")
+
                 let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 let profileViewController = mainStoryboard.instantiateViewControllerWithIdentifier("ProfileView") as! ProfileViewController
                 profileViewController.name = user.displayName
