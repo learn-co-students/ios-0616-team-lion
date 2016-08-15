@@ -74,7 +74,7 @@ class PlaceUserDataStore {
             //self.ref.child(uid).setValue(data)
             self.ref.child(uid).updateChildValues(data as [NSObject : AnyObject])
             self.ref.child("\(uid)/friends").updateChildValues([friendName : friendPic])
-
+            
         }
         
     }
