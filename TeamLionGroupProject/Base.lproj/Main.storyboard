@@ -21,18 +21,19 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9HG-dA-ucD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1788" y="-645"/>
+            <point key="canvasLocation" x="-1090" y="184"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="eAG-4s-JH0">
             <objects>
-                <tabBarController storyboardIdentifier="tabBar" id="mAc-2O-b26" customClass="TabBarController" customModule="TeamLionGroupProject" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="mAc-2O-b26" customClass="TabBarController" customModule="TeamLionGroupProject" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="n7d-tj-ljL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
+                        <segue destination="Zik-vM-d9N" kind="presentation" id="i96-xe-KkI"/>
                         <segue destination="1O1-Mm-aR9" kind="relationship" relationship="viewControllers" id="bAS-uc-cSI"/>
                         <segue destination="DPW-qn-mNB" kind="relationship" relationship="viewControllers" id="pGb-wj-y3s"/>
                     </connections>

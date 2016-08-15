@@ -168,7 +168,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
             make.centerX.equalTo(titleFrame.snp_centerX)
             make.centerY.equalTo(titleFrame.snp_centerY).offset(10)
             make.width.equalTo(titleFrame.snp_width).offset(-5)
-            make.height.equalTo(titleFrame.snp_height)
+            make.height.equalTo(titleFrame.snp_height)git 
         }
         
         scrollView.addSubview(itemImageView)
