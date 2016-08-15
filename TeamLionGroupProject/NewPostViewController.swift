@@ -67,8 +67,25 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
 		print("Sell It pressed")
 		//alert "Are you sure you want to post (item Name) for (price)?
         
-        let post = PlacePost(itemImages: [UIImage(named: "pictureFrame")!], itemTitle: itemNameField.text!, itemDescription: itemDescriptionField.text, price: Int(itemPriceField.text!)!)
-        CurrentUser.postings?.append(post)
+        let alertController = UIAlertController(title: "Confirm", message: "Confirm your post?", preferredStyle: .Alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+            // ...
+        }
+        alertController.addAction(cancelAction)
+        
+        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+            let post = PlacePost(itemImages: [UIImage(named: "pictureFrame")!], itemTitle: self.itemNameField.text!, itemDescription: self.itemDescriptionField.text, price: Int(self.itemPriceField.text!)!)
+            CurrentUser.postings?.append(post)
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        alertController.addAction(OKAction)
+        
+        self.presentViewController(alertController, animated: true) {
+            // ...
+        }
+        
+    
 	}
     
     func takePictureButtonPressed(){
