@@ -59,6 +59,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 				
 			}
 		}
+		
+		setupScene()
 
         // Optional: Place the button in the center of your view.
 		// Do any additional setup after loading the view, typically from a nib.
@@ -101,5 +103,58 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 		let tabBar = mainStoryboard.instantiateViewControllerWithIdentifier("tabBar") as! TabBarController
 		self.presentViewController(tabBar, animated:true, completion: nil)
 	}
+	
+	func setupScene() {
+		
+		let logoFont = "AvenirNext-Regular"
+		let subLabelFont = "AvenirNext-Italic"
+		let placeLabel = UILabel()
+		let placeSublabel = UILabel()
+		let backgroundImage = UIImage(named: "LoginBackground")
+		let divider = UIImage(named: "LoginScreenLine")
+		let backgroundImageView = UIImageView()
+		let dividerView = UIImageView()
+		
+		view.addSubview(backgroundImageView)
+		backgroundImageView.image = backgroundImage
+		backgroundImageView.snp_makeConstraints { (make) in
+			make.edges.equalTo(view.snp_edges)
+		}
+		
+		view.addSubview(placeLabel)
+		placeLabel.text = "place"
+		placeLabel.font = UIFont(name: logoFont, size: 60)
+		placeLabel.textAlignment = .Center
+		placeLabel.textColor = UIColor.darkGrayColor()
+		placeLabel.snp_makeConstraints { (make) in
+			make.centerX.equalTo(view.snp_centerX)
+			make.centerY.equalTo(view.snp_centerY).dividedBy(3)
+			make.width.equalTo(view.snp_width)
+		}
+		
+		view.addSubview(placeSublabel)
+		placeSublabel.text = "a market for friends"
+		placeSublabel.font = UIFont(name: subLabelFont, size: 20)
+		placeSublabel.textAlignment = .Center
+		placeSublabel.textColor = UIColor.wetAsphaltColor()
+		placeSublabel.snp_makeConstraints { (make) in
+			make.top.equalTo(placeLabel.snp_bottom).offset(2)
+			make.centerX.equalTo(placeLabel.snp_centerX)
+			make.width.equalTo(placeLabel.snp_width)
+		}
+		view.addSubview(dividerView)
+		dividerView.image = divider
+		dividerView.contentMode = UIViewContentMode.ScaleAspectFit
+		dividerView.snp_makeConstraints { (make) in
+			make.centerX.equalTo(placeLabel.snp_centerX)
+			make.width.equalTo(view.snp_width).dividedBy(2)
+			make.height.equalTo(view.snp_height).dividedBy(30)
+			make.top.equalTo(placeSublabel.snp_bottom)
+		}
+		
+		view.bringSubviewToFront(loginButton)
+	}
+	
+	
 }
 
