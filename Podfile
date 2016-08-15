@@ -15,4 +15,5 @@ target 'TeamLionGroupProject' do
   pod 'Firebase/Storage'
   pod 'Firebase/Database'
   pod 'CCTextFieldEffects'
+  pod 'SwiftyJSON', '~> 2.3'
 end

@@ -44,6 +44,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 	override func viewDidLoad() {
 		super.viewDidLoad()
         self.loginButton.hidden = true
+
 		
 		self.loginButton.center = self.view.center
 		self.loginButton.readPermissions = ["public_profile", "email", "user_friends", "read_custom_friendlists"]
