@@ -14,29 +14,13 @@ import FirebaseDatabase
 import FBSDKLoginKit
 import SwiftyJSON
 
-struct CurrentUser {
-    static var name: String?
-    static var picture: UIImage?
-    static var postings = [PlacePost]()
-    static var friendsList = [UsersFriend]()
-    
-    
-  //  static var friend: Friend
-    
-    
-    static let childName = "user"
-    static let nameKey = "name"
-    static let pictureKey = "picture"
-    static let friendsKey = "friends"
 
-    
-}
 
 class PlaceUserDataStore {
     var dataSnapshot = [FIRDataSnapshot]()
     var ref: FIRDatabaseReference!
     var refHandle: FIRDatabaseHandle!
-    //var frr: UsersFriend?
+    let randomNumber = arc4random_uniform(500)
 
     
     static let sharedDataStore = PlaceUserDataStore()
@@ -51,8 +35,6 @@ class PlaceUserDataStore {
             self.ref = FIRDatabase.database().reference()
             refHandle = self.ref.child("user").observeEventType(.ChildAdded, withBlock: {snapshot in
             self.dataSnapshot.append(snapshot)
-//                var userSnapshot = self.dataSnapshot[0]
-//                var user = userSnapshot.value as! [String : String]
         })
     }
     
@@ -63,7 +45,6 @@ class PlaceUserDataStore {
         print("post to data store")
         if let user = FIRAuth.auth()?.currentUser {
             let uid = user.uid
-            //let data = [ uid : [CurrentUser.nameKey: nameKey,
             let data = [CurrentUser.nameKey: nameKey,
                 CurrentUser.pictureKey: pictureKey]
             //self.ref.child(uid).setValue(data)
@@ -81,7 +62,6 @@ class PlaceUserDataStore {
         
         let storage = FIRStorage.storage()
         let storageRef = storage.referenceForURL("gs://teamliongroupproject.appspot.com/")
-        let randomNumber = arc4random_uniform(500)
         let postImageRef = storageRef.child("users/userID/posts/\(randomNumber).png")
         let uploadTask = postImageRef.putData(postImageData, metadata: nil) { metadata, error in
             if (error != nil) {
@@ -90,7 +70,7 @@ class PlaceUserDataStore {
                 // Metadata contains file metadata such as size, content-type, and download URL.
                 let downloadURL = metadata?.downloadURL()
                 let postPicURLString = downloadURL?.absoluteString
-                let picID = String(randomNumber)
+                let picID = String(self.randomNumber)
                 if let user = FIRAuth.auth()?.currentUser {
                 let uid = user.uid
                     self.ref.child("\(uid)/posts").updateChildValues([title : [postPicURLString!, desciption, price]])
@@ -115,12 +95,12 @@ class PlaceUserDataStore {
 
                 
                 let data = NSData(contentsOfURL: photoUrl!)
-                let currentUser = PlaceUser.init(withName: name!, lastName: "", profilePicture: UIImage(data: data!), postings: [])
-                
+                CurrentUser.name = name
+                CurrentUser.picture = UIImage(data:data!,scale:1.0)
                 let storage = FIRStorage.storage()
                 let storageRef = storage.referenceForURL("gs://teamliongroupproject.appspot.com/")
                 let id = user.uid
-                let imageRef = storageRef.child("users/userID/profile/\(id).png")
+                let imageRef = storageRef.child("users/userID/profile/profilePic\(id).png")
                 let uploadTask = imageRef.putData(data!, metadata: nil) { metadata, error in
                     if (error != nil) {
                         print("did NOT upload picture to firebase")
@@ -138,7 +118,6 @@ class PlaceUserDataStore {
                     }
                 }
                 self.loadDatabase()
-                
                 // User is signed in.
             } else {
                 // No user is signed in.
@@ -154,20 +133,13 @@ class PlaceUserDataStore {
         var profilePicURL = String()
         let fbRequestFriends = FBSDKGraphRequest(graphPath:"/me/taggable_friends", parameters:["taggable_friends": "taggable_friends"]);
         fbRequestFriends.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
-            print(result)
             if error == nil {
                 let json = JSON(result)
 
                 guard let arrayOfUsers = json["data"].array else { return }
-                //user id
-                for dictionary in arrayOfUsers {
-                    print("@@@@@@@ ID: \(dictionary["id"])")
-                }
-                
                 for dictionary in arrayOfUsers {
                     let friendsName = String(dictionary["name"])
                     let friendPicture = String(dictionary["picture"]["data"]["url"])
-                    print("@@@@@@@ picture: \(friendPicture)")
                     let friend = UsersFriend(withName: friendsName, profilePicture: friendPicture)
                     CurrentUser.friendsList.append(friend)
                 }

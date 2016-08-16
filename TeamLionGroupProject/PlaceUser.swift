@@ -9,6 +9,26 @@
 import Foundation
 import UIKit
 
+struct CurrentUser {
+    static var name: String?
+    static var picture: UIImage?
+    static var postings = [PlacePost]()
+    static var friendsList = [UsersFriend]()
+    
+    
+    //  static var friend: Friend
+    
+    
+    static let childName = "user"
+    static let nameKey = "name"
+    static let pictureKey = "picture"
+    static let friendsKey = "friends"
+    
+    
+}
+
+
+
 class PlaceUser: NSObject {
 	
 	let firstName: String
