@@ -30,7 +30,7 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
     
     let topFrame = UIImageView()
     let pictureFrame = UIImageView()
-    var picture = UIImage()
+    var picture = UIImageView()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -53,7 +53,7 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         super.viewWillAppear(animated)
 
         print("NewPost Pic:\(picture)")
-        pictureFrame.image = picture
+        pictureFrame.image = picture.image
         
     }
     
@@ -78,27 +78,73 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
 	
 	func sellItButtonPressed() {
 		print("Sell It pressed")
-		//alert "Are you sure you want to post (item Name) for (price)?
-        let alertController = UIAlertController(title: "Confirm", message: "Confirm your post?", preferredStyle: .Alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
-            // ...
-        }
-        alertController.addAction(cancelAction)
-        
-        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-            let post = PlacePost(itemImages: [self.picture], itemTitle: self.itemNameField.text!, itemDescription: self.itemDescriptionField.text, price: Int(self.itemPriceField.text!)!)
-
-            let pic = self.picture
-            self.datastore.postPictureToDatabase(pic, title: self.itemNameField.text!, desciption: self.itemDescriptionField.text, price: self.itemPriceField.text!)
-           let array =  self.datastore.fetchPosts()
-            print("array from the view \(array)")
-            //CurrentUser.postings.append(post)
+		
+        if itemNameField.text == "" {
             
-            self.dismissViewControllerAnimated(true, completion: nil)
+            let alertController = UIAlertController(title: "Missing Field", message: "Please enter a name!", preferredStyle: .Alert)
+            
+            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+                // ...
+            }
+            alertController.addAction(OKAction)
+            
+            self.presentViewController(alertController, animated: true) {
+                // ...
+            }
         }
-        alertController.addAction(OKAction)
-        self.presentViewController(alertController, animated: true) {
-            // ...
+        
+        if itemPriceField.text == "" {
+            
+            let alertController = UIAlertController(title: "Missing Field", message: "Please enter a price!", preferredStyle: .Alert)
+            
+            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+                // ...
+            }
+            alertController.addAction(OKAction)
+            
+            self.presentViewController(alertController, animated: true) {
+                // ...
+            }
+        }
+        
+        if itemDescriptionField.text == "" {
+            
+            let alertController = UIAlertController(title: "Missing Field", message: "Please enter a description!", preferredStyle: .Alert)
+            
+            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+                // ...
+            }
+            alertController.addAction(OKAction)
+            
+            self.presentViewController(alertController, animated: true) {
+                // ...
+            }
+        }
+        
+        else {
+            
+            let alertController = UIAlertController(title: "Confirm", message: "Confirm your post?", preferredStyle: .Alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+                // ...
+            }
+            alertController.addAction(cancelAction)
+            
+            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+                let post = PlacePost(itemImages: [self.picture.image!], itemTitle: self.itemNameField.text!, itemDescription: self.itemDescriptionField.text, price: Int(self.itemPriceField.text!)!)
+                
+                let pic = self.picture.image!
+                
+                self.datastore.postPictureToDatabase(pic, title: self.itemNameField.text!, desciption: self.itemDescriptionField.text, price: self.itemPriceField.text!)
+                let array =  self.datastore.fetchPosts()
+                print("array from the view \(array)")
+                //CurrentUser.postings.append(post)
+                
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            alertController.addAction(OKAction)
+            self.presentViewController(alertController, animated: true) {
+                // ...
+            }
         }
         
     
@@ -245,7 +291,7 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         
     }
     
-    func sendBackPhoto(photo: UIImage) {
+    func sendBackPhoto(photo: UIImageView) {
         self.picture = photo
     }
 }
