@@ -30,7 +30,9 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
     
     let topFrame = UIImageView()
     let pictureFrame = UIImageView()
-    var picture = UIImageView()
+    var picture = UIImageView(image: UIImage(named: "NoImage"))
+    
+    var hasPicture = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -46,14 +48,19 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
 
 		generateScene()
         
-        
+        picture.hidden = true
 	}
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
         print("NewPost Pic:\(picture)")
-        pictureFrame.image = picture.image
+        
+        if hasPicture == true {
+            picture.hidden = false
+            pictureFrame.image = picture.image
+            
+        }
         
     }
     
@@ -151,6 +158,8 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
 	}
     
     func takePictureButtonPressed(){
+        
+        hasPicture = true
         
         let photoVC = PhotoViewController()
         
