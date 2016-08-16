@@ -42,6 +42,96 @@
             </objects>
             <point key="canvasLocation" x="-1090" y="-645"/>
         </scene>
+        <!--Item-->
+        <scene sceneID="Lfk-yU-3K0">
+            <objects>
+                <viewController id="zh0-DB-qmy" customClass="ChatHomeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PMl-OL-oSc"/>
+                        <viewControllerLayoutGuide type="bottom" id="5Lj-yz-g1G"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="i5h-ix-n6d">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="JJS-hA-hGR"/>
+                    <connections>
+                        <segue destination="NMB-Wx-lk4" kind="show" id="h06-Dt-Sl2"/>
+                        <segue destination="SZD-PI-ANO" kind="show" id="2Hk-pT-aqh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="paU-QD-6sO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-323" y="-2104"/>
+        </scene>
+        <!--Chat Friends Table View Controller-->
+        <scene sceneID="hEi-Tg-KCW">
+            <objects>
+                <tableViewController id="SZD-PI-ANO" customClass="ChatFriendsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="t1Y-gS-YLO">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="xMi-O6-8l4">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xMi-O6-8l4" id="CgG-tp-vYT">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="SZD-PI-ANO" id="lL2-E9-BYv"/>
+                            <outlet property="delegate" destination="SZD-PI-ANO" id="ikG-ZN-TqI"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="FLv-UG-QWc" kind="show" id="WkL-fs-GRU"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hsg-Vy-I8F" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="454" y="-2484"/>
+        </scene>
+        <!--Direct Chat View Controller-->
+        <scene sceneID="MFf-fZ-kbn">
+            <objects>
+                <viewController id="FLv-UG-QWc" customClass="DirectChatViewController" customModule="TeamLionGroupProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Qav-iT-f2m"/>
+                        <viewControllerLayoutGuide type="bottom" id="I0n-VN-n1a"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OcA-du-yv3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vez-fv-Ql0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1186" y="-2484"/>
+        </scene>
+        <!--Agora View Controller-->
+        <scene sceneID="tYF-DW-1YT">
+            <objects>
+                <viewController id="NMB-Wx-lk4" customClass="AgoraViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qYd-25-yoO"/>
+                        <viewControllerLayoutGuide type="bottom" id="P2Z-ZB-EKP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hsd-ib-Prt">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t2b-RF-YoU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="454" y="-1761"/>
+        </scene>
         <!--Profile View Controller-->
         <scene sceneID="7S8-rD-w5R">
             <objects>
