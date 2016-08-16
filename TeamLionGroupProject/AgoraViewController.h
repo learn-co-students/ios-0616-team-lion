@@ -6,8 +6,15 @@
 //  Copyright © 2016 TeamLion. All rights reserved.
 //
 
+#import <JSQMessagesViewController/JSQMessagesViewController.h>
+#import <SendBirdSDK/SendBirdSDK.h>
+#import <MobileCoreServices/UTCoreTypes.h>
 #import <UIKit/UIKit.h>
 
-@interface AgoraViewController : UIViewController
+#import "JSQMessages.h"
+#import "JSQSBMessage.h"
+
+@interface AgoraViewController : JSQMessagesViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate, SBDConnectionDelegate, SBDChannelDelegate>
+
 
 @end
