@@ -32,11 +32,6 @@ struct CurrentUser {
     
 }
 
-struct Fr {
-    static var pic: String?
-    static var namz: String?
-}
-
 class PlaceUserDataStore {
     var dataSnapshot = [FIRDataSnapshot]()
     var ref: FIRDatabaseReference!
@@ -79,15 +74,13 @@ class PlaceUserDataStore {
         
     }
     
-    func postPictureToDatabase(pictue: UIImage) {
+    func postPictureToDatabase(pictue: UIImage, title: String, desciption: String, price: String) {
         var piccopy = UIImage()
         piccopy = pictue
         let postImageData: NSData = UIImagePNGRepresentation(piccopy)!
-        //let currentUser = PlaceUser.init(withName: name!, lastName: "", profilePicture: UIImage(data: data!), postings: [])
         
         let storage = FIRStorage.storage()
         let storageRef = storage.referenceForURL("gs://teamliongroupproject.appspot.com/")
-        //let id = user.uid
         let randomNumber = arc4random_uniform(500)
         let postImageRef = storageRef.child("users/userID/posts/\(randomNumber).png")
         let uploadTask = postImageRef.putData(postImageData, metadata: nil) { metadata, error in
@@ -100,7 +93,7 @@ class PlaceUserDataStore {
                 let picID = String(randomNumber)
                 if let user = FIRAuth.auth()?.currentUser {
                 let uid = user.uid
-                    self.ref.child("\(uid)/posts").updateChildValues([picID : postPicURLString!])
+                    self.ref.child("\(uid)/posts").updateChildValues([title : [postPicURLString!, desciption, price]])
 
                 }
 
