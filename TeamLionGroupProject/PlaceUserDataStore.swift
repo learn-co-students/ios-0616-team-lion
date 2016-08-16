@@ -22,7 +22,7 @@ class PlaceUserDataStore {
     var ref: FIRDatabaseReference!
     var refHandle: FIRDatabaseHandle!
     let randomNumber = arc4random_uniform(5000000)
-
+    let test = CurrentUser()
     
     static let sharedDataStore = PlaceUserDataStore()
     private init(){}
@@ -39,23 +39,33 @@ class PlaceUserDataStore {
         })
     }
     
-    func fetchPosts(){
+    func fetchPosts()-> [PlacePost]{
         let uid = FIRAuth.auth()?.currentUser?.uid
         FIRDatabase.database().reference().child(uid!).child("posts").observeEventType(.ChildAdded, withBlock: {(snapshot) in
         self.postsDataSnapshot.append(snapshot)
-            guard let snapsotData = snapshot.value as? [String: String] else{  print("error getting snapshot"); return }
+            guard let snapshotData = snapshot.value as? [String: String] else{  print("error getting snapshot"); return }
             var post = PlacePost( itemImages: [], itemTitle: "", itemDescription: "", price: 0)
             
-            if let snapshotdataDescription = snapsotData["description"]{
+            if let snapshotdataDescription = snapshotData["description"]{
                 post.itemDescription = snapshotdataDescription
-                print(post.itemDescription)
             } else{  print("description error"); return }
-            post.itemTitle = snapsotData["title"]!
-            post.price = Int(snapsotData["price"]!)!
+            
+            
+            let str = snapshotData["image"]
+            print(str)
+            if str == str {
+                //print("str:\(str)")
+            guard let url = NSURL(string: str!) else {print("no image"); return}
+            let data = NSData(contentsOfURL: url) //make sure your image in this url does exist, otherwise unwrap in a if let check
+            post.itemImages.append(UIImage(data: data!)!)
+
+            }
+            post.itemTitle = snapshotData["title"]!
+            post.price = Int(snapshotData["price"]!)!
             CurrentUser.postings.append(post)
-            print("@@@@@SNAPSHOT\(CurrentUser.postings)")
 
         }, withCancelBlock: nil)
+        return CurrentUser.postings
     }
 
     
