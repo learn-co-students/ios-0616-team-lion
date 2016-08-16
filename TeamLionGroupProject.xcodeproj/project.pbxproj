@@ -23,6 +23,11 @@
 		BEC67E4B1D53E0F900D2D030 /* PostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E4A1D53E0F900D2D030 /* PostViewCell.swift */; };
 		BEC67E4D1D53E13A00D2D030 /* PlaceUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E4C1D53E13A00D2D030 /* PlaceUser.swift */; };
 		BEC67E4F1D53E14700D2D030 /* PlacePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E4E1D53E14700D2D030 /* PlacePost.swift */; };
+		FFA494091D63685100AA1F38 /* DirectChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA494081D63685100AA1F38 /* DirectChatViewController.swift */; };
+		FFA4940D1D63876500AA1F38 /* ChatHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA4940C1D63876500AA1F38 /* ChatHomeViewController.m */; };
+		FFA494101D63879700AA1F38 /* AgoraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA4940F1D63879700AA1F38 /* AgoraViewController.m */; };
+		FFA494131D6387AF00AA1F38 /* ChatFriendsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA494121D6387AF00AA1F38 /* ChatFriendsTableViewController.m */; };
+		FFA494161D6387E300AA1F38 /* DirectChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA494151D6387E300AA1F38 /* DirectChatViewController.m */; };
 		FFE94A951D53D9730036ED38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94A941D53D9730036ED38 /* AppDelegate.swift */; };
 		FFE94A971D53D9730036ED38 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94A961D53D9730036ED38 /* LoginViewController.swift */; };
 		FFE94A9A1D53D9730036ED38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFE94A981D53D9730036ED38 /* Main.storyboard */; };
@@ -55,6 +60,16 @@
 		BEC67E4C1D53E13A00D2D030 /* PlaceUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceUser.swift; sourceTree = "<group>"; };
 		BEC67E4E1D53E14700D2D030 /* PlacePost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacePost.swift; sourceTree = "<group>"; };
 		DCF91F518C6C9AD294129C82 /* Pods-TeamLionGroupProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamLionGroupProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeamLionGroupProject/Pods-TeamLionGroupProject.release.xcconfig"; sourceTree = "<group>"; };
+		FFA494081D63685100AA1F38 /* DirectChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectChatViewController.swift; sourceTree = "<group>"; };
+		FFA4940A1D63876400AA1F38 /* TeamLionGroupProject-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TeamLionGroupProject-Bridging-Header.h"; sourceTree = "<group>"; };
+		FFA4940B1D63876500AA1F38 /* ChatHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatHomeViewController.h; sourceTree = "<group>"; };
+		FFA4940C1D63876500AA1F38 /* ChatHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatHomeViewController.m; sourceTree = "<group>"; };
+		FFA4940E1D63879700AA1F38 /* AgoraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgoraViewController.h; sourceTree = "<group>"; };
+		FFA4940F1D63879700AA1F38 /* AgoraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgoraViewController.m; sourceTree = "<group>"; };
+		FFA494111D6387AF00AA1F38 /* ChatFriendsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatFriendsTableViewController.h; sourceTree = "<group>"; };
+		FFA494121D6387AF00AA1F38 /* ChatFriendsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatFriendsTableViewController.m; sourceTree = "<group>"; };
+		FFA494141D6387E300AA1F38 /* DirectChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectChatViewController.h; sourceTree = "<group>"; };
+		FFA494151D6387E300AA1F38 /* DirectChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectChatViewController.m; sourceTree = "<group>"; };
 		FFE94A911D53D9730036ED38 /* TeamLionGroupProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamLionGroupProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFE94A941D53D9730036ED38 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFE94A961D53D9730036ED38 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +131,7 @@
 				FFE94AB71D5A36F30036ED38 /* SegementPractice.swift */,
 				BE3FF0571D5D68A6001D2C9E /* PostDetailViewController.swift */,
 				1BD989021D6244C3004ED215 /* FriendsListController.swift */,
+				FFA494031D63676000AA1F38 /* Chat */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -139,6 +155,23 @@
 				DCF91F518C6C9AD294129C82 /* Pods-TeamLionGroupProject.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		FFA494031D63676000AA1F38 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				FFA4940B1D63876500AA1F38 /* ChatHomeViewController.h */,
+				FFA4940C1D63876500AA1F38 /* ChatHomeViewController.m */,
+				FFA4940E1D63879700AA1F38 /* AgoraViewController.h */,
+				FFA4940F1D63879700AA1F38 /* AgoraViewController.m */,
+				FFA494111D6387AF00AA1F38 /* ChatFriendsTableViewController.h */,
+				FFA494121D6387AF00AA1F38 /* ChatFriendsTableViewController.m */,
+				FFA494081D63685100AA1F38 /* DirectChatViewController.swift */,
+				FFA494141D6387E300AA1F38 /* DirectChatViewController.h */,
+				FFA494151D6387E300AA1F38 /* DirectChatViewController.m */,
+				FFA4940A1D63876400AA1F38 /* TeamLionGroupProject-Bridging-Header.h */,
+			);
+			name = Chat;
 			sourceTree = "<group>";
 		};
 		FFE94A881D53D9730036ED38 = {
@@ -312,10 +345,14 @@
 				FFE94A971D53D9730036ED38 /* LoginViewController.swift in Sources */,
 				1BD989031D6244C3004ED215 /* FriendsListController.swift in Sources */,
 				BE6E6CC81D58FA6A00FF8416 /* TabBarController.swift in Sources */,
+				FFA494091D63685100AA1F38 /* DirectChatViewController.swift in Sources */,
+				FFA4940D1D63876500AA1F38 /* ChatHomeViewController.m in Sources */,
 				BEC67E451D53DFCD00D2D030 /* NewPostViewController.swift in Sources */,
 				FFE94AA71D54E4970036ED38 /* TestData.swift in Sources */,
 				FFE94AB81D5A36F30036ED38 /* SegementPractice.swift in Sources */,
+				FFA494161D6387E300AA1F38 /* DirectChatViewController.m in Sources */,
 				BEC67E4B1D53E0F900D2D030 /* PostViewCell.swift in Sources */,
+				FFA494131D6387AF00AA1F38 /* ChatFriendsTableViewController.m in Sources */,
 				FFE94AAC1D54E7320036ED38 /* UIImageExtension.swift in Sources */,
 				BEC67E4F1D53E14700D2D030 /* PlacePost.swift in Sources */,
 				FFE94AB61D58FE810036ED38 /* ProfileHeaderView.swift in Sources */,
@@ -328,6 +365,7 @@
 				1BC10C8A1D5A174A006E9747 /* PlaceUserDataStore.swift in Sources */,
 				1BCEC75A1D5D7A89006A8418 /* Friend.swift in Sources */,
 				FFE94AAB1D54E7320036ED38 /* UIColorExtensions.swift in Sources */,
+				FFA494101D63879700AA1F38 /* AgoraViewController.m in Sources */,
 				BE0049001D5A2C68005F3E2C /* PhotoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -446,6 +484,7 @@
 			baseConfigurationReference = A387EE526A800AD0083D978F /* Pods-TeamLionGroupProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -458,6 +497,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = DavidVY.TeamLionGroupProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "TeamLionGroupProject/TeamLionGroupProject-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -466,6 +507,7 @@
 			baseConfigurationReference = DCF91F518C6C9AD294129C82 /* Pods-TeamLionGroupProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -478,6 +520,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = DavidVY.TeamLionGroupProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "TeamLionGroupProject/TeamLionGroupProject-Bridging-Header.h";
 			};
 			name = Release;
 		};
