@@ -23,15 +23,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 		
 		print(FIRAuth.auth()?.currentUser)
 		FIRAuth.auth()?.addAuthStateDidChangeListener({ (auth: FIRAuth, user: FIRUser?) in
-			print("THIS IS THE USER = \(user)")
-			
-			//**** THE USER IS NIL EVEN IF AUTHENTICATED NEED A DIFFERENT IF CHECK OR NEED TO FIGURE OUT WHAT
-			//**** FB USES AS THEIR "USER"
-			
 			if user != nil {
-				//Facebook user info
-				//profileViewController.name = user.displayName
-				//profileViewController.picture = user.photoURL
 				
 				self.moveToMarket()
 				
@@ -56,8 +48,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 		fbRequest.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
 			
 			if error == nil {
-				print("\n\n\nfriends\n\n\n")
-				print("Friends are : \(result)")
 				
 			} else {
 				
@@ -88,10 +78,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         }else{
 			let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
 			FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
-				print("\n\n\n\n\nuser logged in to firebase app\n\n\n\n")
-				print("\n\n\n\(credential.description)\n\n\n")
-				
-				//self.shared.facebookToFirebase()
+				self.shared.facebookToFirebase()
 				
 				self.moveToMarket()
 				

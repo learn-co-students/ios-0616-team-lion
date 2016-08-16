@@ -16,4 +16,6 @@ target 'TeamLionGroupProject' do
   pod 'Firebase/Database'
   pod 'CCTextFieldEffects'
   pod 'SwiftyJSON', '~> 2.3'
+  pod 'SendBirdSDK'
+
 end
