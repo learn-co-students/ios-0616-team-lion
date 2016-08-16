@@ -11,7 +11,8 @@ import SnapKit
 import DynamicButton
 import CCTextFieldEffects
 
-class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
+class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, sendPhoto {
+
 	let datastore = PlaceUserDataStore.sharedDataStore
     var itemNameField = ChisatoTextField()
 	var itemDescriptionTextField = ChisatoTextField()
@@ -29,6 +30,7 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
     
     let topFrame = UIImageView()
     let pictureFrame = UIImageView()
+    var picture = UIImage()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -43,7 +45,17 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         view.addGestureRecognizer(tap)
 
 		generateScene()
+        
+        
 	}
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        print("NewPost Pic:\(picture)")
+        pictureFrame.image = picture
+        
+    }
     
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
@@ -74,10 +86,10 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         alertController.addAction(cancelAction)
         
         let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-            let post = PlacePost(itemImages: [UIImage(named: "pictureFrame")!], itemTitle: self.itemNameField.text!, itemDescription: self.itemDescriptionField.text, price: Int(self.itemPriceField.text!)!)
+            let post = PlacePost(itemImages: [self.picture], itemTitle: self.itemNameField.text!, itemDescription: self.itemDescriptionField.text, price: Int(self.itemPriceField.text!)!)
 
-            let pic = UIImage(named: "pictureFrame")
-            self.datastore.postPictureToDatabase(pic!, title: self.itemNameField.text!, desciption: self.itemDescriptionField.text, price: self.itemPriceField.text!)
+            let pic = self.picture
+            self.datastore.postPictureToDatabase(pic, title: self.itemNameField.text!, desciption: self.itemDescriptionField.text, price: self.itemPriceField.text!)
            let array =  self.datastore.fetchPosts()
             print("array from the view \(array)")
             //CurrentUser.postings.append(post)
@@ -93,9 +105,13 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
 	}
     
     func takePictureButtonPressed(){
-        print("Take Picture pressed")
         
-        presentViewController(PhotoViewController(), animated: true, completion: nil)
+        let photoVC = PhotoViewController()
+        
+        photoVC.delegate = self
+        
+        presentViewController(photoVC, animated: true, completion: nil)
+       
         
     }
     
@@ -127,7 +143,7 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         }
         
         view.addSubview(pictureFrame)
-        pictureFrame.image = UIImage(named: "pictureFrame")
+        pictureFrame.backgroundColor = UIColor.alizarinColor()
         pictureFrame.snp_makeConstraints { (make) in
             make.bottom.equalTo(profilePic.snp_bottom).offset(10)
             make.right.equalTo(view.snp_right).offset(-20)
@@ -227,6 +243,9 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
             make.height.equalTo(roundSquare.snp_width).dividedBy(1.5)
         }
         
-
+    }
+    
+    func sendBackPhoto(photo: UIImage) {
+        self.picture = photo
     }
 }

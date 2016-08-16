@@ -11,6 +11,11 @@ import AVFoundation
 import DynamicButton
 import SnapKit
 
+protocol sendPhoto: class
+{
+    func sendBackPhoto(photo: UIImage)
+}
+
 class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var previewView = UIView()
@@ -29,6 +34,8 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
     let bottomFrame = UIImageView()
     
     var imagePicker = UIImagePickerController()
+    
+    weak var delegate: sendPhoto?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -149,7 +156,9 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
     func saveButtonTapped() {
      
         //save self.capturedImage as PlacePost.itemImages
-
+        self.delegate?.sendBackPhoto(capturedImage.image!)
+        print("Photo VC PIC:\(capturedImage.image)")
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     func retakeButtonTapped() {
@@ -265,3 +274,4 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
     }
     
 }
+
