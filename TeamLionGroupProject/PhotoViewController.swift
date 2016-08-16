@@ -13,7 +13,7 @@ import SnapKit
 
 protocol sendPhoto: class
 {
-    func sendBackPhoto(photo: UIImage)
+    func sendBackPhoto(photo: UIImageView)
 }
 
 class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -114,7 +114,7 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
             self.capturedImage.hidden = false
             }, completion: { _ in })
         
-        
+        capturedImage.hidden = false
         
     }
     
@@ -156,8 +156,7 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
     func saveButtonTapped() {
      
         //save self.capturedImage as PlacePost.itemImages
-        self.delegate?.sendBackPhoto(capturedImage.image!)
-        print("Photo VC PIC:\(capturedImage.image)")
+        self.delegate?.sendBackPhoto(capturedImage)
         dismissViewControllerAnimated(true, completion: nil)
     }
     
