@@ -86,10 +86,10 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         alertController.addAction(cancelAction)
         
         let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-            let post = PlacePost(itemImages: [UIImage(named: "pictureFrame")!], itemTitle: self.itemNameField.text!, itemDescription: self.itemDescriptionField.text, price: Int(self.itemPriceField.text!)!)
+            let post = PlacePost(itemImages: [self.picture], itemTitle: self.itemNameField.text!, itemDescription: self.itemDescriptionField.text, price: Int(self.itemPriceField.text!)!)
 
-            let pic = UIImage(named: "pictureFrame")
-            self.datastore.postPictureToDatabase(pic!, title: self.itemNameField.text!, desciption: self.itemDescriptionField.text, price: self.itemPriceField.text!)
+            let pic = self.picture
+            self.datastore.postPictureToDatabase(pic, title: self.itemNameField.text!, desciption: self.itemDescriptionField.text, price: self.itemPriceField.text!)
            let array =  self.datastore.fetchPosts()
             print("array from the view \(array)")
             //CurrentUser.postings.append(post)
