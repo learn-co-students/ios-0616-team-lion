@@ -18,9 +18,10 @@ import SwiftyJSON
 
 class PlaceUserDataStore {
     var dataSnapshot = [FIRDataSnapshot]()
+    var postsDataSnapshot = [FIRDataSnapshot]()
     var ref: FIRDatabaseReference!
     var refHandle: FIRDatabaseHandle!
-    let randomNumber = arc4random_uniform(500)
+    let randomNumber = arc4random_uniform(5000000)
 
     
     static let sharedDataStore = PlaceUserDataStore()
@@ -31,14 +32,31 @@ class PlaceUserDataStore {
     }
    
     func loadDatabase(){
-    
+            let uid = FIRAuth.auth()?.currentUser?.uid
             self.ref = FIRDatabase.database().reference()
-            refHandle = self.ref.child("user").observeEventType(.ChildAdded, withBlock: {snapshot in
+            refHandle = self.ref.child(uid!).observeEventType(.ChildAdded, withBlock: {snapshot in
             self.dataSnapshot.append(snapshot)
         })
     }
     
+    func fetchPosts(){
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        FIRDatabase.database().reference().child(uid!).child("posts").observeEventType(.ChildAdded, withBlock: {(snapshot) in
+        self.postsDataSnapshot.append(snapshot)
+            guard let snapsotData = snapshot.value as? [String: String] else{  print("error getting snapshot"); return }
+            var post = PlacePost( itemImages: [], itemTitle: "", itemDescription: "", price: 0)
+            
+            if let snapshotdataDescription = snapsotData["description"]{
+                post.itemDescription = snapshotdataDescription
+                print(post.itemDescription)
+            } else{  print("description error"); return }
+            post.itemTitle = snapsotData["title"]!
+            post.price = Int(snapsotData["price"]!)!
+            CurrentUser.postings.append(post)
+            print("@@@@@SNAPSHOT\(CurrentUser.postings)")
 
+        }, withCancelBlock: nil)
+    }
 
     
     func postToDataStore(nameKey: String, pictureKey: String, friendName: String, friendPic: String){
@@ -73,7 +91,13 @@ class PlaceUserDataStore {
                 let picID = String(self.randomNumber)
                 if let user = FIRAuth.auth()?.currentUser {
                 let uid = user.uid
-                    self.ref.child("\(uid)/posts").updateChildValues([title : [postPicURLString!, desciption, price]])
+                    let postID = String(self.randomNumber)
+                    self.ref.child("\(uid)/posts/\(postID)").updateChildValues(["title": title])
+                    self.ref.child("\(uid)/posts/\(postID)").updateChildValues(["price": price])
+                    self.ref.child("\(uid)/posts/\(postID)").updateChildValues(["description": desciption])
+                    self.ref.child("\(uid)/posts/\(postID)").updateChildValues(["image": postPicURLString!])
+                    
+                    //self.ref.child("\(uid)/posts").updateChildValues([title : [postPicURLString!, desciption, price]])
 
                 }
 

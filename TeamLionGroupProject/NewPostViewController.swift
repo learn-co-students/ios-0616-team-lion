@@ -34,7 +34,7 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
 		super.viewDidLoad()
 		
 		print("New Post VC View Did Load")
-        
+        self.datastore.fetchPosts()
         itemDescriptionTextField.delegate = self
         itemDescriptionField.delegate = self
         
@@ -66,9 +66,7 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
 	func sellItButtonPressed() {
 		print("Sell It pressed")
 		//alert "Are you sure you want to post (item Name) for (price)?
-        
         let alertController = UIAlertController(title: "Confirm", message: "Confirm your post?", preferredStyle: .Alert)
-        
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
             // ...
         }
@@ -78,11 +76,10 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
             let post = PlacePost(itemImages: [UIImage(named: "pictureFrame")!], itemTitle: self.itemNameField.text!, itemDescription: self.itemDescriptionField.text, price: Int(self.itemPriceField.text!)!)
             let pic = UIImage(named: "pictureFrame")
             self.datastore.postPictureToDatabase(pic!, title: self.itemNameField.text!, desciption: self.itemDescriptionField.text, price: self.itemPriceField.text!)
-            CurrentUser.postings.append(post)
+           // CurrentUser.postings.append(post)
             self.dismissViewControllerAnimated(true, completion: nil)
         }
         alertController.addAction(OKAction)
-        
         self.presentViewController(alertController, animated: true) {
             // ...
         }
