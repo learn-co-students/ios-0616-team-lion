@@ -76,7 +76,7 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         
         let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
             let post = PlacePost(itemImages: [UIImage(named: "pictureFrame")!], itemTitle: self.itemNameField.text!, itemDescription: self.itemDescriptionField.text, price: Int(self.itemPriceField.text!)!)
-            CurrentUser.postings?.append(post)
+            CurrentUser.postings.append(post)
             self.dismissViewControllerAnimated(true, completion: nil)
         }
         alertController.addAction(OKAction)
