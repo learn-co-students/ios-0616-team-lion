@@ -17,5 +17,6 @@ target 'TeamLionGroupProject' do
   pod 'CCTextFieldEffects'
   pod 'SwiftyJSON', '~> 2.3'
   pod 'SendBirdSDK'
+  pod 'JSQMessagesViewController'
 
 end
