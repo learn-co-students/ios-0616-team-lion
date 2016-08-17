@@ -37,10 +37,54 @@ class PlaceUserDataStore {
             refHandle = self.ref.child(uid!).observeEventType(.ChildAdded, withBlock: {snapshot in
             self.dataSnapshot.append(snapshot)
             //guard let snapshotData = snapshot.value!["name"] as? [String: String] else{  print("error getting snapshot"); return }
+                
+                self.dataSnapshot.forEach({ (snap) in
+                    //print(snap)
+                })
 
+                
+                
+
+                
                 
         })
     }
+    
+    
+    
+//    func fetchUserInfo(completion: (result: CurrentUser) -> Void){
+//        let uid = FIRAuth.auth()?.currentUser?.uid
+//        FIRDatabase.database().reference().child(uid!).observeEventType(.ChildAdded, withBlock: {(snapshot) in
+//            self.postsDataSnapshot.append(snapshot)
+//            guard let snapshotData = snapshot.value as? [String: String] else{  print("error getting snapshot"); return }
+//            //self.currentUser = CurrentUser( itemImages: [], itemTitle: "", itemDescription: "", price: 0)
+//            
+//            if let snapshotdataName = snapshotData["name"]{
+//                self.currentUser.name = snapshotdataName
+//                print("111POST\(self.currentUser.name)")
+//
+//            } else{  print("didnt get name"); return }
+//            
+//            
+//            let str = snapshotData["image"]
+//            //print(str)
+//            if str == str {
+//                //print("str:\(str)")
+//                guard let url = NSURL(string: str!) else {print("no image"); return}
+//                let data = NSData(contentsOfURL: url) //make sure your image in this url does exist, otherwise unwrap in a if let check
+//                self.currentUser.picture = UIImage(data: data!)
+//                
+//            }
+//            //self.currentUser.postings.append(post)
+//            completion(result: self.currentUser)
+//            print("222POST\(self.currentUser.name)")
+//            print("333POST\(self.currentUser.picture)")
+//            }, withCancelBlock: nil)
+//        // print("FUKKKKK\(self.currentUser.postings)")
+//        
+//        
+//    }
+    
     
     func fetchPosts(completion: (result: PlacePost) -> Void){
         let uid = FIRAuth.auth()?.currentUser?.uid
@@ -56,7 +100,7 @@ class PlaceUserDataStore {
             
             
             let str = snapshotData["image"]
-            print(str)
+            //print(str)
             if str == str {
                 //print("str:\(str)")
             guard let url = NSURL(string: str!) else {print("no image"); return}
@@ -68,7 +112,7 @@ class PlaceUserDataStore {
             post.price = Int(snapshotData["price"]!)!
             //self.currentUser.postings.append(post)
             completion(result: post)
-            print("222POST\(post)")
+            //print("222POST\(post)")
         }, withCancelBlock: nil)
        // print("FUKKKKK\(self.currentUser.postings)")
 
@@ -124,7 +168,7 @@ class PlaceUserDataStore {
     }
 
 
-    func facebookToFirebase(){
+    func facebookToFirebase(completion: (result: (String, UIImage)) -> Void){
         FIRAuth.auth()?.addAuthStateDidChangeListener { auth, user in
             if let user = user {
                 let name = user.displayName
@@ -152,7 +196,7 @@ class PlaceUserDataStore {
                         for friend in self.currentUser.friendsList{
                         let frname = friend.name
                         let frpic = friend.profilePicture
-                            print("to the database: \(frname)\(frpic)")
+                           // print("to the database: \(frname)\(frpic)")
                         self.postToDataStore(name!, pictureKey: profilePicURLString!, friendName: frname, friendPic: frpic!)
                         }
 
@@ -163,7 +207,7 @@ class PlaceUserDataStore {
             } else {
                 // No user is signed in.
             }
-            
+ completion(result: (self.currentUser.name!, self.currentUser.picture!))
         }
     }
  
@@ -184,13 +228,14 @@ class PlaceUserDataStore {
                     let friend = UsersFriend(withName: friendsName, profilePicture: friendPicture)
                     self.currentUser.friendsList.append(friend)
                 }
-
             } else {
                 print("Error Getting Friends \(error)");
             }
-
         }
-
     }
+
+    
+    
+    
     
 }
