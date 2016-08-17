@@ -83,8 +83,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                     print("FROM LOGIN\(self.datastore.currentUser.name)")
                     print("FROM LOGIN\(self.datastore.currentUser.picture)")
                 })
-
-				self.shared.facebookToFirebase()
                 self.shared.currentUser.postings.removeAll()
 
                 self.datastore.fetchPosts { (result) in
