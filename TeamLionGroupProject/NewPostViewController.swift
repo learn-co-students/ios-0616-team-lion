@@ -31,15 +31,13 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
     let topFrame = UIImageView()
     let pictureFrame = UIImageView()
     var picture = UIImageView(image: UIImage(named: "NoImage"))
+    let picFrame = ChisatoTextField()
     
     var hasPicture = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		print("New Post VC View Did Load")
-        self.datastore.fetchPosts()
-        print("@@@@from the view\(CurrentUser.postings)")
         itemDescriptionTextField.delegate = self
         itemDescriptionField.delegate = self
         
@@ -191,23 +189,34 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         view.addSubview(profilePic)
         profilePic.image = UIImage(named: "david")!.circle
         profilePic.snp_makeConstraints { (make) in
-            make.top.equalTo(topFrame.snp_bottom).offset(40)
+            make.top.equalTo(topFrame.snp_bottom).offset(70)
             make.left.equalTo(view.snp_left).offset(20)
             make.width.equalTo(view.snp_width).dividedBy(4)
             make.height.equalTo(view.snp_width).dividedBy(4)
         }
         
+        view.addSubview(picFrame)
+        picFrame.text = " "
+        picFrame.placeholderColor = UIColor.peterRiverColor()
+        picFrame.placeholder = "Picture"
+        picFrame.borderColor = UIColor.peterRiverColor()
+        picFrame.activeColor = UIColor.peterRiverColor()
+        picFrame.snp_makeConstraints { (make) in
+            make.bottom.equalTo(profilePic.snp_bottom).offset(-3)
+            make.right.equalTo(view.snp_right).offset(-40)
+            make.width.equalTo(profilePic.snp_width).multipliedBy(1.75)
+            make.height.equalTo(profilePic.snp_width).multipliedBy(1.8)
+        }
         view.addSubview(pictureFrame)
-        pictureFrame.backgroundColor = UIColor.alizarinColor()
         pictureFrame.snp_makeConstraints { (make) in
-            make.bottom.equalTo(profilePic.snp_bottom).offset(10)
-            make.right.equalTo(view.snp_right).offset(-20)
-            make.width.equalTo(profilePic.snp_width).multipliedBy(2.25)
-            make.height.equalTo(profilePic.snp_width).multipliedBy(1.50)
+            make.bottom.equalTo(picFrame.snp_bottom).offset(-2)
+            make.right.equalTo(picFrame.snp_right).offset(-2)
+            make.top.equalTo(picFrame.snp_top).offset(18)
+            make.left.equalTo(picFrame.snp_left).offset(2)
         }
         
         view.addSubview(takePictureButton)
-        takePictureButton.setTitle("Take Picture", forState: .Normal)
+        takePictureButton.setImage(UIImage(named:"cameraIcon"), forState: .Normal)
         takePictureButton.setTitleColor(UIColor.peterRiverColor(), forState: .Normal)
         takePictureButton.addTarget(self, action: #selector(takePictureButtonPressed), forControlEvents: .TouchUpInside)
         takePictureButton.snp_makeConstraints { (make) in
@@ -279,7 +288,7 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         view.addSubview(roundSquare)
         roundSquare.image = UIImage(named: "roundSquare")
         roundSquare.snp_makeConstraints { (make) in
-            make.top.equalTo(itemDescriptionTextField.snp_bottom).offset(25)
+            make.top.equalTo(itemDescriptionTextField.snp_bottom).offset(15)
             make.centerX.equalTo(itemDescriptionTextField.snp_centerX)
             make.width.equalTo(view.snp_width).dividedBy(4)
             make.height.equalTo(view.snp_width).dividedBy(4)
