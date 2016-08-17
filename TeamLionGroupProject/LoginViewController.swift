@@ -81,8 +81,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 				self.shared.facebookToFirebase()
                 self.datastore.fetchPosts { (result) in
                     print(result)
-                    var arr = [PlacePost]()
-                    arr.append(result)
+                    self.shared.currentUser.postings.append(result)
                     print("RESULTARRAY\(result)")
                 }
 				self.moveToMarket()
