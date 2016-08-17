@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import DynamicButton
 import CCTextFieldEffects
+import ChameleonFramework
 
 class PostDetailViewController: UIViewController, UIScrollViewDelegate {
     
@@ -40,7 +41,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.flatWhiteColor()
         generateScene()
     }
     
@@ -57,7 +58,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
     func generateScene() {
         
         view.addSubview(topFrame)
-        topFrame.backgroundColor = UIColor.whiteColor()
+        topFrame.backgroundColor = UIColor.flatRedColor()
         topFrame.snp_makeConstraints { (make) in
             make.top.equalTo(view.snp_top)
             make.width.equalTo(view.snp_width)
@@ -66,7 +67,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         
         view.addSubview(cancelButton)
         cancelButton.setStyle(DynamicButtonStyle.Rewind, animated: true)
-        cancelButton.strokeColor = UIColor.peterRiverColor()
+        cancelButton.strokeColor = UIColor.flatWhiteColor()
         cancelButton.highlightStokeColor = UIColor.redColor()
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), forControlEvents: .TouchUpInside)
         cancelButton.snp_makeConstraints { (make) in
@@ -88,8 +89,8 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         
         view.addSubview(buyButton)
         buyButton.setStyle(DynamicButtonStyle.CheckMark, animated: true)
-        buyButton.strokeColor = UIColor.peterRiverColor()
-        buyButton.highlightStokeColor = UIColor.greenColor()
+        buyButton.strokeColor = UIColor.flatRedColor()
+        buyButton.highlightStokeColor = UIColor.flatMintColor()
         buyButton.addTarget(self, action: #selector(buyButtonTapped), forControlEvents: .TouchUpInside)
         buyButton.snp_makeConstraints { (make) in
             make.centerY.equalTo(roundSquare.snp_centerY)
@@ -113,7 +114,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         
         
         scrollView.addSubview(profilePic)
-        profilePic.backgroundColor = UIColor.peterRiverColor()
+        profilePic.backgroundColor = UIColor.flatRedColor()
         profilePic.image?.circle
         profilePic.snp_makeConstraints { (make) in
             make.top.equalTo(scrollView.snp_top).offset(20)
@@ -124,10 +125,10 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         
         scrollView.addSubview(fullnameFrame)
         fullnameFrame.text = " "
-        fullnameFrame.placeholderColor = UIColor.peterRiverColor()
+        fullnameFrame.placeholderColor = UIColor.flatRedColor()
         fullnameFrame.placeholder = "Name"
-        fullnameFrame.borderColor = UIColor.peterRiverColor()
-        fullnameFrame.activeColor = UIColor.peterRiverColor()
+        fullnameFrame.borderColor = UIColor.flatRedColor()
+        fullnameFrame.activeColor = UIColor.flatRedColor()
         fullnameFrame.snp_makeConstraints { (make) in
             make.top.equalTo(profilePic.snp_top)
             make.left.equalTo(profilePic.snp_right).offset(5)
@@ -138,7 +139,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         
         scrollView.addSubview(fullNameLabel)
         fullNameLabel.text = fullName
-        fullNameLabel.textColor = UIColor.blackColor()
+        fullNameLabel.textColor = UIColor.flatRedColor()
         fullNameLabel.snp_makeConstraints { (make) in
             make.centerX.equalTo(fullnameFrame.snp_centerX)
             make.centerY.equalTo(fullnameFrame.snp_centerY).offset(10)
@@ -148,10 +149,10 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         
         scrollView.addSubview(titleFrame)
         titleFrame.text = " "
-        titleFrame.placeholderColor = UIColor.peterRiverColor()
+        titleFrame.placeholderColor = UIColor.flatRedColor()
         titleFrame.placeholder = "Item Name"
-        titleFrame.borderColor = UIColor.peterRiverColor()
-        titleFrame.activeColor = UIColor.peterRiverColor()
+        titleFrame.borderColor = UIColor.flatRedColor()
+        titleFrame.activeColor = UIColor.flatRedColor()
         titleFrame.snp_makeConstraints { (make) in
             make.bottom.equalTo(profilePic.snp_bottom)
             make.left.equalTo(fullnameFrame.snp_left)
@@ -161,7 +162,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         
         scrollView.addSubview(titleLabel)
         titleLabel.text = itemTitle
-        titleLabel.textColor = UIColor.blackColor()
+        titleLabel.textColor = UIColor.flatWhiteColor()
         titleLabel.snp_makeConstraints { (make) in
             make.centerX.equalTo(titleFrame.snp_centerX)
             make.centerY.equalTo(titleFrame.snp_centerY).offset(10)
@@ -171,7 +172,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         
         scrollView.addSubview(itemImageView)
         itemImageView.image = itemImage
-        itemImageView.backgroundColor = UIColor.carrotColor()
+        itemImageView.backgroundColor = UIColor.flatRedColor()
         itemImageView.snp_makeConstraints { (make) in
             make.top.equalTo(profilePic.snp_bottom).offset(10)
             make.left.equalTo(profilePic.snp_left)
@@ -193,6 +194,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(descriptionField)
         descriptionField.userInteractionEnabled = false
         descriptionField.scrollEnabled = false
+        descriptionField.backgroundColor = UIColor.flatWhiteColor()
         descriptionField.textContainerInset = UIEdgeInsets(top: 5, left: 30, bottom: 0, right: 30)
         descriptionField.snp_makeConstraints { (make) in
             make.centerX.equalTo(itemImageView.snp_centerX)
@@ -204,10 +206,10 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(descriptionFrame)
         descriptionFrame.text = descriptionField.text
         descriptionFrame.textColor = UIColor.clearColor()
-        descriptionFrame.placeholderColor = UIColor.peterRiverColor()
+        descriptionFrame.placeholderColor = UIColor.flatRedColor()
         descriptionFrame.placeholder = "Description"
-        descriptionFrame.borderColor = UIColor.peterRiverColor()
-        descriptionFrame.activeColor = UIColor.peterRiverColor()
+        descriptionFrame.borderColor = UIColor.flatRedColor()
+        descriptionFrame.activeColor = UIColor.flatRedColor()
         descriptionFrame.snp_makeConstraints { (make) in
             make.left.equalTo(itemImageView.snp_left)
             make.right.equalTo(itemImageView.snp_right)

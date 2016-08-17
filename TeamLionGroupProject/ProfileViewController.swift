@@ -17,7 +17,6 @@ let shared = PlaceUserDataStore.sharedDataStore
     var name: String?
     var picture: NSURL?
     
-    
 	private let cellIdentifier = "Cell"
 	private let headerIdentifier = "header"
 	
