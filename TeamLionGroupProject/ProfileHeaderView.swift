@@ -19,7 +19,7 @@ protocol ProfileHeaderViewDelegate: class {
 class ProfileHeaderView: UICollectionReusableView, FBSDKLoginButtonDelegate {
 	
 	weak var delegate: ProfileHeaderViewDelegate?
-	
+	let shared = PlaceUserDataStore.sharedDataStore
 	var usernameLabel = UILabel()
 	var profilePic = UIImageView()
 	var followingCountLabel = UILabel()
@@ -27,8 +27,8 @@ class ProfileHeaderView: UICollectionReusableView, FBSDKLoginButtonDelegate {
 	var friendsButton = UIButton()
 	
 	var username = "Username"
-	var currentListingsCount = 3
-	var currentFollowingsCount = 7
+	var currentListingsCount = 0
+	var currentFollowingsCount = 0
 	
 	let headerFont = "HelveticaNeue"
     var loginButton: FBSDKLoginButton = FBSDKLoginButton()
@@ -38,6 +38,10 @@ class ProfileHeaderView: UICollectionReusableView, FBSDKLoginButtonDelegate {
 		super.layoutSubviews()
 		
 		setupScene()
+        
+        profilePic.image = self.shared.currentUser.picture
+        currentListingsCount = self.shared.currentUser.postings.count
+
 	}
 	
 	func setupScene() {

@@ -44,7 +44,7 @@ class PostViewCell: UICollectionViewCell {
         
         //name label constraints
         contentView.addSubview(nameLabel)
-        nameLabel.text = "Name Label"
+        nameLabel.text = ""
         nameLabel.textColor = UIColor.whiteColor()
         nameLabel.shadowColor = UIColor.blackColor()
         nameLabel.snp_makeConstraints { (make) in

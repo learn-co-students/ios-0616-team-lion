@@ -137,7 +137,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
 
         
         scrollView.addSubview(fullNameLabel)
-        fullNameLabel.text = "Full Name"
+        fullNameLabel.text = fullName
         fullNameLabel.textColor = UIColor.blackColor()
         fullNameLabel.snp_makeConstraints { (make) in
             make.centerX.equalTo(fullnameFrame.snp_centerX)
