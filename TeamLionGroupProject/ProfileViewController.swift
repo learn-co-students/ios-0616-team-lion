@@ -27,6 +27,7 @@ let shared = PlaceUserDataStore.sharedDataStore
 		super.viewDidLoad()
 		
 		setupCollectionView()
+        
 
 	}
 	
@@ -46,6 +47,7 @@ let shared = PlaceUserDataStore.sharedDataStore
 		
 		collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
 		collectionView.registerClass(ProfileHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerIdentifier)
+        collectionView.registerClass(PostViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
 		
 		view.addSubview(collectionView)
 		
@@ -68,11 +70,28 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 	}
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath)
-		cell.backgroundColor = UIColor.peterRiverColor()
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! PostViewCell
+    
+		cell.postImage.image = shared.currentUser.postings[indexPath.item].itemImages[0]
 		
 		return cell
 	}
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        // handle tap events
+        print("You selected cell #\(indexPath.item)!")
+        let postDetailVC = PostDetailViewController()
+        
+        postDetailVC.itemTitle = shared.currentUser.postings[indexPath.item].itemTitle
+        postDetailVC.itemPrice = shared.currentUser.postings[indexPath.item].price
+        postDetailVC.descriptionField.text = shared.currentUser.postings[indexPath.item].itemDescription
+        postDetailVC.itemImage = shared.currentUser.postings[indexPath.item].itemImages[0]
+        postDetailVC.fullName = shared.currentUser.name
+        postDetailVC.profilePic.image = shared.currentUser.picture
+        
+        self.presentViewController(postDetailVC, animated: true, completion:  nil)
+    }
 	
 	func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
 		
