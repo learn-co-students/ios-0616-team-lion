@@ -17,7 +17,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     let shared = PlaceUserDataStore.sharedDataStore
     var loginButton: FBSDKLoginButton = FBSDKLoginButton()
     var activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-      
+    let datastore = PlaceUserDataStore.sharedDataStore
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 		
@@ -79,7 +79,12 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 			let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
 			FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
 				self.shared.facebookToFirebase()
-				
+                self.datastore.fetchPosts { (result) in
+                    print(result)
+                    var arr = [PlacePost]()
+                    arr.append(result)
+                    print("RESULTARRAY\(result)")
+                }
 				self.moveToMarket()
 				
 			}
@@ -95,6 +100,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 		let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
 		let tabBar = mainStoryboard.instantiateViewControllerWithIdentifier("tabBar") as! TabBarController
 		self.presentViewController(tabBar, animated:true, completion: nil)
+
 	}
 	
 	func setupScene() {

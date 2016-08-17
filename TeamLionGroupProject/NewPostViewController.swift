@@ -38,6 +38,9 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+
+		print("New Post VC View Did Load")
+
         itemDescriptionTextField.delegate = self
         itemDescriptionField.delegate = self
         
@@ -140,10 +143,6 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
                 let pic = self.picture.image!
                 
                 self.datastore.postPictureToDatabase(pic, title: self.itemNameField.text!, desciption: self.itemDescriptionField.text, price: self.itemPriceField.text!)
-                let array =  self.datastore.fetchPosts()
-                print("array from the view \(array)")
-                //CurrentUser.postings.append(post)
-                
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
             alertController.addAction(OKAction)
