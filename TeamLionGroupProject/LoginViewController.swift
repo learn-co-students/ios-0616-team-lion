@@ -78,12 +78,15 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         }else{
 			let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
 			FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
-				self.shared.facebookToFirebase()
+
+				self.shared.facebookToFirebase({ (result) in
+                    print("FROM LOGIN\(self.datastore.currentUser.name)")
+                    print("FROM LOGIN\(self.datastore.currentUser.picture)")
+                })
                 self.shared.currentUser.postings.removeAll()
+
                 self.datastore.fetchPosts { (result) in
-                    print(result)
                     self.shared.currentUser.postings.append(result)
-                    print("RESULTARRAY\(result)")
                 }
 				self.moveToMarket()
 				

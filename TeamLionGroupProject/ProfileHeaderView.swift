@@ -135,12 +135,13 @@ class ProfileHeaderView: UICollectionReusableView, FBSDKLoginButtonDelegate {
         print("friendsButton pressed")
     }
     
-    func setUpForUser(name: String, picture: NSURL) {
+    func setUpForUser(name: String, picture: UIImage) {
         self.usernameLabel.text = name
-        let data = NSData(contentsOfURL: picture)
-        let pic = UIImage(data: data!)
-        self.profilePic.image = pic
-        print("\n\n\n\n\n\n\n\(pic)")
+//        let data = NSData(contentsOfURL: picture)
+//        let pic = UIImage(data: data!)
+//        self.profilePic.image = pic
+        self.profilePic.image = picture
+        //print("\n\n\n\n\n\n\n\(pic)")
     }
   
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
