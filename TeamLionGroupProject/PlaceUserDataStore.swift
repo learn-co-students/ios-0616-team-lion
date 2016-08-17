@@ -41,49 +41,9 @@ class PlaceUserDataStore {
                 self.dataSnapshot.forEach({ (snap) in
                     //print(snap)
                 })
-
-                
-                
-
-                
                 
         })
     }
-    
-    
-    
-//    func fetchUserInfo(completion: (result: CurrentUser) -> Void){
-//        let uid = FIRAuth.auth()?.currentUser?.uid
-//        FIRDatabase.database().reference().child(uid!).observeEventType(.ChildAdded, withBlock: {(snapshot) in
-//            self.postsDataSnapshot.append(snapshot)
-//            guard let snapshotData = snapshot.value as? [String: String] else{  print("error getting snapshot"); return }
-//            //self.currentUser = CurrentUser( itemImages: [], itemTitle: "", itemDescription: "", price: 0)
-//            
-//            if let snapshotdataName = snapshotData["name"]{
-//                self.currentUser.name = snapshotdataName
-//                print("111POST\(self.currentUser.name)")
-//
-//            } else{  print("didnt get name"); return }
-//            
-//            
-//            let str = snapshotData["image"]
-//            //print(str)
-//            if str == str {
-//                //print("str:\(str)")
-//                guard let url = NSURL(string: str!) else {print("no image"); return}
-//                let data = NSData(contentsOfURL: url) //make sure your image in this url does exist, otherwise unwrap in a if let check
-//                self.currentUser.picture = UIImage(data: data!)
-//                
-//            }
-//            //self.currentUser.postings.append(post)
-//            completion(result: self.currentUser)
-//            print("222POST\(self.currentUser.name)")
-//            print("333POST\(self.currentUser.picture)")
-//            }, withCancelBlock: nil)
-//        // print("FUKKKKK\(self.currentUser.postings)")
-//        
-//        
-//    }
     
     
     func fetchPosts(completion: (result: PlacePost) -> Void){
@@ -127,8 +87,9 @@ class PlaceUserDataStore {
             let data = [CurrentUser.nameKey: nameKey,
                 CurrentUser.pictureKey: pictureKey]
             //self.ref.child(uid).setValue(data)
-            self.ref.child(uid).updateChildValues(data as [NSObject : AnyObject])
-            self.ref.child("\(uid)/friends").updateChildValues([friendName : friendPic])
+            self.ref.child("users/\(uid)").updateChildValues(data as [NSObject : AnyObject])
+            //self.ref.child(uid).updateChildValues(data as [NSObject : AnyObject])
+            self.ref.child("users/\(uid)/friends").updateChildValues([friendName : friendPic])
         }
         
     }
@@ -152,10 +113,10 @@ class PlaceUserDataStore {
                 if let user = FIRAuth.auth()?.currentUser {
                 let uid = user.uid
                     let postID = String(self.randomNumber)
-                    self.ref.child("\(uid)/posts/\(postID)").updateChildValues(["title": title])
-                    self.ref.child("\(uid)/posts/\(postID)").updateChildValues(["price": price])
-                    self.ref.child("\(uid)/posts/\(postID)").updateChildValues(["description": desciption])
-                    self.ref.child("\(uid)/posts/\(postID)").updateChildValues(["image": postPicURLString!])
+                    self.ref.child("users/\(uid)/posts/\(postID)").updateChildValues(["title": title])
+                    self.ref.child("users/\(uid)/posts/\(postID)").updateChildValues(["price": price])
+                    self.ref.child("users/\(uid)/posts/\(postID)").updateChildValues(["description": desciption])
+                    self.ref.child("users/\(uid)/posts/\(postID)").updateChildValues(["image": postPicURLString!])
                     
                     //self.ref.child("\(uid)/posts").updateChildValues([title : [postPicURLString!, desciption, price]])
 
