@@ -18,5 +18,4 @@ target 'TeamLionGroupProject' do
   pod 'SwiftyJSON', '~> 2.3'
   pod 'SendBirdSDK'
   pod 'JSQMessagesViewController'
-
 end
