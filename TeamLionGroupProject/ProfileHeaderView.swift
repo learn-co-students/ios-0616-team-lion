@@ -13,6 +13,7 @@ import FBSDKLoginKit
 protocol ProfileHeaderViewDelegate: class {
 	func friendsButtonPressed()
     func backToLoginScreen()
+    func newPostPressed()
 }
 
 
@@ -25,6 +26,7 @@ class ProfileHeaderView: UICollectionReusableView, FBSDKLoginButtonDelegate {
 	var followingCountLabel = UILabel()
 	var listingsCountLabel = UILabel()
 	var friendsButton = UIButton()
+    var newPostButton = UIButton()
 	
 	var username = "Username"
 	var currentListingsCount = 0
@@ -32,6 +34,8 @@ class ProfileHeaderView: UICollectionReusableView, FBSDKLoginButtonDelegate {
 	
 	let headerFont = "HelveticaNeue"
     var loginButton: FBSDKLoginButton = FBSDKLoginButton()
+    
+    let topFrame = UIImageView()
     
 
 	override func layoutSubviews() {
@@ -45,6 +49,26 @@ class ProfileHeaderView: UICollectionReusableView, FBSDKLoginButtonDelegate {
 	}
 	
 	func setupScene() {
+        
+        self.addSubview(topFrame)
+        topFrame.backgroundColor = UIColor.flatRedColor()
+        topFrame.snp_makeConstraints { (make) in
+            make.top.equalTo(self.snp_top)
+            make.width.equalTo(self.snp_width)
+            make.height.equalTo(self.snp_width).dividedBy(5.8)
+        }
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "Profile"
+        titleLabel.backgroundColor = UIColor.flatRedColor()
+        titleLabel.textColor = UIColor.flatWhiteColor()
+        titleLabel.font = UIFont(name: "Noteworthy", size: 28)
+        self.addSubview(titleLabel)
+        titleLabel.snp_makeConstraints { (make) in
+            make.bottom.equalTo(topFrame.snp_bottom).offset(-5)
+            make.centerX.equalTo(topFrame.snp_centerX)
+        }
+        
         self.addSubview(loginButton)
         loginButton.delegate = self
         loginButton.frame = CGRectMake(15, 30, 80, 30)
@@ -53,8 +77,8 @@ class ProfileHeaderView: UICollectionReusableView, FBSDKLoginButtonDelegate {
         
 		self.addSubview(usernameLabel)
 		usernameLabel.snp_makeConstraints { (make) in
-			make.centerX.equalTo(self.snp_centerX)
-			make.top.equalTo(self.snp_top).offset(20)
+			make.centerX.equalTo(topFrame.snp_centerX)
+			make.top.equalTo(topFrame.snp_top).offset(75)
 			make.width.equalTo(self.snp_width).dividedBy(2)
 			make.height.equalTo(self.snp_height).dividedBy(8)
 		}
@@ -90,7 +114,7 @@ class ProfileHeaderView: UICollectionReusableView, FBSDKLoginButtonDelegate {
 		followingCountLabel.text = "Following: \(currentFollowingsCount)"
 		followingCountLabel.textAlignment = .Right
 		followingCountLabel.font = UIFont(name: headerFont, size: followingCountLabel.font.pointSize)
-		followingCountLabel.textColor = UIColor.whiteColor()
+		followingCountLabel.textColor = UIColor.flatRedColor()
 		
 		self.addSubview(listingsCountLabel)
 		listingsCountLabel.snp_makeConstraints { (make) in
@@ -102,16 +126,16 @@ class ProfileHeaderView: UICollectionReusableView, FBSDKLoginButtonDelegate {
 		//listingsCountLabel.backgroundColor = UIColor.amethystColor()
 		listingsCountLabel.text = "Listings: \(currentListingsCount)"
 		listingsCountLabel.font = UIFont(name: headerFont, size: listingsCountLabel.font.pointSize)
-		listingsCountLabel.textColor = UIColor.whiteColor()
+		listingsCountLabel.textColor = UIColor.flatRedColor()
 		
 		self.addSubview(friendsButton)
 		friendsButton.snp_makeConstraints { (make) in
-			make.centerX.equalTo(snp_centerX)
+			make.centerX.equalTo(snp_centerX).offset(-80)
 			make.top.equalTo(followingCountLabel.snp_bottom).offset(5)
 			make.height.equalTo(self.snp_height).dividedBy(6)
 			make.width.equalTo(self.snp_width).dividedBy(2.5)
 		}
-		friendsButton.backgroundColor = UIColor.blackColor()
+		friendsButton.backgroundColor = UIColor.flatRedColor()
 		friendsButton.layer.masksToBounds = true
 		friendsButton.layer.cornerRadius = self.frame.height/12
 		friendsButton.layer.borderWidth = 1
@@ -120,8 +144,31 @@ class ProfileHeaderView: UICollectionReusableView, FBSDKLoginButtonDelegate {
 		friendsButton.setTitle("Friends", forState: .Normal)
 		friendsButton.titleLabel!.font = UIFont(name: headerFont, size: friendsButton.titleLabel!.font.pointSize)
 		friendsButton.addTarget(self, action: #selector(friendsButtonPressed), forControlEvents: .TouchUpInside)
+        
+        self.addSubview(newPostButton)
+        newPostButton.snp_makeConstraints { (make) in
+            make.centerX.equalTo(snp_centerX).offset(80)
+            make.top.equalTo(followingCountLabel.snp_bottom).offset(5)
+            make.height.equalTo(self.snp_height).dividedBy(6)
+            make.width.equalTo(self.snp_width).dividedBy(2.5)
+        }
+        newPostButton.backgroundColor = UIColor.flatRedColor()
+        newPostButton.layer.masksToBounds = true
+        newPostButton.layer.cornerRadius = self.frame.height/12
+        newPostButton.layer.borderWidth = 1
+        newPostButton.layer.borderColor = UIColor.whiteColor().CGColor
+        newPostButton.titleLabel?.textColor = UIColor.redColor()
+        newPostButton.setTitle("New Post", forState: .Normal)
+        newPostButton.titleLabel!.font = UIFont(name: headerFont, size: friendsButton.titleLabel!.font.pointSize)
+        newPostButton.addTarget(self, action: #selector(newPostPressed), forControlEvents: .TouchUpInside)
 	}
 	
+    func newPostPressed() {
+        
+        print("newPost pressed")
+        
+    }
+    
 	func backToLoginScreen() -> Bool{
             if (loginButton.touchInside){
             print("user logged out")

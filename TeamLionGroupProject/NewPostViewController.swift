@@ -185,6 +185,17 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
             make.height.equalTo(view.snp_width).dividedBy(7)
         }
         
+        let titleLabel = UILabel()
+        titleLabel.text = "New Post"
+        titleLabel.backgroundColor = UIColor.flatRedColor()
+        titleLabel.textColor = UIColor.flatWhiteColor()
+        titleLabel.font = UIFont(name: "Noteworthy", size: 22)
+        view.addSubview(titleLabel)
+        titleLabel.snp_makeConstraints { (make) in
+            make.bottom.equalTo(topFrame.snp_bottom).offset(-5)
+            make.centerX.equalTo(topFrame.snp_centerX)
+        }
+        
         view.addSubview(profilePic)
         profilePic.image = datastore.currentUser.picture
         profilePic.snp_makeConstraints { (make) in

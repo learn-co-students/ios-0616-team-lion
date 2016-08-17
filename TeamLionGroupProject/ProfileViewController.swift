@@ -38,9 +38,10 @@ let shared = PlaceUserDataStore.sharedDataStore
 		let blockDimension = (view.frame.width - 2)/3
 		layout.itemSize = CGSize(width: blockDimension, height: blockDimension)
 		layout.headerReferenceSize = CGSizeMake(0, CGRectGetHeight(view.frame)/3)
+        layout.sectionInset = UIEdgeInsets(top: 60, left: 0, bottom: 50, right: 0)
 		
 		collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
-		collectionView.backgroundColor = UIColor.darkGrayColor()
+		collectionView.backgroundColor = UIColor.flatWhiteColor()
 		collectionView.dataSource = self
 		collectionView.delegate = self
 		
@@ -120,8 +121,17 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 }
 
 extension ProfileViewController: ProfileHeaderViewDelegate {
+    
+    func newPostPressed(){
+        
+        print("new post from VC")
+        let newPostVC = NewPostViewController()
+        presentViewController(newPostVC, animated: true, completion: nil)
+    }
 	
 	func friendsButtonPressed() {
+        
+        print("friends from VC")
 	}
     
     func backToLoginScreen(){
