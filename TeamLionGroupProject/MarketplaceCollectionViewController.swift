@@ -120,6 +120,10 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         let newPostVC = NewPostViewController()
         presentViewController(newPostVC, animated: true, completion: nil)
     }
+    
+    func refresh(sender:AnyObject) {
+        // Code to refresh table view
+    }
 
     
     

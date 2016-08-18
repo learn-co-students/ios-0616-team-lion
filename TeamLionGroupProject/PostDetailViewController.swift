@@ -129,6 +129,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         fullnameFrame.placeholder = "Name"
         fullnameFrame.borderColor = UIColor.flatRedColor()
         fullnameFrame.activeColor = UIColor.flatRedColor()
+        fullnameFrame.userInteractionEnabled = false
         fullnameFrame.snp_makeConstraints { (make) in
             make.top.equalTo(profilePic.snp_top)
             make.left.equalTo(profilePic.snp_right).offset(5)
@@ -153,6 +154,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         titleFrame.placeholder = "Item Name"
         titleFrame.borderColor = UIColor.flatRedColor()
         titleFrame.activeColor = UIColor.flatRedColor()
+        titleFrame.userInteractionEnabled = false
         titleFrame.snp_makeConstraints { (make) in
             make.bottom.equalTo(profilePic.snp_bottom)
             make.left.equalTo(fullnameFrame.snp_left)
@@ -162,7 +164,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         
         scrollView.addSubview(titleLabel)
         titleLabel.text = itemTitle
-        titleLabel.textColor = UIColor.flatWhiteColor()
+        titleLabel.textColor = UIColor.flatRedColor()
         titleLabel.snp_makeConstraints { (make) in
             make.centerX.equalTo(titleFrame.snp_centerX)
             make.centerY.equalTo(titleFrame.snp_centerY).offset(10)
@@ -204,6 +206,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         }
         
         scrollView.addSubview(descriptionFrame)
+        descriptionFrame.userInteractionEnabled = false
         descriptionFrame.text = descriptionField.text
         descriptionFrame.textColor = UIColor.clearColor()
         descriptionFrame.placeholderColor = UIColor.flatRedColor()

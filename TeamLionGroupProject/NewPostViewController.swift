@@ -218,6 +218,7 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
             make.height.equalTo(profilePic.snp_width).multipliedBy(1.8)
         }
         view.addSubview(pictureFrame)
+        pictureFrame.userInteractionEnabled = false
         pictureFrame.snp_makeConstraints { (make) in
             make.bottom.equalTo(picFrame.snp_bottom).offset(-2)
             make.right.equalTo(picFrame.snp_right).offset(-2)

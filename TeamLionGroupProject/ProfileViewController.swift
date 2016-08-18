@@ -16,6 +16,7 @@ let shared = PlaceUserDataStore.sharedDataStore
     
     var name: String?
     var picture: NSURL?
+    var refreshControl = UIRefreshControl()
     
 	private let cellIdentifier = "Cell"
 	private let headerIdentifier = "header"
@@ -27,6 +28,10 @@ let shared = PlaceUserDataStore.sharedDataStore
 		
 		setupCollectionView()
         
+        refreshControl.attributedTitle = NSAttributedString(string: "Refresh")
+        refreshControl.tintColor = UIColor.flatRedColor()
+        refreshControl.addTarget(self, action:#selector(refresh) , forControlEvents: UIControlEvents.ValueChanged)
+        collectionView.addSubview(refreshControl)
 
 	}
 	
@@ -44,6 +49,7 @@ let shared = PlaceUserDataStore.sharedDataStore
 		collectionView.backgroundColor = UIColor.flatWhiteColor()
 		collectionView.dataSource = self
 		collectionView.delegate = self
+        collectionView.alwaysBounceVertical = true
 		
 		collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
 		collectionView.registerClass(ProfileHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerIdentifier)
@@ -141,6 +147,20 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
             self.showViewController(LoginViewController(), sender: nil)
 			
         }
+
+    }
+    
+    func refresh(sender:AnyObject) {
+        print ("Refreshing")
+        self.shared.currentUser.postings.removeAll()
+        
+        self.shared.fetchPosts { (result) in
+            self.shared.currentUser.postings.append(result)
+            self.collectionView.reloadData()
+            print(result)
+        }
+        
+        self.refreshControl.endRefreshing()
 
     }
 }

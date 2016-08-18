@@ -48,7 +48,7 @@ class PlaceUserDataStore {
     
     func fetchPosts(completion: (result: PlacePost) -> Void){
         let uid = FIRAuth.auth()?.currentUser?.uid
-        FIRDatabase.database().reference().child(uid!).child("posts").observeEventType(.ChildAdded, withBlock: {(snapshot) in
+        FIRDatabase.database().reference().child("users").child(uid!).child("posts").observeEventType(.ChildAdded, withBlock: {(snapshot) in
         self.postsDataSnapshot.append(snapshot)
             guard let snapshotData = snapshot.value as? [String: String] else{  print("error getting snapshot"); return }
 

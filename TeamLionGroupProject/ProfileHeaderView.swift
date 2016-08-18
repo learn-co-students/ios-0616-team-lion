@@ -45,6 +45,7 @@ class ProfileHeaderView: UICollectionReusableView, FBSDKLoginButtonDelegate {
         
         profilePic.image = self.shared.currentUser.picture
         currentListingsCount = self.shared.currentUser.postings.count
+        usernameLabel.text = self.shared.currentUser.name
 
 	}
 	
@@ -87,7 +88,7 @@ class ProfileHeaderView: UICollectionReusableView, FBSDKLoginButtonDelegate {
         //usernameLabel.text = LoginViewController.
 		usernameLabel.textAlignment = .Center
 		usernameLabel.font = UIFont(name: headerFont, size: usernameLabel.font.pointSize)
-		usernameLabel.textColor = UIColor.whiteColor()
+		usernameLabel.textColor = UIColor.flatRedColor()
 		
 		self.addSubview(profilePic)
 		profilePic.snp_makeConstraints { (make) in
@@ -130,7 +131,7 @@ class ProfileHeaderView: UICollectionReusableView, FBSDKLoginButtonDelegate {
 		
 		self.addSubview(friendsButton)
 		friendsButton.snp_makeConstraints { (make) in
-			make.centerX.equalTo(snp_centerX).offset(-80)
+			make.centerX.equalTo(snp_centerX)
 			make.top.equalTo(followingCountLabel.snp_bottom).offset(5)
 			make.height.equalTo(self.snp_height).dividedBy(6)
 			make.width.equalTo(self.snp_width).dividedBy(2.5)
@@ -145,22 +146,6 @@ class ProfileHeaderView: UICollectionReusableView, FBSDKLoginButtonDelegate {
 		friendsButton.titleLabel!.font = UIFont(name: headerFont, size: friendsButton.titleLabel!.font.pointSize)
 		friendsButton.addTarget(self, action: #selector(friendsButtonPressed), forControlEvents: .TouchUpInside)
         
-        self.addSubview(newPostButton)
-        newPostButton.snp_makeConstraints { (make) in
-            make.centerX.equalTo(snp_centerX).offset(80)
-            make.top.equalTo(followingCountLabel.snp_bottom).offset(5)
-            make.height.equalTo(self.snp_height).dividedBy(6)
-            make.width.equalTo(self.snp_width).dividedBy(2.5)
-        }
-        newPostButton.backgroundColor = UIColor.flatRedColor()
-        newPostButton.layer.masksToBounds = true
-        newPostButton.layer.cornerRadius = self.frame.height/12
-        newPostButton.layer.borderWidth = 1
-        newPostButton.layer.borderColor = UIColor.whiteColor().CGColor
-        newPostButton.titleLabel?.textColor = UIColor.redColor()
-        newPostButton.setTitle("New Post", forState: .Normal)
-        newPostButton.titleLabel!.font = UIFont(name: headerFont, size: friendsButton.titleLabel!.font.pointSize)
-        newPostButton.addTarget(self, action: #selector(newPostPressed), forControlEvents: .TouchUpInside)
 	}
 	
     func newPostPressed() {
