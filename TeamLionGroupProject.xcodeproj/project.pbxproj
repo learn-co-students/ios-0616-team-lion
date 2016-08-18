@@ -120,7 +120,7 @@
 				FFE94AB71D5A36F30036ED38 /* SegementPractice.swift */,
 				BE3FF0571D5D68A6001D2C9E /* PostDetailViewController.swift */,
 				1BD989021D6244C3004ED215 /* FriendsListController.swift */,
-				FF5C941F1D6651B6009EB219 /* OpenChat */,
+				FF5C94201D6651E4009EB219 /* OpenChatViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -144,14 +144,6 @@
 				DCF91F518C6C9AD294129C82 /* Pods-TeamLionGroupProject.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		FF5C941F1D6651B6009EB219 /* OpenChat */ = {
-			isa = PBXGroup;
-			children = (
-				FF5C94201D6651E4009EB219 /* OpenChatViewController.swift */,
-			);
-			name = OpenChat;
 			sourceTree = "<group>";
 		};
 		FFE94A881D53D9730036ED38 = {
