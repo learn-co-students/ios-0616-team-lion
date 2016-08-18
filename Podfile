@@ -19,5 +19,5 @@ target 'TeamLionGroupProject' do
   pod 'SendBirdSDK'
   pod 'JSQMessagesViewController'
   pod 'ChameleonFramework/Swift'
-  
+
 end
