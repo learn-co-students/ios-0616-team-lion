@@ -71,7 +71,6 @@ class PlaceUserDataStore {
             completion(result: post)
             print("222POST\(post)")
         }, withCancelBlock: nil)
-       // print("FUKKKKK\(self.currentUser.postings)")
 
 
     }
@@ -216,7 +215,7 @@ print("JSON FROM FRIEND FUNC\(json)")
             let friendsPost = blah["posts"]
             guard let dict = blah["posts"].dictionary else {print("nope"); return}
             print("database     \(blah)")
-            print("dictionary   \(dict)")
+            print("dictionay   \(dict)")
             
             var storePostsToArray = [String]()
 
