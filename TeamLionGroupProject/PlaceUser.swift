@@ -10,10 +10,10 @@ import Foundation
 import UIKit
 
 struct CurrentUser {
-    static var name: String?
-    static var picture: UIImage?
-    static var postings = [PlacePost]()
-    static var friendsList = [UsersFriend]()
+    var name: String?
+    var picture: UIImage?
+    var postings = [PlacePost]()
+    var friendsList = [UsersFriend]()
     
     
     //  static var friend: Friend

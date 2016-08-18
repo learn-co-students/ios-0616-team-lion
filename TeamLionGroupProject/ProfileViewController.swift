@@ -16,7 +16,7 @@ let shared = PlaceUserDataStore.sharedDataStore
     
     var name: String?
     var picture: NSURL?
-    
+    var refreshControl = UIRefreshControl()
     
 	private let cellIdentifier = "Cell"
 	private let headerIdentifier = "header"
@@ -27,6 +27,11 @@ let shared = PlaceUserDataStore.sharedDataStore
 		super.viewDidLoad()
 		
 		setupCollectionView()
+        
+        refreshControl.attributedTitle = NSAttributedString(string: "Refresh")
+        refreshControl.tintColor = UIColor.flatRedColor()
+        refreshControl.addTarget(self, action:#selector(refresh) , forControlEvents: UIControlEvents.ValueChanged)
+        collectionView.addSubview(refreshControl)
 
 	}
 	
@@ -38,14 +43,17 @@ let shared = PlaceUserDataStore.sharedDataStore
 		let blockDimension = (view.frame.width - 2)/3
 		layout.itemSize = CGSize(width: blockDimension, height: blockDimension)
 		layout.headerReferenceSize = CGSizeMake(0, CGRectGetHeight(view.frame)/3)
+        layout.sectionInset = UIEdgeInsets(top: 60, left: 0, bottom: 50, right: 0)
 		
 		collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
-		collectionView.backgroundColor = UIColor.darkGrayColor()
+		collectionView.backgroundColor = UIColor.flatWhiteColor()
 		collectionView.dataSource = self
 		collectionView.delegate = self
+        collectionView.alwaysBounceVertical = true
 		
 		collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
 		collectionView.registerClass(ProfileHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerIdentifier)
+        collectionView.registerClass(PostViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
 		
 		view.addSubview(collectionView)
 		
@@ -64,15 +72,32 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 	}
 	
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return 20
+		return self.shared.currentUser.postings.count
 	}
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath)
-		cell.backgroundColor = UIColor.peterRiverColor()
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! PostViewCell
+    
+		cell.postImage.image = shared.currentUser.postings[indexPath.item].itemImages[0]
 		
 		return cell
 	}
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        // handle tap events
+        print("You selected cell #\(indexPath.item)!")
+        let postDetailVC = PostDetailViewController()
+        
+        postDetailVC.itemTitle = shared.currentUser.postings[indexPath.item].itemTitle
+        postDetailVC.itemPrice = shared.currentUser.postings[indexPath.item].price
+        postDetailVC.descriptionField.text = shared.currentUser.postings[indexPath.item].itemDescription
+        postDetailVC.itemImage = shared.currentUser.postings[indexPath.item].itemImages[0]
+        postDetailVC.fullName = shared.currentUser.name
+        postDetailVC.profilePic.image = shared.currentUser.picture
+        
+        self.presentViewController(postDetailVC, animated: true, completion:  nil)
+    }
 	
 	func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
 		
@@ -80,7 +105,9 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 		case UICollectionElementKindSectionHeader:
 
 			var headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerIdentifier, forIndexPath: indexPath) as! ProfileHeaderView
-			//headerView.setUpForUser(self.name!, picture: picture!)
+            if let name  = self.shared.currentUser.name {
+            headerView.setUpForUser(name, picture: self.shared.currentUser.picture!)
+            }
 			headerView.delegate = self
             
             print("login - \(headerView.backToLoginScreen())")
@@ -100,8 +127,17 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 }
 
 extension ProfileViewController: ProfileHeaderViewDelegate {
+    
+    func newPostPressed(){
+        
+        print("new post from VC")
+        let newPostVC = NewPostViewController()
+        presentViewController(newPostVC, animated: true, completion: nil)
+    }
 	
 	func friendsButtonPressed() {
+        
+        print("friends from VC")
 	}
     
     func backToLoginScreen(){
@@ -111,6 +147,20 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
             self.showViewController(LoginViewController(), sender: nil)
 			
         }
+
+    }
+    
+    func refresh(sender:AnyObject) {
+        print ("Refreshing")
+        self.shared.currentUser.postings.removeAll()
+        
+        self.shared.fetchPosts { (result) in
+            self.shared.currentUser.postings.append(result)
+            self.collectionView.reloadData()
+            print(result)
+        }
+        
+        self.refreshControl.endRefreshing()
 
     }
 }

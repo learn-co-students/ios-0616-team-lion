@@ -38,6 +38,9 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+
+		print("New Post VC View Did Load")
+
         itemDescriptionTextField.delegate = self
         itemDescriptionField.delegate = self
         
@@ -140,10 +143,6 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
                 let pic = self.picture.image!
                 
                 self.datastore.postPictureToDatabase(pic, title: self.itemNameField.text!, desciption: self.itemDescriptionField.text, price: self.itemPriceField.text!)
-                let array =  self.datastore.fetchPosts()
-                print("array from the view \(array)")
-                //CurrentUser.postings.append(post)
-                
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
             alertController.addAction(OKAction)
@@ -176,20 +175,31 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
     
     func generateScene() {
         
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.flatWhiteColor()
         
         view.addSubview(topFrame)
-        topFrame.backgroundColor = UIColor.whiteColor()
+        topFrame.backgroundColor = UIColor.flatRedColor()
         topFrame.snp_makeConstraints { (make) in
             make.top.equalTo(view.snp_top)
             make.width.equalTo(view.snp_width)
             make.height.equalTo(view.snp_width).dividedBy(7)
         }
         
+        let titleLabel = UILabel()
+        titleLabel.text = "New Post"
+        titleLabel.backgroundColor = UIColor.flatRedColor()
+        titleLabel.textColor = UIColor.flatWhiteColor()
+        titleLabel.font = UIFont(name: "Noteworthy", size: 22)
+        view.addSubview(titleLabel)
+        titleLabel.snp_makeConstraints { (make) in
+            make.bottom.equalTo(topFrame.snp_bottom).offset(-5)
+            make.centerX.equalTo(topFrame.snp_centerX)
+        }
+        
         view.addSubview(profilePic)
-        profilePic.image = UIImage(named: "david")!.circle
+        profilePic.image = datastore.currentUser.picture
         profilePic.snp_makeConstraints { (make) in
-            make.top.equalTo(topFrame.snp_bottom).offset(70)
+            make.top.equalTo(topFrame.snp_bottom).offset(80)
             make.left.equalTo(view.snp_left).offset(20)
             make.width.equalTo(view.snp_width).dividedBy(4)
             make.height.equalTo(view.snp_width).dividedBy(4)
@@ -197,17 +207,18 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         
         view.addSubview(picFrame)
         picFrame.text = " "
-        picFrame.placeholderColor = UIColor.peterRiverColor()
+        picFrame.placeholderColor = UIColor.flatRedColor()
         picFrame.placeholder = "Picture"
-        picFrame.borderColor = UIColor.peterRiverColor()
-        picFrame.activeColor = UIColor.peterRiverColor()
+        picFrame.borderColor = UIColor.flatRedColor()
+        picFrame.activeColor = UIColor.flatRedColor()
         picFrame.snp_makeConstraints { (make) in
-            make.bottom.equalTo(profilePic.snp_bottom).offset(-3)
+            make.bottom.equalTo(profilePic.snp_bottom)
             make.right.equalTo(view.snp_right).offset(-40)
             make.width.equalTo(profilePic.snp_width).multipliedBy(1.75)
             make.height.equalTo(profilePic.snp_width).multipliedBy(1.8)
         }
         view.addSubview(pictureFrame)
+        pictureFrame.userInteractionEnabled = false
         pictureFrame.snp_makeConstraints { (make) in
             make.bottom.equalTo(picFrame.snp_bottom).offset(-2)
             make.right.equalTo(picFrame.snp_right).offset(-2)
@@ -217,7 +228,7 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         
         view.addSubview(takePictureButton)
         takePictureButton.setImage(UIImage(named:"cameraIcon"), forState: .Normal)
-        takePictureButton.setTitleColor(UIColor.peterRiverColor(), forState: .Normal)
+        takePictureButton.setTitleColor(UIColor.flatRedColor(), forState: .Normal)
         takePictureButton.addTarget(self, action: #selector(takePictureButtonPressed), forControlEvents: .TouchUpInside)
         takePictureButton.snp_makeConstraints { (make) in
             make.centerY.equalTo(pictureFrame.snp_centerY)
@@ -226,8 +237,8 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         
         view.addSubview(cancelButton)
         cancelButton.setStyle(DynamicButtonStyle.Rewind, animated: true)
-        cancelButton.strokeColor = UIColor.peterRiverColor()
-        cancelButton.highlightStokeColor = UIColor.redColor()
+        cancelButton.strokeColor = UIColor.flatWhiteColor()
+        cancelButton.highlightStokeColor = UIColor.flatWatermelonColor()
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), forControlEvents: .TouchUpInside)
         cancelButton.snp_makeConstraints { (make) in
             make.centerX.equalTo(topFrame.snp_centerX).offset(-160)
@@ -239,9 +250,9 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         
         view.addSubview(itemNameField)
         itemNameField.placeholder = "Item Name"
-        itemNameField.borderColor = UIColor.redColor()
-        itemNameField.activeColor = UIColor.peterRiverColor()
-        itemNameField.textColor = UIColor.blackColor()
+        itemNameField.borderColor = UIColor.flatRedColor()
+        itemNameField.activeColor = UIColor.flatRedColor()
+        itemNameField.textColor = UIColor.flatRedColor()
         itemNameField.snp_makeConstraints { (make) in
             make.top.equalTo(profilePic.snp_bottom).offset(4)
             make.left.equalTo(view.snp_left).offset(20)
@@ -252,9 +263,9 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         
         view.addSubview(itemPriceField)
         itemPriceField.placeholder = "Price"
-        itemPriceField.borderColor = UIColor.redColor()
-        itemPriceField.activeColor = UIColor.peterRiverColor()
-        itemPriceField.textColor = UIColor.blackColor()
+        itemPriceField.borderColor = UIColor.flatRedColor()
+        itemPriceField.activeColor = UIColor.flatRedColor()
+        itemPriceField.textColor = UIColor.flatRedColor()
         itemPriceField.keyboardType = UIKeyboardType.NumberPad
         itemPriceField.snp_makeConstraints { (make) in
             make.left.equalTo(itemNameField.snp_right).offset(2)
@@ -265,10 +276,10 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         
         view.addSubview(itemDescriptionTextField)
         itemDescriptionTextField.text = " "
-        itemDescriptionTextField.placeholderColor = UIColor.peterRiverColor()
+        itemDescriptionTextField.placeholderColor = UIColor.flatRedColor()
         itemDescriptionTextField.placeholder = "Description"
-        itemDescriptionTextField.borderColor = UIColor.peterRiverColor()
-        itemDescriptionTextField.activeColor = UIColor.peterRiverColor()
+        itemDescriptionTextField.borderColor = UIColor.flatRedColor()
+        itemDescriptionTextField.activeColor = UIColor.flatRedColor()
         itemDescriptionTextField.snp_makeConstraints { (make) in
             make.top.equalTo(itemNameField.snp_bottom).offset(6)
             make.left.equalTo(itemNameField.snp_left)
@@ -277,6 +288,7 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         }
         
         view.addSubview(itemDescriptionField)
+        itemDescriptionField.backgroundColor = UIColor.flatWhiteColor()
         itemDescriptionField.font = UIFont(name: "Helvetica", size: 20)
         itemDescriptionField.snp_makeConstraints { (make) in
             make.top.equalTo(itemDescriptionTextField.snp_top).offset(20)
@@ -288,7 +300,7 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         view.addSubview(roundSquare)
         roundSquare.image = UIImage(named: "roundSquare")
         roundSquare.snp_makeConstraints { (make) in
-            make.top.equalTo(itemDescriptionTextField.snp_bottom).offset(15)
+            make.top.equalTo(itemDescriptionTextField.snp_bottom).offset(10)
             make.centerX.equalTo(itemDescriptionTextField.snp_centerX)
             make.width.equalTo(view.snp_width).dividedBy(4)
             make.height.equalTo(view.snp_width).dividedBy(4)
@@ -296,8 +308,8 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         
         view.addSubview(postItemButton)
         postItemButton.setStyle(DynamicButtonStyle.CheckMark, animated: true)
-        postItemButton.strokeColor = UIColor.peterRiverColor()
-        postItemButton.highlightStokeColor = UIColor.greenSeaColor()
+        postItemButton.strokeColor = UIColor.flatRedColor()
+        postItemButton.highlightStokeColor = UIColor.flatMintColor()
         postItemButton.lineWidth = 4
         postItemButton.addTarget(self, action: #selector(sellItButtonPressed), forControlEvents: .TouchUpInside)
         postItemButton.snp_makeConstraints { (make) in

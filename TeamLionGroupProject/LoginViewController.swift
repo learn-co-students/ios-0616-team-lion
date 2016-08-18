@@ -17,7 +17,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     let shared = PlaceUserDataStore.sharedDataStore
     var loginButton: FBSDKLoginButton = FBSDKLoginButton()
     var activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-      
+    let datastore = PlaceUserDataStore.sharedDataStore
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 		
@@ -72,14 +72,22 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         self.loginButton.hidden = true
         if(error != nil){
             self.loginButton.hidden = false
-
         }else if(result.isCancelled){
             self.loginButton.hidden = false
         }else{
 			let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
 			FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
-				self.shared.facebookToFirebase()
-				
+
+				self.shared.facebookToFirebase({ (result) in
+                    print("FROM LOGIN\(self.datastore.currentUser.name)")
+                    print("FROM LOGIN\(self.datastore.currentUser.picture)")
+                })
+                self.shared.currentUser.postings.removeAll()
+
+                self.datastore.fetchPosts { (result) in
+                    self.shared.currentUser.postings.append(result)
+                    print("POOOOOOST\(self.shared.currentUser.postings)")
+                }
 				self.moveToMarket()
 				
 			}
@@ -95,6 +103,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 		let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
 		let tabBar = mainStoryboard.instantiateViewControllerWithIdentifier("tabBar") as! TabBarController
 		self.presentViewController(tabBar, animated:true, completion: nil)
+
 	}
 	
 	func setupScene() {

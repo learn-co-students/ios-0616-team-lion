@@ -7,17 +7,21 @@
 //
 
 import UIKit
+import SnapKit
+import ChameleonFramework
+import DynamicButton
 
 class MarketplaceCollectionViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UINavigationBarDelegate {
-    
+    var shared = PlaceUserDataStore.sharedDataStore
     var collectionView: UICollectionView!
+    let topFrame = UIImageView()
     var postArray = [post1, post2, post3, post4, post5, post6, post7, post8, post9, post10, post11, post12]
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
         setUpCollectionCells()
-        setUpNavigationBar()
+        generateScene()
 
     }
     
@@ -68,36 +72,59 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "basicCell")
-        collectionView.backgroundColor = UIColor.whiteColor()
+        collectionView?.registerClass(PostViewCell.self, forCellWithReuseIdentifier: "basicCell")
+        collectionView.backgroundColor = UIColor.flatWhiteColor()
         self.view.addSubview(collectionView)
         
-        
-        collectionView?.registerClass(PostViewCell.self, forCellWithReuseIdentifier: "basicCell")
-        
     }
     
-    func setUpNavigationBar() {
+    func generateScene() {
         
-        let navigationBar = UINavigationBar(frame: CGRectMake(0, 0, view.frame.size.width, 64))
+        view.backgroundColor = UIColor.flatWhiteColor()
         
-        view.addSubview(navigationBar)
-        navigationBar.backgroundColor = UIColor.whiteColor()
-        navigationBar.delegate = self
+        view.addSubview(topFrame)
+        topFrame.backgroundColor = UIColor.flatRedColor()
+        topFrame.snp_makeConstraints { (make) in
+            make.top.equalTo(view.snp_top)
+            make.width.equalTo(view.snp_width)
+            make.height.equalTo(view.snp_width).dividedBy(5.8)
+        }
         
-        let navItem = UINavigationItem()
-        let newPost = UIBarButtonItem(image: UIImage(named: "NewPost"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(MarketplaceCollectionViewController.newPostButtonTapped(_:)))
-        navItem.title = "Place"
-        navItem.rightBarButtonItem = newPost
+        let titleLabel = UILabel()
+        titleLabel.text = "Place"
+        titleLabel.backgroundColor = UIColor.flatRedColor()
+        titleLabel.textColor = UIColor.flatWhiteColor()
+        titleLabel.font = UIFont(name: "Noteworthy", size: 28)
+        view.addSubview(titleLabel)
+        titleLabel.snp_makeConstraints { (make) in
+            make.bottom.equalTo(topFrame.snp_bottom).offset(-5)
+            make.centerX.equalTo(topFrame.snp_centerX)
+        }
         
-        navigationBar.items = [navItem]
-        
+        //TEMPORARY
+        let tempNewPostButton = DynamicButton()
+        tempNewPostButton.setStyle(DynamicButtonStyle.Plus, animated: true)
+        tempNewPostButton.strokeColor = UIColor.flatWhiteColor()
+        tempNewPostButton.highlightStokeColor = UIColor.flatWatermelonColor()
+        tempNewPostButton.addTarget(self, action: #selector(newPostPressed), forControlEvents: .TouchUpInside)
+        view.addSubview(tempNewPostButton)
+        tempNewPostButton.snp_makeConstraints { (make) in
+            make.bottom.equalTo(topFrame.snp_bottom).offset(-5)
+            make.right.equalTo(topFrame.snp_right).offset(-20)
+        }
     }
     
-    func newPostButtonTapped(sender: UIBarButtonItem) {
-
-        self.presentViewController(NewPostViewController(), animated: true, completion: nil)
-
+    func newPostPressed(){
+        
+        print("new post from VC")
+        let newPostVC = NewPostViewController()
+        presentViewController(newPostVC, animated: true, completion: nil)
     }
+    
+    func refresh(sender:AnyObject) {
+        // Code to refresh table view
+    }
+
     
     
 }
