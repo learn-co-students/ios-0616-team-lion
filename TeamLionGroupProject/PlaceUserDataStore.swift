@@ -23,7 +23,7 @@ class PlaceUserDataStore {
     var refHandle: FIRDatabaseHandle!
     let randomNumber = arc4random_uniform(5000000)
     var currentUser = CurrentUser()
-    
+    var dictionaryOfPosts = [String: String]()
     static let sharedDataStore = PlaceUserDataStore()
     private init(){}
     
@@ -36,12 +36,9 @@ class PlaceUserDataStore {
             self.ref = FIRDatabase.database().reference()
             refHandle = self.ref.child(uid!).observeEventType(.ChildAdded, withBlock: {snapshot in
             self.dataSnapshot.append(snapshot)
-            //guard let snapshotData = snapshot.value!["name"] as? [String: String] else{  print("error getting snapshot"); return }
-                
-                self.dataSnapshot.forEach({ (snap) in
-                    //print(snap)
-                })
-                
+            guard let snapshotData = snapshot.value!["user"] as? [String: String] else{  print("error getting snapshot"); return }
+                print("SNAPSHOT\(snapshotData)")
+
         })
     }
     
@@ -64,17 +61,16 @@ class PlaceUserDataStore {
             if str == str {
                 //print("str:\(str)")
             guard let url = NSURL(string: str!) else {print("no image"); return}
-            let data = NSData(contentsOfURL: url) //make sure your image in this url does exist, otherwise unwrap in a if let check
-            post.itemImages.append(UIImage(data: data!)!)
+                guard let data = NSData(contentsOfURL: url)else{return} //make sure your image in this url does exist, otherwise unwrap in a if let check
+            post.itemImages.append(UIImage(data: data)!)
 
             }
             post.itemTitle = snapshotData["title"]!
             post.price = Int(snapshotData["price"]!)!
             //self.currentUser.postings.append(post)
             completion(result: post)
-            //print("222POST\(post)")
+            print("222POST\(post)")
         }, withCancelBlock: nil)
-       // print("FUKKKKK\(self.currentUser.postings)")
 
 
     }
@@ -108,15 +104,19 @@ class PlaceUserDataStore {
             } else {
                 // Metadata contains file metadata such as size, content-type, and download URL.
                 let downloadURL = metadata?.downloadURL()
+                
                 let postPicURLString = downloadURL?.absoluteString
                 let picID = String(self.randomNumber)
                 if let user = FIRAuth.auth()?.currentUser {
-                let uid = user.uid
-                    let postID = String(self.randomNumber)
-                    self.ref.child("users/\(uid)/posts/\(postID)").updateChildValues(["title": title])
-                    self.ref.child("users/\(uid)/posts/\(postID)").updateChildValues(["price": price])
-                    self.ref.child("users/\(uid)/posts/\(postID)").updateChildValues(["description": desciption])
-                    self.ref.child("users/\(uid)/posts/\(postID)").updateChildValues(["image": postPicURLString!])
+                    let uid = user.uid
+                    let userRef = self.ref.child("users/\(uid)/posts")
+                    let postRef = userRef.childByAutoId()
+                    print(postRef)
+//                    let postID = String(self.randomNumber)
+                    postRef.updateChildValues(["title": title])
+                    postRef.updateChildValues(["price": price])
+                    postRef.updateChildValues(["description": desciption])
+                    postRef.updateChildValues(["image": postPicURLString!])
                     
                     //self.ref.child("\(uid)/posts").updateChildValues([title : [postPicURLString!, desciption, price]])
 
@@ -146,7 +146,7 @@ class PlaceUserDataStore {
                 let storage = FIRStorage.storage()
                 let storageRef = storage.referenceForURL("gs://teamliongroupproject.appspot.com/")
                 let id = user.uid
-                let imageRef = storageRef.child("users/userID/profile/profilePic\(id).png")
+                let imageRef = storageRef.child("users/\(id)/profile/profilePic\(id).png")
                 let uploadTask = imageRef.putData(data!, metadata: nil) { metadata, error in
                     if (error != nil) {
                         print("did NOT upload picture to firebase")
@@ -181,7 +181,10 @@ class PlaceUserDataStore {
         fbRequestFriends.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
             if error == nil {
                 let json = JSON(result)
-
+print("JSON FROM FRIEND FUNC\(json)")
+                self.fetchUser({ (result) in
+                    print("whatever\(result)")
+                })
                 guard let arrayOfUsers = json["data"].array else { return }
                 for dictionary in arrayOfUsers {
                     let friendsName = String(dictionary["name"])
@@ -195,6 +198,39 @@ class PlaceUserDataStore {
         }
     }
 
+    
+
+    
+    
+    
+    
+    
+    
+    func fetchUser(completion: (result: String) -> Void){
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        FIRDatabase.database().reference().child("users").observeEventType(.ChildAdded, withBlock: {(snapshot) in
+            self.postsDataSnapshot.append(snapshot)
+            let blah  = JSON(snapshot.value!)
+
+            let friendsPost = blah["posts"]
+            guard let dict = blah["posts"].dictionary else {print("nope"); return}
+            print("database     \(blah)")
+            print("dictionay   \(dict)")
+            
+            var storePostsToArray = [String]()
+
+            completion(result: uid!)
+            print("222 \(uid)")
+            }, withCancelBlock: nil)
+        
+    }
+    
+    
+    
+    
+    
+    
+    
     
     
     

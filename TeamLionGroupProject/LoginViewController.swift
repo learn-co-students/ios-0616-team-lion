@@ -72,7 +72,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         self.loginButton.hidden = true
         if(error != nil){
             self.loginButton.hidden = false
-
         }else if(result.isCancelled){
             self.loginButton.hidden = false
         }else{
@@ -87,6 +86,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
                 self.datastore.fetchPosts { (result) in
                     self.shared.currentUser.postings.append(result)
+                    print("POOOOOOST\(self.shared.currentUser.postings)")
                 }
 				self.moveToMarket()
 				
