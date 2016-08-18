@@ -1,4 +1,19 @@
 PODS:
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
+    - AFNetworking/NSURLSession
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -60,6 +75,7 @@ PODS:
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
+  - AFNetworking
   - CCTextFieldEffects
   - DynamicButton (~> 2.1.0)
   - FBSDKCoreKit
@@ -74,6 +90,7 @@ DEPENDENCIES:
   - SwiftyJSON (~> 2.3)
 
 SPEC CHECKSUMS:
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   CCTextFieldEffects: e4203c0518bb7156b9d0e64acccc7580d75b0cd4
   DynamicButton: 08c809fdee3c4feb34a20beeba64c069a529d176
@@ -96,6 +113,6 @@ SPEC CHECKSUMS:
   SnapKit: 0dd2fd157330f1ea11fd84da13e6be8a7a22bae0
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 245fe7a853d8cebacfdfbbe0de83846b10677d89
+PODFILE CHECKSUM: 7ba8d831b1ab7dc1b6ae329b449387109bfcf23c
 
 COCOAPODS: 1.0.1
