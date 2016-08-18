@@ -26,7 +26,7 @@ class PlaceUserDataStore {
     var dictionaryOfPosts = [String: String]()
     static let sharedDataStore = PlaceUserDataStore()
     private init(){}
-    
+    var postRef = FIRDatabaseReference()
     deinit{
         self.ref.removeObserverWithHandle(self.refHandle)
     }
@@ -97,7 +97,8 @@ class PlaceUserDataStore {
         
         let storage = FIRStorage.storage()
         let storageRef = storage.referenceForURL("gs://teamliongroupproject.appspot.com/")
-        let postImageRef = storageRef.child("users/userID/posts/\(randomNumber).png")
+        
+        let postImageRef = storageRef.child("users/userID/posts/\(self.postRef).png")
         let uploadTask = postImageRef.putData(postImageData, metadata: nil) { metadata, error in
             if (error != nil) {
                 print("did NOT upload picture to firebase")
@@ -110,13 +111,13 @@ class PlaceUserDataStore {
                 if let user = FIRAuth.auth()?.currentUser {
                     let uid = user.uid
                     let userRef = self.ref.child("users/\(uid)/posts")
-                    let postRef = userRef.childByAutoId()
-                    print(postRef)
+                    self.postRef = userRef.childByAutoId()
+                    print(self.postRef)
 //                    let postID = String(self.randomNumber)
-                    postRef.updateChildValues(["title": title])
-                    postRef.updateChildValues(["price": price])
-                    postRef.updateChildValues(["description": desciption])
-                    postRef.updateChildValues(["image": postPicURLString!])
+                    self.postRef.updateChildValues(["title": title])
+                    self.postRef.updateChildValues(["price": price])
+                    self.postRef.updateChildValues(["description": desciption])
+                    self.postRef.updateChildValues(["image": postPicURLString!])
                     
                     //self.ref.child("\(uid)/posts").updateChildValues([title : [postPicURLString!, desciption, price]])
 
@@ -146,6 +147,7 @@ class PlaceUserDataStore {
                 let storage = FIRStorage.storage()
                 let storageRef = storage.referenceForURL("gs://teamliongroupproject.appspot.com/")
                 let id = user.uid
+                
                 let imageRef = storageRef.child("users/\(id)/profile/profilePic\(id).png")
                 let uploadTask = imageRef.putData(data!, metadata: nil) { metadata, error in
                     if (error != nil) {
@@ -228,7 +230,24 @@ print("JSON FROM FRIEND FUNC\(json)")
     
     
     
+    func testing(){
     
+        let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
+        FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
+            
+            self.facebookToFirebase({ (result) in
+
+            })
+            self.currentUser.postings.removeAll()
+            
+            self.fetchPosts { (result) in
+                self.currentUser.postings.append(result)
+            }
+            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let tabBar = mainStoryboard.instantiateViewControllerWithIdentifier("tabBar") as! TabBarController
+            //self.presentViewController(tabBar, animated:true, completion: nil)
+        }
+    }
     
     
     
