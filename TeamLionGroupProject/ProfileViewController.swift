@@ -34,7 +34,17 @@ let shared = PlaceUserDataStore.sharedDataStore
         collectionView.addSubview(refreshControl)
 
 	}
-	
+    
+    override func viewWillAppear(animated: Bool) {
+        self.shared.currentUser.postings.removeAll()
+        
+        self.shared.fetchPosts { (result) in
+            self.shared.currentUser.postings.append(result)
+            self.collectionView.reloadData()
+            print(result)
+        }
+    }
+
 	func setupCollectionView() {
 		
 		let layout = UICollectionViewFlowLayout()
@@ -164,4 +174,3 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
 
     }
 }
-

@@ -114,8 +114,13 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         
         
         scrollView.addSubview(profilePic)
-        profilePic.backgroundColor = UIColor.flatRedColor()
+        profilePic.backgroundColor = UIColor.flatWhiteColor()
         profilePic.image?.circle
+        profilePic.layer.borderWidth = 1
+        profilePic.layer.masksToBounds = false
+        profilePic.layer.borderColor = UIColor.flatRedColor().CGColor
+        profilePic.layer.cornerRadius = profilePic.frame.height/2
+        profilePic.clipsToBounds = true
         profilePic.snp_makeConstraints { (make) in
             make.top.equalTo(scrollView.snp_top).offset(20)
             make.left.equalTo(view.snp_left).offset(20)

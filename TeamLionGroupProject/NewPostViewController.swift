@@ -206,6 +206,8 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         }
         
         view.addSubview(picFrame)
+        picFrame.userInteractionEnabled = false
+        
         picFrame.text = " "
         picFrame.placeholderColor = UIColor.flatRedColor()
         picFrame.placeholder = "Picture"
