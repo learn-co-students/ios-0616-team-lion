@@ -23,6 +23,7 @@
 		BEC67E4B1D53E0F900D2D030 /* PostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E4A1D53E0F900D2D030 /* PostViewCell.swift */; };
 		BEC67E4D1D53E13A00D2D030 /* PlaceUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E4C1D53E13A00D2D030 /* PlaceUser.swift */; };
 		BEC67E4F1D53E14700D2D030 /* PlacePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E4E1D53E14700D2D030 /* PlacePost.swift */; };
+		FF5C94211D6651E4009EB219 /* OpenChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5C94201D6651E4009EB219 /* OpenChatViewController.swift */; };
 		FFE94A951D53D9730036ED38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94A941D53D9730036ED38 /* AppDelegate.swift */; };
 		FFE94A971D53D9730036ED38 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94A961D53D9730036ED38 /* LoginViewController.swift */; };
 		FFE94A9A1D53D9730036ED38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFE94A981D53D9730036ED38 /* Main.storyboard */; };
@@ -56,6 +57,7 @@
 		BEC67E4E1D53E14700D2D030 /* PlacePost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacePost.swift; sourceTree = "<group>"; };
 		DCF91F518C6C9AD294129C82 /* Pods-TeamLionGroupProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamLionGroupProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeamLionGroupProject/Pods-TeamLionGroupProject.release.xcconfig"; sourceTree = "<group>"; };
 		FF5C93851D64A5D2009EB219 /* JSQMessagesViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSQMessagesViewController.framework; path = "../../../Library/Developer/Xcode/DerivedData/TeamLionGroupProject-bqdmmrzpcukwogbkobqbozslftkg/Build/Products/Debug-iphonesimulator/JSQMessagesViewController/JSQMessagesViewController.framework"; sourceTree = "<group>"; };
+		FF5C94201D6651E4009EB219 /* OpenChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenChatViewController.swift; sourceTree = "<group>"; };
 		FFE94A911D53D9730036ED38 /* TeamLionGroupProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamLionGroupProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFE94A941D53D9730036ED38 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFE94A961D53D9730036ED38 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				FFE94AB71D5A36F30036ED38 /* SegementPractice.swift */,
 				BE3FF0571D5D68A6001D2C9E /* PostDetailViewController.swift */,
 				1BD989021D6244C3004ED215 /* FriendsListController.swift */,
+				FF5C941F1D6651B6009EB219 /* OpenChat */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -141,6 +144,14 @@
 				DCF91F518C6C9AD294129C82 /* Pods-TeamLionGroupProject.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		FF5C941F1D6651B6009EB219 /* OpenChat */ = {
+			isa = PBXGroup;
+			children = (
+				FF5C94201D6651E4009EB219 /* OpenChatViewController.swift */,
+			);
+			name = OpenChat;
 			sourceTree = "<group>";
 		};
 		FFE94A881D53D9730036ED38 = {
@@ -222,7 +233,7 @@
 				TargetAttributes = {
 					FFE94A901D53D9730036ED38 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = RP6364VX67;
+						DevelopmentTeam = L2YWSL9AVF;
 					};
 				};
 			};
@@ -317,6 +328,7 @@
 				BEC67E451D53DFCD00D2D030 /* NewPostViewController.swift in Sources */,
 				FFE94AA71D54E4970036ED38 /* TestData.swift in Sources */,
 				FFE94AB81D5A36F30036ED38 /* SegementPractice.swift in Sources */,
+				FF5C94211D6651E4009EB219 /* OpenChatViewController.swift in Sources */,
 				BEC67E4B1D53E0F900D2D030 /* PostViewCell.swift in Sources */,
 				FFE94AAC1D54E7320036ED38 /* UIImageExtension.swift in Sources */,
 				BEC67E4F1D53E14700D2D030 /* PlacePost.swift in Sources */,
