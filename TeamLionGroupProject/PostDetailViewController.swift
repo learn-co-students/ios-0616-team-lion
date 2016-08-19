@@ -31,11 +31,11 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
     let titleFrame = ChisatoTextField()
     let descriptionFrame = ChisatoTextField()
     
-    var fullName: String!
+    var fullName: String?
     var itemTitle: String?
-    var itemDescription: String!
-    var itemPrice: Int!
-    var itemImage: UIImage!
+    var itemDescription: String?
+    var itemPrice: Int?
+    var itemImage: UIImage?
     
     var totalHeight: CGFloat = 0
     
@@ -44,6 +44,8 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         
         view.backgroundColor = UIColor.flatWhiteColor()
         generateScene()
+        print(fullName)
+        print(fullNameLabel.text)
     }
     
     
