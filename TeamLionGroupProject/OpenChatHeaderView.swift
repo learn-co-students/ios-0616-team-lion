@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol OpenChatHeaderViewDelegate: class {
-	
+	func backButtonTapped()
 }
 
 
@@ -48,6 +48,8 @@ class OpenChatHeaderView: UICollectionReusableView {
 		
 		
 	}
+	
+	//Delegate functions
 	
 	func backButtonTapped() {
 		

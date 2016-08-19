@@ -310,11 +310,16 @@ extension OpenChatViewController: UIImagePickerControllerDelegate, UINavigationC
 			messages.append(JSQMessage(senderId: senderId, displayName: senderDisplayName, media: videoItem))
 			sendMedia(nil, video: video)
 		}
-		
-		
 		self.dismissViewControllerAnimated(true, completion: nil)
 		collectionView.reloadData()
-		
-		
 	}
 }
+
+extension OpenChatViewController: OpenChatHeaderViewDelegate {
+	
+	func backButtonTapped() {
+		tabBarController?.selectedIndex = 0
+	}
+}
+
+
