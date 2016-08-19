@@ -22,7 +22,31 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
     
         setUpCollectionCells()
         generateScene()
+        
+        backgroundThread(background: {
+            self.shared.currentUser.postings.removeAll()
+            
+            self.shared.fetchPosts { (result) in
+                self.shared.currentUser.postings.append(result)
+                self.collectionView.reloadData()
+            }
+            },
+                         completion: {
+                            
+        })
+        
 
+    }
+    
+    func backgroundThread(delay: Double = 0.0, background: (() -> Void)? = nil, completion: (() -> Void)? = nil) {
+        dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue), 0)) {
+            if(background != nil){ background!(); }
+            
+            let popTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)))
+            dispatch_after(popTime, dispatch_get_main_queue()) {
+                if(completion != nil){ completion!(); }
+            }
+        }
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
