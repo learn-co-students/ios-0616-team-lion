@@ -98,7 +98,7 @@ class PlaceUserDataStore {
         let storage = FIRStorage.storage()
         let storageRef = storage.referenceForURL("gs://teamliongroupproject.appspot.com/")
         
-        let postImageRef = storageRef.child("users/userID/posts/\(self.postRef).png")
+        let postImageRef = storageRef.child("users/userID/posts/\(self.postRef).jpeg")
         let uploadTask = postImageRef.putData(postImageData, metadata: nil) { metadata, error in
             if (error != nil) {
                 print("did NOT upload picture to firebase")

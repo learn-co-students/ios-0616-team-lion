@@ -9,6 +9,8 @@
 import UIKit
 import FBSDKCoreKit
 import FirebaseAuth
+import FBSDKLoginKit
+
 
 class ProfileViewController: UIViewController {
 let shared = PlaceUserDataStore.sharedDataStore
@@ -17,6 +19,8 @@ let shared = PlaceUserDataStore.sharedDataStore
     var name: String?
     var picture: NSURL?
     var refreshControl = UIRefreshControl()
+    var loginButton: FBSDKLoginButton = FBSDKLoginButton()
+    let topFrame = UIImageView()
     
 	private let cellIdentifier = "Cell"
 	private let headerIdentifier = "header"
@@ -27,11 +31,8 @@ let shared = PlaceUserDataStore.sharedDataStore
 		super.viewDidLoad()
 		
 		setupCollectionView()
+        setupScene()
         
-        refreshControl.attributedTitle = NSAttributedString(string: "Refresh")
-        refreshControl.tintColor = UIColor.flatRedColor()
-        refreshControl.addTarget(self, action:#selector(refresh) , forControlEvents: UIControlEvents.ValueChanged)
-        collectionView.addSubview(refreshControl)
 
 	}
     
@@ -49,6 +50,32 @@ let shared = PlaceUserDataStore.sharedDataStore
                 if(completion != nil){ completion!(); }
             }
         }
+    }
+    
+    func setupScene() {
+        view.addSubview(topFrame)
+        topFrame.backgroundColor = UIColor.flatRedColor()
+        topFrame.snp_makeConstraints { (make) in
+            make.top.equalTo(view.snp_top)
+            make.width.equalTo(view.snp_width)
+            make.height.equalTo(view.snp_width).dividedBy(5.8)
+        }
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "Profile"
+        titleLabel.backgroundColor = UIColor.flatRedColor()
+        titleLabel.textColor = UIColor.flatWhiteColor()
+        titleLabel.font = UIFont(name: "Noteworthy", size: 28)
+        view.addSubview(titleLabel)
+        titleLabel.snp_makeConstraints { (make) in
+            make.bottom.equalTo(topFrame.snp_bottom).offset(-5)
+            make.centerX.equalTo(topFrame.snp_centerX)
+        }
+        
+        view.addSubview(loginButton)
+//        loginButton.delegate = self
+        loginButton.frame = CGRectMake(15, 30, 80, 30)
+        loginButton.addTarget(self, action: #selector(backToLoginScreen), forControlEvents: .TouchUpInside)
     }
 
 	func setupCollectionView() {
@@ -76,6 +103,11 @@ let shared = PlaceUserDataStore.sharedDataStore
 		collectionView.snp_makeConstraints { (make) in
 			make.edges.equalTo(view.snp_edges)
 		}
+        
+        refreshControl.attributedTitle = NSAttributedString(string: "Refresh")
+        refreshControl.tintColor = UIColor.flatRedColor()
+        refreshControl.addTarget(self, action:#selector(refresh) , forControlEvents: UIControlEvents.ValueChanged)
+        collectionView.addSubview(refreshControl)
 	}
 }
 

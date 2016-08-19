@@ -51,24 +51,24 @@ class ProfileHeaderView: UICollectionReusableView, FBSDKLoginButtonDelegate {
 	
 	func setupScene() {
         
-        self.addSubview(topFrame)
-        topFrame.backgroundColor = UIColor.flatRedColor()
-        topFrame.snp_makeConstraints { (make) in
-            make.top.equalTo(self.snp_top)
-            make.width.equalTo(self.snp_width)
-            make.height.equalTo(self.snp_width).dividedBy(5.8)
-        }
-        
-        let titleLabel = UILabel()
-        titleLabel.text = "Profile"
-        titleLabel.backgroundColor = UIColor.flatRedColor()
-        titleLabel.textColor = UIColor.flatWhiteColor()
-        titleLabel.font = UIFont(name: "Noteworthy", size: 28)
-        self.addSubview(titleLabel)
-        titleLabel.snp_makeConstraints { (make) in
-            make.bottom.equalTo(topFrame.snp_bottom).offset(-5)
-            make.centerX.equalTo(topFrame.snp_centerX)
-        }
+//        self.addSubview(topFrame)
+//        topFrame.backgroundColor = UIColor.flatRedColor()
+//        topFrame.snp_makeConstraints { (make) in
+//            make.top.equalTo(self.snp_top)
+//            make.width.equalTo(self.snp_width)
+//            make.height.equalTo(self.snp_width).dividedBy(5.8)
+//        }
+//        
+//        let titleLabel = UILabel()
+//        titleLabel.text = "Profile"
+//        titleLabel.backgroundColor = UIColor.flatRedColor()
+//        titleLabel.textColor = UIColor.flatWhiteColor()
+//        titleLabel.font = UIFont(name: "Noteworthy", size: 28)
+//        self.addSubview(titleLabel)
+//        titleLabel.snp_makeConstraints { (make) in
+//            make.bottom.equalTo(topFrame.snp_bottom).offset(-5)
+//            make.centerX.equalTo(topFrame.snp_centerX)
+//        }
         
         self.addSubview(loginButton)
         loginButton.delegate = self
@@ -78,8 +78,8 @@ class ProfileHeaderView: UICollectionReusableView, FBSDKLoginButtonDelegate {
         
 		self.addSubview(usernameLabel)
 		usernameLabel.snp_makeConstraints { (make) in
-			make.centerX.equalTo(topFrame.snp_centerX)
-			make.top.equalTo(topFrame.snp_top).offset(75)
+			make.centerX.equalTo(self.snp_centerX)
+			make.top.equalTo(self.snp_top).offset(75)
 			make.width.equalTo(self.snp_width).dividedBy(2)
 			make.height.equalTo(self.snp_height).dividedBy(8)
 		}
