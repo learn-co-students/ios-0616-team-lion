@@ -16,15 +16,24 @@ import FirebaseAuth
 
 class OpenChatViewController: JSQMessagesViewController {
 	
+	var chatType = "OpenChat"
+	
 	var messages = [JSQMessage]()
 	var avatarDict = [String: JSQMessagesAvatarImage]()
-	
+
 	var messageRef = FIRDatabase.database().reference().child("messages")
+
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		view.backgroundColor = UIColor.peterRiverColor()
+		if (chatType == "OpenChat") {
+			messageRef = FIRDatabase.database().reference().child("messages")
+		} else {
+			let uniqueID = ["myID", "tappedUserID"].sort().joinWithSeparator("-")
+			messageRef = FIRDatabase.database().reference().child(uniqueID)
+		}
+		
 		self.tabBarController?.tabBar.hidden = true
 		
 		if let currentUser = FIRAuth.auth()?.currentUser {
