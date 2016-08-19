@@ -25,6 +25,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
     var cancelButton = DynamicButton()
     var itemImageView = UIImageView()
     let roundSquare = UIImageView()
+    let chatButton = UIButton()
     
     let fullnameFrame = ChisatoTextField()
     let titleFrame = ChisatoTextField()
@@ -55,6 +56,11 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         //send to venmo payment link and mark post as sold if paid
     }
     
+    func chatButtonPressed(){
+        let chatVC = OpenChatViewController()
+        presentViewController(chatVC, animated: true, completion: nil)
+    }
+    
     func generateScene() {
         
         view.addSubview(topFrame)
@@ -72,6 +78,17 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), forControlEvents: .TouchUpInside)
         cancelButton.snp_makeConstraints { (make) in
             make.centerX.equalTo(topFrame.snp_centerX).offset(-160)
+            make.centerY.equalTo(topFrame.snp_centerY).offset(10)
+            make.width.equalTo(topFrame.snp_width).dividedBy(12)
+            make.height.equalTo(topFrame.snp_width).dividedBy(12)
+            
+        }
+        
+        view.addSubview(chatButton)
+        chatButton.setImage(UIImage(named:"chatUnselected"), forState: .Normal)
+        chatButton.addTarget(self, action: #selector(chatButtonPressed), forControlEvents: .TouchUpInside)
+        chatButton.snp_makeConstraints { (make) in
+            make.centerX.equalTo(topFrame.snp_centerX).offset(160)
             make.centerY.equalTo(topFrame.snp_centerY).offset(10)
             make.width.equalTo(topFrame.snp_width).dividedBy(12)
             make.height.equalTo(topFrame.snp_width).dividedBy(12)
@@ -130,6 +147,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         
         scrollView.addSubview(fullnameFrame)
         fullnameFrame.text = " "
+        fullnameFrame.textColor = UIColor.flatRedColor()
         fullnameFrame.placeholderColor = UIColor.flatRedColor()
         fullnameFrame.placeholder = "Name"
         fullnameFrame.borderColor = UIColor.flatRedColor()

@@ -36,12 +36,18 @@ let shared = PlaceUserDataStore.sharedDataStore
 	}
     
     override func viewWillAppear(animated: Bool) {
-        self.shared.currentUser.postings.removeAll()
-        
-        self.shared.fetchPosts { (result) in
-            self.shared.currentUser.postings.append(result)
             self.collectionView.reloadData()
-            print(result)
+        
+    }
+    
+    func backgroundThread(delay: Double = 0.0, background: (() -> Void)? = nil, completion: (() -> Void)? = nil) {
+        dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue), 0)) {
+            if(background != nil){ background!(); }
+            
+            let popTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)))
+            dispatch_after(popTime, dispatch_get_main_queue()) {
+                if(completion != nil){ completion!(); }
+            }
         }
     }
 
@@ -103,7 +109,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
         postDetailVC.itemPrice = shared.currentUser.postings[indexPath.item].price
         postDetailVC.descriptionField.text = shared.currentUser.postings[indexPath.item].itemDescription
         postDetailVC.itemImage = shared.currentUser.postings[indexPath.item].itemImages[0]
-        postDetailVC.fullName = shared.currentUser.name
+        postDetailVC.fullNameLabel.text = shared.currentUser.name
         postDetailVC.profilePic.image = shared.currentUser.picture
         
         self.presentViewController(postDetailVC, animated: true, completion:  nil)

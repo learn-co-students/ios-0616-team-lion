@@ -248,10 +248,6 @@ print("JSON FROM FRIEND FUNC\(json)")
             //self.presentViewController(tabBar, animated:true, completion: nil)
         }
     }
-    
-    
-    
-    
-    
+
     
 }
