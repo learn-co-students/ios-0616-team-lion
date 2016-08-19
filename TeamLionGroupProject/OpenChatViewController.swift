@@ -27,6 +27,10 @@ class OpenChatViewController: JSQMessagesViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		let dismissSwipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeDetected))
+		dismissSwipe.direction = .Left
+		view.addGestureRecognizer(dismissSwipe)
+		
 		if (chatType == "OpenChat") {
 			messageRef = FIRDatabase.database().reference().child("messages")
 		} else {
@@ -48,6 +52,10 @@ class OpenChatViewController: JSQMessagesViewController {
 		}
 		
 		observeMessages()
+	}
+	
+	func swipeDetected() {
+		tabBarController?.selectedIndex = 0
 	}
 	
 	func observeUsers(id: String) {
