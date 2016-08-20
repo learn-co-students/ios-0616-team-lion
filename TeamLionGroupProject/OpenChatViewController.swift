@@ -38,8 +38,6 @@ class OpenChatViewController: JSQMessagesViewController {
 			messageRef = FIRDatabase.database().reference().child(uniqueID)
 		}
 		
-		self.tabBarController?.tabBar.hidden = true
-		
 		if let currentUser = FIRAuth.auth()?.currentUser {
 			self.senderId = currentUser.uid
 			self.senderDisplayName = "TEMP"
@@ -53,6 +51,10 @@ class OpenChatViewController: JSQMessagesViewController {
 		
 		observeMessages()
 	}
+    
+    override func viewWillAppear(animated: Bool) {
+        self.tabBarController?.tabBar.hidden = true
+    }
 	
 	func swipeDetected() {
 		tabBarController?.selectedIndex = 0
