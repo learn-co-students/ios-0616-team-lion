@@ -51,7 +51,7 @@ var post8 = PlacePost(itemImages: imageArray8, itemTitle: "Kaws", itemDescriptio
 var post9 = PlacePost(itemImages: imageArray9, itemTitle: "Penny Board", itemDescription: "Skateboard but penny size", price: 30)
 var post10 = PlacePost(itemImages: imageArray10, itemTitle: "Space Jam VHS", itemDescription: "BEST MOVIE EVER?", price: 50)
 var post11 = PlacePost(itemImages: imageArray11, itemTitle: "Duck Umbrella", itemDescription: "Be a duck", price: 50)
-var post12 = PlacePost(itemImages: imageArray12, itemTitle: "Corgi Puppy", itemDescription: "Short dog", price: 1200)
+var post12 = PlacePost(itemImages: imageArray12, itemTitle: "Corgi Puppy", itemDescription: "Short dog", price: 1200000)
 
 
 func generateTestData() {

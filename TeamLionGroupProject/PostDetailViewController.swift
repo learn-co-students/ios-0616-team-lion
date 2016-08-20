@@ -20,16 +20,14 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
     var priceLabel = UILabel()
     var descriptionField = UITextView()
     var titleLabel = UILabel()
-    var buyButton = DynamicButton()
+    var buyButton = UIButton()
     var topFrame = UIImageView()
     var cancelButton = DynamicButton()
     var itemImageView = UIImageView()
     let roundSquare = UIImageView()
     let chatButton = UIButton()
-    
-    let fullnameFrame = ChisatoTextField()
-    let titleFrame = ChisatoTextField()
-    let descriptionFrame = ChisatoTextField()
+    let dividerImage = UIImageView()
+    var chatButtonImage = UIImageView()
     
     var fullName: String?
     var itemTitle: String?
@@ -65,6 +63,8 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
     
     func generateScene() {
         
+        view.backgroundColor = UIColor.flatRedColor()
+        
         view.addSubview(topFrame)
         topFrame.backgroundColor = UIColor.flatRedColor()
         topFrame.snp_makeConstraints { (make) in
@@ -87,8 +87,12 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         }
         
         view.addSubview(chatButton)
-        chatButton.setImage(UIImage(named:"chatUnselected"), forState: .Normal)
+        chatButtonImage.image = UIImage(named: "chatUnselected")
+        chatButtonImage.image = (chatButtonImage.image?.imageWithRenderingMode(.AlwaysTemplate))!
+        chatButtonImage.tintColor = UIColor.flatWhiteColor()
+        chatButton.setImage(chatButtonImage.image, forState: .Normal)
         chatButton.addTarget(self, action: #selector(chatButtonPressed), forControlEvents: .TouchUpInside)
+        chatButton.tintColor = UIColor.flatWhiteColor()
         chatButton.snp_makeConstraints { (make) in
             make.centerX.equalTo(topFrame.snp_centerX).offset(160)
             make.centerY.equalTo(topFrame.snp_centerY).offset(10)
@@ -97,125 +101,76 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
             
         }
         
-        view.addSubview(roundSquare)
-        roundSquare.image = UIImage(named: "roundSquare")
-        roundSquare.snp_makeConstraints { (make) in
+        view.addSubview(buyButton)
+        buyButton.snp_makeConstraints { (make) in
             make.bottom.equalTo(view.snp_bottom).offset(-20)
             make.centerX.equalTo(view.snp_centerX)
-            make.width.equalTo(view.snp_width).dividedBy(6)
-            make.height.equalTo(view.snp_width).dividedBy(6)
+            make.height.equalTo(view.snp_height).dividedBy(10)
+            make.width.equalTo(view.snp_width).dividedBy(2.5)
         }
-        
-        view.addSubview(buyButton)
-        buyButton.setStyle(DynamicButtonStyle.CheckMark, animated: true)
-        buyButton.strokeColor = UIColor.flatRedColor()
-        buyButton.highlightStokeColor = UIColor.flatMintColor()
+        buyButton.backgroundColor = UIColor.flatRedColor()
+        buyButton.layer.masksToBounds = true
+        buyButton.layer.cornerRadius = view.frame.height/20
+        buyButton.layer.borderWidth = 1
+        buyButton.layer.borderColor = UIColor.whiteColor().CGColor
+        buyButton.titleLabel?.textColor = UIColor.redColor()
+        buyButton.setTitle("BUY", forState: .Normal)
+        buyButton.titleLabel!.font = UIFont(name: "HelveticaNeue", size: buyButton.titleLabel!.font.pointSize)
         buyButton.addTarget(self, action: #selector(buyButtonTapped), forControlEvents: .TouchUpInside)
-        buyButton.snp_makeConstraints { (make) in
-            make.centerY.equalTo(roundSquare.snp_centerY)
-            make.centerX.equalTo(roundSquare.snp_centerX)
-            make.width.equalTo(roundSquare.snp_width).dividedBy(1.5)
-            make.height.equalTo(roundSquare.snp_width).dividedBy(1.5)
-            
-        }
         
         
         view.addSubview(scrollView)
         scrollView.scrollEnabled = true
         scrollView.showsVerticalScrollIndicator = true
         scrollView.userInteractionEnabled = true
+        scrollView.backgroundColor = UIColor.flatWhiteColor()
         scrollView.snp_makeConstraints { (make) in
             make.top.equalTo(topFrame.snp_bottom).offset(10)
-            make.left.equalTo(view.snp_left).offset(10)
-            make.right.equalTo(view.snp_right).offset(-10)
+            make.left.equalTo(view.snp_left)
+            make.right.equalTo(view.snp_right)
             make.bottom.equalTo(view.snp_bottom).offset(-100)
         }
         
-        
-        scrollView.addSubview(profilePic)
-        profilePic.backgroundColor = UIColor.flatWhiteColor()
-        profilePic.image?.circle
-        profilePic.layer.borderWidth = 1
-        profilePic.layer.masksToBounds = false
-        profilePic.layer.borderColor = UIColor.flatRedColor().CGColor
-        profilePic.layer.cornerRadius = profilePic.frame.height/2
-        profilePic.clipsToBounds = true
-        profilePic.snp_makeConstraints { (make) in
-            make.top.equalTo(scrollView.snp_top).offset(20)
-            make.left.equalTo(view.snp_left).offset(20)
-            make.width.equalTo(view.snp_width).dividedBy(4)
-            make.height.equalTo(view.snp_width).dividedBy(4)
-        }
-        
-        scrollView.addSubview(fullnameFrame)
-        fullnameFrame.text = " "
-        fullnameFrame.textColor = UIColor.flatRedColor()
-        fullnameFrame.placeholderColor = UIColor.flatRedColor()
-        fullnameFrame.placeholder = "Name"
-        fullnameFrame.borderColor = UIColor.flatRedColor()
-        fullnameFrame.activeColor = UIColor.flatRedColor()
-        fullnameFrame.userInteractionEnabled = false
-        fullnameFrame.snp_makeConstraints { (make) in
-            make.top.equalTo(profilePic.snp_top)
-            make.left.equalTo(profilePic.snp_right).offset(5)
-            make.right.equalTo(view.snp_right).offset(-20)
-            make.height.equalTo(profilePic.snp_height).dividedBy(2.2)
-        }
-
-        
-        scrollView.addSubview(fullNameLabel)
-        fullNameLabel.text = fullName
-        fullNameLabel.textColor = UIColor.flatRedColor()
-        fullNameLabel.snp_makeConstraints { (make) in
-            make.centerX.equalTo(fullnameFrame.snp_centerX)
-            make.centerY.equalTo(fullnameFrame.snp_centerY).offset(10)
-            make.width.equalTo(fullnameFrame.snp_width).offset(-5)
-            make.height.equalTo(fullnameFrame.snp_height)
-        }
-        
-        scrollView.addSubview(titleFrame)
-        titleFrame.text = " "
-        titleFrame.placeholderColor = UIColor.flatRedColor()
-        titleFrame.placeholder = "Item Name"
-        titleFrame.borderColor = UIColor.flatRedColor()
-        titleFrame.activeColor = UIColor.flatRedColor()
-        titleFrame.userInteractionEnabled = false
-        titleFrame.snp_makeConstraints { (make) in
-            make.bottom.equalTo(profilePic.snp_bottom)
-            make.left.equalTo(fullnameFrame.snp_left)
-            make.width.equalTo(fullnameFrame.snp_width)
-            make.height.equalTo(fullnameFrame.snp_height)
-        }
-        
-        scrollView.addSubview(titleLabel)
-        titleLabel.text = itemTitle
-        titleLabel.textColor = UIColor.flatRedColor()
-        titleLabel.snp_makeConstraints { (make) in
-            make.centerX.equalTo(titleFrame.snp_centerX)
-            make.centerY.equalTo(titleFrame.snp_centerY).offset(10)
-            make.width.equalTo(titleFrame.snp_width).offset(-5)
-            make.height.equalTo(titleFrame.snp_height)
-        }
         
         scrollView.addSubview(itemImageView)
         itemImageView.image = itemImage
         itemImageView.backgroundColor = UIColor.flatRedColor()
         itemImageView.snp_makeConstraints { (make) in
-            make.top.equalTo(profilePic.snp_bottom).offset(10)
-            make.left.equalTo(profilePic.snp_left)
-            make.right.equalTo(fullnameFrame.snp_right)
+            make.top.equalTo(scrollView.snp_top)
+            make.left.equalTo(view.snp_left)
+            make.right.equalTo(view.snp_right)
             make.height.equalTo(itemImageView.snp_width)
         }
         
+        scrollView.addSubview(titleLabel)
+        titleLabel.text = itemTitle
+        titleLabel.textAlignment = NSTextAlignment.Center
+        titleLabel.textColor = UIColor.flatBlackColorDark()
+        titleLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
+        titleLabel.snp_makeConstraints { (make) in
+            make.centerX.equalTo(view.snp_centerX)
+            make.top.equalTo(itemImageView.snp_bottom).offset(15)
+            make.width.equalTo(itemImageView.snp_width).offset(-10)
+        }
+        
         scrollView.addSubview(priceLabel)
-        priceLabel.textColor = UIColor.whiteColor()
+        priceLabel.textColor = UIColor.flatBlackColor()
+        priceLabel.font = UIFont(name: "HelveticaNeue", size: 16)
         priceLabel.text = "$\(itemPrice)"
-        priceLabel.textAlignment = NSTextAlignment.Right
+        priceLabel.textAlignment = NSTextAlignment.Center
         priceLabel.snp_makeConstraints { (make) in
-            make.right.equalTo(itemImageView.snp_right).offset(-5)
-            make.top.equalTo(itemImageView.snp_top).offset(5)
+            make.centerX.equalTo(titleLabel.snp_centerX)
+            make.top.equalTo(titleLabel.snp_bottom).offset(2)
             make.height.equalTo(titleLabel.snp_height)
-            make.width.equalTo(itemImageView.snp_width).dividedBy(5)
+        }
+        
+        scrollView.addSubview(dividerImage)
+        dividerImage.image = UIImage(named: "divider")
+        dividerImage.snp_makeConstraints { (make) in
+            make.top.equalTo(priceLabel.snp_bottom).offset(2)
+            make.height.equalTo(itemImageView.snp_height).dividedBy(10)
+            make.left.equalTo(itemImageView.snp_left)
+            make.right.equalTo(itemImageView.snp_right)
         }
         
         scrollView.addSubview(descriptionField)
@@ -225,26 +180,36 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         descriptionField.textContainerInset = UIEdgeInsets(top: 5, left: 30, bottom: 0, right: 30)
         descriptionField.snp_makeConstraints { (make) in
             make.centerX.equalTo(itemImageView.snp_centerX)
-            make.top.equalTo(itemImageView.snp_bottom).offset(30)
-            make.left.equalTo(itemImageView.snp_left)
-            make.right.equalTo(itemImageView.snp_right)
+            make.top.equalTo(dividerImage.snp_bottom)
+            make.left.equalTo(itemImageView.snp_left).offset(5)
+            make.right.equalTo(itemImageView.snp_right).offset(-5)
         }
         
-        scrollView.addSubview(descriptionFrame)
-        descriptionFrame.userInteractionEnabled = false
-        descriptionFrame.text = descriptionField.text
-        descriptionFrame.textColor = UIColor.clearColor()
-        descriptionFrame.placeholderColor = UIColor.flatRedColor()
-        descriptionFrame.placeholder = "Description"
-        descriptionFrame.borderColor = UIColor.flatRedColor()
-        descriptionFrame.activeColor = UIColor.flatRedColor()
-        descriptionFrame.snp_makeConstraints { (make) in
-            make.left.equalTo(itemImageView.snp_left)
-            make.right.equalTo(itemImageView.snp_right)
-            make.top.equalTo(itemImageView.snp_bottom).offset(5)
-            make.bottom.equalTo(descriptionField.snp_bottom).offset(20)
-            
+        scrollView.addSubview(profilePic)
+        profilePic.backgroundColor = UIColor.flatWhiteColor()
+        profilePic.image?.circle
+        profilePic.layer.cornerRadius = view.frame.height/12
+        profilePic.layer.masksToBounds = true
+        profilePic.layer.borderWidth = 2
+        profilePic.layer.borderColor = UIColor.flatRedColor().CGColor
+        profilePic.clipsToBounds = true
+        profilePic.snp_makeConstraints { (make) in
+            make.top.equalTo(descriptionField.snp_bottom).offset(20)
+            make.centerX.equalTo(view.snp_centerX)
+            make.width.equalTo(view.snp_height).dividedBy(6)
+            make.height.equalTo(view.snp_height).dividedBy(6)
         }
+        
+        scrollView.addSubview(fullNameLabel)
+        fullNameLabel.text = "Sold by: \(fullName)"
+        fullNameLabel.textAlignment = NSTextAlignment.Center
+        fullNameLabel.textColor = UIColor.flatBlackColor()
+        fullNameLabel.snp_makeConstraints { (make) in
+            make.centerX.equalTo(profilePic.snp_centerX)
+            make.top.equalTo(profilePic.snp_bottom).offset(5)
+            make.height.equalTo(priceLabel.snp_height)
+        }
+
         
         calculateScrollViewHeight()
     
@@ -255,14 +220,14 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
     
     func calculateScrollViewHeight() {
      
-        let preTotalHeight = 520 + CGFloat((descriptionFrame.text?.characters.count)!)/1.25
+        let preTotalHeight = 600 + CGFloat((descriptionField.text?.characters.count)!)/1.25
         
-        if preTotalHeight > 600 {
-            totalHeight = 600
+        if preTotalHeight > 800 {
+            totalHeight = 800
         }
             
-        else if preTotalHeight < 525 {
-            totalHeight = 525
+        else if preTotalHeight < 675 {
+            totalHeight = 675
         }
             
         else {

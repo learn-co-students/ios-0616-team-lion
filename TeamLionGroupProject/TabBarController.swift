@@ -22,6 +22,17 @@ class TabBarController: UITabBarController {
         self.tabBar.translucent = true
         self.tabBar.backgroundColor = UIColor.clearColor()
         self.tabBar.tintColor = UIColor.clearColor()
+        
+//        var coloredHomeTabImage = UIImageView(image: UIImage(named: "chatSelected"))
+//        coloredHomeTabImage.image = (coloredHomeTabImage.image?.imageWithRenderingMode(.AlwaysTemplate))!
+//        coloredHomeTabImage.tintColor = UIColor.flatRedColor()
+//        var coloredProfileTabImage = UIImageView(image: UIImage(named: "profileSelected"))
+//        coloredProfileTabImage.image = (coloredHomeTabImage.image?.imageWithRenderingMode(.AlwaysTemplate))!
+//        coloredProfileTabImage.tintColor = UIColor.flatRedColor()
+//        var coloredChatTabImage = UIImageView(image: UIImage(named: "placeSelected"))
+//        coloredChatTabImage.image = (coloredHomeTabImage.image?.imageWithRenderingMode(.AlwaysTemplate))!
+//        coloredChatTabImage.tintColor = UIColor.flatRedColor()
+        
 		
 		let openChat = OpenChatViewController()
 		openChat.tabBarItem = UITabBarItem(title:nil, image: UIImage(named: "chatUnselected")?.imageWithRenderingMode(.AlwaysOriginal), selectedImage: UIImage(named: "chatSelected")?.imageWithRenderingMode(.AlwaysOriginal))
