@@ -22,9 +22,15 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
     
         setUpCollectionCells()
         generateScene()
+        self.shared.getAllPostsByUid { (result) in
+            self.shared.currentUser.friendsPosts.append(result)
+            self.collectionView.reloadData()
+        }
+        self.collectionView.reloadData()
+    
 
     }
-    
+
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.postArray.count
     }

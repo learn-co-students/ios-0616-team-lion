@@ -115,9 +115,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 		case UICollectionElementKindSectionHeader:
 
 			var headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerIdentifier, forIndexPath: indexPath) as! ProfileHeaderView
-            if let name  = self.shared.currentUser.name {
-            headerView.setUpForUser(name, picture: self.shared.currentUser.picture!)
-            }
+            let name = self.shared.currentUser.name
 			headerView.delegate = self
             
             print("login - \(headerView.backToLoginScreen())")
