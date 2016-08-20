@@ -34,7 +34,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
     var fullName: String?
     var itemTitle: String?
     var itemDescription: String?
-    var itemPrice: Int?
+    var itemPrice: Int!
     var itemImage: UIImage?
     
     var totalHeight: CGFloat = 0
