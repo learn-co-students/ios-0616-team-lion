@@ -224,7 +224,7 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         takePictureButton.setTitle("TAP", forState: .Normal)
         takePictureButton.titleLabel?.font = UIFont(name: font, size: 12)
         takePictureButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        takePictureButton.titleEdgeInsets = UIEdgeInsets(top: 42, left: -60, bottom: 0, right: 0)
+        takePictureButton.titleEdgeInsets = UIEdgeInsets(top: 40, left: -60, bottom: 0, right: 0)
         takePictureButton.setTitleColor(UIColor.flatBlackColor(), forState: .Normal)
         takePictureButton.addTarget(self, action: #selector(takePictureButtonPressed), forControlEvents: .TouchUpInside)
         takePictureButton.snp_makeConstraints { (make) in
