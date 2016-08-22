@@ -20,19 +20,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Override point for customization after application launch.
         FIRApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-        
-        backgroundThread(background: {
-            self.shared.currentUser.postings.removeAll()
-            
-            self.shared.fetchPosts { (result) in
-                self.shared.currentUser.postings.append(result)
-                print("background done from marketplace")
-            }
-            },
-                         completion: {
-                            
-                            
-        })
+//        
+//        backgroundThread(background: {
+//            self.shared.currentUser.postings.removeAll()
+//            
+//            self.shared.fetchPosts { (result) in
+//                self.shared.currentUser.postings.append(result)
+//                print("background done from marketplace")
+//            }
+//            },
+//                         completion: {
+//                            
+//                            
+//        })
         
 		return true
 	}

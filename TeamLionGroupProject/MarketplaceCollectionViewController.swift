@@ -25,6 +25,10 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+        tabBarController?.tabBar.hidden = false
+    }
+    
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.postArray.count

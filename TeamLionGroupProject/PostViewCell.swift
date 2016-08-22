@@ -12,7 +12,6 @@ import SnapKit
 class PostViewCell: UICollectionViewCell {
     
     var postImage = UIImageView()
-    var profileImage = UIImageView()
     var nameLabel = UILabel()
     var priceLabel = UILabel()
     
@@ -31,37 +30,27 @@ class PostViewCell: UICollectionViewCell {
             make.height.equalTo(contentView.snp_height)
         }
         
-        //profile picture constraints
-        
-        contentView.addSubview(profileImage)
-        profileImage.image = UIImage(named: "Profile")?.circle
-        profileImage.snp_makeConstraints { (make) in
-            make.centerX.equalTo(postImage.snp_centerX).dividedBy(4.5)
-            make.centerY.equalTo(postImage.snp_centerY).dividedBy(4.5)
-            make.width.equalTo(postImage.snp_width).dividedBy(5)
-            make.height.equalTo(postImage.snp_height).dividedBy(5)
-        }
-        
         //name label constraints
-        contentView.addSubview(nameLabel)
-        nameLabel.text = ""
-        nameLabel.textColor = UIColor.whiteColor()
-        nameLabel.shadowColor = UIColor.blackColor()
-        nameLabel.snp_makeConstraints { (make) in
-            make.leading.equalTo(profileImage.snp_trailing).multipliedBy(1.2)
-            make.centerY.equalTo(profileImage.snp_centerY)
-            make.right.equalTo(postImage.snp_right).offset(-2)
-            make.height.equalTo(profileImage.snp_height)
-        }
+//        contentView.addSubview(nameLabel)
+//        nameLabel.text = ""
+//        nameLabel.textColor = UIColor.whiteColor()
+//        nameLabel.shadowColor = UIColor.blackColor()
+//        nameLabel.snp_makeConstraints { (make) in
+//            make.left.equalTo(postImage.snp_left).offset(4)
+//            make.right.equalTo(postImage.snp_right).offset(-4)
+//            make.centerY.equalTo(postImage.snp_centerY).dividedBy(4.5)
+//            make.height.equalTo(postImage.snp_height).dividedBy(5)
+//        }
         
         //price label constraints
         contentView.addSubview(priceLabel)
         priceLabel.textColor = UIColor.whiteColor()
+        priceLabel.textAlignment = NSTextAlignment.Right
         priceLabel.shadowColor = UIColor.blackColor()
         priceLabel.snp_makeConstraints { (make) in
             make.bottom.equalTo(postImage.snp_bottom).offset(-2)
             make.right.equalTo(postImage.snp_right).offset(-2)
-            make.width.equalTo(postImage.snp_width).dividedBy(4)
+            make.left.equalTo(postImage.snp_left).offset(-2)
             make.height.equalTo(postImage.snp_height).dividedBy(5)
         }
         

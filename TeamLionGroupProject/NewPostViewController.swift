@@ -22,7 +22,7 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
 	var uploadImageButton = UIButton()
     var takePictureButton = UIButton()
 	var profilePic = UIImageView()
-	var postItemButton = DynamicButton()
+	var postItemButton = UIButton()
 	var newPostTextLabel = UILabel()
 	let cancelButton = DynamicButton()
     
@@ -196,15 +196,6 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
             make.centerX.equalTo(topFrame.snp_centerX)
         }
         
-        view.addSubview(profilePic)
-        profilePic.image = datastore.currentUser.picture
-        profilePic.snp_makeConstraints { (make) in
-            make.top.equalTo(topFrame.snp_bottom).offset(80)
-            make.left.equalTo(view.snp_left).offset(20)
-            make.width.equalTo(view.snp_width).dividedBy(4)
-            make.height.equalTo(view.snp_width).dividedBy(4)
-        }
-        
         view.addSubview(picFrame)
         picFrame.userInteractionEnabled = false
         
@@ -214,10 +205,10 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         picFrame.borderColor = UIColor.flatRedColor()
         picFrame.activeColor = UIColor.flatRedColor()
         picFrame.snp_makeConstraints { (make) in
-            make.bottom.equalTo(profilePic.snp_bottom)
-            make.right.equalTo(view.snp_right).offset(-40)
-            make.width.equalTo(profilePic.snp_width).multipliedBy(1.75)
-            make.height.equalTo(profilePic.snp_width).multipliedBy(1.8)
+            make.top.equalTo(topFrame.snp_bottom).offset(10)
+            make.centerX.equalTo(view.snp_centerX)
+            make.width.equalTo(view.snp_width).dividedBy(2.2)
+            make.height.equalTo(view.snp_width).dividedBy(2.1)
         }
         view.addSubview(pictureFrame)
         pictureFrame.userInteractionEnabled = false
@@ -256,7 +247,7 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         itemNameField.activeColor = UIColor.flatRedColor()
         itemNameField.textColor = UIColor.flatRedColor()
         itemNameField.snp_makeConstraints { (make) in
-            make.top.equalTo(profilePic.snp_bottom).offset(4)
+            make.top.equalTo(picFrame.snp_bottom).offset(4)
             make.left.equalTo(view.snp_left).offset(20)
             make.width.equalTo(view.snp_width).dividedBy(1.5)
             make.height.equalTo(view.snp_width).dividedBy(7)
@@ -299,28 +290,22 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
             make.bottom.equalTo(itemDescriptionTextField.snp_bottom).offset(-10)
         }
         
-        view.addSubview(roundSquare)
-        roundSquare.image = UIImage(named: "roundSquare")
-        roundSquare.snp_makeConstraints { (make) in
-            make.top.equalTo(itemDescriptionTextField.snp_bottom).offset(10)
-            make.centerX.equalTo(itemDescriptionTextField.snp_centerX)
-            make.width.equalTo(view.snp_width).dividedBy(4)
-            make.height.equalTo(view.snp_width).dividedBy(4)
-        }
-        
         view.addSubview(postItemButton)
-        postItemButton.setStyle(DynamicButtonStyle.CheckMark, animated: true)
-        postItemButton.strokeColor = UIColor.flatRedColor()
-        postItemButton.highlightStokeColor = UIColor.flatMintColor()
-        postItemButton.lineWidth = 4
-        postItemButton.addTarget(self, action: #selector(sellItButtonPressed), forControlEvents: .TouchUpInside)
         postItemButton.snp_makeConstraints { (make) in
-            make.centerY.equalTo(roundSquare.snp_centerY)
-            make.centerX.equalTo(roundSquare.snp_centerX)
-            make.width.equalTo(roundSquare.snp_width).dividedBy(1.5)
-            make.height.equalTo(roundSquare.snp_width).dividedBy(1.5)
+            make.bottom.equalTo(view.snp_bottom).offset(-20)
+            make.centerX.equalTo(view.snp_centerX)
+            make.height.equalTo(view.snp_height).dividedBy(10)
+            make.width.equalTo(view.snp_width).dividedBy(2.5)
         }
-        
+        postItemButton.backgroundColor = UIColor.flatRedColor()
+        postItemButton.layer.masksToBounds = true
+        postItemButton.layer.cornerRadius = view.frame.height/20
+        postItemButton.layer.borderWidth = 1
+        postItemButton.layer.borderColor = UIColor.whiteColor().CGColor
+        postItemButton.titleLabel?.textColor = UIColor.redColor()
+        postItemButton.setTitle("SELL IT!", forState: .Normal)
+        postItemButton.titleLabel!.font = UIFont(name: "HelveticaNeue", size: postItemButton.titleLabel!.font.pointSize)
+        postItemButton.addTarget(self, action: #selector(sellItButtonPressed), forControlEvents: .TouchUpInside)
     }
     
     func sendBackPhoto(photo: UIImageView) {
