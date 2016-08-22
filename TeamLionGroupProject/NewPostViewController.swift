@@ -60,7 +60,7 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         if hasPicture == true {
             picture.hidden = false
             pictureFrame.image = picture.image
-            
+
         }
         
     }
@@ -175,6 +175,7 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
     
     func generateScene() {
         
+        let font = "HelveticaNeue"
         view.backgroundColor = UIColor.flatWhiteColor()
         
         view.addSubview(topFrame)
@@ -198,7 +199,6 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         
         view.addSubview(picFrame)
         picFrame.userInteractionEnabled = false
-        
         picFrame.text = " "
         picFrame.placeholderColor = UIColor.flatRedColor()
         picFrame.placeholder = "Picture"
@@ -221,11 +221,15 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         
         view.addSubview(takePictureButton)
         takePictureButton.setImage(UIImage(named:"cameraIcon"), forState: .Normal)
-        takePictureButton.setTitleColor(UIColor.flatRedColor(), forState: .Normal)
+        takePictureButton.setTitle("TAP", forState: .Normal)
+        takePictureButton.titleLabel?.font = UIFont(name: font, size: 12)
+        takePictureButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        takePictureButton.titleEdgeInsets = UIEdgeInsets(top: 42, left: -60, bottom: 0, right: 0)
+        takePictureButton.setTitleColor(UIColor.flatBlackColor(), forState: .Normal)
         takePictureButton.addTarget(self, action: #selector(takePictureButtonPressed), forControlEvents: .TouchUpInside)
         takePictureButton.snp_makeConstraints { (make) in
             make.centerY.equalTo(pictureFrame.snp_centerY)
-            make.centerX.equalTo(pictureFrame.snp_centerX)
+            make.centerX.equalTo(pictureFrame.snp_centerX).offset(15)
         }
         
         view.addSubview(cancelButton)
@@ -245,7 +249,7 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         itemNameField.placeholder = "Item Name"
         itemNameField.borderColor = UIColor.flatRedColor()
         itemNameField.activeColor = UIColor.flatRedColor()
-        itemNameField.textColor = UIColor.flatRedColor()
+        itemNameField.textColor = UIColor.flatBlackColor()
         itemNameField.snp_makeConstraints { (make) in
             make.top.equalTo(picFrame.snp_bottom).offset(4)
             make.left.equalTo(view.snp_left).offset(20)
@@ -258,7 +262,7 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         itemPriceField.placeholder = "Price"
         itemPriceField.borderColor = UIColor.flatRedColor()
         itemPriceField.activeColor = UIColor.flatRedColor()
-        itemPriceField.textColor = UIColor.flatRedColor()
+        itemPriceField.textColor = UIColor.flatBlackColor()
         itemPriceField.keyboardType = UIKeyboardType.NumberPad
         itemPriceField.snp_makeConstraints { (make) in
             make.left.equalTo(itemNameField.snp_right).offset(2)
@@ -282,7 +286,7 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         
         view.addSubview(itemDescriptionField)
         itemDescriptionField.backgroundColor = UIColor.flatWhiteColor()
-        itemDescriptionField.font = UIFont(name: "Helvetica", size: 20)
+        itemDescriptionField.font = UIFont(name: "HelveticaNeue", size: 12)
         itemDescriptionField.snp_makeConstraints { (make) in
             make.top.equalTo(itemDescriptionTextField.snp_top).offset(20)
             make.left.equalTo(itemDescriptionTextField.snp_left).offset(5)

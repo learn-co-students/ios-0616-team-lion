@@ -15,7 +15,7 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
         
         setupTabs()
-        self.tabBar.selectedImageTintColor = UIColor.flatRedColor()
+        self.tabBar.tintColor = UIColor.flatRedColor()
     }
     
     func setupTabs() {
