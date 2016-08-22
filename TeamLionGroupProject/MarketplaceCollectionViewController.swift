@@ -79,6 +79,8 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "basicCell")
         collectionView?.registerClass(PostViewCell.self, forCellWithReuseIdentifier: "basicCell")
         collectionView.backgroundColor = UIColor.flatWhiteColor()
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
         self.view.addSubview(collectionView)
         
     }
