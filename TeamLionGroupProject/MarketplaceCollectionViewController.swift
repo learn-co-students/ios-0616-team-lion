@@ -22,9 +22,9 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
     
         setUpCollectionCells()
         generateScene()
-        
+		
     }
-    
+	
     override func viewWillAppear(animated: Bool) {
         tabBarController?.tabBar.hidden = false
     }
