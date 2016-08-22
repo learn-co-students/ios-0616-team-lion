@@ -11,10 +11,11 @@ import UIKit
 
 struct PlacePost {
 	
-	var itemImages: [UIImage]
-	var itemTitle: String
-	var itemDescription: String
-	var price: Int
+	var itemImages = [UIImage]()
+	var itemTitle = ""
+	var itemDescription = ""
+	var price = 0
+    var user = CurrentUser()
 	
 }
 

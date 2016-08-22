@@ -13,7 +13,7 @@ struct CurrentUser {
     var name = String()
     var picture = UIImage()
     var postings = [PlacePost]()
-    var friendsList = [UsersFriend]()
+    //var friendsList = [UsersFriend]()
     var email = String()
     var userID = String()
     var friendsPosts = [PlacePost]()

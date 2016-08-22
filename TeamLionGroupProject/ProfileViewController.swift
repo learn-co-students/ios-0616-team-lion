@@ -15,7 +15,7 @@ let shared = PlaceUserDataStore.sharedDataStore
     
     
     var name: String?
-    var picture: NSURL?
+    var picture: UIImage?
     var refreshControl = UIRefreshControl()
     
 	private let cellIdentifier = "Cell"
@@ -25,7 +25,10 @@ let shared = PlaceUserDataStore.sharedDataStore
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+		self.shared.getUserCredentialsForProfileVC { (result) in
+            self.name = self.shared.currentUser.name
+            self.picture = self.shared.currentUser.picture
+        }
 		setupCollectionView()
         
         refreshControl.attributedTitle = NSAttributedString(string: "Refresh")

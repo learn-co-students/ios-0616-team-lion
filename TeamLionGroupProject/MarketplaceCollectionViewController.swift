@@ -15,34 +15,38 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
     var shared = PlaceUserDataStore.sharedDataStore
     var collectionView: UICollectionView!
     let topFrame = UIImageView()
-    var postArray = [post1, post2, post3, post4, post5, post6, post7, post8, post9, post10, post11, post12]
+//    var postArray = [post1, post2, post3, post4, post5, post6, post7, post8, post9, post10, post11, post12]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        self.shared.getUserCredentialsForProfileVC { (result) in
+            print("result \(result)")
+        }
         setUpCollectionCells()
         generateScene()
         self.shared.getAllPostsByUid { (result) in
             self.shared.currentUser.friendsPosts.append(result)
-            self.collectionView.reloadData()
+            NSOperationQueue.mainQueue().addOperationWithBlock({ 
+                self.collectionView.reloadData()
+            })
         }
         self.collectionView.reloadData()
-    
-
+        
+        
     }
-
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.postArray.count
+        return self.shared.currentUser.friendsPosts.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("basicCell", forIndexPath: indexPath) as! PostViewCell
         
-        cell.postImage.image = self.postArray[indexPath.item].itemImages[0]
-        cell.priceLabel.text = "$\(self.postArray[indexPath.item].price)"
-        cell.nameLabel.text = self.postArray[indexPath.item].itemTitle
-
+        cell.postImage.image = self.shared.currentUser.friendsPosts[indexPath.item].itemImages[0]
+        cell.priceLabel.text = "$\(self.shared.currentUser.friendsPosts[indexPath.item].price)"
+        cell.nameLabel.text = self.shared.currentUser.friendsPosts[indexPath.item].itemTitle
+        
         return cell
     }
     
@@ -51,10 +55,10 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         print("You selected cell #\(indexPath.item)!")
         let postDetailVC = PostDetailViewController()
         
-        postDetailVC.itemTitle = postArray[indexPath.item].itemTitle
-        postDetailVC.itemPrice = postArray[indexPath.item].price
-        postDetailVC.descriptionField.text = postArray[indexPath.item].itemDescription
-        postDetailVC.itemImage = postArray[indexPath.item].itemImages[0]
+        postDetailVC.itemTitle = self.shared.currentUser.friendsPosts[indexPath.item].itemTitle
+        postDetailVC.itemPrice = self.shared.currentUser.friendsPosts[indexPath.item].price
+        postDetailVC.descriptionField.text = self.shared.currentUser.friendsPosts[indexPath.item].itemDescription
+        postDetailVC.itemImage = self.shared.currentUser.friendsPosts[indexPath.item].itemImages[0]
         
         self.presentViewController(postDetailVC, animated: true, completion:  nil)
     }
@@ -130,7 +134,7 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
     func refresh(sender:AnyObject) {
         // Code to refresh table view
     }
-
+    
     
     
 }

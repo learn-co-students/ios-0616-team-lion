@@ -22,6 +22,8 @@ class PlaceUserDataStore {
     var ref: FIRDatabaseReference!
     var refHandle: FIRDatabaseHandle!
     var currentUser = CurrentUser()
+    var aUser = CurrentUser()
+    var currentPost = PlacePost()
     var dictionaryOfPosts = [String: String]()
     static let sharedDataStore = PlaceUserDataStore()
     var uid = ""
@@ -48,7 +50,7 @@ class PlaceUserDataStore {
         self.postsDataSnapshot.append(snapshot)
             guard let snapshotData = snapshot.value as? [String: String] else{  print("error getting snapshot"); return }
 
-            var post = PlacePost( itemImages: [], itemTitle: "", itemDescription: "", price: 0)
+            var post = PlacePost( itemImages: [], itemTitle: "", itemDescription: "", price: 0, user: self.aUser)
             
             if let snapshotdataDescription = snapshotData["description"]{
                 post.itemDescription = snapshotdataDescription
@@ -71,14 +73,14 @@ class PlaceUserDataStore {
     }
 
     
-    func postToDataStore(nameKey: String, pictureKey: String, friendName: String, friendPic: String){
+    func postToDataStore(nameKey: String, pictureKey: String){
         print("post to data store")
         if let user = FIRAuth.auth()?.currentUser {
             let uid = user.uid
             let data = [CurrentUser.nameKey: nameKey,
                 CurrentUser.pictureKey: pictureKey]
             self.ref.child("users/\(uid)").updateChildValues(data as [NSObject : AnyObject])
-            self.ref.child("users/\(uid)/friends").updateChildValues([friendName : friendPic])
+            //self.ref.child("users/\(uid)/friends").updateChildValues([friendName : friendPic])
         }
         
     }
@@ -127,7 +129,7 @@ class PlaceUserDataStore {
                 let photoUrl = user.photoURL
                 let uid = user.uid
 
-       self.getFriendsInfo()
+       //self.getFriendsInfo()
 
                 
                 let data = NSData(contentsOfURL: photoUrl!)
@@ -146,11 +148,11 @@ class PlaceUserDataStore {
                         
                         let downloadURL = metadata?.downloadURL()
                         let profilePicURLString = downloadURL?.absoluteString
-                        for friend in self.currentUser.friendsList{
-                        let frname = friend.name
-                        let frpic = friend.profilePicture
-                        self.postToDataStore(name!, pictureKey: profilePicURLString!, friendName: frname, friendPic: frpic!)
-                        }
+                        //for friend in self.currentUser.friendsList{
+                        //let frname = friend.name
+                        //let frpic = friend.profilePicture
+                        self.postToDataStore(name!, pictureKey: profilePicURLString!)
+                        //}
 
                     }
                 }
@@ -172,12 +174,12 @@ class PlaceUserDataStore {
             if error == nil {
                 let json = JSON(result)
                 guard let arrayOfUsers = json["data"].array else { return }
-                for dictionary in arrayOfUsers {
-                    let friendsName = String(dictionary["name"])
-                    let friendPicture = String(dictionary["picture"]["data"]["url"])
-                    let friend = UsersFriend(withName: friendsName, profilePicture: friendPicture)
-                    self.currentUser.friendsList.append(friend)
-                }
+                //for dictionary in arrayOfUsers {
+                    //let friendsName = String(dictionary["name"])
+                    //let friendPicture = String(dictionary["picture"]["data"]["url"])
+                    //let friend = UsersFriend(withName: friendsName, profilePicture: friendPicture)
+                   // self.currentUser.friendsList.append(friend)
+                //}
             } else {
                 print("Error Getting Friends \(error)");
             }
@@ -192,20 +194,62 @@ class PlaceUserDataStore {
     
     //fetchpost func
     func getAllPostsByUid(completion: (result: PlacePost) -> Void){
-        //var post = PlacePost( itemImages: [], itemTitle: "", itemDescription: "", price: 0, userID: "")
-                print("TEST")
-        FIRDatabase.database().reference().child("users").observeEventType(.Value, withBlock: {(snapshot) in
+        self.ref = FIRDatabase.database().reference()
+        
+        self.ref.child("users").observeEventType(.Value, withBlock: {(snapshot) in
             let usersDict = snapshot.value as! [String : AnyObject]
             let keys = usersDict.keys
+            
+            //for each key get info:
             for key in keys{
+                //print("is this getting called keys \(key)")
+
                 self.uid = key
-            }
+                let anotherDict = usersDict[key] as! NSDictionary
+                self.aUser.name = String(anotherDict["name"])
+                self.aUser.email = String(anotherDict["email"])
+                
+                //calls only one name if uncomment profile picture
+                print("is this getting called? name   \(self.aUser.name)")
+
+                
+//                let str = anotherDict["picture"] as? String
+//                if let unwrappedString = str {
+//                    let stringWithPNG = unwrappedString + ".png"
+//                    guard let url = NSURL(string: stringWithPNG) else {print("no image"); return}
+//                    guard let data = NSData(contentsOfURL: url)else{return} //make sure your image in this url does exist, otherwise unwrap in a if let check
+//                    self.aUser.picture = (UIImage(data: data)!)
+//                    
+//                    
+//                    //not getting called?
+//                    print("is this getting called? picture   \(self.aUser.picture)")
+//                    
+//                }
+                
+                
+                
+                
+//                print("TESTTESTTESTTESTTESTTESTTEST        \(self.currentUser.name)")
+//                print("EMAIL        \(self.currentUser.email)")
+//                print("PICTURE        \(self.currentUser.picture)")
+
+//                self.currentUser.email = String(anotherDict["email"])
+//                guard let url = NSURL(string: String(anotherDict["picture"])) else {print("no image"); return}
+//                guard let data = NSData(contentsOfURL: url)else{return}
+//                self.currentUser.picture = UIImage(data: data)!
+//                let blah = anotherDict["posts"] as! NSDictionary
+//                self.currentPost.itemTitle = String(blah["title"])
+//                print("TEST")
+//
+//                print("POSTPOSTPOST        \(blah)")
+
+                
 
         FIRDatabase.database().reference().child("users").child(self.uid).child("posts").observeEventType(.ChildAdded, withBlock: {(snapshot) in
             guard let snapshotData = snapshot.value as? [String: String] else{  print("error getting snapshot"); return }
             
-            var post = PlacePost( itemImages: [], itemTitle: "", itemDescription: "", price: 0)
-            
+            var post = PlacePost( itemImages: [], itemTitle: "", itemDescription: "", price: 0, user: self.aUser)
+            print("auser within post \(self.aUser.name)")
             if let snapshotdataDescription = snapshotData["description"]{
                 post.itemDescription = snapshotdataDescription
             } else{  print("description error"); return }
@@ -224,10 +268,37 @@ class PlaceUserDataStore {
 
             completion(result: post)
             }, withCancelBlock: nil)
+            }
         }, withCancelBlock: nil)
         
     }
 
+    
+    
+    
+    
+    func getUserCredentialsForProfileVC(completion: (result: (String, UIImage, String, String)) -> Void){
+        FIRAuth.auth()?.addAuthStateDidChangeListener { auth, user in
+            if let user = user {
+                self.currentUser.name = user.displayName!
+                self.currentUser.email = user.email!
+                
+                let data = NSData(contentsOfURL: user.photoURL!)
+                self.currentUser.picture = UIImage(data:data!,scale:1.0)!
+                self.currentUser.userID = user.uid
+
+                // User is signed in.
+            } else {
+                // No user is signed in.
+            }
+            print("name \(self.currentUser.name)")
+            print("picture \(self.currentUser.picture)")
+            print("email \(self.currentUser.email)")
+            print("userID \(self.currentUser.userID)")
+            completion(result: (self.currentUser.name, self.currentUser.picture, self.currentUser.email, self.currentUser.userID))
+        }
+    }
+    
     
     
 }
