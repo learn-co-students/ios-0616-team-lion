@@ -3,7 +3,7 @@
 //  TeamLionGroupProject
 //
 //  Created by David Park on 8/22/16.
-//  Copyright © 2016 TeamLion. All rights reserved.
+//  Copyright © 2016 TeamLion. All rights reserved.xr
 //
 
 import UIKit
@@ -12,17 +12,46 @@ class PageMenuViewController: UIViewController {
 	
 	var pageMenu : CAPSPageMenu?
 	
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		setupNavBar()
+		setupPages()
+		
+		self.edgesForExtendedLayout = UIRectEdge.None
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+	
+	}
+	
+	func setupNavBar() {
+		
+		self.title = "place"
+		self.navigationController?.navigationBar.barTintColor = UIColor(red: 30.0/255.0, green: 30.0/255.0, blue: 30.0/255.0, alpha: 1.0)
+		self.navigationController?.navigationBar.shadowImage = UIImage()
+		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+		
+		self.navigationController?.navigationBar.translucent = false
+		self.navigationController?.navigationBar.barTintColor = UIColor.flatRedColor()
+		self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+		self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "Noteworthy", size: 30)!]
+		
+		self.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(newPostPressed)), animated: true)
+		
+	}
+	
+	func setupPages() {
 		
 		var controllerArray: [UIViewController] = []
-		var marketplaceVC = MarketplaceCollectionViewController()
+		let marketplaceVC = MarketplaceCollectionViewController()
 		marketplaceVC.title = "Marketplace"
 		
-		var profileVC = ProfileViewController()
+		let profileVC = ProfileViewController()
 		profileVC.title = "Profile"
 		
-		var openChatVC = OpenChatViewController()
+		let openChatVC = OpenChatViewController()
 		openChatVC.title = "Open Chat"
 		
 		controllerArray.append(marketplaceVC)
@@ -43,6 +72,16 @@ class PageMenuViewController: UIViewController {
 		pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, 0.0, self.view.frame.width, self.view.frame.height), pageMenuOptions: parameters)
 		
 		self.view.addSubview(pageMenu!.view)
+		
 	}
+	
+	func newPostPressed() {
+		
+		print("new post from VC")
+		let newPostVC = NewPostViewController()
+		presentViewController(newPostVC, animated: true, completion: nil)
+		
+	}
+	
 
 }

@@ -100,9 +100,13 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
 	
 	func moveToMarket() {
-		let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-		let tabBar = mainStoryboard.instantiateViewControllerWithIdentifier("tabBar") as! TabBarController
-		self.presentViewController(tabBar, animated:true, completion: nil)
+		
+		let pageVC = PageMenuViewController()
+		self.presentViewController(pageVC, animated: true, completion: nil)
+		
+//		let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//		let tabBar = mainStoryboard.instantiateViewControllerWithIdentifier("tabBar") as! TabBarController
+//		self.presentViewController(tabBar, animated:true, completion: nil)
 
 	}
 	

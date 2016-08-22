@@ -11,7 +11,9 @@ extension UIColor {
     convenience init(r: Int, g:Int , b:Int) {
         self.init(red: CGFloat(r)/255, green: CGFloat(g)/255, blue: CGFloat(b)/255, alpha: 1.0)
     }
-    
+	
+	//FlatUIColors
+	
     class func turquoiseColor()->UIColor {
         return UIColor(r: 26, g: 188, b: 156)
     }
@@ -87,6 +89,16 @@ extension UIColor {
     class func asbestosColor()->UIColor {
         return UIColor(r:127, g:140, b:141)
     }
+	
+	//pastels
+	
+	class func pastelPinkColor()->UIColor {
+		return UIColor(r:222, g:165, b:164)
+	}
+	
+	class func pastelBlueColor()->UIColor {
+		return UIColor(r:174, g:198, b:207)
+	}
     
     class func randomCustomColor()->UIColor {
         let customColorArray = [UIColor.turquoiseColor(), UIColor.greenSeaColor(), UIColor.emeraldColor(), UIColor.nephritisColor(), UIColor.peterRiverColor(), UIColor.belizeHoleColor(), UIColor.amethystColor(), UIColor.wisteriaColor(), UIColor.wetAsphaltColor(), UIColor.midnightBlueColor(), UIColor.sunflowerColor(), UIColor.carrotColor(), UIColor.pumpkinColor(), UIColor.alizarinColor(), UIColor.pomergranateColor()]
