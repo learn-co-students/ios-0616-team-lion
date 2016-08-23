@@ -56,25 +56,25 @@ let shared = PlaceUserDataStore.sharedDataStore
     }
     
     func setupScene() {
-        view.addSubview(topFrame)
-        topFrame.backgroundColor = UIColor.flatRedColor()
-        topFrame.snp_makeConstraints { (make) in
-            make.top.equalTo(view.snp_top)
-            make.width.equalTo(view.snp_width)
-            make.height.equalTo(view.snp_width).dividedBy(5.8)
-        }
-        
-        let titleLabel = UILabel()
-        titleLabel.text = "Profile"
-        titleLabel.backgroundColor = UIColor.flatRedColor()
-        titleLabel.textColor = UIColor.flatWhiteColor()
-        titleLabel.font = UIFont(name: "Noteworthy", size: 28)
-        view.addSubview(titleLabel)
-        titleLabel.snp_makeConstraints { (make) in
-            make.bottom.equalTo(topFrame.snp_bottom).offset(-5)
-            make.centerX.equalTo(topFrame.snp_centerX)
-        }
-        
+//        view.addSubview(topFrame)
+//        topFrame.backgroundColor = UIColor.flatRedColor()
+//        topFrame.snp_makeConstraints { (make) in
+//            make.top.equalTo(view.snp_top)
+//            make.width.equalTo(view.snp_width)
+//            make.height.equalTo(view.snp_width).dividedBy(5.8)
+//        }
+//        
+//        let titleLabel = UILabel()
+//        titleLabel.text = "Profile"
+//        titleLabel.backgroundColor = UIColor.flatRedColor()
+//        titleLabel.textColor = UIColor.flatWhiteColor()
+//        titleLabel.font = UIFont(name: "Noteworthy", size: 28)
+//        view.addSubview(titleLabel)
+//        titleLabel.snp_makeConstraints { (make) in
+//            make.bottom.equalTo(topFrame.snp_bottom).offset(-5)
+//            make.centerX.equalTo(topFrame.snp_centerX)
+//        }
+		
         view.addSubview(loginButton)
 //        loginButton.delegate = self
         loginButton.frame = CGRectMake(15, 30, 80, 30)

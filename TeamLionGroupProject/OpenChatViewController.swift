@@ -325,11 +325,3 @@ extension OpenChatViewController: UIImagePickerControllerDelegate, UINavigationC
 	}
 }
 
-extension OpenChatViewController: OpenChatHeaderViewDelegate {
-	
-	func backButtonTapped() {
-		tabBarController?.selectedIndex = 0
-	}
-}
-
-

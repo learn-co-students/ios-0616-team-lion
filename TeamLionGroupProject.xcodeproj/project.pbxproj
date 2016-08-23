@@ -24,7 +24,11 @@
 		BEC67E4D1D53E13A00D2D030 /* PlaceUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E4C1D53E13A00D2D030 /* PlaceUser.swift */; };
 		BEC67E4F1D53E14700D2D030 /* PlacePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E4E1D53E14700D2D030 /* PlacePost.swift */; };
 		FF5C94211D6651E4009EB219 /* OpenChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5C94201D6651E4009EB219 /* OpenChatViewController.swift */; };
-		FF5C94231D6751AC009EB219 /* OpenChatHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5C94221D6751AC009EB219 /* OpenChatHeaderView.swift */; };
+		FF654BF81D6C966D004E4AC5 /* PageMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF654BF71D6C966D004E4AC5 /* PageMenuViewController.swift */; };
+		FF654C021D6C96FD004E4AC5 /* CAPSPageMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF654BF91D6C96FD004E4AC5 /* CAPSPageMenu.swift */; };
+		FF654C031D6C96FD004E4AC5 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF654BFA1D6C96FD004E4AC5 /* Info.plist */; };
+		FF654C041D6C96FD004E4AC5 /* PageMenu.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = FF654BFC1D6C96FD004E4AC5 /* PageMenu.xcconfig */; };
+		FF654C051D6C96FD004E4AC5 /* PageMenu-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FF654BFD1D6C96FD004E4AC5 /* PageMenu-dummy.m */; };
 		FFE94A951D53D9730036ED38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94A941D53D9730036ED38 /* AppDelegate.swift */; };
 		FFE94A971D53D9730036ED38 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94A961D53D9730036ED38 /* LoginViewController.swift */; };
 		FFE94A9A1D53D9730036ED38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFE94A981D53D9730036ED38 /* Main.storyboard */; };
@@ -59,7 +63,14 @@
 		DCF91F518C6C9AD294129C82 /* Pods-TeamLionGroupProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamLionGroupProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeamLionGroupProject/Pods-TeamLionGroupProject.release.xcconfig"; sourceTree = "<group>"; };
 		FF5C93851D64A5D2009EB219 /* JSQMessagesViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSQMessagesViewController.framework; path = "../../../Library/Developer/Xcode/DerivedData/TeamLionGroupProject-bqdmmrzpcukwogbkobqbozslftkg/Build/Products/Debug-iphonesimulator/JSQMessagesViewController/JSQMessagesViewController.framework"; sourceTree = "<group>"; };
 		FF5C94201D6651E4009EB219 /* OpenChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenChatViewController.swift; sourceTree = "<group>"; };
-		FF5C94221D6751AC009EB219 /* OpenChatHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenChatHeaderView.swift; sourceTree = "<group>"; };
+		FF654BF71D6C966D004E4AC5 /* PageMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMenuViewController.swift; sourceTree = "<group>"; };
+		FF654BF91D6C96FD004E4AC5 /* CAPSPageMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CAPSPageMenu.swift; path = Classes/CAPSPageMenu.swift; sourceTree = "<group>"; };
+		FF654BFA1D6C96FD004E4AC5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF654BFB1D6C96FD004E4AC5 /* PageMenu.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = PageMenu.modulemap; sourceTree = "<group>"; };
+		FF654BFC1D6C96FD004E4AC5 /* PageMenu.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = PageMenu.xcconfig; sourceTree = "<group>"; };
+		FF654BFD1D6C96FD004E4AC5 /* PageMenu-dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PageMenu-dummy.m"; sourceTree = "<group>"; };
+		FF654BFE1D6C96FD004E4AC5 /* PageMenu-prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PageMenu-prefix.pch"; sourceTree = "<group>"; };
+		FF654BFF1D6C96FD004E4AC5 /* PageMenu-umbrella.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PageMenu-umbrella.h"; sourceTree = "<group>"; };
 		FFE94A911D53D9730036ED38 /* TeamLionGroupProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamLionGroupProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFE94A941D53D9730036ED38 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFE94A961D53D9730036ED38 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				FFE94A961D53D9730036ED38 /* LoginViewController.swift */,
+				FF654BF71D6C966D004E4AC5 /* PageMenuViewController.swift */,
 				BEC67E421D53DF8100D2D030 /* MarketplaceCollectionViewController.swift */,
 				BEC67E441D53DFCD00D2D030 /* NewPostViewController.swift */,
 				BEC67E471D53E04300D2D030 /* ProfileViewController.swift */,
@@ -123,7 +135,6 @@
 				BE3FF0571D5D68A6001D2C9E /* PostDetailViewController.swift */,
 				1BD989021D6244C3004ED215 /* FriendsListController.swift */,
 				FF5C94201D6651E4009EB219 /* OpenChatViewController.swift */,
-				FF5C94221D6751AC009EB219 /* OpenChatHeaderView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -149,9 +160,34 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		FF654C001D6C96FD004E4AC5 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				FF654BFA1D6C96FD004E4AC5 /* Info.plist */,
+				FF654BFB1D6C96FD004E4AC5 /* PageMenu.modulemap */,
+				FF654BFC1D6C96FD004E4AC5 /* PageMenu.xcconfig */,
+				FF654BFD1D6C96FD004E4AC5 /* PageMenu-dummy.m */,
+				FF654BFE1D6C96FD004E4AC5 /* PageMenu-prefix.pch */,
+				FF654BFF1D6C96FD004E4AC5 /* PageMenu-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/PageMenu";
+			sourceTree = "<group>";
+		};
+		FF654C011D6C96FD004E4AC5 /* PageMenu */ = {
+			isa = PBXGroup;
+			children = (
+				FF654BF91D6C96FD004E4AC5 /* CAPSPageMenu.swift */,
+				FF654C001D6C96FD004E4AC5 /* Support Files */,
+			);
+			name = PageMenu;
+			path = Pods/PageMenu;
+			sourceTree = "<group>";
+		};
 		FFE94A881D53D9730036ED38 = {
 			isa = PBXGroup;
 			children = (
+				FF654C011D6C96FD004E4AC5 /* PageMenu */,
 				FFE94A931D53D9730036ED38 /* TeamLionGroupProject */,
 				FFE94A921D53D9730036ED38 /* Products */,
 				FE0ACB3E835C53C24CECCE64 /* Pods */,
@@ -228,7 +264,7 @@
 				TargetAttributes = {
 					FFE94A901D53D9730036ED38 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = RP6364VX67;
+						DevelopmentTeam = C7U2ZE2237;
 					};
 				};
 			};
@@ -255,9 +291,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF654C041D6C96FD004E4AC5 /* PageMenu.xcconfig in Resources */,
 				FFE94A9F1D53D9730036ED38 /* LaunchScreen.storyboard in Resources */,
 				FFE94A9C1D53D9730036ED38 /* Assets.xcassets in Resources */,
 				FFE94A9A1D53D9730036ED38 /* Main.storyboard in Resources */,
+				FF654C031D6C96FD004E4AC5 /* Info.plist in Resources */,
 				1BC10C821D58D1C5006E9747 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -329,15 +367,17 @@
 				BEC67E4F1D53E14700D2D030 /* PlacePost.swift in Sources */,
 				FFE94AB61D58FE810036ED38 /* ProfileHeaderView.swift in Sources */,
 				BEC67E481D53E04300D2D030 /* ProfileViewController.swift in Sources */,
+				FF654BF81D6C966D004E4AC5 /* PageMenuViewController.swift in Sources */,
 				BEC67E431D53DF8100D2D030 /* MarketplaceCollectionViewController.swift in Sources */,
 				FFE94A951D53D9730036ED38 /* AppDelegate.swift in Sources */,
 				BEC67E4D1D53E13A00D2D030 /* PlaceUser.swift in Sources */,
+				FF654C021D6C96FD004E4AC5 /* CAPSPageMenu.swift in Sources */,
 				BE3FF0581D5D68A6001D2C9E /* PostDetailViewController.swift in Sources */,
 				FFE94AAD1D54E7320036ED38 /* UIViewExtensions.swift in Sources */,
-				FF5C94231D6751AC009EB219 /* OpenChatHeaderView.swift in Sources */,
 				1BC10C8A1D5A174A006E9747 /* PlaceUserDataStore.swift in Sources */,
 				1BCEC75A1D5D7A89006A8418 /* Friend.swift in Sources */,
 				FFE94AAB1D54E7320036ED38 /* UIColorExtensions.swift in Sources */,
+				FF654C051D6C96FD004E4AC5 /* PageMenu-dummy.m in Sources */,
 				BE0049001D5A2C68005F3E2C /* PhotoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -466,7 +506,7 @@
 				);
 				INFOPLIST_FILE = TeamLionGroupProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = DavidVY.TeamLionGroupProject;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DavidVY.TeamLionGroupProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -489,7 +529,7 @@
 				);
 				INFOPLIST_FILE = TeamLionGroupProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = DavidVY.TeamLionGroupProject;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DavidVY.TeamLionGroupProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";

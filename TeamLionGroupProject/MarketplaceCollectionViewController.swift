@@ -25,6 +25,7 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
             print("result \(result)")
         }
         setUpCollectionCells()
+
         generateScene()
         getAllPosts()
         
@@ -122,7 +123,8 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         self.view.addSubview(collectionView)
         
     }
-    
+	
+	//DONT NEED THIS FUNCTION ANYMORE **** VVVVV
     func generateScene() {
         
         view.backgroundColor = UIColor.flatWhiteColor()
