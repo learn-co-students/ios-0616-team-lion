@@ -20,5 +20,6 @@ target 'TeamLionGroupProject' do
   pod 'JSQMessagesViewController'
   pod 'ChameleonFramework/Swift'
   pod 'PageMenu'
+  pod 'SDWebImage', '~>3.8'
 
 end

@@ -17,7 +17,6 @@
 		BE0049001D5A2C68005F3E2C /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0048FF1D5A2C68005F3E2C /* PhotoViewController.swift */; };
 		BE3FF0581D5D68A6001D2C9E /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3FF0571D5D68A6001D2C9E /* PostDetailViewController.swift */; };
 		BE6E6CC81D58FA6A00FF8416 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6E6CC71D58FA6A00FF8416 /* TabBarController.swift */; };
-		BEC67E431D53DF8100D2D030 /* MarketplaceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E421D53DF8100D2D030 /* MarketplaceCollectionViewController.swift */; };
 		BEC67E451D53DFCD00D2D030 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E441D53DFCD00D2D030 /* NewPostViewController.swift */; };
 		BEC67E481D53E04300D2D030 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E471D53E04300D2D030 /* ProfileViewController.swift */; };
 		BEC67E4B1D53E0F900D2D030 /* PostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E4A1D53E0F900D2D030 /* PostViewCell.swift */; };
@@ -29,6 +28,7 @@
 		FF654C031D6C96FD004E4AC5 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF654BFA1D6C96FD004E4AC5 /* Info.plist */; };
 		FF654C041D6C96FD004E4AC5 /* PageMenu.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = FF654BFC1D6C96FD004E4AC5 /* PageMenu.xcconfig */; };
 		FF654C051D6C96FD004E4AC5 /* PageMenu-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FF654BFD1D6C96FD004E4AC5 /* PageMenu-dummy.m */; };
+		FFD2E9C51D6CDF2300524A03 /* MarketplaceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E421D53DF8100D2D030 /* MarketplaceCollectionViewController.swift */; };
 		FFE94A951D53D9730036ED38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94A941D53D9730036ED38 /* AppDelegate.swift */; };
 		FFE94A971D53D9730036ED38 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94A961D53D9730036ED38 /* LoginViewController.swift */; };
 		FFE94A9A1D53D9730036ED38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFE94A981D53D9730036ED38 /* Main.storyboard */; };
@@ -355,6 +355,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFD2E9C51D6CDF2300524A03 /* MarketplaceCollectionViewController.swift in Sources */,
 				FFE94A971D53D9730036ED38 /* LoginViewController.swift in Sources */,
 				1BD989031D6244C3004ED215 /* FriendsListController.swift in Sources */,
 				BE6E6CC81D58FA6A00FF8416 /* TabBarController.swift in Sources */,
@@ -368,7 +369,6 @@
 				FFE94AB61D58FE810036ED38 /* ProfileHeaderView.swift in Sources */,
 				BEC67E481D53E04300D2D030 /* ProfileViewController.swift in Sources */,
 				FF654BF81D6C966D004E4AC5 /* PageMenuViewController.swift in Sources */,
-				BEC67E431D53DF8100D2D030 /* MarketplaceCollectionViewController.swift in Sources */,
 				FFE94A951D53D9730036ED38 /* AppDelegate.swift in Sources */,
 				BEC67E4D1D53E13A00D2D030 /* PlaceUser.swift in Sources */,
 				FF654C021D6C96FD004E4AC5 /* CAPSPageMenu.swift in Sources */,
