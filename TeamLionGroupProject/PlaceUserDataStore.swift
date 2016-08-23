@@ -50,7 +50,7 @@ class PlaceUserDataStore {
         self.postsDataSnapshot.append(snapshot)
             guard let snapshotData = snapshot.value as? [String: String] else{  print("error getting snapshot"); return }
 
-            var post = PlacePost( itemImages: [], itemTitle: "", itemDescription: "", price: 0, user: self.aUser)
+            var post = PlacePost( itemImages: [], itemTitle: "", itemDescription: "", price: 0, user: self.aUser, userID: "")
             
             if let snapshotdataDescription = snapshotData["description"]{
                 post.itemDescription = snapshotdataDescription
@@ -85,7 +85,7 @@ class PlaceUserDataStore {
         
     }
     
-    func postPictureToDatabase(pictue: UIImage, title: String, desciption: String, price: String) {
+    func postPictureToDatabase(pictue: UIImage, title: String, description: String, price: String, userID: String) {
         var piccopy = UIImage()
         piccopy = pictue
         let postImageData: NSData = UIImagePNGRepresentation(piccopy)!
@@ -105,13 +105,14 @@ class PlaceUserDataStore {
                 let postPicURLString = downloadURL?.absoluteString
                 if let user = FIRAuth.auth()?.currentUser {
                     let uid = user.uid
-                    let userRef = self.ref.child("users/\(uid)/posts")
+                    let userRef = self.ref.child("posts")
                     self.postRef = userRef.childByAutoId()
                     print(self.postRef)
                     self.postRef.updateChildValues(["title": title])
                     self.postRef.updateChildValues(["price": price])
-                    self.postRef.updateChildValues(["description": desciption])
+                    self.postRef.updateChildValues(["description": description])
                     self.postRef.updateChildValues(["image": postPicURLString!])
+                    self.postRef.updateChildValues(["userID": userID])
                 }
 
             }
@@ -248,7 +249,7 @@ class PlaceUserDataStore {
         FIRDatabase.database().reference().child("users").child(self.uid).child("posts").observeEventType(.ChildAdded, withBlock: {(snapshot) in
             guard let snapshotData = snapshot.value as? [String: String] else{  print("error getting snapshot"); return }
             
-            var post = PlacePost( itemImages: [], itemTitle: "", itemDescription: "", price: 0, user: self.aUser)
+            var post = PlacePost( itemImages: [], itemTitle: "", itemDescription: "", price: 0, user: self.aUser, userID: "")
             print("auser within post \(self.aUser.name)")
             if let snapshotdataDescription = snapshotData["description"]{
                 post.itemDescription = snapshotdataDescription

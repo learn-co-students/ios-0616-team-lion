@@ -24,13 +24,13 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         }
         setUpCollectionCells()
         generateScene()
-        self.shared.getAllPostsByUid { (result) in
-            self.shared.currentUser.friendsPosts.append(result)
-            NSOperationQueue.mainQueue().addOperationWithBlock({ 
-                self.collectionView.reloadData()
-            })
-        }
-        self.collectionView.reloadData()
+//        self.shared.getAllPostsByUid { (result) in
+//            self.shared.currentUser.friendsPosts.append(result)
+//            NSOperationQueue.mainQueue().addOperationWithBlock({ 
+//                self.collectionView.reloadData()
+//            })
+//        }
+        //self.collectionView.reloadData()
         
         
     }
@@ -43,7 +43,7 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("basicCell", forIndexPath: indexPath) as! PostViewCell
         
-        cell.postImage.image = self.shared.currentUser.friendsPosts[indexPath.item].itemImages[0]
+        //cell.postImage.image = self.shared.currentUser.friendsPosts[indexPath.item].itemImages[0]
         cell.priceLabel.text = "$\(self.shared.currentUser.friendsPosts[indexPath.item].price)"
         cell.nameLabel.text = self.shared.currentUser.friendsPosts[indexPath.item].itemTitle
         

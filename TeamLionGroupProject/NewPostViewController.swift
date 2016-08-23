@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import DynamicButton
 import CCTextFieldEffects
-
+import FirebaseAuth
 class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, sendPhoto {
 
 	let datastore = PlaceUserDataStore.sharedDataStore
@@ -138,11 +138,11 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
             alertController.addAction(cancelAction)
             
             let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-                let post = PlacePost(itemImages: [self.picture.image!], itemTitle: self.itemNameField.text!, itemDescription: self.itemDescriptionField.text, price: Int(self.itemPriceField.text!)!, user: self.datastore.aUser)
+                let post = PlacePost(itemImages: [self.picture.image!], itemTitle: self.itemNameField.text!, itemDescription: self.itemDescriptionField.text, price: Int(self.itemPriceField.text!)!, user: self.datastore.aUser, userID: "")
                 
                 let pic = self.picture.image!
-                
-                self.datastore.postPictureToDatabase(pic, title: self.itemNameField.text!, desciption: self.itemDescriptionField.text, price: self.itemPriceField.text!)
+                let userID = FIRAuth.auth()?.currentUser?.uid
+                self.datastore.postPictureToDatabase(pic, title: self.itemNameField.text!, description: self.itemDescriptionField.text, price: self.itemPriceField.text!, userID: userID!)
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
             alertController.addAction(OKAction)
