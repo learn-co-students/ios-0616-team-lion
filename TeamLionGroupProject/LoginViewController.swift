@@ -101,8 +101,11 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 	
 	func moveToMarket() {
 		
-		let pageMenuVC = PageMenuViewController()
-		self.presentViewController(pageMenuVC, animated: true, completion: nil)
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		let naviVC = storyboard.instantiateViewControllerWithIdentifier("NavigationVC") as! UINavigationController
+		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+		appDelegate.window?.rootViewController = naviVC
+
 	}
 	
 	func setupScene() {

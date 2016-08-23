@@ -21,26 +21,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9HG-dA-ucD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1090" y="184"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="eAG-4s-JH0">
-            <objects>
-                <tabBarController storyboardIdentifier="tabBar" id="mAc-2O-b26" customClass="TabBarController" customModule="TeamLionGroupProject" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="n7d-tj-ljL">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="Zik-vM-d9N" kind="presentation" id="i96-xe-KkI"/>
-                        <segue destination="1O1-Mm-aR9" kind="relationship" relationship="viewControllers" id="bAS-uc-cSI"/>
-                        <segue destination="DPW-qn-mNB" kind="relationship" relationship="viewControllers" id="pGb-wj-y3s"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JjV-eA-Bkg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1090" y="-645"/>
+            <point key="canvasLocation" x="-1018" y="457"/>
         </scene>
         <!--Direct Chat View Controller-->
         <scene sceneID="MFf-fZ-kbn">
@@ -59,44 +40,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vez-fv-Ql0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1186" y="-2484"/>
-        </scene>
-        <!--Profile View Controller-->
-        <scene sceneID="7S8-rD-w5R">
-            <objects>
-                <viewController storyboardIdentifier="ProfileView" id="1O1-Mm-aR9" userLabel="Profile View Controller" customClass="ProfileViewController" customModule="TeamLionGroupProject" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="eqe-qt-d02"/>
-                        <viewControllerLayoutGuide type="bottom" id="xKt-rU-13b"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kX1-zS-KVz">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="eRB-5l-FqE"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SAT-uw-L1k" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-298" y="-957"/>
-        </scene>
-        <!--Marketplace View Controller-->
-        <scene sceneID="2mw-6Z-sGa">
-            <objects>
-                <viewController id="DPW-qn-mNB" userLabel="Marketplace View Controller" customClass="MarketplaceCollectionViewController" customModule="TeamLionGroupProject" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="bo4-nR-xbx"/>
-                        <viewControllerLayoutGuide type="bottom" id="PQb-qq-rw0"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="PKM-OZ-Rud">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="dfx-4h-XgZ"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1Fa-6U-xNc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-298" y="-304"/>
         </scene>
         <!--Page Menu View Controller-->
         <scene sceneID="Zdh-Ly-Y9G">
@@ -120,7 +63,7 @@
         <!--Navigation Controller-->
         <scene sceneID="c6d-5E-vc1">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sPh-YS-PZC" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationVC" automaticallyAdjustsScrollViewInsets="NO" id="sPh-YS-PZC" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="kf0-tm-Tks">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
