@@ -29,7 +29,6 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         }
 		
         setUpCollectionCells()
-
         getAllPosts()
 		
     }
