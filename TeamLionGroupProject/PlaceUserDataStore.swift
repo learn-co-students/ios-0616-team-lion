@@ -50,7 +50,7 @@ class PlaceUserDataStore {
         self.postsDataSnapshot.append(snapshot)
             guard let snapshotData = snapshot.value as? [String: String] else{  print("error getting snapshot"); return }
 
-            var post = PlacePost( itemImages: [], itemTitle: "", itemDescription: "", price: 0, user: self.aUser, userID: "")
+			var post = PlacePost( itemImages: UIImage(), itemImageURL: "", itemTitle: "", itemDescription: "", price: "0", user: self.aUser, userID: "")
             
             if let snapshotdataDescription = snapshotData["description"]{
                 post.itemDescription = snapshotdataDescription
@@ -61,11 +61,11 @@ class PlaceUserDataStore {
             if str == str {
             guard let url = NSURL(string: str!) else {print("no image"); return}
                 guard let data = NSData(contentsOfURL: url)else{return} //make sure your image in this url does exist, otherwise unwrap in a if let check
-            post.itemImages.append(UIImage(data: data)!)
+            //post.itemImages.append(UIImage(data: data)!)
 
             }
             post.itemTitle = snapshotData["title"]!
-            post.price = Int(snapshotData["price"]!)!
+            post.price = snapshotData["price"]!
             completion(result: post)
         }, withCancelBlock: nil)
 
@@ -249,7 +249,7 @@ class PlaceUserDataStore {
         FIRDatabase.database().reference().child("users").child(self.uid).child("posts").observeEventType(.ChildAdded, withBlock: {(snapshot) in
             guard let snapshotData = snapshot.value as? [String: String] else{  print("error getting snapshot"); return }
             
-            var post = PlacePost( itemImages: [], itemTitle: "", itemDescription: "", price: 0, user: self.aUser, userID: "")
+            var post = PlacePost( itemImages: UIImage(), itemImageURL: "", itemTitle: "", itemDescription: "", price: "0", user: self.aUser, userID: "")
             print("auser within post \(self.aUser.name)")
             if let snapshotdataDescription = snapshotData["description"]{
                 post.itemDescription = snapshotdataDescription
@@ -260,11 +260,11 @@ class PlaceUserDataStore {
             if str == str {
                 guard let url = NSURL(string: str!) else {print("no image"); return}
                 guard let data = NSData(contentsOfURL: url)else{return} //make sure your image in this url does exist, otherwise unwrap in a if let check
-                post.itemImages.append(UIImage(data: data)!)
+           //     post.itemImages.append(UIImage(data: data)!)
                 
             }
             post.itemTitle = snapshotData["title"]!
-            post.price = Int(snapshotData["price"]!)!
+            post.price = snapshotData["price"]!
             print("FRIENDSPOST \(post)")
 
             completion(result: post)

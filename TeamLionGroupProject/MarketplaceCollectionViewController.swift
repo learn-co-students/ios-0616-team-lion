@@ -17,10 +17,10 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
     var shared = PlaceUserDataStore.sharedDataStore
     var collectionView: UICollectionView!
     let topFrame = UIImageView()
-//    var postArray = [post1, post2, post3, post4, post5, post6, post7, post8, post9, post10, post11, post12]
     var posts = [FIRDataSnapshot]()
     var ref: FIRDatabaseReference!
-	var imageUrlArray = [String]()
+//	var imageUrlArray = [String]()
+	var postArray = [PlacePost]()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,51 +29,21 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         }
 		
         setUpCollectionCells()
-		getAllImageURLs()
-        //getAllPosts()
-        
+
+        getAllPosts()
+		
     }
     
     override func viewWillAppear(animated: Bool) {
         tabBarController?.tabBar.hidden = false
 		
+		
 		collectionView.reloadData()
     }
     
     
-    
-    func getAllPosts(){
-        
-        self.ref = FIRDatabase.database().reference()
-        self.ref.child("posts").observeEventType(.ChildAdded, withBlock: {(snapshot) -> Void in
-            print(snapshot)
-            
-            
-            var post = snapshot.value as! Dictionary<String,String>
-            
-            if post["user"] == FIRAuth.auth()?.currentUser?.uid{
-                print("filting user posts")
-            }else{
-                //self.shared.currentUser.friendsPosts.append(<#T##newElement: Element##Element#>)
-                self.posts.append(snapshot)
-                self.collectionView.reloadData()
-                
-            }
-        })
-        
-        
-        print("reloading")
-        //self.collectionView.reloadData()
-        
-        
-        
-        
-        //self.collectionView.reloadData()
-        
-        
-    }
-	
-	func getAllImageURLs() {
+
+	func getAllPosts() {
 		
 		print("Before block")
 		
@@ -81,18 +51,23 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
 		self.ref.child("posts").observeEventType(.ChildAdded, withBlock: {(snapshot) -> Void in
 
 			let data = snapshot.value!
-			let imageURL = data["image"] as! String
-			self.imageUrlArray.append(imageURL)
-			self.collectionView.reloadData()
+//			let imageURL = data["image"] as! String
+//			self.imageUrlArray.append(imageURL)
+			
+			
+			var post = PlacePost()
+			post.itemDescription = data["description"] as! String
+			post.price = data["price"] as! String
+			post.itemTitle = data["title"] as! String
+			post.userID = data["userID"] as! String
+			post.itemImageURL = data["image"] as! String
 
-			print("URLARRAY = \(self.imageUrlArray)")
+			self.postArray.append(post)
 			
+			self.collectionView.reloadData()
 			
-			
-			
-			
-//			self.postRefArray.append(snapshot.key)
-//			print("SNAPSHOTrEFaRRAY = \(self.postRefArray)")
+			print(self.postArray)
+
 			
 			
 		})
@@ -100,19 +75,17 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
     
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imageUrlArray.count
+        return postArray.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("basicCell", forIndexPath: indexPath) as! PostViewCell
-        
-        //cell.postImage.image = self.shared.currentUser.friendsPosts[indexPath.item].itemImages[0]
-//        cell.priceLabel.text = "$\(self.shared.currentUser.friendsPosts[indexPath.item].price)"
-//        cell.nameLabel.text = self.shared.currentUser.friendsPosts[indexPath.item].itemTitle
-//		//cell.postImage.sd_setImageWithURL(<#T##url: NSURL!##NSURL!#>)
 		
-		let url = NSURL(string: imageUrlArray[indexPath.item])
+		let post = postArray[indexPath.item]
+		cell.priceLabel.text = "$\(post.price)"
+		
+		let url = NSURL(string: post.itemImageURL)
 		cell.postImage.sd_setImageWithURL(url, placeholderImage: UIImage(named: "loadingImage"))
 		
         return cell
@@ -122,11 +95,12 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         // handle tap events
         print("You selected cell #\(indexPath.item)!")
         let postDetailVC = PostDetailViewController()
-        postDetailVC.itemTitle = self.shared.currentUser.friendsPosts[indexPath.item].itemTitle
-        postDetailVC.itemPrice = self.shared.currentUser.friendsPosts[indexPath.item].price
-        postDetailVC.descriptionField.text = self.shared.currentUser.friendsPosts[indexPath.item].itemDescription
-        postDetailVC.itemImage = self.shared.currentUser.friendsPosts[indexPath.item].itemImages[0]
-
+		let post = postArray[indexPath.item]
+        postDetailVC.itemTitle = post.itemTitle
+        postDetailVC.itemPrice = post.price
+        postDetailVC.itemDescription = post.itemDescription
+		let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PostViewCell
+		postDetailVC.itemImage = cell.postImage.image
         
         self.presentViewController(postDetailVC, animated: true, completion:  nil)
     }

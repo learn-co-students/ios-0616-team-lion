@@ -138,7 +138,7 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
             alertController.addAction(cancelAction)
             
             let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-                let post = PlacePost(itemImages: [self.picture.image!], itemTitle: self.itemNameField.text!, itemDescription: self.itemDescriptionField.text, price: Int(self.itemPriceField.text!)!, user: self.datastore.aUser, userID: "")
+				let post = PlacePost(itemImages: self.picture.image!, itemImageURL:"", itemTitle: self.itemNameField.text!, itemDescription: self.itemDescriptionField.text, price: self.itemPriceField.text!, user: self.datastore.aUser, userID: "")
                 
                 let pic = self.picture.image!
                 let userID = FIRAuth.auth()?.currentUser?.uid

@@ -130,7 +130,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! PostViewCell
     
-		cell.postImage.image = shared.currentUser.postings[indexPath.item].itemImages[0]
+		//cell.postImage.image = shared.currentUser.postings[indexPath.item].itemImages[0]
 		
 		return cell
 	}
@@ -143,7 +143,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
         postDetailVC.itemTitle = shared.currentUser.postings[indexPath.item].itemTitle
         postDetailVC.itemPrice = shared.currentUser.postings[indexPath.item].price
         postDetailVC.descriptionField.text = shared.currentUser.postings[indexPath.item].itemDescription
-        postDetailVC.itemImage = shared.currentUser.postings[indexPath.item].itemImages[0]
+        //postDetailVC.itemImage = shared.currentUser.postings[indexPath.item].itemImages[0]
         postDetailVC.fullName = shared.currentUser.name
         postDetailVC.profilePic.image = shared.currentUser.picture
         
