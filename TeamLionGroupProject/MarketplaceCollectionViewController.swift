@@ -35,8 +35,8 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
     }
     
     override func viewWillAppear(animated: Bool) {
-        tabBarController?.tabBar.hidden = false
 		
+		self.edgesForExtendedLayout = UIRectEdge.None
 		
 		collectionView.reloadData()
     }
