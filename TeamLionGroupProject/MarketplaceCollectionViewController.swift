@@ -10,13 +10,15 @@ import UIKit
 import SnapKit
 import ChameleonFramework
 import DynamicButton
+import Firebase
 
 class MarketplaceCollectionViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UINavigationBarDelegate {
     var shared = PlaceUserDataStore.sharedDataStore
     var collectionView: UICollectionView!
     let topFrame = UIImageView()
 //    var postArray = [post1, post2, post3, post4, post5, post6, post7, post8, post9, post10, post11, post12]
-    
+    var posts = [FIRDataSnapshot]()
+    var ref: FIRDatabaseReference!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.shared.getUserCredentialsForProfileVC { (result) in
@@ -24,12 +26,45 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         }
         setUpCollectionCells()
         generateScene()
-
+        getAllPosts()
         
     }
     
     override func viewWillAppear(animated: Bool) {
         tabBarController?.tabBar.hidden = false
+    }
+    
+    
+    
+    func getAllPosts(){
+        
+        self.ref = FIRDatabase.database().reference()
+        self.ref.child("posts").observeEventType(.ChildAdded, withBlock: {(snapshot) -> Void in
+            print(snapshot)
+            
+            
+            var post = snapshot.value as! Dictionary<String,String>
+            
+            if post["user"] == FIRAuth.auth()?.currentUser?.uid{
+                print("filting user posts")
+            }else{
+                //self.shared.currentUser.friendsPosts.append(<#T##newElement: Element##Element#>)
+                self.posts.append(snapshot)
+                self.collectionView.reloadData()
+                
+            }
+        })
+        
+        
+        print("reloading")
+        //self.collectionView.reloadData()
+        
+        
+        
+        
+        //self.collectionView.reloadData()
+        
+        
     }
     
     
@@ -52,7 +87,6 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         // handle tap events
         print("You selected cell #\(indexPath.item)!")
         let postDetailVC = PostDetailViewController()
-        
         postDetailVC.itemTitle = self.shared.currentUser.friendsPosts[indexPath.item].itemTitle
         postDetailVC.itemPrice = self.shared.currentUser.friendsPosts[indexPath.item].price
         postDetailVC.descriptionField.text = self.shared.currentUser.friendsPosts[indexPath.item].itemDescription

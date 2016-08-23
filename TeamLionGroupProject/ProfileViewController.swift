@@ -144,7 +144,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
         postDetailVC.itemPrice = shared.currentUser.postings[indexPath.item].price
         postDetailVC.descriptionField.text = shared.currentUser.postings[indexPath.item].itemDescription
         postDetailVC.itemImage = shared.currentUser.postings[indexPath.item].itemImages[0]
-        postDetailVC.fullName = shared.currentUser.name!
+        postDetailVC.fullName = shared.currentUser.name
         postDetailVC.profilePic.image = shared.currentUser.picture
         
         self.presentViewController(postDetailVC, animated: true, completion:  nil)
