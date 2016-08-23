@@ -10,12 +10,13 @@ import Foundation
 import UIKit
 
 struct CurrentUser {
-    var name: String?
-    var picture: UIImage?
+    var name = String()
+    var picture = UIImage()
     var postings = [PlacePost]()
-    var friendsList = [UsersFriend]()
-    
-    
+    //var friendsList = [UsersFriend]()
+    var email = String()
+    var userID = String()
+    var friendsPosts = [PlacePost]()
     //  static var friend: Friend
     
     
@@ -23,7 +24,7 @@ struct CurrentUser {
     static let nameKey = "name"
     static let pictureKey = "picture"
     static let friendsKey = "friends"
-    
+    static let email = "email"
     
 }
 

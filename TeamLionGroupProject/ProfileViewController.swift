@@ -17,7 +17,7 @@ let shared = PlaceUserDataStore.sharedDataStore
     
     
     var name: String?
-    var picture: NSURL?
+    var picture: UIImage?
     var refreshControl = UIRefreshControl()
     var loginButton: FBSDKLoginButton = FBSDKLoginButton()
     let topFrame = UIImageView()
@@ -29,7 +29,10 @@ let shared = PlaceUserDataStore.sharedDataStore
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+		self.shared.getUserCredentialsForProfileVC { (result) in
+            self.name = self.shared.currentUser.name
+            self.picture = self.shared.currentUser.picture
+        }
 		setupCollectionView()
         setupScene()
         
@@ -153,9 +156,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 		case UICollectionElementKindSectionHeader:
 
 			var headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerIdentifier, forIndexPath: indexPath) as! ProfileHeaderView
-            if let name  = self.shared.currentUser.name {
-            headerView.setUpForUser(name, picture: self.shared.currentUser.picture!)
-            }
+            let name = self.shared.currentUser.name
 			headerView.delegate = self
             
             print("login - \(headerView.backToLoginScreen())")
