@@ -42,60 +42,6 @@
             </objects>
             <point key="canvasLocation" x="-1090" y="-645"/>
         </scene>
-        <!--Item-->
-        <scene sceneID="Lfk-yU-3K0">
-            <objects>
-                <viewController id="zh0-DB-qmy" customClass="ChatHomeViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="PMl-OL-oSc"/>
-                        <viewControllerLayoutGuide type="bottom" id="5Lj-yz-g1G"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="i5h-ix-n6d">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="JJS-hA-hGR"/>
-                    <connections>
-                        <segue destination="NMB-Wx-lk4" kind="show" id="h06-Dt-Sl2"/>
-                        <segue destination="SZD-PI-ANO" kind="show" id="2Hk-pT-aqh"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="paU-QD-6sO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-323" y="-2104"/>
-        </scene>
-        <!--Chat Friends Table View Controller-->
-        <scene sceneID="hEi-Tg-KCW">
-            <objects>
-                <tableViewController id="SZD-PI-ANO" customClass="ChatFriendsTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="t1Y-gS-YLO">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="xMi-O6-8l4">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xMi-O6-8l4" id="CgG-tp-vYT">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="SZD-PI-ANO" id="lL2-E9-BYv"/>
-                            <outlet property="delegate" destination="SZD-PI-ANO" id="ikG-ZN-TqI"/>
-                        </connections>
-                    </tableView>
-                    <connections>
-                        <segue destination="FLv-UG-QWc" kind="show" id="WkL-fs-GRU"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Hsg-Vy-I8F" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="454" y="-2484"/>
-        </scene>
         <!--Direct Chat View Controller-->
         <scene sceneID="MFf-fZ-kbn">
             <objects>
@@ -113,24 +59,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vez-fv-Ql0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1186" y="-2484"/>
-        </scene>
-        <!--Agora View Controller-->
-        <scene sceneID="tYF-DW-1YT">
-            <objects>
-                <viewController id="NMB-Wx-lk4" customClass="AgoraViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="qYd-25-yoO"/>
-                        <viewControllerLayoutGuide type="bottom" id="P2Z-ZB-EKP"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="hsd-ib-Prt">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="t2b-RF-YoU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="454" y="-1761"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="7S8-rD-w5R">
@@ -170,69 +98,42 @@
             </objects>
             <point key="canvasLocation" x="-298" y="-304"/>
         </scene>
-        <!--Segement Practice-->
-        <scene sceneID="4dn-ml-jJ2">
+        <!--Page Menu View Controller-->
+        <scene sceneID="Zdh-Ly-Y9G">
             <objects>
-                <viewController id="PCd-zW-98O" customClass="SegementPractice" customModule="TeamLionGroupProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="3yX-7s-XbE" customClass="PageMenuViewController" customModule="TeamLionGroupProject" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="G6B-ON-8ik"/>
-                        <viewControllerLayoutGuide type="bottom" id="Onc-KD-L45"/>
+                        <viewControllerLayoutGuide type="top" id="w3d-Bg-DOc"/>
+                        <viewControllerLayoutGuide type="bottom" id="Sqo-iM-YEv"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="zpt-nK-yr7">
+                    <view key="view" contentMode="scaleToFill" id="hWJ-SV-X6U">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="hFP-2T-raM"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7gw-hX-WKg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mI9-04-tjd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-332" y="370"/>
+            <point key="canvasLocation" x="490" y="457"/>
         </scene>
-        <!--New Post View Controller-->
-        <scene sceneID="coU-Iw-FIb">
+        <!--Navigation Controller-->
+        <scene sceneID="c6d-5E-vc1">
             <objects>
-                <viewController id="La8-mt-cWy" userLabel="New Post View Controller" customClass="NewPostViewController" customModule="TeamLionGroupProject" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="DfV-0S-iZK"/>
-                        <viewControllerLayoutGuide type="bottom" id="vBD-Ea-3h7"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="eqW-j3-eZ1">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0Ph-KJ-jPP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sPh-YS-PZC" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kf0-tm-Tks">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="3yX-7s-XbE" kind="relationship" relationship="rootViewController" id="XNH-O4-Qyg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lQ8-dy-Bcv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="461" y="-957"/>
-        </scene>
-        <!--Friends List Controller-->
-        <scene sceneID="tXd-ep-fid">
-            <objects>
-                <tableViewController id="jnO-kC-cbq" customClass="FriendsListController" customModule="TeamLionGroupProject" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Iuv-OX-N0u">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ftq-K3-MVW">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ftq-K3-MVW" id="5LJ-Mc-DQ2">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="jnO-kC-cbq" id="npf-pk-A72"/>
-                            <outlet property="delegate" destination="jnO-kC-cbq" id="9FZ-nQ-DSU"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QFw-iR-heX" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="591" y="-320"/>
+            <point key="canvasLocation" x="-198" y="457"/>
         </scene>
     </scenes>
 </document>
