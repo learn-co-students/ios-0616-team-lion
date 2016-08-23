@@ -140,7 +140,7 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         //setup Layout
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = UICollectionViewScrollDirection.Vertical
-        layout.sectionInset = UIEdgeInsets(top: 65, left: 0, bottom: 50, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.itemSize = CGSize(width: screenWidth/2.005, height: screenWidth/2.005)
         layout.minimumLineSpacing = 1
         layout.minimumInteritemSpacing = 0
