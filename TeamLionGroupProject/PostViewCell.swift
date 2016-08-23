@@ -44,11 +44,11 @@ class PostViewCell: UICollectionViewCell {
         
         //price label constraints
         contentView.addSubview(priceLabel)
-        priceLabel.textColor = UIColor.whiteColor()
+        priceLabel.textColor = UIColor.flatWhiteColor()
         priceLabel.textAlignment = NSTextAlignment.Right
-        priceLabel.shadowColor = UIColor.blackColor()
+//        priceLabel.shadowColor = UIColor.blackColor()
         priceLabel.snp_makeConstraints { (make) in
-            make.bottom.equalTo(postImage.snp_bottom).offset(-2)
+            make.bottom.equalTo(postImage.snp_bottom)
             make.right.equalTo(postImage.snp_right).offset(-2)
             make.left.equalTo(postImage.snp_left).offset(-2)
             make.height.equalTo(postImage.snp_height).dividedBy(5)

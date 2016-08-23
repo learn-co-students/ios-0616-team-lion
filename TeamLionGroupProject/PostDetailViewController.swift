@@ -54,6 +54,18 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
     
     func buyButtonTapped() {
         //send to venmo payment link and mark post as sold if paid
+        
+        var itemDescriptionWithPlus = ""
+        for var characters in (itemDescription?.characters)! {
+            if characters == " " {
+                characters = "+"
+            }
+            itemDescriptionWithPlus.append(characters)
+        }
+        
+        //delete cassido later to replace with \(email)
+        let url = NSURL(string: "https://venmo.com/cassidoo?txn=pay&amount=\(itemPrice)&note=Purchasing+from+PLACE:+\(itemDescriptionWithPlus)")!
+        UIApplication.sharedApplication().openURL(url)
     }
     
     func chatButtonPressed(){
@@ -178,6 +190,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         descriptionField.scrollEnabled = false
         descriptionField.backgroundColor = UIColor.flatWhiteColor()
         descriptionField.textContainerInset = UIEdgeInsets(top: 5, left: 30, bottom: 0, right: 30)
+        descriptionField.text = itemDescription
         descriptionField.snp_makeConstraints { (make) in
             make.centerX.equalTo(itemImageView.snp_centerX)
             make.top.equalTo(dividerImage.snp_bottom)

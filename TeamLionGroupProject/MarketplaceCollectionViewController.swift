@@ -52,7 +52,7 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         
         postDetailVC.itemTitle = postArray[indexPath.item].itemTitle
         postDetailVC.itemPrice = postArray[indexPath.item].price
-        postDetailVC.descriptionField.text = postArray[indexPath.item].itemDescription
+        postDetailVC.itemDescription = postArray[indexPath.item].itemDescription
         postDetailVC.itemImage = postArray[indexPath.item].itemImages[0]
         
         self.presentViewController(postDetailVC, animated: true, completion:  nil)
