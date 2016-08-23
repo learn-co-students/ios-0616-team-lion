@@ -24,16 +24,14 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         }
         setUpCollectionCells()
         generateScene()
-//        self.shared.getAllPostsByUid { (result) in
-//            self.shared.currentUser.friendsPosts.append(result)
-//            NSOperationQueue.mainQueue().addOperationWithBlock({ 
-//                self.collectionView.reloadData()
-//            })
-//        }
-        //self.collectionView.reloadData()
-        
+
         
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        tabBarController?.tabBar.hidden = false
+    }
+    
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.shared.currentUser.friendsPosts.count
@@ -59,6 +57,7 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         postDetailVC.itemPrice = self.shared.currentUser.friendsPosts[indexPath.item].price
         postDetailVC.descriptionField.text = self.shared.currentUser.friendsPosts[indexPath.item].itemDescription
         postDetailVC.itemImage = self.shared.currentUser.friendsPosts[indexPath.item].itemImages[0]
+
         
         self.presentViewController(postDetailVC, animated: true, completion:  nil)
     }
@@ -84,6 +83,8 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "basicCell")
         collectionView?.registerClass(PostViewCell.self, forCellWithReuseIdentifier: "basicCell")
         collectionView.backgroundColor = UIColor.flatWhiteColor()
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
         self.view.addSubview(collectionView)
         
     }

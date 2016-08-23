@@ -16,16 +16,27 @@ import FirebaseAuth
 
 class OpenChatViewController: JSQMessagesViewController {
 	
+	var chatType = "OpenChat"
+	
 	var messages = [JSQMessage]()
 	var avatarDict = [String: JSQMessagesAvatarImage]()
-	
+
 	var messageRef = FIRDatabase.database().reference().child("messages")
+
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		view.backgroundColor = UIColor.peterRiverColor()
-		self.tabBarController?.tabBar.hidden = true
+		let dismissSwipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeDetected))
+		dismissSwipe.direction = .Left
+		view.addGestureRecognizer(dismissSwipe)
+		
+		if (chatType == "OpenChat") {
+			messageRef = FIRDatabase.database().reference().child("messages")
+		} else {
+			let uniqueID = ["myID", "tappedUserID"].sort().joinWithSeparator("-")
+			messageRef = FIRDatabase.database().reference().child(uniqueID)
+		}
 		
 		if let currentUser = FIRAuth.auth()?.currentUser {
 			self.senderId = currentUser.uid
@@ -39,6 +50,14 @@ class OpenChatViewController: JSQMessagesViewController {
 		}
 		
 		observeMessages()
+	}
+    
+    override func viewWillAppear(animated: Bool) {
+        self.tabBarController?.tabBar.hidden = true
+    }
+	
+	func swipeDetected() {
+		tabBarController?.selectedIndex = 0
 	}
 	
 	func observeUsers(id: String) {
@@ -301,11 +320,16 @@ extension OpenChatViewController: UIImagePickerControllerDelegate, UINavigationC
 			messages.append(JSQMessage(senderId: senderId, displayName: senderDisplayName, media: videoItem))
 			sendMedia(nil, video: video)
 		}
-		
-		
 		self.dismissViewControllerAnimated(true, completion: nil)
 		collectionView.reloadData()
-		
-		
 	}
 }
+
+extension OpenChatViewController: OpenChatHeaderViewDelegate {
+	
+	func backButtonTapped() {
+		tabBarController?.selectedIndex = 0
+	}
+}
+
+

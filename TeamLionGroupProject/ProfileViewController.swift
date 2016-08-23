@@ -9,6 +9,8 @@
 import UIKit
 import FBSDKCoreKit
 import FirebaseAuth
+import FBSDKLoginKit
+
 
 class ProfileViewController: UIViewController {
 let shared = PlaceUserDataStore.sharedDataStore
@@ -17,6 +19,8 @@ let shared = PlaceUserDataStore.sharedDataStore
     var name: String?
     var picture: UIImage?
     var refreshControl = UIRefreshControl()
+    var loginButton: FBSDKLoginButton = FBSDKLoginButton()
+    let topFrame = UIImageView()
     
 	private let cellIdentifier = "Cell"
 	private let headerIdentifier = "header"
@@ -30,22 +34,51 @@ let shared = PlaceUserDataStore.sharedDataStore
             self.picture = self.shared.currentUser.picture
         }
 		setupCollectionView()
+        setupScene()
         
-        refreshControl.attributedTitle = NSAttributedString(string: "Refresh")
-        refreshControl.tintColor = UIColor.flatRedColor()
-        refreshControl.addTarget(self, action:#selector(refresh) , forControlEvents: UIControlEvents.ValueChanged)
-        collectionView.addSubview(refreshControl)
 
 	}
     
     override func viewWillAppear(animated: Bool) {
-        self.shared.currentUser.postings.removeAll()
-        
-        self.shared.fetchPosts { (result) in
-            self.shared.currentUser.postings.append(result)
             self.collectionView.reloadData()
-            print(result)
+        
+    }
+    
+    func backgroundThread(delay: Double = 0.0, background: (() -> Void)? = nil, completion: (() -> Void)? = nil) {
+        dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue), 0)) {
+            if(background != nil){ background!(); }
+            
+            let popTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)))
+            dispatch_after(popTime, dispatch_get_main_queue()) {
+                if(completion != nil){ completion!(); }
+            }
         }
+    }
+    
+    func setupScene() {
+        view.addSubview(topFrame)
+        topFrame.backgroundColor = UIColor.flatRedColor()
+        topFrame.snp_makeConstraints { (make) in
+            make.top.equalTo(view.snp_top)
+            make.width.equalTo(view.snp_width)
+            make.height.equalTo(view.snp_width).dividedBy(5.8)
+        }
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "Profile"
+        titleLabel.backgroundColor = UIColor.flatRedColor()
+        titleLabel.textColor = UIColor.flatWhiteColor()
+        titleLabel.font = UIFont(name: "Noteworthy", size: 28)
+        view.addSubview(titleLabel)
+        titleLabel.snp_makeConstraints { (make) in
+            make.bottom.equalTo(topFrame.snp_bottom).offset(-5)
+            make.centerX.equalTo(topFrame.snp_centerX)
+        }
+        
+        view.addSubview(loginButton)
+//        loginButton.delegate = self
+        loginButton.frame = CGRectMake(15, 30, 80, 30)
+        loginButton.addTarget(self, action: #selector(backToLoginScreen), forControlEvents: .TouchUpInside)
     }
 
 	func setupCollectionView() {
@@ -73,6 +106,11 @@ let shared = PlaceUserDataStore.sharedDataStore
 		collectionView.snp_makeConstraints { (make) in
 			make.edges.equalTo(view.snp_edges)
 		}
+        
+        refreshControl.attributedTitle = NSAttributedString(string: "Refresh")
+        refreshControl.tintColor = UIColor.flatRedColor()
+        refreshControl.addTarget(self, action:#selector(refresh) , forControlEvents: UIControlEvents.ValueChanged)
+        collectionView.addSubview(refreshControl)
 	}
 }
 
@@ -106,7 +144,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
         postDetailVC.itemPrice = shared.currentUser.postings[indexPath.item].price
         postDetailVC.descriptionField.text = shared.currentUser.postings[indexPath.item].itemDescription
         postDetailVC.itemImage = shared.currentUser.postings[indexPath.item].itemImages[0]
-        postDetailVC.fullName = shared.currentUser.name
+        postDetailVC.fullName = shared.currentUser.name!
         postDetailVC.profilePic.image = shared.currentUser.picture
         
         self.presentViewController(postDetailVC, animated: true, completion:  nil)

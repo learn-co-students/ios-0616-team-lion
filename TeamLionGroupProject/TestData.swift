@@ -32,13 +32,6 @@ var postArray3 = [PlacePost]()
 //TEST USERS
 
 
-let user1 = PlaceUser.init(withName: "Alex", lastName: "Kalina", profilePicture: UIImage(named: "alex"), postings: postArray1)
-let user2 = PlaceUser.init(withName: "Eldon", lastName: "Chan", profilePicture: UIImage(named: "eldon"), postings: postArray2)
-let user3 = PlaceUser.init(withName: "David", lastName: "Park", profilePicture: UIImage(named: "david"), postings: postArray3)
-
-
-
-//TEST POSTS
 
 //var post1 = PlacePost(itemImages: imageArray1, itemTitle: "bike" , itemDescription: "Awesome Bike. It's so awesome. Awesome Bike. It's so awesome. Awesome Bike. It's so awesome. Awesome Bike. It's so awesome. Awesome Bike. It's so awesome. Awesome Bike. It's so awesome. Awesome Bike. It's so awesome. Awesome Bike. It's so awesome.", price: 200)
 //var post2 = PlacePost(itemImages: imageArray2, itemTitle: "phone", itemDescription: "iphone. Used to play flappy bird and send nudes", price: 500)
@@ -52,6 +45,7 @@ let user3 = PlaceUser.init(withName: "David", lastName: "Park", profilePicture: 
 //var post10 = PlacePost(itemImages: imageArray10, itemTitle: "Space Jam VHS", itemDescription: "BEST MOVIE EVER?", price: 50)
 //var post11 = PlacePost(itemImages: imageArray11, itemTitle: "Duck Umbrella", itemDescription: "Be a duck", price: 50)
 //var post12 = PlacePost(itemImages: imageArray12, itemTitle: "Corgi Puppy", itemDescription: "Short dog", price: 1200)
+
 
 
 func generateTestData() {
