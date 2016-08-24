@@ -72,6 +72,8 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, MFMailCo
         view.backgroundColor = UIColor.flatRedColor()
 		
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "contact seller", style: UIBarButtonItemStyle.Done, target: self, action: #selector(contactButtonPressed))
+		let textAttribute = [NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 20)!]
+		self.navigationItem.rightBarButtonItem?.setTitleTextAttributes(textAttribute, forState: .Normal)
 		
         view.addSubview(buyButton)
         buyButton.snp_makeConstraints { (make) in
