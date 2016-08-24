@@ -92,14 +92,15 @@ class PlaceUserDataStore {
         
         let storage = FIRStorage.storage()
         let storageRef = storage.referenceForURL("gs://teamliongroupproject.appspot.com/")
-        
+        let userRef = self.ref.child("posts")
+        self.postRef = userRef.childByAutoId()
 
         let postImageRef = storageRef.child("users/userID/posts/\(self.postRef).jpeg")
         let uploadTask = postImageRef.putData(postImageData, metadata: nil) { metadata, error in
             if (error != nil) {
                 print("did NOT upload picture to firebase")
             } else {
-                // Metadata contains file metadata such as size, content-type, and download URL.
+                // Metadata contains file metadata such as size,1 content-type, and download URL.
                 let downloadURL = metadata?.downloadURL()
                 
                 let postPicURLString = downloadURL?.absoluteString
@@ -274,6 +275,40 @@ class PlaceUserDataStore {
         
     }
 
+    
+    func getPostsForProfileView(){
+        self.ref = FIRDatabase.database().reference()
+        self.ref.child("posts").observeEventType(.ChildAdded, withBlock: {(snapshot) -> Void in
+            print(snapshot)
+            
+            
+            var post = snapshot.value as! Dictionary<String,String>
+            
+            if post["userID"] == FIRAuth.auth()?.currentUser?.uid{
+                //display posts
+            }else{
+                //whatever
+            }
+    })
+    }
+    
+    
+    
+    func getUserEmail(){
+        self.ref = FIRDatabase.database().reference()
+        self.ref.child("posts").observeEventType(.ChildAdded, withBlock: {(snapshot) -> Void in
+            print("PRINTING SNAPSHOT   \(snapshot)")
+            
+            
+            var post = snapshot.value as! Dictionary<String,String>
+            
+            if post["userID"] == FIRAuth.auth()?.currentUser?.uid{
+                //do nothing
+            }else{
+                //whatever
+            }
+        })
+    }
     
     
     

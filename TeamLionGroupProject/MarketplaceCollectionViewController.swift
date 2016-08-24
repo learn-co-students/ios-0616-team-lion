@@ -25,10 +25,8 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
             print("result \(result)")
         }
         setUpCollectionCells()
-
-        generateScene()
-        getAllPosts()
-        
+        //getAllPosts()
+        self.shared.getUserEmail()
     }
     
     override func viewWillAppear(animated: Bool) {
