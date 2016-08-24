@@ -142,6 +142,7 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
 				
                 let pic = self.picture.image!
                 let userID = FIRAuth.auth()?.currentUser?.uid
+                
 				print("THE USER ID IS \(userID)")
 				print("Picture is \(pic)")
 				print("ITEM NAME is \(self.itemNameField.text)")

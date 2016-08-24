@@ -61,11 +61,13 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
 			let data = snapshot.value!
 
 			var post = PlacePost()
-			post.itemDescription = data["description"] as! String		//*** APP IS CRASHING HERE *********
+            if let descr = data["description"] as? String {
+                post.itemDescription = descr
+            }//*** APP IS CRASHING HERE *********
 			post.price = data["price"] as! String						//*** VALUES OF NEW POST ARE NIL ***
 			post.itemTitle = data["title"] as! String					//*** Firebase Database not updating
 			post.userID = data["userID"] as! String
-			post.itemImageURL = data["image"] as? String
+            post.itemImageURL = data["image"] as! String
 
 			self.shared.postArray.append(post)
 			
