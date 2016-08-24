@@ -11,6 +11,7 @@ import UIKit
 class PageMenuViewController: UIViewController {
 	
 	var pageMenu : CAPSPageMenu?
+	var currentIndex = 0
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
@@ -18,18 +19,14 @@ class PageMenuViewController: UIViewController {
 		setupNavBar()
 		self.edgesForExtendedLayout = UIRectEdge.None
 		self.extendedLayoutIncludesOpaqueBars = false
-	}
-	
-	override func viewDidAppear(animated: Bool) {
-		super.viewDidAppear(animated)
 		
-		setupPages()
-
+		pageMenu?.currentPageIndex = currentIndex
 	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		setupPages()
 	}
 	
 	func setupNavBar() {
@@ -76,7 +73,7 @@ class PageMenuViewController: UIViewController {
 			.MenuItemFont(UIFont(name: "HelveticaNeue", size: 13.0)!),
 			.MenuHeight(40.0),
 			.MenuItemWidth(90.0),
-			.CenterMenuItems(true)
+			.CenterMenuItems(true),
 		]
 		
 		pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, 0.0, self.view.frame.width, self.view.frame.height), pageMenuOptions: parameters)
@@ -88,7 +85,8 @@ class PageMenuViewController: UIViewController {
 	
 	func newPostPressed() {
 		
-		print("new post from VC")
+		currentIndex = pageMenu!.currentPageIndex
+		
 		let newPostVC = NewPostViewController()
 		presentViewController(newPostVC, animated: true, completion: nil)
 		
