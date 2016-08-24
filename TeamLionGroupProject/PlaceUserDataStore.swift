@@ -102,15 +102,15 @@ class PlaceUserDataStore {
             } else {
                 // Metadata contains file metadata such as size, content-type, and download URL.
                 let downloadURL = metadata?.downloadURL()
-                
+                self.ref = FIRDatabase.database().reference()
                 let postPicURLString = downloadURL?.absoluteString
                 if let user = FIRAuth.auth()?.currentUser {
                     let uid = user.uid
 					print("PRINTING \(self.ref.child("posts"))")
                     let userRef = self.ref.child("posts")		//******* THIS IS WHERE **********
                     self.postRef = userRef.childByAutoId()		//******* THE APP IS CRASHING ****
-					print(userRef)								//******* REF IS NIL *************
-					print(self.postRef)
+					print("USERREF = \(userRef)")				//******* REF IS NIL *************
+					print("POSTREF = \(self.postRef)")
 					
                     self.postRef.updateChildValues(["title": title])
                     self.postRef.updateChildValues(["price": price])
@@ -121,7 +121,7 @@ class PlaceUserDataStore {
 
             }
         }
-        //self.loadDatabase()
+        self.loadDatabase()
         // User is signed in.
     }
 
