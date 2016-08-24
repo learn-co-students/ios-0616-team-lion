@@ -11,8 +11,9 @@ import SnapKit
 import DynamicButton
 import CCTextFieldEffects
 import ChameleonFramework
+import MessageUI
 
-class PostDetailViewController: UIViewController, UIScrollViewDelegate {
+class PostDetailViewController: UIViewController, UIScrollViewDelegate, MFMailComposeViewControllerDelegate {
     
     var scrollView = UIScrollView()
     var profilePic = UIImageView()
@@ -78,7 +79,8 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         
         view.backgroundColor = UIColor.flatRedColor()
 		
-        
+		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "contact", style: UIBarButtonItemStyle.Done, target: self, action: #selector(contactButtonPressed))
+		
         view.addSubview(buyButton)
         buyButton.snp_makeConstraints { (make) in
             make.bottom.equalTo(view.snp_bottom).offset(-20)
@@ -213,6 +215,45 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
             totalHeight = preTotalHeight
         }
     }
-    
+	
+	func contactButtonPressed() {
+		
+		let emailTitle = "Email Title"
+		let messageBody = "I want to buy your thing please"
+		let recipient = ["davidvypark@gmail.com"]
+		let mailVC = MFMailComposeViewController()
+		
+		mailVC.mailComposeDelegate = self
+		mailVC.setSubject(emailTitle)
+		mailVC.setMessageBody(messageBody, isHTML: false)
+		mailVC.setToRecipients(recipient)
+		
+		self.presentViewController(mailVC, animated: true, completion: nil)
+		
+	}
+	
+	func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+		switch (result)
+		{
+		case MFMailComposeResultCancelled:
+			print("Mail cancelled")
+			break;
+		case MFMailComposeResultSaved:
+			print("Mail saved");
+			break;
+		case MFMailComposeResultSent:
+			print("Mail sent");
+			break;
+		case MFMailComposeResultFailed:
+			print("Mail sent failure: \(error?.localizedDescription)");
+			break;
+		default:
+			break;
+		}
+		
+		// Close the Mail Interface
+		self.dismissViewControllerAnimated(true, completion: nil)
+	}
+	
 
 }
