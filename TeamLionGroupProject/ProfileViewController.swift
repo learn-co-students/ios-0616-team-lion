@@ -184,10 +184,14 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
     func backToLoginScreen(){
         try! FIRAuth.auth()!.signOut()
         FBSDKAccessToken.setCurrentAccessToken(nil)
-        dispatch_async(dispatch_get_main_queue()) { 
-            self.showViewController(LoginViewController(), sender: nil)
-			
+        dispatch_async(dispatch_get_main_queue()) {
+            //self.showViewController(LoginViewController(), sender: nil)
         }
+		
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		let loginVC = storyboard.instantiateViewControllerWithIdentifier("LoginView")
+		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+		appDelegate.window?.rootViewController = loginVC
 
     }
     

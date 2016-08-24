@@ -22,8 +22,6 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
     let topFrame = UIImageView()
     var posts = [FIRDataSnapshot]()
     var ref: FIRDatabaseReference!
-//	var imageUrlArray = [String]()
-//	var postArray = [PlacePost]()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,10 +47,6 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
 		
 		self.edgesForExtendedLayout = UIRectEdge.None
 	}
-	
-
-    
-    
 
 	func getAllPosts() {
 		
@@ -64,10 +58,7 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
 			print("running block")
 			
 			let data = snapshot.value!
-//			let imageURL = data["image"] as! String
-//			self.imageUrlArray.append(imageURL)
-			
-			
+
 			var post = PlacePost()
 			post.itemDescription = data["description"] as! String
 			post.price = data["price"] as! String
@@ -82,8 +73,6 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
 			print(post.itemDescription)
 			print(self.shared.postArray)
 
-			
-			
 		})
 	}
     
@@ -132,7 +121,6 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         layout.itemSize = CGSize(width: screenWidth/2.005, height: screenWidth/2.005)
         layout.minimumLineSpacing = 1
         layout.minimumInteritemSpacing = 0
-        
         
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         collectionView.dataSource = self
