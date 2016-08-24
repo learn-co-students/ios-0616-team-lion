@@ -11,74 +11,95 @@ import SnapKit
 import ChameleonFramework
 import DynamicButton
 import Firebase
+import SDWebImage
 
 class MarketplaceCollectionViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UINavigationBarDelegate {
     var shared = PlaceUserDataStore.sharedDataStore
     var collectionView: UICollectionView!
     let topFrame = UIImageView()
-//    var postArray = [post1, post2, post3, post4, post5, post6, post7, post8, post9, post10, post11, post12]
     var posts = [FIRDataSnapshot]()
     var ref: FIRDatabaseReference!
+//	var imageUrlArray = [String]()
+//	var postArray = [PlacePost]()
+	
     override func viewDidLoad() {
         super.viewDidLoad()
         self.shared.getUserCredentialsForProfileVC { (result) in
             print("result \(result)")
         }
+		
         setUpCollectionCells()
-        //getAllPosts()
-        self.shared.getUserEmail()
+        getAllPosts()
+		
+
     }
     
     override func viewWillAppear(animated: Bool) {
-        tabBarController?.tabBar.hidden = false
+		super.viewWillAppear(animated)
+		
+		self.edgesForExtendedLayout = UIRectEdge.None
+		
+		collectionView.reloadData()
     }
+	
+	override func viewDidAppear(animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		self.edgesForExtendedLayout = UIRectEdge.None
+	}
+	
+
     
     
-    
-    func getAllPosts(){
-        
-        self.ref = FIRDatabase.database().reference()
-        self.ref.child("posts").observeEventType(.ChildAdded, withBlock: {(snapshot) -> Void in
-            print(snapshot)
-            
-            
-            var post = snapshot.value as! Dictionary<String,String>
-            
-            if post["user"] == FIRAuth.auth()?.currentUser?.uid{
-                print("filting user posts")
-            }else{
-                //self.shared.currentUser.friendsPosts.append(<#T##newElement: Element##Element#>)
-                self.posts.append(snapshot)
-                self.collectionView.reloadData()
-                
-            }
-        })
-        
-        
-        print("reloading")
-        //self.collectionView.reloadData()
-        
-        
-        
-        
-        //self.collectionView.reloadData()
-        
-        
-    }
+
+	func getAllPosts() {
+		
+		print("Before block")
+		
+		self.ref = FIRDatabase.database().reference()
+		self.shared.postArray.removeAll()
+		self.ref.child("posts").observeEventType(.ChildAdded, withBlock: {(snapshot) -> Void in
+			print("running block")
+			
+			let data = snapshot.value!
+//			let imageURL = data["image"] as! String
+//			self.imageUrlArray.append(imageURL)
+			
+			
+			var post = PlacePost()
+			post.itemDescription = String(data["description"])
+			post.price = data["price"] as! String
+			post.itemTitle = data["title"] as! String
+			post.userID = data["userID"] as! String
+			post.itemImageURL = data["image"] as! String
+
+			self.shared.postArray.append(post)
+			
+			self.collectionView.reloadData()
+			print(data["description"])
+			print(post.itemDescription)
+			print(self.shared.postArray)
+
+			
+			
+		})
+	}
     
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.shared.currentUser.friendsPosts.count
+        return shared.postArray.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("basicCell", forIndexPath: indexPath) as! PostViewCell
-        
-        //cell.postImage.image = self.shared.currentUser.friendsPosts[indexPath.item].itemImages[0]
-        cell.priceLabel.text = "$\(self.shared.currentUser.friendsPosts[indexPath.item].price)"
-        cell.nameLabel.text = self.shared.currentUser.friendsPosts[indexPath.item].itemTitle
-        
+		
+		let post = shared.postArray[indexPath.item]
+		cell.priceLabel.text = "$\(post.price)"
+		
+		let url = NSURL(string: post.itemImageURL!)
+		cell.postImage.sd_setImageWithURL(url, placeholderImage: UIImage(named: "loadingImage"))
+		
         return cell
     }
     
@@ -86,13 +107,15 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         // handle tap events
         print("You selected cell #\(indexPath.item)!")
         let postDetailVC = PostDetailViewController()
-        postDetailVC.itemTitle = self.shared.currentUser.friendsPosts[indexPath.item].itemTitle
-        postDetailVC.itemPrice = self.shared.currentUser.friendsPosts[indexPath.item].price
-        postDetailVC.descriptionField.text = self.shared.currentUser.friendsPosts[indexPath.item].itemDescription
-        postDetailVC.itemImage = self.shared.currentUser.friendsPosts[indexPath.item].itemImages[0]
-
+		let post = shared.postArray[indexPath.item]
+        postDetailVC.itemTitle = post.itemTitle
+        postDetailVC.itemPrice = post.price
+        postDetailVC.itemDescription = post.itemDescription
+		let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PostViewCell
+		postDetailVC.itemImage = cell.postImage.image
         
         self.presentViewController(postDetailVC, animated: true, completion:  nil)
+		//self.navigationController?.pushViewController(postDetailVC, animated: true)
     }
     
     func setUpCollectionCells() {
@@ -104,7 +127,7 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         //setup Layout
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = UICollectionViewScrollDirection.Vertical
-        layout.sectionInset = UIEdgeInsets(top: 65, left: 0, bottom: 50, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.itemSize = CGSize(width: screenWidth/2.005, height: screenWidth/2.005)
         layout.minimumLineSpacing = 1
         layout.minimumInteritemSpacing = 0
@@ -120,50 +143,6 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         collectionView.showsHorizontalScrollIndicator = false
         self.view.addSubview(collectionView)
         
-    }
-	
-	//DONT NEED THIS FUNCTION ANYMORE **** VVVVV
-    func generateScene() {
-        
-        view.backgroundColor = UIColor.flatWhiteColor()
-        
-        view.addSubview(topFrame)
-        topFrame.backgroundColor = UIColor.flatRedColor()
-        topFrame.snp_makeConstraints { (make) in
-            make.top.equalTo(view.snp_top)
-            make.width.equalTo(view.snp_width)
-            make.height.equalTo(view.snp_width).dividedBy(5.8)
-        }
-        
-        let titleLabel = UILabel()
-        titleLabel.text = "Place"
-        titleLabel.backgroundColor = UIColor.flatRedColor()
-        titleLabel.textColor = UIColor.flatWhiteColor()
-        titleLabel.font = UIFont(name: "Noteworthy", size: 28)
-        view.addSubview(titleLabel)
-        titleLabel.snp_makeConstraints { (make) in
-            make.bottom.equalTo(topFrame.snp_bottom).offset(-5)
-            make.centerX.equalTo(topFrame.snp_centerX)
-        }
-        
-        //TEMPORARY
-        let tempNewPostButton = DynamicButton()
-        tempNewPostButton.setStyle(DynamicButtonStyle.Plus, animated: true)
-        tempNewPostButton.strokeColor = UIColor.flatWhiteColor()
-        tempNewPostButton.highlightStokeColor = UIColor.flatWatermelonColor()
-        tempNewPostButton.addTarget(self, action: #selector(newPostPressed), forControlEvents: .TouchUpInside)
-        view.addSubview(tempNewPostButton)
-        tempNewPostButton.snp_makeConstraints { (make) in
-            make.bottom.equalTo(topFrame.snp_bottom).offset(-5)
-            make.right.equalTo(topFrame.snp_right).offset(-20)
-        }
-    }
-    
-    func newPostPressed(){
-        
-        print("new post from VC")
-        let newPostVC = NewPostViewController()
-        presentViewController(newPostVC, animated: true, completion: nil)
     }
     
     func refresh(sender:AnyObject) {

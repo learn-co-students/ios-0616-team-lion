@@ -59,6 +59,9 @@ PODS:
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
   - PageMenu (1.2.9)
+  - SDWebImage (3.8.1):
+    - SDWebImage/Core (= 3.8.1)
+  - SDWebImage/Core (3.8.1)
   - SendBirdSDK (3.0.0)
   - SnapKit (0.22.0)
   - SwiftyJSON (2.3.2)
@@ -75,6 +78,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - JSQMessagesViewController
   - PageMenu
+  - SDWebImage (~> 3.8)
   - SendBirdSDK
   - SnapKit
   - SwiftyJSON (~> 2.3)
@@ -100,10 +104,11 @@ SPEC CHECKSUMS:
   JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   PageMenu: ba19ff267f7a19e444e93c20a7847b78954a7011
+  SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SendBirdSDK: 3b6b1338ad1081649d46191906bf3c546c6c66f9
   SnapKit: 0dd2fd157330f1ea11fd84da13e6be8a7a22bae0
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: a62f6f1fc5e853a8f19126286b57bead4e00b5f7
+PODFILE CHECKSUM: 8e5ebab57b4ee1819e93439eb679a3960211b63b
 
 COCOAPODS: 1.0.1

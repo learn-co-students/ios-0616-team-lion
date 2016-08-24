@@ -32,7 +32,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
     var fullName: String?
     var itemTitle: String?
     var itemDescription: String?
-    var itemPrice: Int!
+    var itemPrice = String()
     var itemImage: UIImage?
     
     var totalHeight: CGFloat = 0
@@ -48,8 +48,9 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
     
     
     func cancelButtonTapped() {
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
+		
+		self.dismissViewControllerAnimated(true, completion: nil)
+        //self.navigationController?.popViewControllerAnimated(true)
     }
     
     func buyButtonTapped() {

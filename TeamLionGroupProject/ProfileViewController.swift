@@ -21,6 +21,7 @@ let shared = PlaceUserDataStore.sharedDataStore
     var refreshControl = UIRefreshControl()
     var loginButton: FBSDKLoginButton = FBSDKLoginButton()
     let topFrame = UIImageView()
+	var filteredArray = [PlacePost]()
     
 	private let cellIdentifier = "Cell"
 	private let headerIdentifier = "header"
@@ -33,6 +34,14 @@ let shared = PlaceUserDataStore.sharedDataStore
             self.name = self.shared.currentUser.name
             self.picture = self.shared.currentUser.picture
         }
+		
+		for post in shared.postArray {
+			if (post.userID == FIRAuth.auth()?.currentUser?.uid) {
+				filteredArray.append(post)
+			}
+		}
+		print("FILTERED ARRAY = \(filteredArray)")
+		
 		setupCollectionView()
         setupScene()
         
@@ -56,25 +65,6 @@ let shared = PlaceUserDataStore.sharedDataStore
     }
     
     func setupScene() {
-//        view.addSubview(topFrame)
-//        topFrame.backgroundColor = UIColor.flatRedColor()
-//        topFrame.snp_makeConstraints { (make) in
-//            make.top.equalTo(view.snp_top)
-//            make.width.equalTo(view.snp_width)
-//            make.height.equalTo(view.snp_width).dividedBy(5.8)
-//        }
-//        
-//        let titleLabel = UILabel()
-//        titleLabel.text = "Profile"
-//        titleLabel.backgroundColor = UIColor.flatRedColor()
-//        titleLabel.textColor = UIColor.flatWhiteColor()
-//        titleLabel.font = UIFont(name: "Noteworthy", size: 28)
-//        view.addSubview(titleLabel)
-//        titleLabel.snp_makeConstraints { (make) in
-//            make.bottom.equalTo(topFrame.snp_bottom).offset(-5)
-//            make.centerX.equalTo(topFrame.snp_centerX)
-//        }
-		
         view.addSubview(loginButton)
 //        loginButton.delegate = self
         loginButton.frame = CGRectMake(15, 30, 80, 30)
@@ -89,7 +79,7 @@ let shared = PlaceUserDataStore.sharedDataStore
 		let blockDimension = (view.frame.width - 2)/3
 		layout.itemSize = CGSize(width: blockDimension, height: blockDimension)
 		layout.headerReferenceSize = CGSizeMake(0, CGRectGetHeight(view.frame)/3)
-        layout.sectionInset = UIEdgeInsets(top: 60, left: 0, bottom: 50, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 		
 		collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
 		collectionView.backgroundColor = UIColor.flatWhiteColor()
@@ -123,14 +113,18 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 	}
 	
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return self.shared.currentUser.postings.count
+		return self.filteredArray.count
 	}
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! PostViewCell
-    
-		cell.postImage.image = shared.currentUser.postings[indexPath.item].itemImages[0]
+		
+		let url = NSURL(string: filteredArray[indexPath.item].itemImageURL!)
+		cell.postImage.sd_setImageWithURL(url, placeholderImage: UIImage(named: "loadingImage"))
+		
+		return cell
+		
 		
 		return cell
 	}
@@ -138,15 +132,15 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         // handle tap events
         print("You selected cell #\(indexPath.item)!")
-        let postDetailVC = PostDetailViewController()
         
-        postDetailVC.itemTitle = shared.currentUser.postings[indexPath.item].itemTitle
-        postDetailVC.itemPrice = shared.currentUser.postings[indexPath.item].price
-        postDetailVC.descriptionField.text = shared.currentUser.postings[indexPath.item].itemDescription
-        postDetailVC.itemImage = shared.currentUser.postings[indexPath.item].itemImages[0]
-        postDetailVC.fullName = shared.currentUser.name
-        postDetailVC.profilePic.image = shared.currentUser.picture
-        
+		let postDetailVC = PostDetailViewController()
+		let post = filteredArray[indexPath.item]
+		postDetailVC.itemTitle = post.itemTitle
+		postDetailVC.itemPrice = post.price
+		postDetailVC.itemDescription = post.itemDescription
+		let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PostViewCell
+		postDetailVC.itemImage = cell.postImage.image
+		
         self.presentViewController(postDetailVC, animated: true, completion:  nil)
     }
 	

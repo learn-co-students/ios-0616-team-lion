@@ -29,6 +29,7 @@ class PlaceUserDataStore {
     var uid = ""
     private init(){}
     var postRef = FIRDatabaseReference()
+	var postArray = [PlacePost]()
     deinit{
         self.ref.removeObserverWithHandle(self.refHandle)
     }
@@ -50,7 +51,7 @@ class PlaceUserDataStore {
         self.postsDataSnapshot.append(snapshot)
             guard let snapshotData = snapshot.value as? [String: String] else{  print("error getting snapshot"); return }
 
-            var post = PlacePost( itemImages: [], itemTitle: "", itemDescription: "", price: 0, user: self.aUser, userID: "")
+			var post = PlacePost( itemImages: UIImage(), itemImageURL: "", itemTitle: "", itemDescription: "", price: "0", user: self.aUser, userID: "")
             
             if let snapshotdataDescription = snapshotData["description"]{
                 post.itemDescription = snapshotdataDescription
@@ -61,11 +62,11 @@ class PlaceUserDataStore {
             if str == str {
             guard let url = NSURL(string: str!) else {print("no image"); return}
                 guard let data = NSData(contentsOfURL: url)else{return} //make sure your image in this url does exist, otherwise unwrap in a if let check
-            post.itemImages.append(UIImage(data: data)!)
+            //post.itemImages.append(UIImage(data: data)!)
 
             }
             post.itemTitle = snapshotData["title"]!
-            post.price = Int(snapshotData["price"]!)!
+            post.price = snapshotData["price"]!
             completion(result: post)
         }, withCancelBlock: nil)
 
@@ -92,10 +93,10 @@ class PlaceUserDataStore {
         
         let storage = FIRStorage.storage()
         let storageRef = storage.referenceForURL("gs://teamliongroupproject.appspot.com/")
-        let userRef = self.ref.child("posts")
-        self.postRef = userRef.childByAutoId()
 
-        let postImageRef = storageRef.child("users/userID/posts/\(self.postRef).jpeg")
+		let user = FIRAuth.auth()?.currentUser?.uid
+        let postImageRef = storageRef.child("users/\(user)/posts/\(self.postRef).jpeg")
+
         let uploadTask = postImageRef.putData(postImageData, metadata: nil) { metadata, error in
             if (error != nil) {
                 print("did NOT upload picture to firebase")
@@ -118,7 +119,7 @@ class PlaceUserDataStore {
 
             }
         }
-        self.loadDatabase()
+        //self.loadDatabase()
         // User is signed in.
     }
 
@@ -250,7 +251,7 @@ class PlaceUserDataStore {
         FIRDatabase.database().reference().child("users").child(self.uid).child("posts").observeEventType(.ChildAdded, withBlock: {(snapshot) in
             guard let snapshotData = snapshot.value as? [String: String] else{  print("error getting snapshot"); return }
             
-            var post = PlacePost( itemImages: [], itemTitle: "", itemDescription: "", price: 0, user: self.aUser, userID: "")
+            var post = PlacePost( itemImages: UIImage(), itemImageURL: "", itemTitle: "", itemDescription: "", price: "0", user: self.aUser, userID: "")
             print("auser within post \(self.aUser.name)")
             if let snapshotdataDescription = snapshotData["description"]{
                 post.itemDescription = snapshotdataDescription
@@ -261,11 +262,11 @@ class PlaceUserDataStore {
             if str == str {
                 guard let url = NSURL(string: str!) else {print("no image"); return}
                 guard let data = NSData(contentsOfURL: url)else{return} //make sure your image in this url does exist, otherwise unwrap in a if let check
-                post.itemImages.append(UIImage(data: data)!)
+           //     post.itemImages.append(UIImage(data: data)!)
                 
             }
             post.itemTitle = snapshotData["title"]!
-            post.price = Int(snapshotData["price"]!)!
+            post.price = snapshotData["price"]!
             print("FRIENDSPOST \(post)")
 
             completion(result: post)
