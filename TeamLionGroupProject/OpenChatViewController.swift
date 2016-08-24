@@ -230,6 +230,22 @@ class OpenChatViewController: JSQMessagesViewController {
 		print("didtapmessegeBubbleAtIndexPath: \(indexPath.item)")
 		let message = messages[indexPath.item]
 		
+		let alertController = UIAlertController(title: "Block User", message: "would you like to block this user?", preferredStyle: .Alert)
+		let cancelAction = UIAlertAction(title: "BLOCK", style: .Cancel) { (action) in
+			
+		}
+		alertController.addAction(cancelAction)
+		let OKAction = UIAlertAction(title: "Cancel", style: .Default) { (action) in
+			//append message.UID to the banned string
+		}
+		alertController.addAction(OKAction)
+		
+		//if meesage user you not yourself
+		self.presentViewController(alertController, animated: true) {
+			//append message.UID to the banned string
+			
+		}
+		
 		if message.isMediaMessage {
 			if let mediaItem = message.media as? JSQVideoMediaItem {
 				let player = AVPlayer(URL: mediaItem.fileURL)
@@ -240,34 +256,13 @@ class OpenChatViewController: JSQMessagesViewController {
 		}
 	}
 	
-//	@IBAction func logOutButtonTapped(sender: AnyObject) {
-//		
-//		do{
-//			try FIRAuth.auth()?.signOut()
-//		} catch let error {
-//			print(error)
-//		}
-//		
-//		print(FIRAuth.auth()?.currentUser)
-//		
-//		
-//		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//		let loginVC = storyboard.instantiateViewControllerWithIdentifier("LoginVC") as! LogInViewController
-//		
-//		//get the app delegate
-//		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//		
-//		//set navigation controller as root view controller
-//		appDelegate.window?.rootViewController = loginVC
-//	}
-	
 	func sendMedia(picture: UIImage?, video: NSURL?) {
 		print(picture)
 		print(FIRStorage.storage().reference())
 		if let picture = picture {
 			let filePath = "\(FIRAuth.auth()!.currentUser!)/\(NSDate.timeIntervalSinceReferenceDate())"
 			print(filePath)
-			let data = UIImageJPEGRepresentation(picture, 0.2)					//might have to compress this down
+			let data = UIImageJPEGRepresentation(picture, 0.2)
 			let metadata = FIRStorageMetadata()
 			metadata.contentType = "image/jpg"
 			FIRStorage.storage().reference().child(filePath).putData(data!, metadata: metadata) { (metadata, error) in
@@ -308,6 +303,8 @@ class OpenChatViewController: JSQMessagesViewController {
 
 
 extension OpenChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+	
+	
 	
 	func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
 		print("Did finish picking")
