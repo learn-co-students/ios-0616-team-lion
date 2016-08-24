@@ -36,13 +36,6 @@ let shared = PlaceUserDataStore.sharedDataStore
             self.picture = self.shared.currentUser.picture
         }
 		
-		for post in shared.postArray {
-			if (post.userID == FIRAuth.auth()?.currentUser?.uid) {
-				filteredArray.append(post)
-			}
-		}
-		print("FILTERED ARRAY = \(filteredArray)")
-		
 		setupCollectionView()
         setupScene()
         
@@ -50,7 +43,17 @@ let shared = PlaceUserDataStore.sharedDataStore
 	}
     
     override func viewWillAppear(animated: Bool) {
-            self.collectionView.reloadData()
+        super.viewWillAppear(animated)
+        
+        filteredArray.removeAll()
+        for post in shared.postArray {
+            if (post.userID == FIRAuth.auth()?.currentUser?.uid) {
+                filteredArray.append(post)
+            }
+        }
+        
+        print("FILTERED ARRAY = \(filteredArray)")
+        self.collectionView.reloadData()
         
     }
     
@@ -199,15 +202,19 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
     
     func refresh(sender:AnyObject) {
         print ("Refreshing")
-        self.shared.currentUser.postings.removeAll()
         
-        self.shared.fetchPosts { (result) in
-            self.shared.currentUser.postings.append(result)
-            self.collectionView.reloadData()
-            print(result)
+        filteredArray.removeAll()
+        for post in shared.postArray {
+            if (post.userID == FIRAuth.auth()?.currentUser?.uid) {
+                filteredArray.append(post)
+            }
         }
         
+        print("FILTERED ARRAY = \(filteredArray)")
+        self.collectionView.reloadData()
+        
         self.refreshControl.endRefreshing()
+        
 
     }
 }

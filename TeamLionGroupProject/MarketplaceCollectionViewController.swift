@@ -71,7 +71,7 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
             post.itemImageURL = data["image"] as! String
             post.name = data["name"] as! String
 
-			self.shared.postArray.append(post)
+            self.shared.postArray.insert(post, atIndex: 0)
 			
 			self.collectionView.reloadData()
 			print(data["description"])
