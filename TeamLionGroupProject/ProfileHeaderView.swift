@@ -97,7 +97,7 @@ class ProfileHeaderView: UICollectionReusableView, FBSDKLoginButtonDelegate {
 		
 		self.addSubview(listingsCountLabel)
 		listingsCountLabel.snp_makeConstraints { (make) in
-			make.center.equalTo(self.snp_centerX).offset(0)
+			make.centerX.equalTo(self.snp_centerX).offset(0)
 			make.top.equalTo(profilePic.snp_bottom).offset(3)
 			make.height.equalTo(self.snp_height).dividedBy(10)
 			make.width.equalTo(self.snp_width).dividedBy(2)
