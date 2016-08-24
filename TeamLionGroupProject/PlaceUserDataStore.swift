@@ -93,30 +93,37 @@ class PlaceUserDataStore {
         
         let storage = FIRStorage.storage()
         let storageRef = storage.referenceForURL("gs://teamliongroupproject.appspot.com/")
+        self.ref = FIRDatabase.database().reference()
+        let userRef = self.ref.child("posts")		//******* THIS IS WHERE **********
+        self.postRef = userRef.childByAutoId()
         
 		let user = FIRAuth.auth()?.currentUser?.uid
-        let postImageRef = storageRef.child("users/\(user)/posts/\(self.postRef).jpeg")
+        print("POSTREF = \(self.postRef)")
+        let autoID = String(postRef).stringByReplacingOccurrencesOfString("https://teamliongroupproject.firebaseio.com/posts/", withString: "")
+        let postImageRef = storageRef.child("users/\(user)/posts/\(autoID).jpeg")
+
         let uploadTask = postImageRef.putData(postImageData, metadata: nil) { metadata, error in
             if (error != nil) {
                 print("did NOT upload picture to firebase")
             } else {
-                // Metadata contains file metadata such as size, content-type, and download URL.
+                // Metadata contains file metadata such as size,1 content-type, and download URL.
                 let downloadURL = metadata?.downloadURL()
-                self.ref = FIRDatabase.database().reference()
+                
                 let postPicURLString = downloadURL?.absoluteString
                 if let user = FIRAuth.auth()?.currentUser {
                     let uid = user.uid
 					print("PRINTING \(self.ref.child("posts"))")
-                    let userRef = self.ref.child("posts")		//******* THIS IS WHERE **********
-                    self.postRef = userRef.childByAutoId()		//******* THE APP IS CRASHING ****
+                    		//******* THE APP IS CRASHING ****
 					print("USERREF = \(userRef)")				//******* REF IS NIL *************
-					print("POSTREF = \(self.postRef)")
 					
-                    self.postRef.updateChildValues(["title": title])
-                    self.postRef.updateChildValues(["price": price])
-                    self.postRef.updateChildValues(["description": description])
-                    self.postRef.updateChildValues(["image": postPicURLString!])
-                    self.postRef.updateChildValues(["userID": userID])
+//                    self.postRef.updateChildValues(["title": title])
+//                    self.postRef.updateChildValues(["price": price])
+//                    self.postRef.updateChildValues(["description": description])
+//                    self.postRef.updateChildValues(["image": postPicURLString!])
+//                    self.postRef.updateChildValues(["userID": userID])
+                    
+                    let postData = ["title": title, "price": price, "description": description, "image": postPicURLString!, "userID": userID]
+                    self.postRef.setValue(postData)
                 }
 
             }
@@ -278,6 +285,40 @@ class PlaceUserDataStore {
         
     }
 
+    
+    func getPostsForProfileView(){
+        self.ref = FIRDatabase.database().reference()
+        self.ref.child("posts").observeEventType(.ChildAdded, withBlock: {(snapshot) -> Void in
+            print(snapshot)
+            
+            
+            var post = snapshot.value as! Dictionary<String,String>
+            
+            if post["userID"] == FIRAuth.auth()?.currentUser?.uid{
+                //display posts
+            }else{
+                //whatever
+            }
+    })
+    }
+    
+    
+    
+    func getUserEmail(){
+        self.ref = FIRDatabase.database().reference()
+        self.ref.child("posts").observeEventType(.ChildAdded, withBlock: {(snapshot) -> Void in
+            print("PRINTING SNAPSHOT   \(snapshot)")
+            
+            
+            var post = snapshot.value as! Dictionary<String,String>
+            
+            if post["userID"] == FIRAuth.auth()?.currentUser?.uid{
+                //do nothing
+            }else{
+                //whatever
+            }
+        })
+    }
     
     
     
