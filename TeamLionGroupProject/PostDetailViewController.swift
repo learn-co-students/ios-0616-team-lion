@@ -200,14 +200,14 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, MFMailCo
     
     func calculateScrollViewHeight() {
      
-        let preTotalHeight = 600 + CGFloat((descriptionField.text?.characters.count)!)/1.25
+        let preTotalHeight = 650 + CGFloat((descriptionField.text?.characters.count)!)/1.25
         
-        if preTotalHeight > 800 {
-            totalHeight = 800
+        if preTotalHeight > 850 {
+            totalHeight = 850
         }
             
-        else if preTotalHeight < 675 {
-            totalHeight = 675
+        else if preTotalHeight < 725 {
+            totalHeight = 725
         }
             
         else {
