@@ -15,7 +15,8 @@ import FBSDKLoginKit
 class ProfileViewController: UIViewController {
 let shared = PlaceUserDataStore.sharedDataStore
     
-    
+	var parentNavigationController : UINavigationController?
+	
     var name: String?
     var picture: UIImage?
     var refreshControl = UIRefreshControl()

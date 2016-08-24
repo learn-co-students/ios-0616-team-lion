@@ -14,7 +14,10 @@ import Firebase
 import SDWebImage
 
 class MarketplaceCollectionViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UINavigationBarDelegate {
-    var shared = PlaceUserDataStore.sharedDataStore
+	
+	var parentNavigationController : UINavigationController?
+	
+	var shared = PlaceUserDataStore.sharedDataStore
     var collectionView: UICollectionView!
     let topFrame = UIImageView()
     var posts = [FIRDataSnapshot]()
