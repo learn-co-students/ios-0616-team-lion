@@ -74,12 +74,12 @@ class PlaceUserDataStore {
     }
 
     
-    func postToDataStore(nameKey: String, pictureKey: String){
+	func postToDataStore(nameKey: String, pictureKey: String, blockedUsers: String){
         print("post to data store")
         if let user = FIRAuth.auth()?.currentUser {
             let uid = user.uid
             let data = [CurrentUser.nameKey: nameKey,
-                CurrentUser.pictureKey: pictureKey]
+                CurrentUser.pictureKey: pictureKey, "blockedUsers": blockedUsers]
             self.ref.child("users/\(uid)").updateChildValues(data as [NSObject : AnyObject])
             //self.ref.child("users/\(uid)/friends").updateChildValues([friendName : friendPic])
         }
@@ -163,7 +163,7 @@ class PlaceUserDataStore {
                         //for friend in self.currentUser.friendsList{
                         //let frname = friend.name
                         //let frpic = friend.profilePicture
-                        self.postToDataStore(name!, pictureKey: profilePicURLString!)
+						self.postToDataStore(name!, pictureKey: profilePicURLString!, blockedUsers: "")
                         //}
 
                     }
@@ -173,7 +173,7 @@ class PlaceUserDataStore {
             } else {
                 // No user is signed in.
             }
- completion(result: (self.currentUser.name, self.currentUser.picture))
+			completion(result: (self.currentUser.name, self.currentUser.picture))
         }
     }
   
