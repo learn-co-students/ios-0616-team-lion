@@ -34,7 +34,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, MFMailCo
     var itemDescription: String?
     var itemPrice = String()
     var itemImage: UIImage?
-    var email: String?
+    var email = String()
     
     var totalHeight: CGFloat = 0
     
