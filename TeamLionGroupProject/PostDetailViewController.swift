@@ -34,6 +34,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, MFMailCo
     var itemDescription: String?
     var itemPrice = String()
     var itemImage: UIImage?
+    var email: String?
     
     var totalHeight: CGFloat = 0
     
@@ -44,6 +45,10 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, MFMailCo
         generateScene()
         print(fullName)
         print(fullNameLabel.text)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        print(email)
     }
     
     func buyButtonTapped() {
@@ -58,8 +63,8 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, MFMailCo
         }
         
         //delete cassido later to replace with \(email)
-        let url = NSURL(string: "https://venmo.com/cassidoo?txn=pay&amount=\(itemPrice)&note=Purchasing+from+PLACE:+\(itemDescriptionWithPlus)")!
-        UIApplication.sharedApplication().openURL(url)
+        let url = NSURL(string: "https://venmo.com/\(email)?txn=pay&amount=\(itemPrice)&note=Purchasing+from+PLACE:+\(itemDescriptionWithPlus)")
+        UIApplication.sharedApplication().openURL(url!)
     }
     
     func chatButtonPressed(){
@@ -214,7 +219,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, MFMailCo
 		
 		let emailTitle = "Email Title"
 		let messageBody = "I want to buy your thing please"
-		let recipient = ["davidvypark@gmail.com"]
+		let recipient = ["\(email)"]
 		let mailVC = MFMailComposeViewController()
 		
 		mailVC.mailComposeDelegate = self

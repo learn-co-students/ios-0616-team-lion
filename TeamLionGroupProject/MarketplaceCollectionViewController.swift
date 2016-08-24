@@ -105,6 +105,7 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         postDetailVC.itemTitle = post.itemTitle
         postDetailVC.itemPrice = post.price
         postDetailVC.itemDescription = post.itemDescription
+        postDetailVC.email = post.userID
 		let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PostViewCell
 		postDetailVC.itemImage = cell.postImage.image
         
