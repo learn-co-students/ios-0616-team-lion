@@ -18,6 +18,7 @@ struct PlacePost {
 	var price = ""
     var user = CurrentUser()
 	var userID = ""
-
+    var name = ""
+    var email = ""
 }
 

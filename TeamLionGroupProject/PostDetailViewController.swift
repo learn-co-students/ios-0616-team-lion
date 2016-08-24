@@ -29,7 +29,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, MFMailCo
     let dividerImage = UIImageView()
     var chatButtonImage = UIImageView()
     
-    var fullName: String?
+    var fullName = String()
     var itemTitle: String?
     var itemDescription: String?
     var itemPrice = String()
@@ -165,28 +165,28 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, MFMailCo
             make.right.equalTo(itemImageView.snp_right).offset(-5)
         }
         
-        scrollView.addSubview(profilePic)
-        profilePic.backgroundColor = UIColor.flatWhiteColor()
-        profilePic.image?.circle
-        profilePic.layer.cornerRadius = view.frame.height/12
-        profilePic.layer.masksToBounds = true
-        profilePic.layer.borderWidth = 2
-        profilePic.layer.borderColor = UIColor.flatRedColor().CGColor
-        profilePic.clipsToBounds = true
-        profilePic.snp_makeConstraints { (make) in
-            make.top.equalTo(descriptionField.snp_bottom).offset(20)
-            make.centerX.equalTo(view.snp_centerX)
-            make.width.equalTo(view.snp_height).dividedBy(6)
-            make.height.equalTo(view.snp_height).dividedBy(6)
-        }
+//        scrollView.addSubview(profilePic)
+//        profilePic.backgroundColor = UIColor.flatWhiteColor()
+//        profilePic.image?.circle
+//        profilePic.layer.cornerRadius = view.frame.height/12
+//        profilePic.layer.masksToBounds = true
+//        profilePic.layer.borderWidth = 2
+//        profilePic.layer.borderColor = UIColor.flatRedColor().CGColor
+//        profilePic.clipsToBounds = true
+//        profilePic.snp_makeConstraints { (make) in
+//            make.top.equalTo(descriptionField.snp_bottom).offset(20)
+//            make.centerX.equalTo(view.snp_centerX)
+//            make.width.equalTo(view.snp_height).dividedBy(6)
+//            make.height.equalTo(view.snp_height).dividedBy(6)
+//        }
         
         scrollView.addSubview(fullNameLabel)
         fullNameLabel.text = "Sold by: \(fullName)"
         fullNameLabel.textAlignment = NSTextAlignment.Center
         fullNameLabel.textColor = UIColor.flatBlackColor()
         fullNameLabel.snp_makeConstraints { (make) in
-            make.centerX.equalTo(profilePic.snp_centerX)
-            make.top.equalTo(profilePic.snp_bottom).offset(5)
+            make.centerX.equalTo(descriptionField.snp_centerX)
+            make.top.equalTo(descriptionField.snp_bottom).offset(25)
             make.height.equalTo(priceLabel.snp_height)
         }
 
@@ -200,14 +200,14 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, MFMailCo
     
     func calculateScrollViewHeight() {
      
-        let preTotalHeight = 650 + CGFloat((descriptionField.text?.characters.count)!)/1.25
+        let preTotalHeight = 550 + CGFloat((descriptionField.text?.characters.count)!)/1.25
         
         if preTotalHeight > 850 {
             totalHeight = 850
         }
             
-        else if preTotalHeight < 725 {
-            totalHeight = 725
+        else if preTotalHeight < 650 {
+            totalHeight = 650
         }
             
         else {

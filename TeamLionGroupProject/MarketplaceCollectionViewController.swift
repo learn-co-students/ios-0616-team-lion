@@ -67,7 +67,9 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
 			post.price = data["price"] as! String						//*** VALUES OF NEW POST ARE NIL ***
 			post.itemTitle = data["title"] as! String					//*** Firebase Database not updating
 			post.userID = data["userID"] as! String
+            post.email = data["email"] as! String
             post.itemImageURL = data["image"] as! String
+            post.name = data["name"] as! String
 
 			self.shared.postArray.append(post)
 			
@@ -105,7 +107,8 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         postDetailVC.itemTitle = post.itemTitle
         postDetailVC.itemPrice = post.price
         postDetailVC.itemDescription = post.itemDescription
-        postDetailVC.email = post.userID
+        postDetailVC.email = post.email
+        postDetailVC.fullName = post.name
 		let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PostViewCell
 		postDetailVC.itemImage = cell.postImage.image
         

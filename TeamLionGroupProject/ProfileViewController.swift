@@ -136,7 +136,8 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 		postDetailVC.itemTitle = post.itemTitle
 		postDetailVC.itemPrice = post.price
 		postDetailVC.itemDescription = post.itemDescription
-        postDetailVC.email = post.userID
+        postDetailVC.email = post.email
+        postDetailVC.fullName = post.name
 		let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PostViewCell
 		postDetailVC.itemImage = cell.postImage.image
 		

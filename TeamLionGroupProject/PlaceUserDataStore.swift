@@ -51,7 +51,7 @@ class PlaceUserDataStore {
         self.postsDataSnapshot.append(snapshot)
             guard let snapshotData = snapshot.value as? [String: String] else{  print("error getting snapshot"); return }
 
-			var post = PlacePost( itemImages: UIImage(), itemImageURL: "", itemTitle: "", itemDescription: "", price: "0", user: self.aUser, userID: "")
+			var post = PlacePost( itemImages: UIImage(), itemImageURL: "", itemTitle: "", itemDescription: "", price: "0", user: self.aUser, userID: "", name: "", email: "")
             
             if let snapshotdataDescription = snapshotData["description"]{
                 post.itemDescription = snapshotdataDescription
@@ -86,7 +86,7 @@ class PlaceUserDataStore {
         
     }
     
-    func postPictureToDatabase(pictue: UIImage, title: String, description: String, price: String, userID: String, name: String) {
+    func postPictureToDatabase(pictue: UIImage, title: String, description: String, price: String, userID: String, name: String, email: String) {
         var piccopy = UIImage()
         piccopy = pictue
         let postImageData: NSData = UIImagePNGRepresentation(piccopy)!
@@ -122,7 +122,7 @@ class PlaceUserDataStore {
 //                    self.postRef.updateChildValues(["image": postPicURLString!])
 //                    self.postRef.updateChildValues(["userID": userID])
                     
-                    let postData = ["title": title, "price": price, "description": description, "image": postPicURLString!, "userID": userID, "name": name]
+                    let postData = ["title": title, "price": price, "description": description, "image": postPicURLString!, "userID": userID, "name": name, "email": email]
                     self.postRef.setValue(postData)
                 }
 
@@ -260,7 +260,7 @@ class PlaceUserDataStore {
         FIRDatabase.database().reference().child("users").child(self.uid).child("posts").observeEventType(.ChildAdded, withBlock: {(snapshot) in
             guard let snapshotData = snapshot.value as? [String: String] else{  print("error getting snapshot"); return }
             
-            var post = PlacePost( itemImages: UIImage(), itemImageURL: "", itemTitle: "", itemDescription: "", price: "0", user: self.aUser, userID: "")
+            var post = PlacePost( itemImages: UIImage(), itemImageURL: "", itemTitle: "", itemDescription: "", price: "0", user: self.aUser, userID: "", name: "", email: "")
             print("auser within post \(self.aUser.name)")
             if let snapshotdataDescription = snapshotData["description"]{
                 post.itemDescription = snapshotdataDescription

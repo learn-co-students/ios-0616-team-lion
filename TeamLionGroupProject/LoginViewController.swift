@@ -18,6 +18,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     var loginButton: FBSDKLoginButton = FBSDKLoginButton()
     var activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
     let datastore = PlaceUserDataStore.sharedDataStore
+    let fbButton = UIButton()
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 		
@@ -35,6 +36,31 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
 	override func viewDidLoad() {
 		super.viewDidLoad()
+        view.addSubview(fbButton)
+        fbButton.snp_makeConstraints { (make) in
+            make.bottom.equalTo(view.snp_bottom).offset(-20)
+            make.centerX.equalTo(view.snp_centerX)
+            make.height.equalTo(view.snp_height).dividedBy(10)
+            make.width.equalTo(view.snp_width).dividedBy(2.5)
+        }
+        fbButton.backgroundColor = UIColor.flatRedColor()
+        fbButton.layer.masksToBounds = true
+        fbButton.layer.cornerRadius = view.frame.height/20
+        fbButton.layer.borderWidth = 1
+        fbButton.layer.borderColor = UIColor.whiteColor().CGColor
+        fbButton.titleLabel?.textColor = UIColor.redColor()
+        fbButton.setTitle("Login", forState: .Normal)
+        fbButton.titleLabel!.font = UIFont(name: "HelveticaNeue", size: fbButton.titleLabel!.font.pointSize)
+        fbButton.addTarget(self, action: #selector(connectWithFacebook), forControlEvents: .TouchUpInside)
+        
+        
+        
+        
+        
+        
+        
+        
+        
         self.loginButton.hidden = true
 
 		
@@ -66,6 +92,29 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
 	}
+    
+    
+    func connectWithFacebook(){
+        
+        if FBSDKAccessToken.currentAccessToken() != nil {
+            FBSDKLoginManager().logOut()
+            return
+        }
+        
+        let login:FBSDKLoginManager = FBSDKLoginManager()
+        login.logInWithReadPermissions(["email"], handler: { (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
+            if(error != nil){
+                FBSDKLoginManager().logOut()
+            }else if(result.isCancelled){
+                FBSDKLoginManager().logOut()
+            }else{
+                //Handle login success
+            }
+        })
+    }
+    
+    
+    
 
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         print("user logged in")
