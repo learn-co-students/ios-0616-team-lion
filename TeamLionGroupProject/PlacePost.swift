@@ -12,7 +12,7 @@ import UIKit
 struct PlacePost {
 	
 	var itemImages = UIImage()
-	var itemImageURL = ""
+	var itemImageURL: String?
 	var itemTitle = ""
 	var itemDescription = ""
 	var price = ""

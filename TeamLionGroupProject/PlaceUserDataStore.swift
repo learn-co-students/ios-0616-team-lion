@@ -29,6 +29,7 @@ class PlaceUserDataStore {
     var uid = ""
     private init(){}
     var postRef = FIRDatabaseReference()
+	var postArray = [PlacePost]()
     deinit{
         self.ref.removeObserverWithHandle(self.refHandle)
     }
@@ -93,8 +94,8 @@ class PlaceUserDataStore {
         let storage = FIRStorage.storage()
         let storageRef = storage.referenceForURL("gs://teamliongroupproject.appspot.com/")
         
-
-        let postImageRef = storageRef.child("users/userID/posts/\(self.postRef).jpeg")
+		let user = FIRAuth.auth()?.currentUser?.uid
+        let postImageRef = storageRef.child("users/\(user)/posts/\(self.postRef).jpeg")
         let uploadTask = postImageRef.putData(postImageData, metadata: nil) { metadata, error in
             if (error != nil) {
                 print("did NOT upload picture to firebase")
@@ -117,7 +118,7 @@ class PlaceUserDataStore {
 
             }
         }
-        self.loadDatabase()
+        //self.loadDatabase()
         // User is signed in.
     }
 

@@ -59,7 +59,7 @@ class ProfileHeaderView: UICollectionReusableView, FBSDKLoginButtonDelegate {
 		self.addSubview(usernameLabel)
 		usernameLabel.snp_makeConstraints { (make) in
 			make.centerX.equalTo(self.snp_centerX)
-			make.top.equalTo(self.snp_top).offset(75)
+			make.top.equalTo(self.snp_top).offset(30)
 			make.width.equalTo(self.snp_width).dividedBy(2)
 			make.height.equalTo(self.snp_height).dividedBy(8)
 		}
@@ -108,23 +108,23 @@ class ProfileHeaderView: UICollectionReusableView, FBSDKLoginButtonDelegate {
 		listingsCountLabel.font = UIFont(name: headerFont, size: listingsCountLabel.font.pointSize)
 		listingsCountLabel.textColor = UIColor.flatRedColor()
 		
-		self.addSubview(friendsButton)
-		friendsButton.snp_makeConstraints { (make) in
-			make.centerX.equalTo(snp_centerX)
-			make.top.equalTo(followingCountLabel.snp_bottom).offset(5)
-			make.height.equalTo(self.snp_height).dividedBy(6)
-			make.width.equalTo(self.snp_width).dividedBy(2.5)
-		}
-		friendsButton.backgroundColor = UIColor.flatRedColor()
-		friendsButton.layer.masksToBounds = true
-		friendsButton.layer.cornerRadius = self.frame.height/12
-		friendsButton.layer.borderWidth = 1
-		friendsButton.layer.borderColor = UIColor.whiteColor().CGColor
-		friendsButton.titleLabel?.textColor = UIColor.redColor()
-		friendsButton.setTitle("Friends", forState: .Normal)
-		friendsButton.titleLabel!.font = UIFont(name: headerFont, size: friendsButton.titleLabel!.font.pointSize)
-		friendsButton.addTarget(self, action: #selector(friendsButtonPressed), forControlEvents: .TouchUpInside)
-        
+//		self.addSubview(friendsButton)
+//		friendsButton.snp_makeConstraints { (make) in
+//			make.centerX.equalTo(snp_centerX)
+//			make.top.equalTo(followingCountLabel.snp_bottom).offset(5)
+//			make.height.equalTo(self.snp_height).dividedBy(6)
+//			make.width.equalTo(self.snp_width).dividedBy(2.5)
+//		}
+//		friendsButton.backgroundColor = UIColor.flatRedColor()
+//		friendsButton.layer.masksToBounds = true
+//		friendsButton.layer.cornerRadius = self.frame.height/12
+//		friendsButton.layer.borderWidth = 1
+//		friendsButton.layer.borderColor = UIColor.whiteColor().CGColor
+//		friendsButton.titleLabel?.textColor = UIColor.redColor()
+//		friendsButton.setTitle("Friends", forState: .Normal)
+//		friendsButton.titleLabel!.font = UIFont(name: headerFont, size: friendsButton.titleLabel!.font.pointSize)
+//		friendsButton.addTarget(self, action: #selector(friendsButtonPressed), forControlEvents: .TouchUpInside)
+		
 	}
 	
     func newPostPressed() {

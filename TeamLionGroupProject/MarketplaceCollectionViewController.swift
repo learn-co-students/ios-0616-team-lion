@@ -20,7 +20,7 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
     var posts = [FIRDataSnapshot]()
     var ref: FIRDatabaseReference!
 //	var imageUrlArray = [String]()
-	var postArray = [PlacePost]()
+//	var postArray = [PlacePost]()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,11 +34,20 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
     }
     
     override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
 		
 		self.edgesForExtendedLayout = UIRectEdge.None
 		
 		collectionView.reloadData()
     }
+	
+	override func viewDidAppear(animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		self.edgesForExtendedLayout = UIRectEdge.None
+	}
+	
+
     
     
 
@@ -47,25 +56,28 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
 		print("Before block")
 		
 		self.ref = FIRDatabase.database().reference()
+		self.shared.postArray.removeAll()
 		self.ref.child("posts").observeEventType(.ChildAdded, withBlock: {(snapshot) -> Void in
-
+			print("running block")
+			
 			let data = snapshot.value!
 //			let imageURL = data["image"] as! String
 //			self.imageUrlArray.append(imageURL)
 			
 			
 			var post = PlacePost()
-			post.itemDescription = data["description"] as! String
+			post.itemDescription = String(data["description"])
 			post.price = data["price"] as! String
 			post.itemTitle = data["title"] as! String
 			post.userID = data["userID"] as! String
 			post.itemImageURL = data["image"] as! String
 
-			self.postArray.append(post)
+			self.shared.postArray.append(post)
 			
 			self.collectionView.reloadData()
-			
-			print(self.postArray)
+			print(data["description"])
+			print(post.itemDescription)
+			print(self.shared.postArray)
 
 			
 			
@@ -74,17 +86,17 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
     
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return postArray.count
+        return shared.postArray.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("basicCell", forIndexPath: indexPath) as! PostViewCell
 		
-		let post = postArray[indexPath.item]
+		let post = shared.postArray[indexPath.item]
 		cell.priceLabel.text = "$\(post.price)"
 		
-		let url = NSURL(string: post.itemImageURL)
+		let url = NSURL(string: post.itemImageURL!)
 		cell.postImage.sd_setImageWithURL(url, placeholderImage: UIImage(named: "loadingImage"))
 		
         return cell
@@ -94,7 +106,7 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         // handle tap events
         print("You selected cell #\(indexPath.item)!")
         let postDetailVC = PostDetailViewController()
-		let post = postArray[indexPath.item]
+		let post = shared.postArray[indexPath.item]
         postDetailVC.itemTitle = post.itemTitle
         postDetailVC.itemPrice = post.price
         postDetailVC.itemDescription = post.itemDescription
@@ -102,6 +114,7 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
 		postDetailVC.itemImage = cell.postImage.image
         
         self.presentViewController(postDetailVC, animated: true, completion:  nil)
+		//self.navigationController?.pushViewController(postDetailVC, animated: true)
     }
     
     func setUpCollectionCells() {
@@ -129,50 +142,6 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         collectionView.showsHorizontalScrollIndicator = false
         self.view.addSubview(collectionView)
         
-    }
-	
-	//DONT NEED THIS FUNCTION ANYMORE **** VVVVV
-    func generateScene() {
-        
-        view.backgroundColor = UIColor.flatWhiteColor()
-        
-        view.addSubview(topFrame)
-        topFrame.backgroundColor = UIColor.flatRedColor()
-        topFrame.snp_makeConstraints { (make) in
-            make.top.equalTo(view.snp_top)
-            make.width.equalTo(view.snp_width)
-            make.height.equalTo(view.snp_width).dividedBy(5.8)
-        }
-        
-        let titleLabel = UILabel()
-        titleLabel.text = "Place"
-        titleLabel.backgroundColor = UIColor.flatRedColor()
-        titleLabel.textColor = UIColor.flatWhiteColor()
-        titleLabel.font = UIFont(name: "Noteworthy", size: 28)
-        view.addSubview(titleLabel)
-        titleLabel.snp_makeConstraints { (make) in
-            make.bottom.equalTo(topFrame.snp_bottom).offset(-5)
-            make.centerX.equalTo(topFrame.snp_centerX)
-        }
-        
-        //TEMPORARY
-        let tempNewPostButton = DynamicButton()
-        tempNewPostButton.setStyle(DynamicButtonStyle.Plus, animated: true)
-        tempNewPostButton.strokeColor = UIColor.flatWhiteColor()
-        tempNewPostButton.highlightStokeColor = UIColor.flatWatermelonColor()
-        tempNewPostButton.addTarget(self, action: #selector(newPostPressed), forControlEvents: .TouchUpInside)
-        view.addSubview(tempNewPostButton)
-        tempNewPostButton.snp_makeConstraints { (make) in
-            make.bottom.equalTo(topFrame.snp_bottom).offset(-5)
-            make.right.equalTo(topFrame.snp_right).offset(-20)
-        }
-    }
-    
-    func newPostPressed(){
-        
-        print("new post from VC")
-        let newPostVC = NewPostViewController()
-        presentViewController(newPostVC, animated: true, completion: nil)
     }
     
     func refresh(sender:AnyObject) {

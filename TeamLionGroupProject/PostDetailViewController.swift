@@ -48,8 +48,9 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
     
     
     func cancelButtonTapped() {
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
+		
+		self.dismissViewControllerAnimated(true, completion: nil)
+        //self.navigationController?.popViewControllerAnimated(true)
     }
     
     func buyButtonTapped() {
