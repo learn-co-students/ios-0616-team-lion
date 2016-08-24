@@ -23,7 +23,6 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, MFMailCo
     var titleLabel = UILabel()
     var buyButton = UIButton()
     var topFrame = UIImageView()
-    var cancelButton = DynamicButton()
     var itemImageView = UIImageView()
     let roundSquare = UIImageView()
     let chatButton = UIButton()
@@ -45,13 +44,6 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, MFMailCo
         generateScene()
         print(fullName)
         print(fullNameLabel.text)
-    }
-    
-    
-    func cancelButtonTapped() {
-		
-		self.dismissViewControllerAnimated(true, completion: nil)
-        //self.navigationController?.popViewControllerAnimated(true)
     }
     
     func buyButtonTapped() {
@@ -79,7 +71,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, MFMailCo
         
         view.backgroundColor = UIColor.flatRedColor()
 		
-		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "contact", style: UIBarButtonItemStyle.Done, target: self, action: #selector(contactButtonPressed))
+		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "contact seller", style: UIBarButtonItemStyle.Done, target: self, action: #selector(contactButtonPressed))
 		
         view.addSubview(buyButton)
         buyButton.snp_makeConstraints { (make) in
@@ -233,8 +225,8 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, MFMailCo
 	}
 	
 	func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-		switch (result)
-		{
+		
+		switch (result) {
 		case MFMailComposeResultCancelled:
 			print("Mail cancelled")
 			break;

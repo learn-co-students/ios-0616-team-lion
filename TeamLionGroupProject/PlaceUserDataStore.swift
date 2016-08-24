@@ -106,9 +106,12 @@ class PlaceUserDataStore {
                 let postPicURLString = downloadURL?.absoluteString
                 if let user = FIRAuth.auth()?.currentUser {
                     let uid = user.uid
-                    let userRef = self.ref.child("posts")
-                    self.postRef = userRef.childByAutoId()
-                    print(self.postRef)
+					print("PRINTING \(self.ref.child("posts"))")
+                    let userRef = self.ref.child("posts")		//******* THIS IS WHERE **********
+                    self.postRef = userRef.childByAutoId()		//******* THE APP IS CRASHING ****
+					print(userRef)								//******* REF IS NIL *************
+					print(self.postRef)
+					
                     self.postRef.updateChildValues(["title": title])
                     self.postRef.updateChildValues(["price": price])
                     self.postRef.updateChildValues(["description": description])
