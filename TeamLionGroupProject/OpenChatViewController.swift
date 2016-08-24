@@ -55,7 +55,7 @@ class OpenChatViewController: JSQMessagesViewController {
 	}
     
     override func viewWillAppear(animated: Bool) {
-        self.tabBarController?.tabBar.hidden = true
+        
     }
 	
 	func swipeDetected() {
@@ -225,10 +225,9 @@ class OpenChatViewController: JSQMessagesViewController {
 		return cell
 	}
 	
-	override func collectionView(collectionView: JSQMessagesCollectionView!, didTapMessageBubbleAtIndexPath indexPath: NSIndexPath!) {
-		print("Tapped")
-		print("didtapmessegeBubbleAtIndexPath: \(indexPath.item)")
-		let message = messages[indexPath.item]
+	override func collectionView(collectionView: JSQMessagesCollectionView!, didTapAvatarImageView avatarImageView: UIImageView!, atIndexPath indexPath: NSIndexPath!) {
+		
+		print("didTapAvatarAtIndexPath \(indexPath.item)")
 		
 		let alertController = UIAlertController(title: "Block User", message: "would you like to block this user?", preferredStyle: .Alert)
 		let cancelAction = UIAlertAction(title: "BLOCK", style: .Cancel) { (action) in
@@ -245,6 +244,13 @@ class OpenChatViewController: JSQMessagesViewController {
 			//append message.UID to the banned string
 			
 		}
+
+	}
+	
+	override func collectionView(collectionView: JSQMessagesCollectionView!, didTapMessageBubbleAtIndexPath indexPath: NSIndexPath!) {
+		print("Tapped")
+		print("didtapmessegeBubbleAtIndexPath: \(indexPath.item)")
+		let message = messages[indexPath.item]
 		
 		if message.isMediaMessage {
 			if let mediaItem = message.media as? JSQVideoMediaItem {
