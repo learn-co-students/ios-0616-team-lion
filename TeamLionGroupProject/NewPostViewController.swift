@@ -238,6 +238,8 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         takePictureButton.snp_makeConstraints { (make) in
             make.centerY.equalTo(pictureFrame.snp_centerY)
             make.centerX.equalTo(pictureFrame.snp_centerX).offset(15)
+            make.width.equalTo(pictureFrame.snp_width)
+            make.height.equalTo(pictureFrame.snp_height)
         }
         
         view.addSubview(cancelButton)
