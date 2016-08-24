@@ -126,8 +126,6 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 		
 		return cell
 		
-		
-		return cell
 	}
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -142,8 +140,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 		let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PostViewCell
 		postDetailVC.itemImage = cell.postImage.image
 		
-//        self.presentViewController(postDetailVC, animated: true, completion:  nil)
-		self.parentViewController?.navigationController?.pushViewController(postDetailVC, animated: true)
+		self.parentNavigationController?.pushViewController(postDetailVC, animated: true)
     }
 	
 	func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {

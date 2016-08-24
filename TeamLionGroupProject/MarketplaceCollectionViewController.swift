@@ -116,9 +116,7 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
 		let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PostViewCell
 		postDetailVC.itemImage = cell.postImage.image
         
-        //self.presentViewController(postDetailVC, animated: true, completion:  nil)
-		//self.navigationController?.pushViewController(postDetailVC, animated: true
-		self.parentViewController?.navigationController?.pushViewController(postDetailVC, animated: true)
+        self.parentNavigationController?.pushViewController(postDetailVC, animated: true)
     }
     
     func setUpCollectionCells() {
