@@ -40,7 +40,6 @@
 		FFE94AAD1D54E7320036ED38 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94AAA1D54E7320036ED38 /* UIViewExtensions.swift */; };
 		FFE94AB61D58FE810036ED38 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94AB51D58FE810036ED38 /* ProfileHeaderView.swift */; };
 		FFE94AB81D5A36F30036ED38 /* SegementPractice.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE94AB71D5A36F30036ED38 /* SegementPractice.swift */; };
-		FFFE8C491D6D33B300642330 /* Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFE8C481D6D33B300642330 /* Temp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,7 +84,6 @@
 		FFE94AAA1D54E7320036ED38 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		FFE94AB51D58FE810036ED38 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		FFE94AB71D5A36F30036ED38 /* SegementPractice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegementPractice.swift; sourceTree = "<group>"; };
-		FFFE8C481D6D33B300642330 /* Temp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Temp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,7 +123,6 @@
 			isa = PBXGroup;
 			children = (
 				FFE94A961D53D9730036ED38 /* LoginViewController.swift */,
-				FFFE8C481D6D33B300642330 /* Temp.swift */,
 				FF654BF71D6C966D004E4AC5 /* PageMenuViewController.swift */,
 				BEC67E421D53DF8100D2D030 /* MarketplaceCollectionViewController.swift */,
 				BEC67E441D53DFCD00D2D030 /* NewPostViewController.swift */,
@@ -380,7 +377,6 @@
 				1BC10C8A1D5A174A006E9747 /* PlaceUserDataStore.swift in Sources */,
 				1BCEC75A1D5D7A89006A8418 /* Friend.swift in Sources */,
 				FFE94AAB1D54E7320036ED38 /* UIColorExtensions.swift in Sources */,
-				FFFE8C491D6D33B300642330 /* Temp.swift in Sources */,
 				FF654C051D6C96FD004E4AC5 /* PageMenu-dummy.m in Sources */,
 				BE0049001D5A2C68005F3E2C /* PhotoViewController.swift in Sources */,
 			);
