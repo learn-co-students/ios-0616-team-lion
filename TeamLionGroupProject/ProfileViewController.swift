@@ -45,13 +45,22 @@ let shared = PlaceUserDataStore.sharedDataStore
 		
 		setupCollectionView()
         setupScene()
-        
+
 
 	}
     
     override func viewWillAppear(animated: Bool) {
             self.collectionView.reloadData()
         
+    }
+    
+    func logout(){
+        
+            try! FIRAuth.auth()!.signOut()
+            FBSDKAccessToken.setCurrentAccessToken(nil)
+            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let loginViewController: UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("LoginView")
+            self.presentViewController(loginViewController, animated: true, completion: nil)
     }
     
     func backgroundThread(delay: Double = 0.0, background: (() -> Void)? = nil, completion: (() -> Void)? = nil) {
@@ -66,10 +75,17 @@ let shared = PlaceUserDataStore.sharedDataStore
     }
     
     func setupScene() {
-        view.addSubview(loginButton)
+        var button=UIButton(frame: CGRectMake(20, 20, 75, 30))
+        button.setTitle("Log out", forState: UIControlState.Normal)
+        button.addTarget(self, action: #selector(logout), forControlEvents: UIControlEvents.TouchUpInside)
+        button.backgroundColor = UIColor(hexString: "#4E64A8")
+        button.layer.cornerRadius = view.frame.height/99
+        button.titleLabel!.font = UIFont(name: "HelveticaNeue", size: button.titleLabel!.font.pointSize)
+        self.view.addSubview(button)
+       // view.addSubview(loginButton)
 //        loginButton.delegate = self
-        loginButton.frame = CGRectMake(15, 30, 80, 30)
-        loginButton.addTarget(self, action: #selector(backToLoginScreen), forControlEvents: .TouchUpInside)
+        //loginButton.frame = CGRectMake(15, 30, 80, 30)
+        //loginButton.addTarget(self, action: #selector(backToLoginScreen), forControlEvents: .TouchUpInside)
     }
 
 	func setupCollectionView() {
@@ -125,6 +141,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 		cell.postImage.sd_setImageWithURL(url, placeholderImage: UIImage(named: "loadingImage"))
 		
 		return cell
+        
 	}
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
