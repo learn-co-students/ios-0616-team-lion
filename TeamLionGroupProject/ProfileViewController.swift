@@ -15,7 +15,8 @@ import FBSDKLoginKit
 class ProfileViewController: UIViewController {
 let shared = PlaceUserDataStore.sharedDataStore
     
-    
+	var parentNavigationController : UINavigationController?
+	
     var name: String?
     var picture: UIImage?
     var refreshControl = UIRefreshControl()
@@ -124,9 +125,6 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 		cell.postImage.sd_setImageWithURL(url, placeholderImage: UIImage(named: "loadingImage"))
 		
 		return cell
-		
-		
-		return cell
 	}
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -141,7 +139,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 		let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PostViewCell
 		postDetailVC.itemImage = cell.postImage.image
 		
-        self.presentViewController(postDetailVC, animated: true, completion:  nil)
+		self.parentNavigationController?.pushViewController(postDetailVC, animated: true)
     }
 	
 	func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
@@ -149,7 +147,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 		switch kind {
 		case UICollectionElementKindSectionHeader:
 
-			var headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerIdentifier, forIndexPath: indexPath) as! ProfileHeaderView
+			let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerIdentifier, forIndexPath: indexPath) as! ProfileHeaderView
             let name = self.shared.currentUser.name
 			headerView.delegate = self
             
@@ -186,10 +184,14 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
     func backToLoginScreen(){
         try! FIRAuth.auth()!.signOut()
         FBSDKAccessToken.setCurrentAccessToken(nil)
-        dispatch_async(dispatch_get_main_queue()) { 
-            self.showViewController(LoginViewController(), sender: nil)
-			
+        dispatch_async(dispatch_get_main_queue()) {
+            //self.showViewController(LoginViewController(), sender: nil)
         }
+		
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		let loginVC = storyboard.instantiateViewControllerWithIdentifier("LoginView")
+		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+		appDelegate.window?.rootViewController = loginVC
 
     }
     

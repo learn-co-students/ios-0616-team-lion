@@ -21,7 +21,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9HG-dA-ucD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1018" y="457"/>
+            <point key="canvasLocation" x="-868" y="457"/>
         </scene>
         <!--Direct Chat View Controller-->
         <scene sceneID="MFf-fZ-kbn">

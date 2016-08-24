@@ -11,8 +11,9 @@ import SnapKit
 import DynamicButton
 import CCTextFieldEffects
 import ChameleonFramework
+import MessageUI
 
-class PostDetailViewController: UIViewController, UIScrollViewDelegate {
+class PostDetailViewController: UIViewController, UIScrollViewDelegate, MFMailComposeViewControllerDelegate {
     
     var scrollView = UIScrollView()
     var profilePic = UIImageView()
@@ -22,7 +23,6 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
     var titleLabel = UILabel()
     var buyButton = UIButton()
     var topFrame = UIImageView()
-    var cancelButton = DynamicButton()
     var itemImageView = UIImageView()
     let roundSquare = UIImageView()
     let chatButton = UIButton()
@@ -44,13 +44,6 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         generateScene()
         print(fullName)
         print(fullNameLabel.text)
-    }
-    
-    
-    func cancelButtonTapped() {
-		
-		self.dismissViewControllerAnimated(true, completion: nil)
-        //self.navigationController?.popViewControllerAnimated(true)
     }
     
     func buyButtonTapped() {
@@ -77,43 +70,11 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
     func generateScene() {
         
         view.backgroundColor = UIColor.flatRedColor()
-        
-        view.addSubview(topFrame)
-        topFrame.backgroundColor = UIColor.flatRedColor()
-        topFrame.snp_makeConstraints { (make) in
-            make.top.equalTo(view.snp_top)
-            make.width.equalTo(view.snp_width)
-            make.height.equalTo(view.snp_width).dividedBy(7)
-        }
-        
-        view.addSubview(cancelButton)
-        cancelButton.setStyle(DynamicButtonStyle.Rewind, animated: true)
-        cancelButton.strokeColor = UIColor.flatWhiteColor()
-        cancelButton.highlightStokeColor = UIColor.redColor()
-        cancelButton.addTarget(self, action: #selector(cancelButtonTapped), forControlEvents: .TouchUpInside)
-        cancelButton.snp_makeConstraints { (make) in
-            make.centerX.equalTo(topFrame.snp_centerX).offset(-160)
-            make.centerY.equalTo(topFrame.snp_centerY).offset(10)
-            make.width.equalTo(topFrame.snp_width).dividedBy(12)
-            make.height.equalTo(topFrame.snp_width).dividedBy(12)
-            
-        }
-        
-        view.addSubview(chatButton)
-        chatButtonImage.image = UIImage(named: "chatUnselected")
-        chatButtonImage.image = (chatButtonImage.image?.imageWithRenderingMode(.AlwaysTemplate))!
-        chatButtonImage.tintColor = UIColor.flatWhiteColor()
-        chatButton.setImage(chatButtonImage.image, forState: .Normal)
-        chatButton.addTarget(self, action: #selector(chatButtonPressed), forControlEvents: .TouchUpInside)
-        chatButton.tintColor = UIColor.flatWhiteColor()
-        chatButton.snp_makeConstraints { (make) in
-            make.centerX.equalTo(topFrame.snp_centerX).offset(160)
-            make.centerY.equalTo(topFrame.snp_centerY).offset(10)
-            make.width.equalTo(topFrame.snp_width).dividedBy(12)
-            make.height.equalTo(topFrame.snp_width).dividedBy(12)
-            
-        }
-        
+		
+		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "contact seller", style: UIBarButtonItemStyle.Done, target: self, action: #selector(contactButtonPressed))
+		let textAttribute = [NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 20)!]
+		self.navigationItem.rightBarButtonItem?.setTitleTextAttributes(textAttribute, forState: .Normal)
+		
         view.addSubview(buyButton)
         buyButton.snp_makeConstraints { (make) in
             make.bottom.equalTo(view.snp_bottom).offset(-20)
@@ -138,7 +99,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         scrollView.userInteractionEnabled = true
         scrollView.backgroundColor = UIColor.flatWhiteColor()
         scrollView.snp_makeConstraints { (make) in
-            make.top.equalTo(topFrame.snp_bottom).offset(10)
+            make.top.equalTo(view.snp_top)
             make.left.equalTo(view.snp_left)
             make.right.equalTo(view.snp_right)
             make.bottom.equalTo(view.snp_bottom).offset(-100)
@@ -248,6 +209,45 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
             totalHeight = preTotalHeight
         }
     }
-    
+	
+	func contactButtonPressed() {
+		
+		let emailTitle = "Email Title"
+		let messageBody = "I want to buy your thing please"
+		let recipient = ["davidvypark@gmail.com"]
+		let mailVC = MFMailComposeViewController()
+		
+		mailVC.mailComposeDelegate = self
+		mailVC.setSubject(emailTitle)
+		mailVC.setMessageBody(messageBody, isHTML: false)
+		mailVC.setToRecipients(recipient)
+		
+		self.presentViewController(mailVC, animated: true, completion: nil)
+		
+	}
+	
+	func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+		
+		switch (result) {
+		case MFMailComposeResultCancelled:
+			print("Mail cancelled")
+			break;
+		case MFMailComposeResultSaved:
+			print("Mail saved");
+			break;
+		case MFMailComposeResultSent:
+			print("Mail sent");
+			break;
+		case MFMailComposeResultFailed:
+			print("Mail sent failure: \(error?.localizedDescription)");
+			break;
+		default:
+			break;
+		}
+		
+		// Close the Mail Interface
+		self.dismissViewControllerAnimated(true, completion: nil)
+	}
+	
 
 }

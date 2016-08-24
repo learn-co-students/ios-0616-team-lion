@@ -14,13 +14,14 @@ import Firebase
 import SDWebImage
 
 class MarketplaceCollectionViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UINavigationBarDelegate {
-    var shared = PlaceUserDataStore.sharedDataStore
+	
+	var parentNavigationController : UINavigationController?
+	
+	var shared = PlaceUserDataStore.sharedDataStore
     var collectionView: UICollectionView!
     let topFrame = UIImageView()
     var posts = [FIRDataSnapshot]()
     var ref: FIRDatabaseReference!
-//	var imageUrlArray = [String]()
-//	var postArray = [PlacePost]()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,10 +48,6 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
 		
 		self.edgesForExtendedLayout = UIRectEdge.None
 	}
-	
-
-    
-    
 
 	func getAllPosts() {
 		
@@ -62,16 +59,13 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
 			print("running block")
 			
 			let data = snapshot.value!
-//			let imageURL = data["image"] as! String
-//			self.imageUrlArray.append(imageURL)
-			
-			
+
 			var post = PlacePost()
-			post.itemDescription = String(data["description"])
-			post.price = data["price"] as! String
-			post.itemTitle = data["title"] as! String
+			post.itemDescription = data["description"] as! String		//*** APP IS CRASHING HERE *********
+			post.price = data["price"] as! String						//*** VALUES OF NEW POST ARE NIL ***
+			post.itemTitle = data["title"] as! String					//*** Firebase Database not updating
 			post.userID = data["userID"] as! String
-			post.itemImageURL = data["image"] as! String
+			post.itemImageURL = data["image"] as? String
 
 			self.shared.postArray.append(post)
 			
@@ -80,8 +74,6 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
 			print(post.itemDescription)
 			print(self.shared.postArray)
 
-			
-			
 		})
 	}
     
@@ -114,8 +106,7 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
 		let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PostViewCell
 		postDetailVC.itemImage = cell.postImage.image
         
-        self.presentViewController(postDetailVC, animated: true, completion:  nil)
-		//self.navigationController?.pushViewController(postDetailVC, animated: true)
+        self.parentNavigationController?.pushViewController(postDetailVC, animated: true)
     }
     
     func setUpCollectionCells() {
@@ -131,7 +122,6 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         layout.itemSize = CGSize(width: screenWidth/2.005, height: screenWidth/2.005)
         layout.minimumLineSpacing = 1
         layout.minimumInteritemSpacing = 0
-        
         
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         collectionView.dataSource = self

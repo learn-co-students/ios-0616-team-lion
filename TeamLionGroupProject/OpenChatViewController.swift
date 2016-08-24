@@ -16,6 +16,8 @@ import FirebaseAuth
 
 class OpenChatViewController: JSQMessagesViewController {
 	
+	var parentNavigationController : UINavigationController?
+	
 	var chatType = "OpenChat"
 	
 	var messages = [JSQMessage]()

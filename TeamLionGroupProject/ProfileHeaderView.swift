@@ -25,7 +25,7 @@ class ProfileHeaderView: UICollectionReusableView, FBSDKLoginButtonDelegate {
 	var profilePic = UIImageView()
 	var followingCountLabel = UILabel()
 	var listingsCountLabel = UILabel()
-	var friendsButton = UIButton()
+	var contactButton = UIButton()
     var newPostButton = UIButton()
 	
 	var username = "Username"
@@ -83,47 +83,47 @@ class ProfileHeaderView: UICollectionReusableView, FBSDKLoginButtonDelegate {
 		profilePic.layer.borderColor = UIColor.whiteColor().CGColor
 		
 		
-		self.addSubview(followingCountLabel)
-		followingCountLabel.snp_makeConstraints { (make) in
-			make.right.equalTo(self.snp_centerX).offset(-3)
-			make.top.equalTo(profilePic.snp_bottom).offset(2)
-			make.height.equalTo(self.snp_height).dividedBy(10)
-			make.width.equalTo(self.snp_width).dividedBy(2)
-		}
-		//followingCountLabel.backgroundColor = UIColor.alizarinColor()
-		followingCountLabel.text = "Following: \(currentFollowingsCount)"
-		followingCountLabel.textAlignment = .Right
-		followingCountLabel.font = UIFont(name: headerFont, size: followingCountLabel.font.pointSize)
-		followingCountLabel.textColor = UIColor.flatRedColor()
+//		self.addSubview(followingCountLabel)
+//		followingCountLabel.snp_makeConstraints { (make) in
+//			make.right.equalTo(self.snp_centerX).offset(-3)
+//			make.top.equalTo(profilePic.snp_bottom).offset(2)
+//			make.height.equalTo(self.snp_height).dividedBy(10)
+//			make.width.equalTo(self.snp_width).dividedBy(2)
+//		}
+//		followingCountLabel.text = "Following: \(currentFollowingsCount)"
+//		followingCountLabel.textAlignment = .Right
+//		followingCountLabel.font = UIFont(name: headerFont, size: followingCountLabel.font.pointSize)
+//		followingCountLabel.textColor = UIColor.flatRedColor()
 		
 		self.addSubview(listingsCountLabel)
 		listingsCountLabel.snp_makeConstraints { (make) in
-			make.left.equalTo(self.snp_centerX).offset(3)
-			make.top.equalTo(followingCountLabel.snp_top)
-			make.height.equalTo(followingCountLabel.snp_height)
-			make.width.equalTo(followingCountLabel.snp_width)
+			make.center.equalTo(self.snp_centerX).offset(0)
+			make.top.equalTo(profilePic.snp_bottom).offset(3)
+			make.height.equalTo(self.snp_height).dividedBy(10)
+			make.width.equalTo(self.snp_width).dividedBy(2)
 		}
 		//listingsCountLabel.backgroundColor = UIColor.amethystColor()
 		listingsCountLabel.text = "Listings: \(currentListingsCount)"
 		listingsCountLabel.font = UIFont(name: headerFont, size: listingsCountLabel.font.pointSize)
+		listingsCountLabel.textAlignment = .Center
 		listingsCountLabel.textColor = UIColor.flatRedColor()
 		
-//		self.addSubview(friendsButton)
-//		friendsButton.snp_makeConstraints { (make) in
+//		self.addSubview(contactButton)
+//		contactButton.snp_makeConstraints { (make) in
 //			make.centerX.equalTo(snp_centerX)
-//			make.top.equalTo(followingCountLabel.snp_bottom).offset(5)
+//			make.top.equalTo(listingsCountLabel.snp_bottom).offset(5)
 //			make.height.equalTo(self.snp_height).dividedBy(6)
 //			make.width.equalTo(self.snp_width).dividedBy(2.5)
 //		}
-//		friendsButton.backgroundColor = UIColor.flatRedColor()
-//		friendsButton.layer.masksToBounds = true
-//		friendsButton.layer.cornerRadius = self.frame.height/12
-//		friendsButton.layer.borderWidth = 1
-//		friendsButton.layer.borderColor = UIColor.whiteColor().CGColor
-//		friendsButton.titleLabel?.textColor = UIColor.redColor()
-//		friendsButton.setTitle("Friends", forState: .Normal)
-//		friendsButton.titleLabel!.font = UIFont(name: headerFont, size: friendsButton.titleLabel!.font.pointSize)
-//		friendsButton.addTarget(self, action: #selector(friendsButtonPressed), forControlEvents: .TouchUpInside)
+//		contactButton.backgroundColor = UIColor.flatRedColor()
+//		contactButton.layer.masksToBounds = true
+//		contactButton.layer.cornerRadius = self.frame.height/12
+//		contactButton.layer.borderWidth = 1
+//		contactButton.layer.borderColor = UIColor.whiteColor().CGColor
+//		contactButton.titleLabel?.textColor = UIColor.redColor()
+//		contactButton.setTitle("Friends", forState: .Normal)
+//		contactButton.titleLabel!.font = UIFont(name: headerFont, size: contactButton.titleLabel!.font.pointSize)
+//		contactButton.addTarget(self, action: #selector(friendsButtonPressed), forControlEvents: .TouchUpInside)
 		
 	}
 	
