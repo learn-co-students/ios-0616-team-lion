@@ -86,7 +86,7 @@ class PlaceUserDataStore {
         
     }
     
-    func postPictureToDatabase(pictue: UIImage, title: String, description: String, price: String, userID: String) {
+    func postPictureToDatabase(pictue: UIImage, title: String, description: String, price: String, userID: String, name: String) {
         var piccopy = UIImage()
         piccopy = pictue
         let postImageData: NSData = UIImagePNGRepresentation(piccopy)!
@@ -122,7 +122,7 @@ class PlaceUserDataStore {
 //                    self.postRef.updateChildValues(["image": postPicURLString!])
 //                    self.postRef.updateChildValues(["userID": userID])
                     
-                    let postData = ["title": title, "price": price, "description": description, "image": postPicURLString!, "userID": userID]
+                    let postData = ["title": title, "price": price, "description": description, "image": postPicURLString!, "userID": userID, "name": name]
                     self.postRef.setValue(postData)
                 }
 

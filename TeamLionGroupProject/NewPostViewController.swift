@@ -142,13 +142,14 @@ class NewPostViewController: UIViewController, UITextFieldDelegate, UITextViewDe
 				
                 let pic = self.picture.image!
                 guard let userID = FIRAuth.auth()?.currentUser?.email else{return}
+                guard let name = FIRAuth.auth()?.currentUser?.displayName else{return}
                 print("USERID         \(userID)")
 				print("THE USER ID IS \(userID)")
 				print("Picture is \(pic)")
 				print("ITEM NAME is \(self.itemNameField.text)")
 				print("description is \(self.itemDescriptionField.text)")
 				print("price is \(self.itemPriceField.text)")
-                self.datastore.postPictureToDatabase(pic, title: self.itemNameField.text!, description: self.itemDescriptionField.text, price: self.itemPriceField.text!, userID: userID)
+                self.datastore.postPictureToDatabase(pic, title: self.itemNameField.text!, description: self.itemDescriptionField.text, price: self.itemPriceField.text!, userID: userID, name: name)
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
 			
