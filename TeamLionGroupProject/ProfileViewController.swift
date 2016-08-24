@@ -125,7 +125,6 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 		cell.postImage.sd_setImageWithURL(url, placeholderImage: UIImage(named: "loadingImage"))
 		
 		return cell
-		
 	}
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -148,7 +147,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 		switch kind {
 		case UICollectionElementKindSectionHeader:
 
-			var headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerIdentifier, forIndexPath: indexPath) as! ProfileHeaderView
+			let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerIdentifier, forIndexPath: indexPath) as! ProfileHeaderView
             let name = self.shared.currentUser.name
 			headerView.delegate = self
             

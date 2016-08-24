@@ -83,29 +83,29 @@ class ProfileHeaderView: UICollectionReusableView, FBSDKLoginButtonDelegate {
 		profilePic.layer.borderColor = UIColor.whiteColor().CGColor
 		
 		
-		self.addSubview(followingCountLabel)
-		followingCountLabel.snp_makeConstraints { (make) in
-			make.right.equalTo(self.snp_centerX).offset(-3)
-			make.top.equalTo(profilePic.snp_bottom).offset(2)
-			make.height.equalTo(self.snp_height).dividedBy(10)
-			make.width.equalTo(self.snp_width).dividedBy(2)
-		}
-		//followingCountLabel.backgroundColor = UIColor.alizarinColor()
-		followingCountLabel.text = "Following: \(currentFollowingsCount)"
-		followingCountLabel.textAlignment = .Right
-		followingCountLabel.font = UIFont(name: headerFont, size: followingCountLabel.font.pointSize)
-		followingCountLabel.textColor = UIColor.flatRedColor()
+//		self.addSubview(followingCountLabel)
+//		followingCountLabel.snp_makeConstraints { (make) in
+//			make.right.equalTo(self.snp_centerX).offset(-3)
+//			make.top.equalTo(profilePic.snp_bottom).offset(2)
+//			make.height.equalTo(self.snp_height).dividedBy(10)
+//			make.width.equalTo(self.snp_width).dividedBy(2)
+//		}
+//		followingCountLabel.text = "Following: \(currentFollowingsCount)"
+//		followingCountLabel.textAlignment = .Right
+//		followingCountLabel.font = UIFont(name: headerFont, size: followingCountLabel.font.pointSize)
+//		followingCountLabel.textColor = UIColor.flatRedColor()
 		
 		self.addSubview(listingsCountLabel)
 		listingsCountLabel.snp_makeConstraints { (make) in
-			make.left.equalTo(self.snp_centerX).offset(3)
-			make.top.equalTo(followingCountLabel.snp_top)
-			make.height.equalTo(followingCountLabel.snp_height)
-			make.width.equalTo(followingCountLabel.snp_width)
+			make.center.equalTo(self.snp_centerX).offset(0)
+			make.top.equalTo(profilePic.snp_bottom).offset(3)
+			make.height.equalTo(self.snp_height).dividedBy(10)
+			make.width.equalTo(self.snp_width).dividedBy(2)
 		}
 		//listingsCountLabel.backgroundColor = UIColor.amethystColor()
 		listingsCountLabel.text = "Listings: \(currentListingsCount)"
 		listingsCountLabel.font = UIFont(name: headerFont, size: listingsCountLabel.font.pointSize)
+		listingsCountLabel.textAlignment = .Center
 		listingsCountLabel.textColor = UIColor.flatRedColor()
 		
 //		self.addSubview(friendsButton)
