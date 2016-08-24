@@ -141,7 +141,8 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 		let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PostViewCell
 		postDetailVC.itemImage = cell.postImage.image
 		
-        self.presentViewController(postDetailVC, animated: true, completion:  nil)
+//        self.presentViewController(postDetailVC, animated: true, completion:  nil)
+		self.parentViewController?.navigationController?.pushViewController(postDetailVC, animated: true)
     }
 	
 	func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {

@@ -77,42 +77,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
     func generateScene() {
         
         view.backgroundColor = UIColor.flatRedColor()
-        
-        view.addSubview(topFrame)
-        topFrame.backgroundColor = UIColor.flatRedColor()
-        topFrame.snp_makeConstraints { (make) in
-            make.top.equalTo(view.snp_top)
-            make.width.equalTo(view.snp_width)
-            make.height.equalTo(view.snp_width).dividedBy(7)
-        }
-        
-        view.addSubview(cancelButton)
-        cancelButton.setStyle(DynamicButtonStyle.Rewind, animated: true)
-        cancelButton.strokeColor = UIColor.flatWhiteColor()
-        cancelButton.highlightStokeColor = UIColor.redColor()
-        cancelButton.addTarget(self, action: #selector(cancelButtonTapped), forControlEvents: .TouchUpInside)
-        cancelButton.snp_makeConstraints { (make) in
-            make.centerX.equalTo(topFrame.snp_centerX).offset(-160)
-            make.centerY.equalTo(topFrame.snp_centerY).offset(10)
-            make.width.equalTo(topFrame.snp_width).dividedBy(12)
-            make.height.equalTo(topFrame.snp_width).dividedBy(12)
-            
-        }
-        
-        view.addSubview(chatButton)
-        chatButtonImage.image = UIImage(named: "chatUnselected")
-        chatButtonImage.image = (chatButtonImage.image?.imageWithRenderingMode(.AlwaysTemplate))!
-        chatButtonImage.tintColor = UIColor.flatWhiteColor()
-        chatButton.setImage(chatButtonImage.image, forState: .Normal)
-        chatButton.addTarget(self, action: #selector(chatButtonPressed), forControlEvents: .TouchUpInside)
-        chatButton.tintColor = UIColor.flatWhiteColor()
-        chatButton.snp_makeConstraints { (make) in
-            make.centerX.equalTo(topFrame.snp_centerX).offset(160)
-            make.centerY.equalTo(topFrame.snp_centerY).offset(10)
-            make.width.equalTo(topFrame.snp_width).dividedBy(12)
-            make.height.equalTo(topFrame.snp_width).dividedBy(12)
-            
-        }
+		
         
         view.addSubview(buyButton)
         buyButton.snp_makeConstraints { (make) in
@@ -138,7 +103,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         scrollView.userInteractionEnabled = true
         scrollView.backgroundColor = UIColor.flatWhiteColor()
         scrollView.snp_makeConstraints { (make) in
-            make.top.equalTo(topFrame.snp_bottom).offset(10)
+            make.top.equalTo(view.snp_top)
             make.left.equalTo(view.snp_left)
             make.right.equalTo(view.snp_right)
             make.bottom.equalTo(view.snp_bottom).offset(-100)

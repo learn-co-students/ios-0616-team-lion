@@ -16,9 +16,19 @@ class PageMenuViewController: UIViewController {
 		super.viewWillAppear(animated)
 		
 		setupNavBar()
-		setupPages()
-		
 		self.edgesForExtendedLayout = UIRectEdge.None
+		self.extendedLayoutIncludesOpaqueBars = false
+	
+		
+		//self.edgesForExtendedLayout = UIRectEdge.None
+		//self.extendedLayoutIncludesOpaqueBars = false
+	}
+	
+	override func viewDidAppear(animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		setupPages()
+
 	}
 	
 	override func viewDidLoad() {
@@ -72,6 +82,10 @@ class PageMenuViewController: UIViewController {
 		pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, 0.0, self.view.frame.width, self.view.frame.height), pageMenuOptions: parameters)
 		
 		self.view.addSubview(pageMenu!.view)
+		
+		self.addChildViewController(marketplaceVC)
+//		self.addChildViewController(profileVC)
+//		self.addChildViewController(openChatVC)
 		
 	}
 	

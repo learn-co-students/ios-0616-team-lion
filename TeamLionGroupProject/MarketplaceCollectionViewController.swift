@@ -66,7 +66,7 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
 			
 			
 			var post = PlacePost()
-			post.itemDescription = String(data["description"])
+			post.itemDescription = data["description"] as! String
 			post.price = data["price"] as! String
 			post.itemTitle = data["title"] as! String
 			post.userID = data["userID"] as! String
@@ -113,8 +113,9 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
 		let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PostViewCell
 		postDetailVC.itemImage = cell.postImage.image
         
-        self.presentViewController(postDetailVC, animated: true, completion:  nil)
-		//self.navigationController?.pushViewController(postDetailVC, animated: true)
+        //self.presentViewController(postDetailVC, animated: true, completion:  nil)
+		//self.navigationController?.pushViewController(postDetailVC, animated: true
+		self.parentViewController?.navigationController?.pushViewController(postDetailVC, animated: true)
     }
     
     func setUpCollectionCells() {
