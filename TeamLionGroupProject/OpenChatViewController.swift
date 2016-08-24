@@ -24,7 +24,7 @@ class OpenChatViewController: JSQMessagesViewController {
 	var avatarDict = [String: JSQMessagesAvatarImage]()
 
 	var messageRef = FIRDatabase.database().reference().child("messages")
-
+	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -226,27 +226,31 @@ class OpenChatViewController: JSQMessagesViewController {
 	}
 	
 	override func collectionView(collectionView: JSQMessagesCollectionView!, didTapAvatarImageView avatarImageView: UIImageView!, atIndexPath indexPath: NSIndexPath!) {
-		
+
 		print("didTapAvatarAtIndexPath \(indexPath.item)")
+		let message = messages[indexPath.item]
 		
-		let alertController = UIAlertController(title: "Block User", message: "would you like to block this user?", preferredStyle: .Alert)
-		let cancelAction = UIAlertAction(title: "BLOCK", style: .Cancel) { (action) in
+		let alertController = UIAlertController(title: "Block \(message.senderDisplayName)", message: "would you like to block this user?", preferredStyle: .Alert)
+		let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
 			
 		}
 		alertController.addAction(cancelAction)
-		let OKAction = UIAlertAction(title: "Cancel", style: .Default) { (action) in
+		let OKAction = UIAlertAction(title: "BLOCK", style: .Default) { (action) in
+			print("User BLOCKED")
+			
 			//append message.UID to the banned string
+			//notification User Blocked
+			
 		}
 		alertController.addAction(OKAction)
 		
-		//if meesage user you not yourself
-		self.presentViewController(alertController, animated: true) {
-			//append message.UID to the banned string
-			
+		if (message.senderId != self.senderId) {
+			self.presentViewController(alertController, animated: true) {
+				
+			}
 		}
-
 	}
-	
+
 	override func collectionView(collectionView: JSQMessagesCollectionView!, didTapMessageBubbleAtIndexPath indexPath: NSIndexPath!) {
 		print("Tapped")
 		print("didtapmessegeBubbleAtIndexPath: \(indexPath.item)")
@@ -309,8 +313,6 @@ class OpenChatViewController: JSQMessagesViewController {
 
 
 extension OpenChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-	
-	
 	
 	func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
 		print("Did finish picking")
