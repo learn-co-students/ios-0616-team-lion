@@ -142,6 +142,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 		
 		let url = NSURL(string: filteredArray[indexPath.item].itemImageURL!)
 		cell.postImage.sd_setImageWithURL(url, placeholderImage: UIImage(named: "loadingImage"))
+        cell.priceTagImage.hidden = true
 		
 		return cell
         
