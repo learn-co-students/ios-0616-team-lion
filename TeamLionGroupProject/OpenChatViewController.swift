@@ -229,17 +229,66 @@ class OpenChatViewController: JSQMessagesViewController {
 
 		print("didTapAvatarAtIndexPath \(indexPath.item)")
 		let message = messages[indexPath.item]
+		//print("SENDERID \(message.senderId)")
+		//print("FIRAUTH \(FIRAuth.auth()?.currentUser!.uid)")
 		
 		let alertController = UIAlertController(title: "Block \(message.senderDisplayName)", message: "would you like to block this user?", preferredStyle: .Alert)
 		let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
 			
 		}
 		alertController.addAction(cancelAction)
+		
 		let OKAction = UIAlertAction(title: "BLOCK", style: .Default) { (action) in
 			print("User BLOCKED")
 			
-			//append message.UID to the banned string
-			//notification User Blocked
+			let userRef = FIRDatabase.database().reference()
+			print("USERREF \(userRef)")
+			userRef.child("users").child(self.senderId).observeEventType(.ChildAdded, withBlock: { (snapshot) in
+				
+				print("SNAPSHOT " + String(snapshot))
+				
+				var blockedString = snapshot.value as! String
+				
+				if !(blockedString.containsString(String(message.senderId))) {
+					
+					if (String(snapshot).containsString("Snap (blockedUsers) ")) {
+						
+						print(blockedString)
+						blockedString.appendContentsOf(String(message.senderId))
+						print("AFTERSTRING \(blockedString)")
+						
+						//update child to firebase
+						
+						userRef.child("users").child(self.senderId).updateChildValues(["blockedUsers" : blockedString])
+						
+						let confirmAlertController = UIAlertController(title: "BLOCKED", message: "\(message.senderDisplayName) has been blocked", preferredStyle: .Alert)
+						
+						let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
+						confirmAlertController.addAction(OKAction)
+						
+						self.presentViewController(confirmAlertController, animated: true, completion: nil)
+						
+					}
+					
+				} else {
+					
+					let errorAlertController = UIAlertController(title: "Error", message: "\(message.senderDisplayName) has already been blocked", preferredStyle: .Alert)
+					
+					let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
+					errorAlertController.addAction(OKAction)
+					
+					self.presentViewController(errorAlertController, animated: true, completion: nil)
+				}
+
+			})
+			
+			
+			// if !blockedArray.containsubstring(message.senderId) {
+				// append message.senderId to the banned string
+			
+			
+			// else
+				// alert "User has already been blocked
 			
 		}
 		alertController.addAction(OKAction)

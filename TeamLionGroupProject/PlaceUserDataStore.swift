@@ -344,6 +344,5 @@ class PlaceUserDataStore {
             completion(result: (self.currentUser.name, self.currentUser.picture, self.currentUser.email, self.currentUser.userID))
         }
     }
-
     
 }
