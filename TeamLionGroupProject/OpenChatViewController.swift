@@ -183,6 +183,7 @@ class OpenChatViewController: JSQMessagesViewController {
 		mediaPicker.mediaTypes = [type as String]
 		self.presentViewController(mediaPicker, animated: true, completion: nil)
 		//parentNavigationController?.pushViewController(mediaPicker, animated: true)
+		//self.parentViewController?.presentViewController(mediaPicker, animated: true, completion: nil)
 	}
 	
 	func filterMessages() {

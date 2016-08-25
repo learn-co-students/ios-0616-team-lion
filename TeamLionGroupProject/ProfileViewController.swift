@@ -39,7 +39,6 @@ let shared = PlaceUserDataStore.sharedDataStore
 		setupCollectionView()
         setupScene()
 
-
 	}
     
     override func viewWillAppear(animated: Bool) {
@@ -58,14 +57,23 @@ let shared = PlaceUserDataStore.sharedDataStore
     }
     
     func logout(){
-        
-            try! FIRAuth.auth()!.signOut()
-            FBSDKAccessToken.setCurrentAccessToken(nil)
-            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let loginViewController: UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("LoginView")
-            self.presentViewController(loginViewController, animated: true, completion: nil)
+		
+		let confirmationAlertController = UIAlertController(title: "Log Out", message: "would you like to log out?", preferredStyle: .Alert)
+		let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in }
+		confirmationAlertController.addAction(cancelAction)
+
+		let OKAction = UIAlertAction(title: "Log Out", style: .Default) { (action) in
+			try! FIRAuth.auth()!.signOut()
+			FBSDKAccessToken.setCurrentAccessToken(nil)
+			let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+			let loginViewController: UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("LoginView")
+			self.presentViewController(loginViewController, animated: true, completion: nil)
+		}
+		confirmationAlertController.addAction(OKAction)
+		
+		self.presentViewController(confirmationAlertController, animated: true, completion: nil)
     }
-    
+	
     func backgroundThread(delay: Double = 0.0, background: (() -> Void)? = nil, completion: (() -> Void)? = nil) {
         dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue), 0)) {
             if(background != nil){ background!(); }

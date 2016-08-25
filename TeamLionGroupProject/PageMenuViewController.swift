@@ -64,6 +64,7 @@ class PageMenuViewController: UIViewController {
 		controllerArray.append(marketplaceVC)
 		controllerArray.append(profileVC)
 		controllerArray.append(openChatVC)
+		self.addChildViewController(openChatVC)
 		
 		let parameters: [CAPSPageMenuOption] = [
 			.ScrollMenuBackgroundColor(UIColor(red: 30.0/255.0, green: 30.0/255.0, blue: 30.0/255.0, alpha: 1.0)),
