@@ -9,6 +9,8 @@
 import UIKit
 import SnapKit
 import FBSDKLoginKit
+import FirebaseAuth
+import FBSDKLoginKit
 
 protocol ProfileHeaderViewDelegate: class {
 	func friendsButtonPressed()
@@ -42,12 +44,14 @@ class ProfileHeaderView: UICollectionReusableView, FBSDKLoginButtonDelegate {
 		super.layoutSubviews()
 		
 		setupScene()
-        
         profilePic.image = self.shared.currentUser.picture
-        currentListingsCount = self.shared.currentUser.postings.count
         usernameLabel.text = self.shared.currentUser.name
+        currentListingsCount = shared.currentUser.postings.count
+        listingsCountLabel.text = "Listings: \(currentListingsCount)"
+
 
 	}
+    
 	
 	func setupScene() {
         
@@ -163,6 +167,5 @@ class ProfileHeaderView: UICollectionReusableView, FBSDKLoginButtonDelegate {
         self.delegate?.backToLoginScreen()
 
     }
-
 	
 }

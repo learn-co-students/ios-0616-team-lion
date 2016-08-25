@@ -22,7 +22,6 @@ let shared = PlaceUserDataStore.sharedDataStore
     var refreshControl = UIRefreshControl()
     var loginButton: FBSDKLoginButton = FBSDKLoginButton()
     let topFrame = UIImageView()
-	var filteredArray = [PlacePost]()
     
 	private let cellIdentifier = "Cell"
 	private let headerIdentifier = "header"
@@ -45,14 +44,14 @@ let shared = PlaceUserDataStore.sharedDataStore
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        filteredArray.removeAll()
+        shared.currentUser.postings.removeAll()
         for post in shared.postArray {
             if (post.userID == FIRAuth.auth()?.currentUser?.uid) {
-                filteredArray.append(post)
+                self.shared.currentUser.postings.append(post)
             }
         }
         
-        print("FILTERED ARRAY = \(filteredArray)")
+        print("FILTERED ARRAY = \(self.shared.currentUser.postings)")
         self.collectionView.reloadData()
         
     }
@@ -133,14 +132,14 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 	}
 	
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return self.filteredArray.count
+		return self.shared.currentUser.postings.count
 	}
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! PostViewCell
 		
-		let url = NSURL(string: filteredArray[indexPath.item].itemImageURL!)
+		let url = NSURL(string: shared.currentUser.postings[indexPath.item].itemImageURL!)
 		cell.postImage.sd_setImageWithURL(url, placeholderImage: UIImage(named: "loadingImage"))
         cell.priceTagImage.hidden = true
 		
@@ -153,7 +152,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
         print("You selected cell #\(indexPath.item)!")
         
 		let postDetailVC = PostDetailViewController()
-		let post = filteredArray[indexPath.item]
+		let post = shared.currentUser.postings[indexPath.item]
 		postDetailVC.itemTitle = post.itemTitle
 		postDetailVC.itemPrice = post.price
 		postDetailVC.itemDescription = post.itemDescription
@@ -221,18 +220,17 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
     func refresh(sender:AnyObject) {
         print ("Refreshing")
         
-        filteredArray.removeAll()
+        shared.currentUser.postings.removeAll()
         for post in shared.postArray {
             if (post.userID == FIRAuth.auth()?.currentUser?.uid) {
-                filteredArray.append(post)
+                self.shared.currentUser.postings.append(post)
             }
         }
         
-        print("FILTERED ARRAY = \(filteredArray)")
+        print("FILTERED ARRAY = \(self.shared.currentUser.postings)")
         self.collectionView.reloadData()
         
         self.refreshControl.endRefreshing()
         
-
     }
 }
