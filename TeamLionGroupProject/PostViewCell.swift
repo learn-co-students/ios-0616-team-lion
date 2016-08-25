@@ -14,6 +14,7 @@ class PostViewCell: UICollectionViewCell {
     var postImage = UIImageView()
     var nameLabel = UILabel()
     var priceLabel = UILabel()
+    var priceTagImage = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,16 +43,24 @@ class PostViewCell: UICollectionViewCell {
 //            make.height.equalTo(postImage.snp_height).dividedBy(5)
 //        }
         
+        //price tage image contraints
+        contentView.addSubview(priceTagImage)
+        priceTagImage.image = UIImage(named: "priceTag")
+        priceTagImage.snp_makeConstraints { (make) in
+            make.bottom.equalTo(postImage.snp_bottom)
+            make.right.equalTo(postImage.snp_right).offset(-2)
+            make.width.equalTo(postImage.snp_width).dividedBy(2.2)
+            make.height.equalTo(postImage.snp_height).dividedBy(5)
+        }
+        
         //price label constraints
         contentView.addSubview(priceLabel)
         priceLabel.textColor = UIColor.flatWhiteColor()
         priceLabel.textAlignment = NSTextAlignment.Right
 //        priceLabel.shadowColor = UIColor.blackColor()
         priceLabel.snp_makeConstraints { (make) in
-            make.bottom.equalTo(postImage.snp_bottom)
-            make.right.equalTo(postImage.snp_right).offset(-2)
-            make.left.equalTo(postImage.snp_left).offset(-2)
-            make.height.equalTo(postImage.snp_height).dividedBy(5)
+            make.centerX.equalTo(priceTagImage.snp_centerX)
+            make.centerY.equalTo(priceTagImage.snp_centerY)
         }
         
     }

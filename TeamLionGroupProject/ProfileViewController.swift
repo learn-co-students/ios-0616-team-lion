@@ -36,22 +36,34 @@ let shared = PlaceUserDataStore.sharedDataStore
             self.picture = self.shared.currentUser.picture
         }
 		
-		for post in shared.postArray {
-			if (post.userID == FIRAuth.auth()?.currentUser?.uid) {
-				filteredArray.append(post)
-			}
-		}
-		print("FILTERED ARRAY = \(filteredArray)")
-		
 		setupCollectionView()
         setupScene()
-        
+
 
 	}
     
     override func viewWillAppear(animated: Bool) {
-            self.collectionView.reloadData()
+        super.viewWillAppear(animated)
         
+        filteredArray.removeAll()
+        for post in shared.postArray {
+            if (post.userID == FIRAuth.auth()?.currentUser?.uid) {
+                filteredArray.append(post)
+            }
+        }
+        
+        print("FILTERED ARRAY = \(filteredArray)")
+        self.collectionView.reloadData()
+        
+    }
+    
+    func logout(){
+        
+            try! FIRAuth.auth()!.signOut()
+            FBSDKAccessToken.setCurrentAccessToken(nil)
+            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let loginViewController: UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("LoginView")
+            self.presentViewController(loginViewController, animated: true, completion: nil)
     }
     
     func backgroundThread(delay: Double = 0.0, background: (() -> Void)? = nil, completion: (() -> Void)? = nil) {
@@ -66,10 +78,17 @@ let shared = PlaceUserDataStore.sharedDataStore
     }
     
     func setupScene() {
-        view.addSubview(loginButton)
+        var button=UIButton(frame: CGRectMake(20, 20, 75, 30))
+        button.setTitle("Log out", forState: UIControlState.Normal)
+        button.addTarget(self, action: #selector(logout), forControlEvents: UIControlEvents.TouchUpInside)
+        button.backgroundColor = UIColor(hexString: "#4E64A8")
+        button.layer.cornerRadius = view.frame.height/99
+        button.titleLabel!.font = UIFont(name: "HelveticaNeue", size: button.titleLabel!.font.pointSize)
+        self.view.addSubview(button)
+       // view.addSubview(loginButton)
 //        loginButton.delegate = self
-        loginButton.frame = CGRectMake(15, 30, 80, 30)
-        loginButton.addTarget(self, action: #selector(backToLoginScreen), forControlEvents: .TouchUpInside)
+        //loginButton.frame = CGRectMake(15, 30, 80, 30)
+        //loginButton.addTarget(self, action: #selector(backToLoginScreen), forControlEvents: .TouchUpInside)
     }
 
 	func setupCollectionView() {
@@ -123,8 +142,10 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 		
 		let url = NSURL(string: filteredArray[indexPath.item].itemImageURL!)
 		cell.postImage.sd_setImageWithURL(url, placeholderImage: UIImage(named: "loadingImage"))
+        cell.priceTagImage.hidden = true
 		
 		return cell
+        
 	}
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -199,15 +220,19 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
     
     func refresh(sender:AnyObject) {
         print ("Refreshing")
-        self.shared.currentUser.postings.removeAll()
         
-        self.shared.fetchPosts { (result) in
-            self.shared.currentUser.postings.append(result)
-            self.collectionView.reloadData()
-            print(result)
+        filteredArray.removeAll()
+        for post in shared.postArray {
+            if (post.userID == FIRAuth.auth()?.currentUser?.uid) {
+                filteredArray.append(post)
+            }
         }
         
+        print("FILTERED ARRAY = \(filteredArray)")
+        self.collectionView.reloadData()
+        
         self.refreshControl.endRefreshing()
+        
 
     }
 }
