@@ -52,11 +52,7 @@ class OpenChatViewController: JSQMessagesViewController {
 	}
     
     override func viewWillAppear(animated: Bool) {
-		self.edgesForExtendedLayout = UIRectEdge.None
-		self.extendedLayoutIncludesOpaqueBars = false
-		self.automaticallyAdjustsScrollViewInsets = false
 		
-		print("After Frame \(self.view.frame)")
     }
 	
 	func swipeDetected() {

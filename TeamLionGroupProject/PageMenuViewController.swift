@@ -17,8 +17,6 @@ class PageMenuViewController: UIViewController {
 		super.viewWillAppear(animated)
 		
 		self.automaticallyAdjustsScrollViewInsets = false
-		self.edgesForExtendedLayout = UIRectEdge.None
-		self.extendedLayoutIncludesOpaqueBars = false
 		
 		pageMenu?.currentPageIndex = currentIndex
 		
