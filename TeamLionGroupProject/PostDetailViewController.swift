@@ -231,6 +231,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, MFMailCo
     }
 	
 	func contactButtonPressed() {
+
 		if self.navigationItem.rightBarButtonItem?.title == "contact seller"{
             let emailTitle = "Email Title"
             let messageBody = "I want to buy your thing please"
@@ -295,6 +296,20 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, MFMailCo
             })
             
         }
+
+		let emailTitle = "placeApp: \(itemTitle!)"
+		let messageBody = "I want to buy your thing please for $\(itemPrice)"
+		let recipient = ["\(email)"]
+		let mailVC = MFMailComposeViewController()
+		
+		mailVC.mailComposeDelegate = self
+		mailVC.setSubject(emailTitle)
+		mailVC.setMessageBody(messageBody, isHTML: false)
+		mailVC.setToRecipients(recipient)
+		
+		self.presentViewController(mailVC, animated: true, completion: nil)
+		
+
 	}
 	
 	func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {

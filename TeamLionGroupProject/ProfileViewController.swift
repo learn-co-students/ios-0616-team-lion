@@ -22,7 +22,6 @@ let shared = PlaceUserDataStore.sharedDataStore
     var refreshControl = UIRefreshControl()
     var loginButton: FBSDKLoginButton = FBSDKLoginButton()
     let topFrame = UIImageView()
-	var filteredArray = [PlacePost]()
     
 	private let cellIdentifier = "Cell"
 	private let headerIdentifier = "header"
@@ -39,33 +38,41 @@ let shared = PlaceUserDataStore.sharedDataStore
 		setupCollectionView()
         setupScene()
 
-
 	}
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        filteredArray.removeAll()
+        shared.currentUser.postings.removeAll()
         for post in shared.postArray {
             if (post.userID == FIRAuth.auth()?.currentUser?.uid) {
-                filteredArray.append(post)
+                self.shared.currentUser.postings.append(post)
             }
         }
         
-        print("FILTERED ARRAY = \(filteredArray)")
+        print("FILTERED ARRAY = \(self.shared.currentUser.postings)")
         self.collectionView.reloadData()
         
     }
     
     func logout(){
-        
-            try! FIRAuth.auth()!.signOut()
-            FBSDKAccessToken.setCurrentAccessToken(nil)
-            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let loginViewController: UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("LoginView")
-            self.presentViewController(loginViewController, animated: true, completion: nil)
+		
+		let confirmationAlertController = UIAlertController(title: "Log Out", message: "would you like to log out?", preferredStyle: .Alert)
+		let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in }
+		confirmationAlertController.addAction(cancelAction)
+
+		let OKAction = UIAlertAction(title: "Log Out", style: .Default) { (action) in
+			try! FIRAuth.auth()!.signOut()
+			FBSDKAccessToken.setCurrentAccessToken(nil)
+			let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+			let loginViewController: UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("LoginView")
+			self.presentViewController(loginViewController, animated: true, completion: nil)
+		}
+		confirmationAlertController.addAction(OKAction)
+		
+		self.presentViewController(confirmationAlertController, animated: true, completion: nil)
     }
-    
+	
     func backgroundThread(delay: Double = 0.0, background: (() -> Void)? = nil, completion: (() -> Void)? = nil) {
         dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue), 0)) {
             if(background != nil){ background!(); }
@@ -133,14 +140,14 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 	}
 	
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return self.filteredArray.count
+		return self.shared.currentUser.postings.count
 	}
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! PostViewCell
 		
-		let url = NSURL(string: filteredArray[indexPath.item].itemImageURL!)
+		let url = NSURL(string: shared.currentUser.postings[indexPath.item].itemImageURL!)
 		cell.postImage.sd_setImageWithURL(url, placeholderImage: UIImage(named: "loadingImage"))
         cell.priceTagImage.hidden = true
 		
@@ -153,8 +160,9 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
         print("You selected cell #\(indexPath.item)!")
         
 		let postDetailVC = PostDetailViewController()
-		let post = filteredArray[indexPath.item]
         postDetailVC.delegate = self
+		let post = shared.currentUser.postings[indexPath.item]
+
 		postDetailVC.itemTitle = post.itemTitle
 		postDetailVC.itemPrice = post.price
 		postDetailVC.itemDescription = post.itemDescription
@@ -222,19 +230,18 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
     func refresh(sender:AnyObject) {
         print ("Refreshing")
         
-        filteredArray.removeAll()
+        shared.currentUser.postings.removeAll()
         for post in shared.postArray {
             if (post.userID == FIRAuth.auth()?.currentUser?.uid) {
-                filteredArray.append(post)
+                self.shared.currentUser.postings.append(post)
             }
         }
         
-        print("FILTERED ARRAY = \(filteredArray)")
+        print("FILTERED ARRAY = \(self.shared.currentUser.postings)")
         self.collectionView.reloadData()
         
         self.refreshControl.endRefreshing()
         
-
     }
     
     func reloadDataAfterDelete(deleted: String) {

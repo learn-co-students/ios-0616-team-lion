@@ -58,7 +58,7 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
 	func getAllPosts() {
 		
 		print("Before block")
-		
+    
 		self.ref = FIRDatabase.database().reference()
 		self.shared.postArray.removeAll()
 		self.ref.child("posts").observeEventType(.ChildAdded, withBlock: {(snapshot) -> Void in
