@@ -217,7 +217,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, MFMailCo
 	
 	func contactButtonPressed() {
 		
-		let emailTitle = "placeApp: \(itemTitle)"
+		let emailTitle = "placeApp: \(itemTitle!)"
 		let messageBody = "I want to buy your thing please for $\(itemPrice)"
 		let recipient = ["\(email)"]
 		let mailVC = MFMailComposeViewController()

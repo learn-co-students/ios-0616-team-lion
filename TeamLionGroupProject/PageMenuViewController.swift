@@ -16,16 +16,19 @@ class PageMenuViewController: UIViewController {
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		setupNavBar()
+		self.automaticallyAdjustsScrollViewInsets = false
 		self.edgesForExtendedLayout = UIRectEdge.None
 		self.extendedLayoutIncludesOpaqueBars = false
 		
 		pageMenu?.currentPageIndex = currentIndex
+		
+		print("Will Appear \(view)")
 	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		setupNavBar()
 		setupPages()
 	}
 	

@@ -54,7 +54,9 @@ class OpenChatViewController: JSQMessagesViewController {
     override func viewWillAppear(animated: Bool) {
 		self.edgesForExtendedLayout = UIRectEdge.None
 		self.extendedLayoutIncludesOpaqueBars = false
-        
+		self.automaticallyAdjustsScrollViewInsets = false
+		
+		print("After Frame \(self.view.frame)")
     }
 	
 	func swipeDetected() {
@@ -169,6 +171,7 @@ class OpenChatViewController: JSQMessagesViewController {
 		sheet.addAction(photoLibrary)
 		sheet.addAction(videoLibrary)
 		sheet.addAction(cancel)
+		print("Before Frame \(self.view.frame)")
 		self.presentViewController(sheet, animated: true, completion: nil)
 
 		//		let imagePicker = UIImagePickerController()
@@ -181,9 +184,8 @@ class OpenChatViewController: JSQMessagesViewController {
 		let mediaPicker = UIImagePickerController()
 		mediaPicker.delegate = self
 		mediaPicker.mediaTypes = [type as String]
+		
 		self.presentViewController(mediaPicker, animated: true, completion: nil)
-		//parentNavigationController?.pushViewController(mediaPicker, animated: true)
-		//self.parentViewController?.presentViewController(mediaPicker, animated: true, completion: nil)
 	}
 	
 	func filterMessages() {
