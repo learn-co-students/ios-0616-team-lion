@@ -52,6 +52,8 @@ class OpenChatViewController: JSQMessagesViewController {
 	}
     
     override func viewWillAppear(animated: Bool) {
+		self.edgesForExtendedLayout = UIRectEdge.None
+		self.extendedLayoutIncludesOpaqueBars = false
         
     }
 	
@@ -180,6 +182,7 @@ class OpenChatViewController: JSQMessagesViewController {
 		mediaPicker.delegate = self
 		mediaPicker.mediaTypes = [type as String]
 		self.presentViewController(mediaPicker, animated: true, completion: nil)
+		//parentNavigationController?.pushViewController(mediaPicker, animated: true)
 	}
 	
 	func filterMessages() {
@@ -212,7 +215,7 @@ class OpenChatViewController: JSQMessagesViewController {
 	}
 	
 	override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource! {
-		let message = messages[indexPath.item]
+		let message = filteredMessages[indexPath.item]
 		
 		print(avatarDict[message.senderId])
 		return avatarDict[message.senderId]
@@ -371,8 +374,6 @@ class OpenChatViewController: JSQMessagesViewController {
 	}
 }
 
-
-
 extension OpenChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 	
 	func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
@@ -389,6 +390,7 @@ extension OpenChatViewController: UIImagePickerControllerDelegate, UINavigationC
 			sendMedia(nil, video: video)
 		}
 		self.dismissViewControllerAnimated(true, completion: nil)
+		
 		collectionView.reloadData()
 	}
 }
