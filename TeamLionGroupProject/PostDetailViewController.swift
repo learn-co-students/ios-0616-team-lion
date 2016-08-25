@@ -12,7 +12,13 @@ import DynamicButton
 import CCTextFieldEffects
 import ChameleonFramework
 import MessageUI
+import FirebaseAuth
+import FirebaseDatabase
+import Firebase
 
+protocol PostDetailVCDelegate: class {
+    func reloadDataAfterDelete(deleted: String)
+}
 class PostDetailViewController: UIViewController, UIScrollViewDelegate, MFMailComposeViewControllerDelegate {
     
     var scrollView = UIScrollView()
@@ -36,6 +42,8 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, MFMailCo
     var itemImage: UIImage?
     var email = String()
     
+    var delegate: PostDetailVCDelegate?
+    
     var totalHeight: CGFloat = 0
     
     override func viewDidLoad() {
@@ -43,6 +51,14 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, MFMailCo
         
         view.backgroundColor = UIColor.flatWhiteColor()
         generateScene()
+        if let currentUserEmail = FIRAuth.auth()?.currentUser?.email{
+            if currentUserEmail == self.email{
+            self.navigationItem.rightBarButtonItem?.title = "delete post"
+        }else{
+            self.navigationItem.rightBarButtonItem?.title = "contact seller"
+            }
+        }
+        
         print(fullName)
         print(fullNameLabel.text)
     }
@@ -75,7 +91,6 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, MFMailCo
     func generateScene() {
         
         view.backgroundColor = UIColor.flatRedColor()
-		
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "contact seller", style: UIBarButtonItemStyle.Done, target: self, action: #selector(contactButtonPressed))
 		let textAttribute = [NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 20)!]
 		self.navigationItem.rightBarButtonItem?.setTitleTextAttributes(textAttribute, forState: .Normal)
@@ -216,19 +231,70 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, MFMailCo
     }
 	
 	func contactButtonPressed() {
-		
-		let emailTitle = "Email Title"
-		let messageBody = "I want to buy your thing please"
-		let recipient = ["\(email)"]
-		let mailVC = MFMailComposeViewController()
-		
-		mailVC.mailComposeDelegate = self
-		mailVC.setSubject(emailTitle)
-		mailVC.setMessageBody(messageBody, isHTML: false)
-		mailVC.setToRecipients(recipient)
-		
-		self.presentViewController(mailVC, animated: true, completion: nil)
-		
+		if self.navigationItem.rightBarButtonItem?.title == "contact seller"{
+            let emailTitle = "Email Title"
+            let messageBody = "I want to buy your thing please"
+            let recipient = ["\(email)"]
+            let mailVC = MFMailComposeViewController()
+            
+            mailVC.mailComposeDelegate = self
+            mailVC.setSubject(emailTitle)
+            mailVC.setMessageBody(messageBody, isHTML: false)
+            mailVC.setToRecipients(recipient)
+            
+            self.presentViewController(mailVC, animated: true, completion: nil)
+        }else{
+            print("it works!")
+            let ref = FIRDatabase.database().reference()
+            
+            ref.child("posts").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+                
+                let posts = snapshot.value as! [String: AnyObject]
+                print("\n\nposts: \(posts)\n\n")
+                
+                var idForRemoval = ""
+                for post in posts {
+                    let description = post.1["description"] as! String
+                    if self.itemDescription == description {
+                        idForRemoval = post.0 // post ID
+                    }
+                }
+                
+                ref.child("posts").child(idForRemoval).removeValue()
+//                self.dismissViewControllerAnimated(true, completion: nil)
+//                let backToProfile = ProfileViewController()
+//                self.presentViewController(backToProfile, animated: true, completion: nil)
+                
+                
+                
+                
+                let alertController = UIAlertController(title: "Confirm", message: "Do you want to delete this post?", preferredStyle: .Alert)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+                    // ...
+                }
+                alertController.addAction(cancelAction)
+                
+                let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+                    
+                    self.delegate?.reloadDataAfterDelete("DELETED")
+                    self.navigationController?.popViewControllerAnimated(true)
+
+                }
+                
+                
+                alertController.addAction(OKAction)
+                self.presentViewController(alertController, animated: true) {
+                    // ...
+                }
+                
+                
+                
+                
+                
+                
+            })
+            
+        }
 	}
 	
 	func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {

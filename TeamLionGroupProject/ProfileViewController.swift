@@ -12,7 +12,7 @@ import FirebaseAuth
 import FBSDKLoginKit
 
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, PostDetailVCDelegate {
 let shared = PlaceUserDataStore.sharedDataStore
     
 	var parentNavigationController : UINavigationController?
@@ -154,6 +154,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
         
 		let postDetailVC = PostDetailViewController()
 		let post = filteredArray[indexPath.item]
+        postDetailVC.delegate = self
 		postDetailVC.itemTitle = post.itemTitle
 		postDetailVC.itemPrice = post.price
 		postDetailVC.itemDescription = post.itemDescription
@@ -234,5 +235,10 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
         self.refreshControl.endRefreshing()
         
 
+    }
+    
+    func reloadDataAfterDelete(deleted: String) {
+        deletedMe.didDelete = deleted
+        print("getting called")
     }
 }
