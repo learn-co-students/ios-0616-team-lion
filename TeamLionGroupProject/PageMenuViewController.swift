@@ -16,16 +16,19 @@ class PageMenuViewController: UIViewController {
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		setupNavBar()
+		self.automaticallyAdjustsScrollViewInsets = false
 		self.edgesForExtendedLayout = UIRectEdge.None
 		self.extendedLayoutIncludesOpaqueBars = false
 		
 		pageMenu?.currentPageIndex = currentIndex
+		
+		print("Will Appear \(view)")
 	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		setupNavBar()
 		setupPages()
 	}
 	
@@ -64,6 +67,7 @@ class PageMenuViewController: UIViewController {
 		controllerArray.append(marketplaceVC)
 		controllerArray.append(profileVC)
 		controllerArray.append(openChatVC)
+		self.addChildViewController(openChatVC)
 		
 		let parameters: [CAPSPageMenuOption] = [
 			.ScrollMenuBackgroundColor(UIColor(red: 30.0/255.0, green: 30.0/255.0, blue: 30.0/255.0, alpha: 1.0)),
