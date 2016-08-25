@@ -24,14 +24,11 @@ class OpenChatViewController: JSQMessagesViewController {
 	var avatarDict = [String: JSQMessagesAvatarImage]()
 
 	var messageRef = FIRDatabase.database().reference().child("messages")
-	
+	var blockedString = ""
+	var filteredMessages = [JSQMessage]()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		let dismissSwipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeDetected))
-		dismissSwipe.direction = .Left
-		view.addGestureRecognizer(dismissSwipe)
 		
 		if (chatType == "OpenChat") {
 			messageRef = FIRDatabase.database().reference().child("messages")
@@ -47,10 +44,10 @@ class OpenChatViewController: JSQMessagesViewController {
 			if currentUser.anonymous == true {
 				self.senderDisplayName = "Anonymous"
 			} else {
-				self.senderDisplayName = "\(currentUser.displayName!)"		//change this to Facebook USERNAME
+				self.senderDisplayName = "\(currentUser.displayName!)"
 			}
 		}
-		
+		grabBlockedList()
 		observeMessages()
 	}
     
@@ -68,7 +65,7 @@ class OpenChatViewController: JSQMessagesViewController {
 			snapshot in
 			if let dict = snapshot.value as? [String: AnyObject] {
 				let avatarUrl = dict["picture"] as! String
-				print("profileUrl = \(avatarUrl)")
+				//print("profileUrl = \(avatarUrl)")
 				self.setupAvatar(avatarUrl, messageId: id)
 			}
 		})
@@ -157,9 +154,7 @@ class OpenChatViewController: JSQMessagesViewController {
 		print("did print accessory button")
 		
 		let sheet = UIAlertController(title: "Media Messages", message: "Please select a media", preferredStyle: UIAlertControllerStyle.ActionSheet)
-		let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (alert: UIAlertAction) in
-			
-		}
+		let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (alert: UIAlertAction) in }
 		
 		let photoLibrary = UIAlertAction(title: "Photo Library", style: UIAlertActionStyle.Default) { (alert: UIAlertAction) in
 			self.getMediaFrom(kUTTypeImage)
@@ -167,8 +162,8 @@ class OpenChatViewController: JSQMessagesViewController {
 		
 		let videoLibrary = UIAlertAction(title: "Video Library", style: UIAlertActionStyle.Default) { (alert: UIAlertAction) in
 			self.getMediaFrom(kUTTypeMovie)
-			
 		}
+		
 		sheet.addAction(photoLibrary)
 		sheet.addAction(videoLibrary)
 		sheet.addAction(cancel)
@@ -187,8 +182,21 @@ class OpenChatViewController: JSQMessagesViewController {
 		self.presentViewController(mediaPicker, animated: true, completion: nil)
 	}
 	
+	func filterMessages() {
+		filteredMessages.removeAll()
+		for message in messages {
+			print("this is the blockedstring in filter message \(blockedString)")
+			if (!blockedString.containsString(message.senderId)) {
+				print("SenderID \(message.senderId)")
+				filteredMessages.append(message)
+			}
+		}
+		print("filterdmessage \(filteredMessages)")
+	}
+	
 	override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData! {
-		return messages[indexPath.item]
+		
+		return filteredMessages[indexPath.item]
 	}
 	
 	override func collectionView(collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageBubbleImageDataSource! {
@@ -201,8 +209,6 @@ class OpenChatViewController: JSQMessagesViewController {
 			
 			return bubbleFactory.incomingMessagesBubbleImageWithColor(UIColor.blueColor())
 		}
-		
-		
 	}
 	
 	override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource! {
@@ -215,8 +221,9 @@ class OpenChatViewController: JSQMessagesViewController {
 	}
 	
 	override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		print(messages.count)
-		return messages.count
+		self.filterMessages()
+		print(self.filteredMessages.count)
+		return filteredMessages.count
 	}
 	
 	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -225,6 +232,21 @@ class OpenChatViewController: JSQMessagesViewController {
 		return cell
 	}
 	
+	func grabBlockedList() {
+		let userRef = FIRDatabase.database().reference()
+		print("USERREF \(userRef)")
+		userRef.child("users").child(self.senderId).observeEventType(.ChildAdded, withBlock: { (snapshot) in
+			
+			print("SNAPSHOT " + String(snapshot))
+
+			if (String(snapshot).containsString("Snap (blockedUsers) ")) {
+				self.blockedString = snapshot.value as! String
+				print("This is important \(self.blockedString)")
+			}
+		})
+	}
+	
+	//I can refactor this entire function now that I have the grabBlockedList() function
 	override func collectionView(collectionView: JSQMessagesCollectionView!, didTapAvatarImageView avatarImageView: UIImageView!, atIndexPath indexPath: NSIndexPath!) {
 
 		print("didTapAvatarAtIndexPath \(indexPath.item)")
@@ -247,19 +269,17 @@ class OpenChatViewController: JSQMessagesViewController {
 				
 				print("SNAPSHOT " + String(snapshot))
 				
-				var blockedString = snapshot.value as! String
-				
-				if !(blockedString.containsString(String(message.senderId))) {
+				if !(self.blockedString.containsString(String(message.senderId))) {
 					
 					if (String(snapshot).containsString("Snap (blockedUsers) ")) {
 						
-						print(blockedString)
-						blockedString.appendContentsOf(String(message.senderId))
-						print("AFTERSTRING \(blockedString)")
+						print(self.blockedString)
+						self.blockedString.appendContentsOf(String(message.senderId))
+						print("AFTERSTRING \(self.blockedString)")
 						
 						//update child to firebase
 						
-						userRef.child("users").child(self.senderId).updateChildValues(["blockedUsers" : blockedString])
+						userRef.child("users").child(self.senderId).updateChildValues(["blockedUsers" : self.blockedString])
 						
 						let confirmAlertController = UIAlertController(title: "BLOCKED", message: "\(message.senderDisplayName) has been blocked", preferredStyle: .Alert)
 						
@@ -281,14 +301,6 @@ class OpenChatViewController: JSQMessagesViewController {
 				}
 
 			})
-			
-			
-			// if !blockedArray.containsubstring(message.senderId) {
-				// append message.senderId to the banned string
-			
-			
-			// else
-				// alert "User has already been blocked
 			
 		}
 		alertController.addAction(OKAction)
