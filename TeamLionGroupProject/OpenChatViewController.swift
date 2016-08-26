@@ -181,7 +181,12 @@ class OpenChatViewController: JSQMessagesViewController {
 		mediaPicker.delegate = self
 		mediaPicker.mediaTypes = [type as String]
 		
+//		self.addChildViewController(mediaPicker)
+//		mediaPicker.didMoveToParentViewController(self)
+//		self.view.addSubview(mediaPicker.view)
+		
 		self.presentViewController(mediaPicker, animated: true, completion: nil)
+		
 	}
 	
 	func filterMessages() {
@@ -389,6 +394,7 @@ extension OpenChatViewController: UIImagePickerControllerDelegate, UINavigationC
 			sendMedia(nil, video: video)
 		}
 		self.dismissViewControllerAnimated(true, completion: nil)
+		//self.view.removeFromSuperview()
 		
 		collectionView.reloadData()
 	}
