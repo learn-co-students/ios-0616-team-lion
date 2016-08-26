@@ -13,7 +13,7 @@ import DynamicButton
 import Firebase
 import SDWebImage
 
-class MarketplaceCollectionViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UINavigationBarDelegate {
+class MarketplaceCollectionViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UINavigationBarDelegate, PostDetailVCDelegate {
 	
 	var parentNavigationController : UINavigationController?
 	
@@ -41,6 +41,12 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
 		self.edgesForExtendedLayout = UIRectEdge.None
 		
 		collectionView.reloadData()
+        print(deletedMe.didDelete)
+        if deletedMe.didDelete == "DELETED"{
+            print("In deletion refresh")
+            getAllPosts()
+            deletedMe.didDelete = "NOPE"
+        }
     }
 	
 	override func viewDidAppear(animated: Bool) {
@@ -103,6 +109,7 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         // handle tap events
         print("You selected cell #\(indexPath.item)!")
         let postDetailVC = PostDetailViewController()
+        postDetailVC.delegate = self
 		let post = shared.postArray[indexPath.item]
         postDetailVC.itemTitle = post.itemTitle
         postDetailVC.itemPrice = post.price
@@ -145,6 +152,10 @@ class MarketplaceCollectionViewController: UIViewController, UICollectionViewDel
         // Code to refresh table view
     }
     
+    func reloadDataAfterDelete(deleted: String) {
+        deletedMe.didDelete = deleted
+        print("getting called")
+    }
     
     
 }

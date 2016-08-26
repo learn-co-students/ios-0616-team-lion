@@ -264,8 +264,7 @@
 				TargetAttributes = {
 					FFE94A901D53D9730036ED38 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = RP6364VX67;
-
+						DevelopmentTeam = L2YWSL9AVF;
 					};
 				};
 			};
@@ -508,7 +507,6 @@
 				INFOPLIST_FILE = TeamLionGroupProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.DavidVY.TeamLionGroupProject;
-
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -532,7 +530,6 @@
 				INFOPLIST_FILE = TeamLionGroupProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.DavidVY.TeamLionGroupProject;
-
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
