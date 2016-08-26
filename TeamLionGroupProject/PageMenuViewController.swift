@@ -64,8 +64,8 @@ class PageMenuViewController: UIViewController {
 		
 		controllerArray.append(marketplaceVC)
 		controllerArray.append(profileVC)
-		controllerArray.append(openChatVC)
-		self.addChildViewController(openChatVC)
+		//controllerArray.append(openChatVC)
+		//self.addChildViewController(openChatVC)
 		
 		let parameters: [CAPSPageMenuOption] = [
 			.ScrollMenuBackgroundColor(UIColor(red: 30.0/255.0, green: 30.0/255.0, blue: 30.0/255.0, alpha: 1.0)),
@@ -74,7 +74,7 @@ class PageMenuViewController: UIViewController {
 			.BottomMenuHairlineColor(UIColor(red: 70.0/255.0, green: 70.0/255.0, blue: 80.0/255.0, alpha: 1.0)),
 			.MenuItemFont(UIFont(name: "HelveticaNeue", size: 13.0)!),
 			.MenuHeight(40.0),
-			.MenuItemWidth(90.0),
+			.MenuItemWidth(135.0),
 			.CenterMenuItems(true),
 		]
 		
