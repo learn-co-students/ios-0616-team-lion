@@ -176,6 +176,8 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 	
 	func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
 		
+		let defaultReturn = UICollectionReusableView()
+		
 		switch kind {
 		case UICollectionElementKindSectionHeader:
 
@@ -196,6 +198,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 			return headerView
 		default: assert(false, "Unexpected element type")
 		}
+		return defaultReturn
 	}
 }
 

@@ -22,7 +22,6 @@
 		BEC67E4B1D53E0F900D2D030 /* PostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E4A1D53E0F900D2D030 /* PostViewCell.swift */; };
 		BEC67E4D1D53E13A00D2D030 /* PlaceUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E4C1D53E13A00D2D030 /* PlaceUser.swift */; };
 		BEC67E4F1D53E14700D2D030 /* PlacePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC67E4E1D53E14700D2D030 /* PlacePost.swift */; };
-		FF5C94211D6651E4009EB219 /* OpenChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5C94201D6651E4009EB219 /* OpenChatViewController.swift */; };
 		FF654BF81D6C966D004E4AC5 /* PageMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF654BF71D6C966D004E4AC5 /* PageMenuViewController.swift */; };
 		FF654C021D6C96FD004E4AC5 /* CAPSPageMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF654BF91D6C96FD004E4AC5 /* CAPSPageMenu.swift */; };
 		FF654C031D6C96FD004E4AC5 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF654BFA1D6C96FD004E4AC5 /* Info.plist */; };
@@ -62,7 +61,6 @@
 		BEC67E4E1D53E14700D2D030 /* PlacePost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacePost.swift; sourceTree = "<group>"; };
 		DCF91F518C6C9AD294129C82 /* Pods-TeamLionGroupProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamLionGroupProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeamLionGroupProject/Pods-TeamLionGroupProject.release.xcconfig"; sourceTree = "<group>"; };
 		FF5C93851D64A5D2009EB219 /* JSQMessagesViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSQMessagesViewController.framework; path = "../../../Library/Developer/Xcode/DerivedData/TeamLionGroupProject-bqdmmrzpcukwogbkobqbozslftkg/Build/Products/Debug-iphonesimulator/JSQMessagesViewController/JSQMessagesViewController.framework"; sourceTree = "<group>"; };
-		FF5C94201D6651E4009EB219 /* OpenChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenChatViewController.swift; sourceTree = "<group>"; };
 		FF654BF71D6C966D004E4AC5 /* PageMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMenuViewController.swift; sourceTree = "<group>"; };
 		FF654BF91D6C96FD004E4AC5 /* CAPSPageMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CAPSPageMenu.swift; path = Classes/CAPSPageMenu.swift; sourceTree = "<group>"; };
 		FF654BFA1D6C96FD004E4AC5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -134,7 +132,6 @@
 				FFE94AB71D5A36F30036ED38 /* SegementPractice.swift */,
 				BE3FF0571D5D68A6001D2C9E /* PostDetailViewController.swift */,
 				1BD989021D6244C3004ED215 /* FriendsListController.swift */,
-				FF5C94201D6651E4009EB219 /* OpenChatViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -264,7 +261,7 @@
 				TargetAttributes = {
 					FFE94A901D53D9730036ED38 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = L2YWSL9AVF;
+						DevelopmentTeam = KXY9EDFTF5;
 					};
 				};
 			};
@@ -362,7 +359,6 @@
 				BEC67E451D53DFCD00D2D030 /* NewPostViewController.swift in Sources */,
 				FFE94AA71D54E4970036ED38 /* TestData.swift in Sources */,
 				FFE94AB81D5A36F30036ED38 /* SegementPractice.swift in Sources */,
-				FF5C94211D6651E4009EB219 /* OpenChatViewController.swift in Sources */,
 				BEC67E4B1D53E0F900D2D030 /* PostViewCell.swift in Sources */,
 				FFE94AAC1D54E7320036ED38 /* UIImageExtension.swift in Sources */,
 				BEC67E4F1D53E14700D2D030 /* PlacePost.swift in Sources */,
@@ -511,6 +507,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -533,6 +530,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

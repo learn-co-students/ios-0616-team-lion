@@ -16,8 +16,6 @@ target 'TeamLionGroupProject' do
   pod 'Firebase/Database'
   pod 'CCTextFieldEffects'
   pod 'SwiftyJSON', '~> 2.3'
-  pod 'SendBirdSDK'
-  pod 'JSQMessagesViewController'
   pod 'ChameleonFramework/Swift'
   pod 'PageMenu'
   pod 'SDWebImage', '~>3.8'
