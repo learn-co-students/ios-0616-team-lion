@@ -58,9 +58,9 @@ class PageMenuViewController: UIViewController {
 		profileVC.title = "Profile"
 		profileVC.parentNavigationController = self.navigationController
 		
-		let openChatVC = OpenChatViewController()
-		openChatVC.title = "Open Chat"
-		openChatVC.parentNavigationController = self.navigationController
+		//let openChatVC = OpenChatViewController()
+		//openChatVC.title = "Open Chat"
+		//openChatVC.parentNavigationController = self.navigationController
 		
 		controllerArray.append(marketplaceVC)
 		controllerArray.append(profileVC)

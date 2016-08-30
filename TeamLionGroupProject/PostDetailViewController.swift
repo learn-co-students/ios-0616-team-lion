@@ -84,8 +84,8 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, MFMailCo
     }
     
     func chatButtonPressed(){
-        let chatVC = OpenChatViewController()
-        presentViewController(chatVC, animated: true, completion: nil)
+        //let chatVC = OpenChatViewController()
+        //presentViewController(chatVC, animated: true, completion: nil)
     }
     
     func generateScene() {
